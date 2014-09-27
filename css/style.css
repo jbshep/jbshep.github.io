@@ -1,0 +1,52 @@
+.jumbotron {
+    margin-bottom: 0;
+}
+
+#welcome-tron {
+    background-image: url(../images/back_2048.jpg);
+    background-size: 1024px 768px;
+    text-align: center;
+    min-height: 600px;
+}
+
+#welcome-tron h1 {
+    color: black;
+    text-shadow: 2px 2px 2px white;
+    font-size: 48pt;
+    font-weight: bold;
+    padding-bottom: 8px;
+}
+
+#welcome-tron h2 {
+    color: black;
+    text-shadow: 2px 2px 2px white;
+    font-weight: bold;
+    font-size: 22pt;
+    padding-bottom: 140px;
+}
+
+#welcome-tron p {
+    color: black;
+    text-shadow: 2px 2px 2px white;
+    font-weight: bold;
+    font-size: 12pt;
+    font-style: italic;
+}
+
+.row-filler {
+    background-color: black;
+}
+
+#contact-tron {
+    background-color: #024;
+    color: white;
+}
+
+#courses-tron {
+    background-color: #024;
+    color: white;
+}
+
+#welcome, #contact, #pro, #courses, #research {
+    padding-top: 50px;
+}
