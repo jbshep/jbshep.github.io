@@ -1,204 +1,233 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>Dr. Jason B. Shepherd</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-  <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" /> 
-  <link href="css/style.css" rel="stylesheet" /> 
+    <title>Dr. Jason B. Shepherd</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+
+    <!-- Plugin CSS -->
+    <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+
+    <!-- Theme CSS -->
+    <link href="css/creative.css" rel="stylesheet">
+
+    <!-- Site-specific CSS -->
+    <link href="css/shep-site.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
 </head>
-<body>
 
-  <nav class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-      </div>
+<body id="page-top">
 
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-          <li><a href="#welcome" class="smoothScroll">Welcome</a></li>
-          <li><a href="#contact" class="smoothScroll">Contact</a></li>
-          <li><a href="#pro" class="smoothScroll">Professional Experience</a></li>
-          <li><a href="#courses" class="smoothScroll">Courses</a></li>
-          <li><a href="#research" class="smoothScroll">Research and Projects</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="http://facebook.com/jbshep"><img src="images/facebook.png" /></a></li>
-          <li><a href="http://twitter.com/jbshep"><img src="images/twitter.png" /></a></li>
-          <li><a href="http://linkedin.com/in/jbshep"><img src="images/linkedin.png" /></a></li>
-        </ul>
-      </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-  </nav>
+    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top">Dr. Jason
+                B. Shepherd</a>
+            </div>
 
-  <div class="jumbotron" id="welcome-tron">
-    <div class="container">
-      <div class='row section_head'>
-        <div class='span12'>
-          <a id="welcome" name="welcome" class="named-anchor">&nbsp;</a>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a class="page-scroll" href="#background">Background</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#recognition">Recognition</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#success">Student Success</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
         </div>
-      </div>
-      <h1>Dr. Jason B. Shepherd</h1>
-      <h2>Professor @ BVU, Software Engineer, Scholar.</h2>
-      <p>"If you want to build a ship, don’t drum up the men to gather wood, divide the work, and give orders. Instead, teach them to yearn for the vast and endless sea." - Antoine de Saint-Exupéry</p>
-    </div>
-  </div>
-  <div class="jumbotron" id="contact-tron">
-    <div class="container">
-      <div class='row section_head'>
-        <div class='span12'>
-          <a id="contact" name="contact" class="named-anchor">&nbsp;</a>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <header>
+        <div class="header-content">
+            <div class="header-content-inner">
+                <h1 id="homeHeading">Professor @ BVU, Software Developer</h1>
+                <hr>
+                <p>"If you want to build a ship, don’t drum up the men to
+                gather wood, divide the work, and give orders. Instead, teach
+                them to yearn for the vast and endless sea." - Antoine de
+                Saint-Exupéry</p>
+                <!--
+                <a href="#about" class="btn btn-primary btn-xl page-scroll">A
+                Button</a>
+                -->
+            </div>
         </div>
-      </div>
-      <h1>Contact</h1>
-      <div class="col-xs-12 col-sm-6">
-        <p>Jason B. Shepherd, Ph.D.<br/>
-           Associate Professor of Computer Science<br/>
-           Buena Vista University<br/>
-           Storm Lake, IA 50588</p>
-      </div>
-      <div class="col-xs-12 col-sm-6">
-        <p>Office: ESSC-104<br/>
-           Phone: 712.749.2281<br/>
-           Email: shepherd@bvu.edu</p>
-      </div>
-    </div>
-  </div>
-  <div class="jumbotron" id="pro-tron">
-    <div class="container">
-      <div class='row section_head'>
-        <div class='span12'>
-          <a id="pro" name="pro" class="named-anchor">&nbsp;</a>
+    </header>
+
+    <section class="bg-primary" id="background">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <h2 class="section-heading">Background</h2>
+                    <hr class="light">
+                    <h3>Bio</h3>
+                    <p class="text-faded text-left">Dr. Shepherd joined the faculty at
+                    Buena Vista University in 2007. Prior to joining the
+                    faculty, he spent a decade working as a software engineer
+                    and IT architect, having spent most of his time in the
+                    national defense (DoD), energy, and transportation
+                    industries. He enjoys bringing those experiences into the
+                    classroom so that students can see the connection between
+                    computer science theory and real-world practical skills.
+                    Dr. Shepherd's research interests include software engineering,
+                    user interface design and testing, algorithms, and
+                    interval numerical methods.
+                    </p>
+                    <h3>Education</h3>
+                    <ul>
+                    <li class="text-faded text-left"><strong>Ph.D.</strong><br>Computational Science and Statistics<br>University of South Dakota, Vermillion, South Dakota</li>
+                    <li class="text-faded text-left"><strong>M.S.</strong><br>Computer Science<br>University of Nebraska at Omaha, Omaha, Nebraska</li>
+                    <li class="text-faded text-left"><strong>B.S.</strong><br>Computer Science/Mathematics<br>Buena Vista University, Storm Lake, Iowa</li>
+                    </ul>
+                </div>
+            </div>
         </div>
-      </div>
-      <h1>Professional Experience</h1>
-      <h3>Bio</h3>
-      <p>Dr. Shepherd joined the faculty at Buena Vista University in 2007. Prior to joining the faculty, he spent a decade working as a software engineer and IT architect, having spent most of his time in the national defense (DoD), energy, and transportation industries. He enjoys bringing those experiences into the classroom so that students can see the connection between computer science theory and real-world practical skills. Dr. Shepherd's research interests include user interface design and testing, algorithms, software engineering, and parallelization of interval methods.</p>
+    </section>
 
-      <h3>Education</h3>
-      <p>Ph.D., Computational Science and Statistics, University of South Dakota, Vermillion, South Dakota</p>
-      <ul>
-        <li>Dissertation: "Acceleration of Verified Numerical Algorithms for Finding All Solutions to the Inverse Kinematics Problem"</li>
-        <li>Honors: Golden Key International Honour Society</li>
-      </ul>
-      <p>M.S., Computer Science, University of Nebraska at Omaha, Omaha, Nebraska</p>
-      <ul>
-        <li>Thesis: "Untest: An Unattended Usability Testing System for Facilitating Formative Studies"</li>
-        <li>Area of Specialization: Graphics and Human-Computer Interaction</li>
-      </ul>
-      <p>B.S., Computer Science/Mathematics, Buena Vista University, Storm Lake, Iowa</p>
-      <ul>
-        <li>Honors: Magna Cum Laude, Sun/Oracle Java World Cup Team Champion - Educational Division</li>
-      </ul>
-    </div>
-  </div>
-  <div class="jumbotron" id="courses-tron">
-    <div class="container">
-      <div class='row section_head'>
-        <div class='span12'>
-          <a id="courses" name="courses" class="named-anchor">&nbsp;</a>
+    <section id="recognition">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Recognition and Awards</h2>
+                    <hr class="primary">
+                </div>
+            </div>
         </div>
-      </div>
-      <h1>Courses</h1>
-      <h3>This semester</h3>
-      <ul>
-        <li>CMSC 181 Computer Science I: Introduction to Computer Science</li>
-        <li>CMSC 190 Introduction to Information Technology</li>
-        <li>CMSC 420 Programming Languages and Compilers</li>
-        <li>MATH 143 Discrete Mathematics</li>
-      </ul>
-      <h3>In general</h3>
-      <p>I teach, or have taught, various introductory programming classes, data structures and algorithms, discrete mathematics, user interface design, software engineering, operating systems, computer graphics, Web app developoment, Internet programming, introduction to IT, mobile app programming, and a variety of university service courses (including courses for the honors program).</p>
-    </div>
-  </div>
-  <div class="jumbotron" id="research-tron">
-    <div class="container">
-      <div class='row section_head'>
-        <div class='span12'>
-          <a id="research" name="research" class="named-anchor">&nbsp;</a>
+        <div class="container">
+            <div class="row">
+                <div id="awards-col" class="col-lg-3 col-md-6">
+                    <p><a href="http://www.prweb.com/releases/2015/bvuwytheaward/prweb12767089.htm">George Wythe Award for Excellence in Teaching</a>, 2015</p>
+                    <p>New Century Faculty Development Award for Advising, 2011</p>
+                    <p>Golden Key International Honour Society, inducted 2010</p>
+                    <p>Bass and Associates, Inc., "Wall of Fame," 2002</p>
+                    <p>World Champion Team, Sun/Oracle Java World Cup, 1996</p>
+                </div>
+            </div>
         </div>
-      </div>
-      <h1>Research and Projects</h1>
-        <h3>Overview</h3>
-        We try to foster a culture of curiosity and self-motivation at BVU. One of the best ways to build real-world skills and master the concepts learned in class is by doing undergraduate projects and research. Our students often work on projects under the supervision of a faculty mentor, and ultimately present their work at BVU's Scholars Day.
+    </section>
 
-        <h3>Past Projects</h3>
-        Some of the areas students have done research in are:
-        <ul>
-          <li>Android and iOS mobile development</li>
-          <li>Web development</li>
-          <li>Video game development using Unity</li>
-					<li>Video game enhancement (such as extending game maps, tweaking AI, and building controller support for keyboard/mouse-only games)</li>
-          <li>Robotics</li>
-          <li>Parallel computing</li>
-          <li>Customized Linux system authentication</li>
-          <li>Scientific computing/computational science</li>
-        </ul>
+    <section class="bg-primary" id="success">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <h2 class="section-heading">Student Success</h2>
+                    <hr class="light">
+                    <p class="text-faded text-left">At BVU, our computer science
+                        department features a rigorous yet distinctive academic
+                        program that is coupled with a number of unique outside-the-classroom
+                        experiences designed to help students develop their skills
+                        and find their passion.  The end result is having students
+                        we're <em>very</em> proud of by the time they graduate!
+                        Here is <em>just a sample</em> of where our students go for internships,
+                        full-time employment, and grad schools.
+                    </p>
+                    <h3>Before Graduation</h3>
+                    <h5>(Internships, Research, Study Abroad, Conferences, etc.)</h5>
+                    <ul>
+                    <li class="text-faded text-left">Walt Disney World</li>
+                    <li class="text-faded text-left">Microsoft</li>
+                    <li class="text-faded text-left">National Security Agency (NSA)</li>
+                    <li class="text-faded text-left">CUNY High Performance Computing Center</li>
+                    <li class="text-faded text-left">Grace Hopper Celebration of Women in Computing Conference</li>
+                    <li class="text-faded text-left">DuPont Pioneer</li>
+                    <li class="text-faded text-left">Nationwide Insurance</li>
+                    <li class="text-faded text-left">Budapest Semester in Mathematics</li>
+                    <li class="text-faded text-left">Wells Blue Bunny</li>
+                    <li class="text-faded text-left">Principal Financial Group</li>
+                    </ul>
+                    <h3>Employment</h3>
+                    <ul>
+                    <li class="text-faded text-left">Software Developer, U.S. Olympic Committee, Colorado Springs, CO</li>
+                    <li class="text-faded text-left">Associate Gameplay Programmer, Hi-Rez Studios, Atlanta, GA</li>
+                    <li class="text-faded text-left">Specialist, Federal Bureau of Investigation (FBI), Washington, D.C.</li>
+                    <li class="text-faded text-left">Software Developer, Stine Seeds, Adel, IA</li>
+                    </ul>
+                    <h3>Graduate School</h3>
+                    <ul>
+                    <li class="text-faded text-left">Ph.D. student, Vanderbilt University, Nashville, TN</li>
+                    <li class="text-faded text-left">M.S. in Information Assurance, Iowa State University, Ames, IA</li>
+                    <li class="text-faded text-left">M.S. in Entertainments Arts Engineering, University of Utah, Salt Lake City, UT</li>
+                    </ul>
+                    <a href="http://www.bvu.edu/compsci" id="btn-cs" class="btn btn-default btn-xl sr-button">Learn more about Comp Sci @ BVU</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        <h3>Current Research Opportunities with Dr. Shepherd</h3>
-        The following are on-going projects within the BVU Computer Science department.  Students are encouraged to talk to Dr. Shepherd to join the fun! :)  Dr. Backman and Dr. Stone also have some interesting projects, and students are encouraged to talk to them as well.
-        <h4>Feedback frameworks</h4>
-        <ul>
-          <li>Description: Create software (most likely Web-based) that allows computer science students to submit their code and receive immediate and interactive feedback on the quality of their work.</li>
-          <li>Needed background: CMSC 181 Computer Science I</li>
-					<li>Helpful background: CMSC 182 Computer Science II, CMSC 310 Algorithms, CMSC 331 Web Application Development</li>
-        </ul>
-        <h4>Mobile app development</h4>
-        <ul>
-          <li>Description: Build iPad, iPhone, and Android apps to be deployed to the Apple App Store and Google Play.  App ideas include games, campus information apps, communication apps, and learning apps.  Thus far, we've had students build both native apps (iOS, Android) and cross-platform mobile apps (jQuery Mobile, PhoneGap).</li>
-          <li>Needed background: CMSC 181 Computer Science I</li>
-					<li>Helpful background: CMSC 182 Computer Science II, CMSC 310 Algorithms, CMSC 331 Web Application Development</li>
-        </ul>
-        <h4>Web analytics</h4>
-        <ul>
-          <li>Description: Design algorithms that discover unique Web browsing patterns in users of high volume Web sites.  This would include the automatic detection of troublesome task sequences.</li>
-          <li>Needed background: CMSC 310 Algorithms
-					<li>Helpful background: CMSC 190 Intro to IT, CMSC 331 Web Application Development, CMSC 351 User Interface Design/Development</li>
-        </ul>
-        <h4>Interval methods</h4>
-        <ul>
-          <li>Description: Use interval methods to bound and accelerate solutions to known NP-hard problems in computational science.  Possible applications include robot motion planning, finding points of discontinuity, etc.</li>
-          <li>Needed background: CMSC 310 Algorithms, MATH 160 Calculus I, MATH 161 Calculus II, MATH 322 Linear Algebra, MATH 371 Numerical Analysis. </li>
-        </ul>
-    </div>
-  </div>
 
-  <script src="bower_components/jquery/jquery.min.js"></script>
-  <script src="bower_components/jquery.smooth-scroll/jquery.smooth-scroll.min.js"></script>
-  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script src="js/jquery.ba-bbq.js"></script>
-  <script>
-    $(document)
-    .on('click', 'a[href*="#"]', function() {
-      if ( this.hash && this.pathname === location.pathname ) {
-        $.bbq.pushState( '#/' + this.hash.slice(1) );
-        return false;
-      }
-    })
-    .ready(function() {
-      $(window).bind('hashchange', function(event) {
-        var tgt = location.hash.replace(/^#\/?/,'');
-        if ( document.getElementById(tgt) ) {
-          $.smoothScroll({scrollTarget: '#' + tgt});
-        }
-      });
+    <section id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <h2 class="section-heading">Contact Dr. Shepherd</h2>
+                    <hr class="primary">
+                            <p>Jason B. Shepherd, Ph.D.<br>
+                               Associate Professor of Computer Science<br>
+                               Buena Vista University<br>
+                               610 W. 4th St.<br>
+                               Storm Lake, IA 50588</p>
+                </div>
+                <div class="col-lg-4 col-lg-offset-2 text-center">
+                    <i class="fa fa-phone fa-3x sr-contact"></i>
+                    <p>712-749-2281</p>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <i class="fa fa-envelope-o fa-3x sr-contact"></i>
+                    <p><a href="mailto:shepherd@bvu.edu">shepherd@bvu.edu</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-      $(window).trigger('hashchange');
-    });
-  </script>
+    <!-- jQuery -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="vendor/scrollreveal/scrollreveal.min.js"></script>
+    <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+    <!-- Theme JavaScript -->
+    <script src="js/creative.min.js"></script>
+
 </body>
+
 </html>
-<!--
-vim: ts=2 sw=2:
--->
