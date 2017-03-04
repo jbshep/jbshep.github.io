@@ -1,7 +1,5 @@
 header {
   background-image: url('../img/shep-discrete.jpg');
-  /*background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),
-   * url('../img/shep-discrete.jpg');*/
 }
 
 .navbar-default .navbar-header .navbar-brand {
@@ -55,25 +53,6 @@ header .header-content .header-content-inner p {
 a#btn-cs {
     margin-top: 2em;
 }
-/*
-#recognition {
-    position: relative;
-    width: 100%;
-    min-height: auto;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover;
-    -o-background-size: cover;
-    background-position: center;
-    background-image: url('../img/shep-algo.jpg');
-    text-align: center;
-    color: white;
-}
-
-#recognition p {
-    text-align: right;
-}
-*/
 
 #recognition {
   position: relative;
