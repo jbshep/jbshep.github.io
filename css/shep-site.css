@@ -1,5 +1,5 @@
 header {
-  background-image: url('../img/shep-discrete.jpg');
+  background-image: url('../img/shep-discrete-bg.jpg');
 }
 
 .navbar-default .navbar-header .navbar-brand {
@@ -29,12 +29,15 @@ header {
 }
 
 header .header-content .header-content-inner p {
-  color: white;
-  text-shadow: 2px 2px 5px black;
+  color: #002244;
+  font-weight: bold;
+  text-shadow: 2px 2px 5px white;
 }
 
 #homeHeading {
-  text-shadow: 2px 2px black;
+  color: #002244;
+  font-weight: bold;
+  text-shadow: 2px 2px 5px white;
 }
 
 .bg-primary {
