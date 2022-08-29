@@ -1,0 +1,1181 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>6. Files and Exceptions &#8212; Conversational Python 2.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="7. Dictionaries" href="ch7_dicts.html" />
+    <link rel="prev" title="5. Lists" href="ch5_lists.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="files-and-exceptions">
+<span id="ch-files-excepts"></span><h1><span class="section-number">6. </span>Files and Exceptions<a class="headerlink" href="#files-and-exceptions" title="Permalink to this headline">¶</a></h1>
+<section id="opening-and-reading-files">
+<span id="sec-read-files"></span><h2><span class="section-number">6.1. </span>Opening and Reading Files<a class="headerlink" href="#opening-and-reading-files" title="Permalink to this headline">¶</a></h2>
+<p>Of the time people spend using computers, a very large proportion of the time is
+spent on managing files.  People take photos, organize them, and sometimes edit
+them on their laptops.  People open Word documents, edit them, and save their
+changes.  People may make copies of files or move files from one folder to
+another.  In some cases, people manage files directly.  In other situations,
+people may be blissfully unaware that programs are managing files on their
+behalf.  Suppose you are playing a video game.  When you, the user, save your
+game, the game program most likely stores the level you were on in a file.  The
+game would then open and read information from this file when you start the game
+again so that you can start where you left off.  In this chapter, we will learn
+how to create files, read from files, and write to files using Python.</p>
+<p>As we often do in this book, we will begin with an example.  In Thonny, create a
+new code file named <code class="docutils literal notranslate"><span class="pre">show-menu.py</span></code>.  Do not type anything into it just yet, but
+leave the new code file open.  Now create a second file and name it <code class="docutils literal notranslate"><span class="pre">menu.txt</span></code>.
+Take note that this file ends in <code class="docutils literal notranslate"><span class="pre">.txt</span></code> rather than <code class="docutils literal notranslate"><span class="pre">.py</span></code>.  Be sure to save the
+file <code class="docutils literal notranslate"><span class="pre">menu.txt</span></code> in the same folder as you save the file <code class="docutils literal notranslate"><span class="pre">show-menu.py</span></code>.  This
+<code class="docutils literal notranslate"><span class="pre">menu.txt</span></code> file will not contain Python code.  Instead, it should contain the
+following lines.  Go ahead and type them into the file and save it.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>roast duck
+ribeye steak
+plank-seared salmon
+caesar salad
+</pre></div>
+</div>
+<p>Now, return to the window for <code class="docutils literal notranslate"><span class="pre">show-menu.py</span></code>.  Still, do not type anything into
+it, but go ahead and run the empty code file.  This should shift the focus back
+to the Python Shell window.  In the Python Shell window type the following.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">open</span><span class="p">(</span><span class="s2">&quot;menu.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>What appears when you type this?  Now, type this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;menu.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Even though the type of <code class="docutils literal notranslate"><span class="pre">f</span></code> is reported as having the type <code class="docutils literal notranslate"><span class="pre">_io.TextIOWrapper</span></code>,
+in general we will refer to <code class="docutils literal notranslate"><span class="pre">f</span></code> as a <code class="docutils literal notranslate"><span class="pre">file</span></code> type variable.  When we use the
+<code class="docutils literal notranslate"><span class="pre">open</span></code> function, we pass it the name of the file we wish to open, and we also
+tell it what we intend to do with the file.  In this case, the <code class="docutils literal notranslate"><span class="pre">&quot;r&quot;</span></code> indicates
+that we wish to “read” from the file.</p>
+<p>Now try this in the Python Shell window:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Interesting.  This function returns a list that looks like <code class="docutils literal notranslate"><span class="pre">['roast</span>
+<span class="pre">duck\n',</span> <span class="pre">'ribeye</span> <span class="pre">steak\n',</span> <span class="pre">'wood-fired</span> <span class="pre">pizza\n',</span> <span class="pre">'plank-seared</span> <span class="pre">salmon\n',</span> <span class="pre">'caesar</span> <span class="pre">salad\n']</span></code>.  Each item in the list is a single line in the file.
+The <code class="docutils literal notranslate"><span class="pre">&quot;\n&quot;</span></code> is the newline character.  A newline can be found at
+the end of every line.</p>
+<p>Try reading the lines again by typing:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Oh no!  Where did the lines go?  Has our file been deleted?  Is the file still
+there but its contents have been deleted?</p>
+<p>The good news is the file is still there and none of the lines have been harmed
+in the process.  For evidence, try the following.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Hey, they’re back!  What do you think <code class="docutils literal notranslate"><span class="pre">f.seek(0)</span></code> does?  (We’ll explain exactly
+what it does in a bit.)</p>
+<p>Okay, now let’s try these lines in the Python Shell window.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+<span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+<span class="n">f</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+<span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The singular <code class="docutils literal notranslate"><span class="pre">f.readline()</span></code> works differently than the plural <code class="docutils literal notranslate"><span class="pre">f.readlines()</span></code>.
+<code class="docutils literal notranslate"><span class="pre">readline</span></code> simply returns a single line as a string.  <code class="docutils literal notranslate"><span class="pre">readlines</span></code> returns all of
+the lines as a <code class="docutils literal notranslate"><span class="pre">list</span></code> of strings.</p>
+<p>We can also do this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The function call <code class="docutils literal notranslate"><span class="pre">f.read()</span></code> returns the entire file as a single string.</p>
+<p>Finally, we can do this.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This closes the file we opened earlier.  If we try to <code class="docutils literal notranslate"><span class="pre">seek</span></code> or <code class="docutils literal notranslate"><span class="pre">readline</span></code>, the
+program will encounter an error.  We can check to see whether a file is closed
+by typing:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">.</span><span class="n">closed</span>    <span class="c1"># type is bool</span>
+</pre></div>
+</div>
+<p>Let’s make sense of how this all works.  When we open a new file, imagine that
+we are setting up a “pipe” in front of our file.  Through the pipe, we can pull
+lines out of a file and into our Python program, line by line.  At any point,
+the end of the pipe is pointing at the next line to be retrieved.</p>
+<p>Suppose we type the following into the Python Shell window.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">line</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;menu.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+<span class="n">line</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+<span class="n">line</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>With each call to <code class="docutils literal notranslate"><span class="pre">readline()</span></code>, the next line will be read through the file’s
+pipe, and then the pipe will be moved to the location in the file to be read
+next.  To help visualize this process, the first and second <code class="docutils literal notranslate"><span class="pre">readline</span></code> calls are
+shown in Figure <a class="reference internal" href="#fig-read1"><span class="std std-numref">6.1</span></a> and Figure <a class="reference internal" href="#fig-read2"><span class="std std-numref">6.2</span></a>, respectively.  Note
+how after the first <code class="docutils literal notranslate"><span class="pre">readline</span></code>, the pipe is moved down in
+Figure <a class="reference internal" href="#fig-read2"><span class="std std-numref">6.2</span></a>, ready to read the next line.</p>
+<figure class="align-default" id="id1">
+<span id="fig-read1"></span><a class="reference internal image-reference" href="_images/read1.png"><img alt="The effect of the first ``f.readline()``" src="_images/read1.png" style="width: 786.0px; height: 402.59999999999997px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 6.1 </span><span class="caption-text">The effect of the first <code class="docutils literal notranslate"><span class="pre">f.readline()</span></code></span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id2">
+<span id="fig-read2"></span><a class="reference internal image-reference" href="_images/read2.png"><img alt="The effect of the second ``f.readline()``" src="_images/read2.png" style="width: 786.0px; height: 399.59999999999997px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 6.2 </span><span class="caption-text">The effect of the second <code class="docutils literal notranslate"><span class="pre">f.readline()</span></code></span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>When we write <code class="docutils literal notranslate"><span class="pre">f.seek(0)</span></code>, we are telling the file to reset the pipe to the
+beginning of the file.</p>
+<p>Now, we’re finally ready to write some code in <code class="docutils literal notranslate"><span class="pre">show-menu.py</span></code> (see
+Listing <a class="reference internal" href="#find-duck1"><span class="std std-numref">6.1</span></a>).</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<span id="find-duck1"></span><div class="code-block-caption"><span class="caption-number">Listing 6.1 </span><span class="caption-text">Searching for a specific value in a file, first attempt</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;menu.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+<span class="linenos">2</span><span class="n">lines</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+<span class="linenos">3</span><span class="k">for</span> <span class="n">food</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+<span class="linenos">4</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;They have </span><span class="si">%s</span><span class="s2">.&quot;</span> <span class="o">%</span> <span class="n">food</span><span class="p">)</span>
+<span class="linenos">5</span>    <span class="k">if</span> <span class="n">food</span> <span class="o">==</span> <span class="s2">&quot;roast duck&quot;</span><span class="p">:</span>
+<span class="linenos">6</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ooo, they have duck!  Yummy!&quot;</span><span class="p">)</span>
+<span class="linenos">7</span><span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>The code in Listing <a class="reference internal" href="#find-duck1"><span class="std std-numref">6.1</span></a> opens the file and retrieves all of
+the lines as a list of strings. Then, we use a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop to print each one of
+the lines; in the loop we call each line <code class="docutils literal notranslate"><span class="pre">food</span></code>.  If the food happens to be
+<code class="docutils literal notranslate"><span class="pre">&quot;roast</span> <span class="pre">duck&quot;</span></code> we print an especially excited message.  At the end of the code,
+we close the file.  It is always good practice to remember to close any files
+you open.</p>
+<p>Save your code file and run it.  Does the output look like what you would expect
+(I would guess the answer is “no”)?  Let’s look at the output.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>They have roast duck
+.
+They have ribeye steak
+.
+They have wood-fired pizza
+.
+They have plank-seared salmon
+.
+They have caesar salad
+.
+</pre></div>
+</div>
+<p>First of all, we don’t see our excited message at all.  Second, the period at
+the end of each <code class="docutils literal notranslate"><span class="pre">print</span></code> statement is on the next line.</p>
+<p>Look again at the list value returned by <code class="docutils literal notranslate"><span class="pre">f.readlines()</span></code>, which is <code class="docutils literal notranslate"><span class="pre">['roast</span>
+<span class="pre">duck\n',</span> <span class="pre">'ribeye</span> <span class="pre">steak\n',</span> <span class="pre">'wood-fired</span> <span class="pre">pizza\n',</span> <span class="pre">'plank-seared</span> <span class="pre">salmon\n',</span>
+<span class="pre">'caesar</span> <span class="pre">salad\n']</span></code>.  Every string value within the list includes a <code class="docutils literal notranslate"><span class="pre">&quot;\n&quot;</span></code> at the
+end.  The <code class="docutils literal notranslate"><span class="pre">&quot;\n&quot;</span></code> is the newline that separates the text on each line.  Since
+<code class="docutils literal notranslate"><span class="pre">print</span></code> normally inserts a newline after it prints its string, and since the
+string has a newline, too, there are two newlines that get printed: one before
+the period and one after the period.</p>
+<p>This also causes our <code class="docutils literal notranslate"><span class="pre">if</span></code> statement to fail.  When we compare <code class="docutils literal notranslate"><span class="pre">&quot;roast</span> <span class="pre">duck&quot;</span></code> to
+<code class="docutils literal notranslate"><span class="pre">&quot;roast</span> <span class="pre">duck\n&quot;</span></code>, these are technically different strings because the second one
+has a <code class="docutils literal notranslate"><span class="pre">&quot;\n&quot;</span></code> character at the end.  That’s why we never see our excited message.
+The expression <code class="docutils literal notranslate"><span class="pre">&quot;roast</span> <span class="pre">duck&quot;</span> <span class="pre">==</span> <span class="pre">&quot;roast</span> <span class="pre">duck\n&quot;</span></code> is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<p>Let’s fix this code; see Listing <a class="reference internal" href="#find-duck"><span class="std std-numref">6.2</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="id4">
+<span id="find-duck"></span><div class="code-block-caption"><span class="caption-number">Listing 6.2 </span><span class="caption-text">Searching for a specific value in a file, second attempt</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;menu.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+<span class="linenos">2</span><span class="n">lines</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+<span class="linenos">3</span><span class="k">for</span> <span class="n">food</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+<span class="hll"><span class="linenos">4</span>    <span class="n">food</span> <span class="o">=</span> <span class="n">food</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
+</span><span class="linenos">5</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;They have </span><span class="si">%s</span><span class="s2">.&quot;</span> <span class="o">%</span> <span class="n">food</span><span class="p">)</span>
+<span class="linenos">6</span>    <span class="k">if</span> <span class="n">food</span> <span class="o">==</span> <span class="s2">&quot;roast duck&quot;</span><span class="p">:</span>
+<span class="linenos">7</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ooo, they have duck!  Yummy!&quot;</span><span class="p">)</span>
+<span class="linenos">8</span><span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">rstrip</span></code> function removes any “whitespace” characters from the end of the
+string.  Whitespace characters include spaces, tabs, and newlines.  Make sure
+you remember to call the <code class="docutils literal notranslate"><span class="pre">rstrip</span></code> function using parentheses.  It’s a common
+mistake to forget.  It is perfectly “legal” in Python to do this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">food</span> <span class="o">=</span> <span class="n">food</span><span class="o">.</span><span class="n">rstrip</span>     <span class="c1"># This is INCORRECT.</span>
+</pre></div>
+</div>
+<p>Instead of this</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">food</span> <span class="o">=</span> <span class="n">food</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>   <span class="c1"># This is correct.</span>
+</pre></div>
+</div>
+<p>The second one is correct.  The first one is wrong but does not cause an error.
+Variables can store <em>references</em> to functions, so the first statement would
+change the variable food from a string to a function.  There are reasons why we
+would want to put function references in variables (which you may have
+encountered if you read “optional” Section <a class="reference internal" href="ch5_lists.html#sec-func-prog"><span class="std std-numref">5.8</span></a>),
+but this is not one of those instances.  So, be sure to call the function
+by using parentheses.</p>
+<p>Another way we could have accomplished this is to use the singular <code class="docutils literal notranslate"><span class="pre">readline</span></code>
+instead of <code class="docutils literal notranslate"><span class="pre">readlines</span></code>.  Consider Listing <a class="reference internal" href="#find-duck-singular"><span class="std std-numref">6.3</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="id5">
+<span id="find-duck-singular"></span><div class="code-block-caption"><span class="caption-number">Listing 6.3 </span><span class="caption-text">Searching for a specific value in a file using <code class="docutils literal notranslate"><span class="pre">readline</span></code></span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;menu.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+<span class="hll"><span class="linenos">2</span><span class="n">food</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+</span><span class="linenos">3</span><span class="k">while</span> <span class="n">food</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+<span class="linenos">4</span>    <span class="n">food</span> <span class="o">=</span> <span class="n">food</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
+<span class="linenos">5</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;They have </span><span class="si">%s</span><span class="s2">.&quot;</span> <span class="o">%</span> <span class="n">food</span><span class="p">)</span>
+<span class="linenos">6</span>    <span class="k">if</span> <span class="n">food</span> <span class="o">==</span> <span class="s2">&quot;roast duck&quot;</span><span class="p">:</span>
+<span class="linenos">7</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ooo, they have duck!  Yummy!&quot;</span><span class="p">)</span>
+<span class="hll"><span class="linenos">8</span>    <span class="n">food</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+</span><span class="linenos">9</span><span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>We retrieve the first food using <code class="docutils literal notranslate"><span class="pre">f.readline()</span></code>.  As long as the food is not an
+empty string, we can display it using the code in the body of the <code class="docutils literal notranslate"><span class="pre">while</span></code> loop.
+At the end of the <code class="docutils literal notranslate"><span class="pre">while</span></code> loop, we need to remember to retrieve the next line
+from the file.  When we have reached the end of the file, <code class="docutils literal notranslate"><span class="pre">f.readline()</span></code> returns
+an empty string (that is, <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>).</p>
+</section>
+<section id="reading-file-records">
+<span id="sec-read-records"></span><h2><span class="section-number">6.2. </span>Reading File Records<a class="headerlink" href="#reading-file-records" title="Permalink to this headline">¶</a></h2>
+<p>In the previous section, we had a file that contained a list of food items.
+What if we wanted to store more information about each food item beyond simply
+its name?  Suppose we wanted to also track how many calories and carbohydrates
+the food item contains?  One way we might do this is to store each piece of
+information on a separate line in a new file (let’s name it <code class="docutils literal notranslate"><span class="pre">new-menu.txt</span></code>),
+like this.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>roast duck
+1284
+0
+ribeye steak
+847
+0
+wood-fired pizza
+1680
+200
+</pre></div>
+</div>
+<p>The attributes of each item are now listed on three separate lines.  The first
+line is the name of the food item.  The second line is the calorie count.  The
+third line is the number of carbohydrates (“carbs”) in grams.</p>
+<p>Let’s write code to show all of the items and their attributes, and at the end
+of the program, let’s announce which food has the lowest calorie count.  Let’s
+focus on the first part initially (see Listing <a class="reference internal" href="#show-records"><span class="std std-numref">6.4</span></a>), and
+then we’ll come back and add to the code to print out the item with the lowest
+calorie count.</p>
+<div class="literal-block-wrapper docutils container" id="id6">
+<span id="show-records"></span><div class="code-block-caption"><span class="caption-number">Listing 6.4 </span><span class="caption-text">Showing all records in a file</span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">infile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;new-menu.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+<span class="linenos"> 2</span><span class="n">item</span> <span class="o">=</span> <span class="n">infile</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+<span class="linenos"> 3</span><span class="k">while</span> <span class="n">item</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+<span class="linenos"> 4</span>    <span class="n">item</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
+<span class="linenos"> 5</span>    <span class="n">calories</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">infile</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">rstrip</span><span class="p">())</span>
+<span class="linenos"> 6</span>    <span class="n">carbs</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">infile</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">rstrip</span><span class="p">())</span>
+<span class="linenos"> 7</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> contains </span><span class="si">%d</span><span class="s2"> cal and </span><span class="si">%d</span><span class="s2"> carbs.&quot;</span> \
+<span class="linenos"> 8</span>              <span class="o">%</span> <span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">calories</span><span class="p">,</span> <span class="n">carbs</span><span class="p">))</span>
+<span class="linenos"> 9</span>    <span class="n">item</span> <span class="o">=</span> <span class="n">infile</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+<span class="linenos">10</span><span class="n">infile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>In Listing <a class="reference internal" href="#show-records"><span class="std std-numref">6.4</span></a>, we attempt to read lines in sets of three’s
+since each item now consists of three lines of attributes, the item name, the
+calorie count, and the carbohydrate count.  If we ever get an empty string for
+the first line in the next set of three lines, we know we have reached the end
+of the file.</p>
+<p>Now, let’s add the code to track which food as the lowest calorie count.  For
+now, if there is a tie, we will announce only the first food with the lowest
+calorie count (see Listing <a class="reference internal" href="#lowcal-record"><span class="std std-numref">6.5</span></a>).</p>
+<div class="literal-block-wrapper docutils container" id="id7">
+<span id="lowcal-record"></span><div class="code-block-caption"><span class="caption-number">Listing 6.5 </span><span class="caption-text">Finding lowest calorie count in a set of file records</span><a class="headerlink" href="#id7" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos"> 1</span><span class="n">lowcal</span> <span class="o">=</span> <span class="mi">100000</span>   <span class="c1"># a really big number!</span>
+</span><span class="hll"><span class="linenos"> 2</span><span class="n">lowitem</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+</span><span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="n">infile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;new-menu.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+<span class="linenos"> 5</span><span class="n">item</span> <span class="o">=</span> <span class="n">infile</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+<span class="linenos"> 6</span><span class="k">while</span> <span class="n">item</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+<span class="linenos"> 7</span>    <span class="n">item</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
+<span class="linenos"> 8</span>    <span class="n">calories</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">infile</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">rstrip</span><span class="p">())</span>
+<span class="linenos"> 9</span>    <span class="n">carbs</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">infile</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">rstrip</span><span class="p">())</span>
+<span class="linenos">10</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> contains </span><span class="si">%d</span><span class="s2"> cal and </span><span class="si">%d</span><span class="s2"> carbs.&quot;</span> \
+<span class="linenos">11</span>              <span class="o">%</span> <span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">calories</span><span class="p">,</span> <span class="n">carbs</span><span class="p">))</span>
+<span class="linenos">12</span>
+<span class="hll"><span class="linenos">13</span>    <span class="k">if</span> <span class="n">lowcal</span> <span class="o">&gt;</span> <span class="n">calories</span><span class="p">:</span>
+</span><span class="hll"><span class="linenos">14</span>        <span class="n">lowcal</span> <span class="o">=</span> <span class="n">calories</span>
+</span><span class="hll"><span class="linenos">15</span>        <span class="n">lowitem</span> <span class="o">=</span> <span class="n">item</span>
+</span><span class="linenos">16</span>
+<span class="linenos">17</span>    <span class="n">item</span> <span class="o">=</span> <span class="n">infile</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span><span class="n">infile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="linenos">20</span>
+<span class="hll"><span class="linenos">21</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The food with the least calories is </span><span class="si">%s</span><span class="s2"> with </span><span class="si">%d</span><span class="s2"> cal.&quot;</span> <span class="o">%</span> \
+</span><span class="hll"><span class="linenos">22</span>      <span class="p">(</span><span class="n">lowitem</span><span class="p">,</span> <span class="n">lowcal</span><span class="p">))</span>
+</span></pre></div>
+</div>
+</div>
+<p>In Listing <a class="reference internal" href="#lowcal-record"><span class="std std-numref">6.5</span></a>, we make two variables before the loop
+starts.  <code class="docutils literal notranslate"><span class="pre">lowitem</span></code> keeps track of the name of the lowest calorie item and
+<code class="docutils literal notranslate"><span class="pre">lowcal</span></code> keeps track of how many calories it was.  Then, inside the loop, we
+check each item to see if its calorie count is lower than what we’ve seen so far
+in the file.  Once the loop is finished and we’ve examined all items, we print
+our findings.</p>
+<p>Storing related values on separate lines is not uncommon, though real-world data
+is often stored differently.  It is very common to find data stored in files
+using the comma-separated values (CSV) format.  Let’s explore how to read CSV
+files.  To do this, let’s make yet another new file and name it <code class="docutils literal notranslate"><span class="pre">menu.csv</span></code> (note
+the <code class="docutils literal notranslate"><span class="pre">.csv</span></code> file extension).  The contents of this file should appear as follows.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#item,cal,carb
+roast duck,1284,0
+ribeye steak,847,0
+wood-fired pizza,1680,200
+</pre></div>
+</div>
+<p>Now, the information for each item is stored on a single line, and each
+“attribute” is separated by commas.  It is fairly common to have the first line
+in the file not contain actual data, but rather it contains a description of the
+order of attributes in each subsequent line.  This first line is often called
+the <em>header line</em> or <em>header row</em> of information.  In the code we will write, we
+will need to remember to read that header line, but then simply ignore its
+contents.</p>
+<p>Our CSV-related code becomes Listing <a class="reference internal" href="#lowcal-csv"><span class="std std-numref">6.6</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="id8">
+<span id="lowcal-csv"></span><div class="code-block-caption"><span class="caption-number">Listing 6.6 </span><span class="caption-text">Finding lowest calorie count in CSV file</span><a class="headerlink" href="#id8" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">lowcal</span> <span class="o">=</span> <span class="mi">100000</span>   <span class="c1"># a really big number!</span>
+<span class="linenos"> 2</span><span class="n">lowitem</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="n">infile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;menu.csv&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span><span class="c1"># Read the header and throw it away.</span>
+<span class="linenos"> 7</span><span class="n">line</span> <span class="o">=</span> <span class="n">infile</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span><span class="c1"># Get the actual first line.</span>
+<span class="linenos">10</span><span class="n">line</span> <span class="o">=</span> <span class="n">infile</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="k">while</span> <span class="n">line</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+<span class="hll"><span class="linenos">13</span>    <span class="n">attributes</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+</span><span class="hll"><span class="linenos">14</span>    <span class="n">item</span> <span class="o">=</span> <span class="n">attributes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span class="hll"><span class="linenos">15</span>    <span class="n">calories</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">attributes</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</span><span class="hll"><span class="linenos">16</span>    <span class="n">carbs</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">attributes</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+</span><span class="linenos">17</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> contains </span><span class="si">%d</span><span class="s2"> cal and </span><span class="si">%d</span><span class="s2"> carbs.&quot;</span> \
+<span class="linenos">18</span>              <span class="o">%</span> <span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">calories</span><span class="p">,</span> <span class="n">carbs</span><span class="p">))</span>
+<span class="linenos">19</span>
+<span class="linenos">20</span>    <span class="k">if</span> <span class="n">lowcal</span> <span class="o">&gt;</span> <span class="n">calories</span><span class="p">:</span>
+<span class="linenos">21</span>        <span class="n">lowcal</span> <span class="o">=</span> <span class="n">calories</span>
+<span class="linenos">22</span>        <span class="n">lowitem</span> <span class="o">=</span> <span class="n">item</span>
+<span class="linenos">23</span>
+<span class="linenos">24</span>    <span class="n">line</span> <span class="o">=</span> <span class="n">infile</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+<span class="linenos">25</span><span class="n">infile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="linenos">26</span>
+<span class="linenos">27</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The food with the least calories is </span><span class="si">%s</span><span class="s2"> with </span><span class="si">%d</span><span class="s2"> cal.&quot;</span> <span class="o">%</span> \
+<span class="linenos">28</span>      <span class="p">(</span><span class="n">lowitem</span><span class="p">,</span> <span class="n">lowcal</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<p>We use <code class="docutils literal notranslate"><span class="pre">.split(&quot;,&quot;)</span></code> to split the line into its three pieces: the item, the
+calories, and the carbs.  Then, we proceed as we did previously.</p>
+</section>
+<section id="writing-information-to-files">
+<span id="sec-write-file"></span><h2><span class="section-number">6.3. </span>Writing Information to Files<a class="headerlink" href="#writing-information-to-files" title="Permalink to this headline">¶</a></h2>
+<p>So far in this chapter, we have written code to read information from existing
+files.  Let’s learn how to write code that writes to files.  That is, we may
+want to create new files, or we may wish to update existing files.</p>
+<p>We shall continue with another food-related example, and we’ll hope that you’re
+not reading this book close to meal time, otherwise it may be hard to
+concentrate!</p>
+<p>Suppose we want to create a program that allows us to make a menu for a meal
+that we would then save for later use.  Let’s save this code into a file named
+<code class="docutils literal notranslate"><span class="pre">write_menu.py</span></code>.  Let’s ask for each menu item, one after another, until the
+user enters a bare enter/return (i.e., an empty string). Then, we’ll write each
+menu item line to a file that we will name <code class="docutils literal notranslate"><span class="pre">menu.txt</span></code>.
+Listing <a class="reference internal" href="#write-menu"><span class="std std-numref">6.7</span></a> shows the code to accomplish this in all its
+wonderous Python-y glory.</p>
+<div class="literal-block-wrapper docutils container" id="id9">
+<span id="write-menu"></span><div class="code-block-caption"><span class="caption-number">Listing 6.7 </span><span class="caption-text">Creating <code class="docutils literal notranslate"><span class="pre">menu.txt</span></code></span><a class="headerlink" href="#id9" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;menu.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span>
+<span class="linenos">2</span><span class="n">food</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What do you want to eat? (Enter nothing to quit.) &quot;</span><span class="p">)</span>
+<span class="linenos">3</span><span class="k">while</span> <span class="n">food</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+<span class="linenos">4</span>    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">food</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">5</span>    <span class="n">food</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What do you want to eat? (Enter nothing to quit.) &quot;</span><span class="p">)</span>
+<span class="linenos">6</span><span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>Give this code a try.  After the program ends, a file named <code class="docutils literal notranslate"><span class="pre">menu.txt</span></code> should
+“magically” appear in the same folder as your code file <code class="docutils literal notranslate"><span class="pre">write_menu.py</span></code>.  Go
+ahead and open <code class="docutils literal notranslate"><span class="pre">menu.txt</span></code> and verify that all the items you typed when you first
+ran the program do in fact appear in the file, each on a separate line.</p>
+<p>Take note of line 1 in Listing <a class="reference internal" href="#write-menu"><span class="std std-numref">6.7</span></a>.  See how we changed the
+second parameter of the function call to <code class="docutils literal notranslate"><span class="pre">open</span></code>?  Instead of <code class="docutils literal notranslate"><span class="pre">&quot;r&quot;</span></code>, which means
+“read”, we typed <code class="docutils literal notranslate"><span class="pre">&quot;w&quot;</span></code>, which means “write.”</p>
+<p>Also, consider line 4 in Listing <a class="reference internal" href="#write-menu"><span class="std std-numref">6.7</span></a>.  The file variable <code class="docutils literal notranslate"><span class="pre">f</span></code>
+has a function named <code class="docutils literal notranslate"><span class="pre">write</span></code>.  Unlike <code class="docutils literal notranslate"><span class="pre">print</span></code>, which always inserts a newline
+(<code class="docutils literal notranslate"><span class="pre">\n</span></code>) at the end of output, <code class="docutils literal notranslate"><span class="pre">write</span></code> does not automatically add a
+newline. Thus, we must manually insert the newline by passing the string
+expression <code class="docutils literal notranslate"><span class="pre">food</span> <span class="pre">+</span> <span class="pre">&quot;\n&quot;</span></code> to our call to <code class="docutils literal notranslate"><span class="pre">f.write</span></code>.  If we omitted
+the <code class="docutils literal notranslate"><span class="pre">&quot;\n&quot;</span></code>, all of the food items you entered would be squished
+together on one unreadable line.</p>
+<p>There is a downside to this program.  Whenever we run this code,
+<code class="docutils literal notranslate"><span class="pre">open(&quot;menu.txt&quot;,</span> <span class="pre">&quot;w&quot;)</span></code> obliterates any pre-existing <code class="docutils literal notranslate"><span class="pre">menu.txt</span></code> file.  Any menu
+that we have previously created is destroyed.  That’s maybe not such a good
+thing.  It might be a good idea to show users the menu we already have, if there
+is one, and then ask if they want to create a new menu.</p>
+<p>Okay, here we go!  Check out Listing <a class="reference internal" href="#check-and-write-menu"><span class="std std-numref">6.8</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="id10">
+<span id="check-and-write-menu"></span><div class="code-block-caption"><span class="caption-number">Listing 6.8 </span><span class="caption-text">Show and re-create <code class="docutils literal notranslate"><span class="pre">menu.txt</span></code></span><a class="headerlink" href="#id10" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">infile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;menu.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+<span class="linenos"> 2</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The current menu on file is:&quot;</span><span class="p">)</span>
+<span class="linenos"> 3</span><span class="k">for</span> <span class="n">menuitem</span> <span class="ow">in</span> <span class="n">infile</span><span class="p">:</span>
+<span class="linenos"> 4</span>    <span class="nb">print</span><span class="p">(</span><span class="n">menuitem</span><span class="o">.</span><span class="n">rstrip</span><span class="p">())</span>
+<span class="linenos"> 5</span><span class="n">infile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="linenos"> 6</span><span class="nb">print</span><span class="p">()</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="n">create_new</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Would you like to throw away this menu &quot;</span> <span class="o">+</span>
+<span class="linenos"> 9</span>                   <span class="s2">&quot;and create a new one? (y/n): &quot;</span><span class="p">)</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span><span class="k">if</span> <span class="n">create_new</span> <span class="o">==</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span>
+<span class="linenos">12</span>    <span class="n">outfile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;menu.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span>
+<span class="linenos">13</span>    <span class="n">food</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What do you want to eat? (Enter nothing to quit.) &quot;</span><span class="p">)</span>
+<span class="linenos">14</span>    <span class="k">while</span> <span class="n">food</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+<span class="linenos">15</span>        <span class="n">outfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">food</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">16</span>        <span class="n">food</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What do you want to eat? (Enter nothing to quit.) &quot;</span><span class="p">)</span>
+<span class="linenos">17</span>    <span class="n">outfile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>Run the code in Listing <a class="reference internal" href="#check-and-write-menu"><span class="std std-numref">6.8</span></a>.  It should show you the
+contents of <code class="docutils literal notranslate"><span class="pre">menu.txt</span></code> and then ask you if you want to create a new menu.  Enter
+<code class="docutils literal notranslate"><span class="pre">n</span></code> and press enter/return.  Re-run the code.  Your menu items should still be
+intact!  Now run the program again.  When it asks you if you want to create a
+new menu, enter <code class="docutils literal notranslate"><span class="pre">y</span></code>.  You will be able to enter several new menu items.  When
+you are finished entering items, you should be able to see those menu items
+whenever you re-run the program.</p>
+<p>Our code does suffer from at least one problem, however.  Line 1 of
+Listing <a class="reference internal" href="#check-and-write-menu"><span class="std std-numref">6.8</span></a> assumes there is a file named
+<code class="docutils literal notranslate"><span class="pre">menu.txt</span></code>.  What if there isn’t?  In other words, if we were to run this
+program for the first time without creating a <code class="docutils literal notranslate"><span class="pre">menu.txt</span></code> ahead of time, what
+will happen.  Well, let’s try that.  Delete the file <code class="docutils literal notranslate"><span class="pre">menu.txt</span></code>.  Re-run the
+program.  Kablooey!</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Traceback (most recent call last):
+  File &quot;t.py&quot;, line 1, in &lt;module&gt;
+    infile = open(&quot;menu.txt&quot;, &quot;r&quot;)
+FileNotFoundError: [Errno 2] No such file or directory: &#39;menu.txt&#39;
+</pre></div>
+</div>
+<p>Our code is brittle.  We will fix this in Section <a class="reference internal" href="#sec-except"><span class="std std-numref">6.4</span></a>.</p>
+</section>
+<section id="exceptions">
+<span id="sec-except"></span><h2><span class="section-number">6.4. </span>Exceptions<a class="headerlink" href="#exceptions" title="Permalink to this headline">¶</a></h2>
+<p>Let’s not delay in fixing Listing <a class="reference internal" href="#check-and-write-menu"><span class="std std-numref">6.8</span></a>.  The code,
+again, for the sake of convenience, is:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">infile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;menu.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+<span class="linenos"> 2</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The current menu on file is:&quot;</span><span class="p">)</span>
+<span class="linenos"> 3</span><span class="k">for</span> <span class="n">menuitem</span> <span class="ow">in</span> <span class="n">infile</span><span class="p">:</span>
+<span class="linenos"> 4</span>    <span class="nb">print</span><span class="p">(</span><span class="n">menuitem</span><span class="o">.</span><span class="n">rstrip</span><span class="p">())</span>
+<span class="linenos"> 5</span><span class="n">infile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="linenos"> 6</span><span class="nb">print</span><span class="p">()</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="n">create_new</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Would you like to throw away this menu &quot;</span> <span class="o">+</span>
+<span class="linenos"> 9</span>                   <span class="s2">&quot;and create a new one? (y/n): &quot;</span><span class="p">)</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span><span class="k">if</span> <span class="n">create_new</span> <span class="o">==</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span>
+<span class="linenos">12</span>    <span class="n">outfile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;menu.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span>
+<span class="linenos">13</span>    <span class="n">food</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What do you want to eat? (Enter nothing to quit.) &quot;</span><span class="p">)</span>
+<span class="linenos">14</span>    <span class="k">while</span> <span class="n">food</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+<span class="linenos">15</span>        <span class="n">outfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">food</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">16</span>        <span class="n">food</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What do you want to eat? (Enter nothing to quit.) &quot;</span><span class="p">)</span>
+<span class="linenos">17</span>    <span class="n">outfile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>To recap, the problem lies in line 1, which assumes that we already have a file
+named <code class="docutils literal notranslate"><span class="pre">menu.txt</span></code> that resides in the same folder as our code.  If that file does
+not exist, then our code will crash at line 1.  Furthermore, lines 2 through 9
+also rely on this assumption, namely, that we already have a menu saved.  So,
+our first instinct might be to “protect” lines 1 through 9 with an <code class="docutils literal notranslate"><span class="pre">if</span></code>
+statement.  The Python standard libraries has a package named <code class="docutils literal notranslate"><span class="pre">os</span></code> that has
+functions that let us look at the contents of the current folder.  We can use it
+as shown in Listing <a class="reference internal" href="#menu-with-isfile"><span class="std std-numref">6.9</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="id11">
+<span id="menu-with-isfile"></span><div class="code-block-caption"><span class="caption-number">Listing 6.9 </span><span class="caption-text">Show and create menu with error checking</span><a class="headerlink" href="#id11" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos"> 1</span><span class="kn">import</span> <span class="nn">os</span>
+</span><span class="linenos"> 2</span>
+<span class="hll"><span class="linenos"> 3</span><span class="n">create_new</span> <span class="o">=</span> <span class="s2">&quot;y&quot;</span>
+</span><span class="linenos"> 4</span>
+<span class="hll"><span class="linenos"> 5</span><span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="s2">&quot;menu.txt&quot;</span><span class="p">):</span>
+</span><span class="linenos"> 6</span>    <span class="n">infile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;menu.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+<span class="linenos"> 7</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The current menu on file is:&quot;</span><span class="p">)</span>
+<span class="linenos"> 8</span>    <span class="k">for</span> <span class="n">menuitem</span> <span class="ow">in</span> <span class="n">infile</span><span class="p">:</span>
+<span class="linenos"> 9</span>        <span class="nb">print</span><span class="p">(</span><span class="n">menuitem</span><span class="o">.</span><span class="n">rstrip</span><span class="p">())</span>
+<span class="linenos">10</span>    <span class="n">infile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="linenos">11</span>    <span class="nb">print</span><span class="p">()</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span>    <span class="n">create_new</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Would you like to throw away this menu &quot;</span> <span class="o">+</span>
+<span class="linenos">14</span>                        <span class="s2">&quot;and create a new one? (y/n): &quot;</span><span class="p">)</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span><span class="k">if</span> <span class="n">create_new</span> <span class="o">==</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span>
+<span class="linenos">17</span>    <span class="n">outfile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;menu.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span>
+<span class="linenos">18</span>    <span class="n">food</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What do you want to eat? (Enter nothing to quit.) &quot;</span><span class="p">)</span>
+<span class="linenos">19</span>    <span class="k">while</span> <span class="n">food</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+<span class="linenos">20</span>        <span class="n">outfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">food</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">21</span>        <span class="n">food</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What do you want to eat? (Enter nothing to quit.) &quot;</span><span class="p">)</span>
+<span class="linenos">22</span>    <span class="n">outfile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>In Listing <a class="reference internal" href="#menu-with-isfile"><span class="std std-numref">6.9</span></a>, we’ve indented lines 6 through 14 from
+our previous code (Listing <a class="reference internal" href="#check-and-write-menu"><span class="std std-numref">6.8</span></a>).  We are now
+importing the <code class="docutils literal notranslate"><span class="pre">os</span></code> module and using it in line 5 to ensure that <code class="docutils literal notranslate"><span class="pre">menu.txt</span></code>
+exists before we try to open it and read from it.  We also need to initialize
+the variable <code class="docutils literal notranslate"><span class="pre">create_new</span></code> since we only ask the question of whether to create a
+new menu if we already have a menu created (see line 3).</p>
+<p>Try to break this code.  Remove <code class="docutils literal notranslate"><span class="pre">menu.txt</span></code> and run the code.  What happens?</p>
+<p>It looks like we’ve fixed everything, so congratulations!  Give yourself a pat
+on the back.  If that is difficult, you may want to consider stretching your
+shoulders more often (heh!).</p>
+<p>The strategy we just used is one we’ve used before in this book, specifically,
+we’ve used an <code class="docutils literal notranslate"><span class="pre">if</span></code> statement to “guard” a block of other statements.  That’s not
+the only way to solve this problem, however.  There is another way to do it, and
+it is one that might make other problems easier to solve in the future as well.
+The other way is to utilize <em>exceptions</em>.</p>
+<p>You’ve seen exceptions before in code.  In fact, we saw one at the end of the
+last section.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Traceback (most recent call last):
+  File &quot;t.py&quot;, line 1, in &lt;module&gt;
+    infile = open(&quot;menu.txt&quot;, &quot;r&quot;)
+FileNotFoundError: [Errno 2] No such file or directory: &#39;menu.txt&#39;
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">FileNotFoundError</span></code> is an exception!  An exception is an “exceptional condition”
+that, if unhandled, can cause the program to crash.  We’ve seen others of these
+earlier in the book as well: <code class="docutils literal notranslate"><span class="pre">NameError</span></code>, <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>, <code class="docutils literal notranslate"><span class="pre">IndexError</span></code>, etc.</p>
+<p>Notice what we just said about exceptions: they <em>can</em> cause a program to crash.
+We can prevent them from causing a crash, however.  We can <em>catch</em> exceptions
+when they happen, and then we can respond appropriately to them.</p>
+<p>Before we go back to Listing <a class="reference internal" href="#menu-with-isfile"><span class="std std-numref">6.9</span></a> and try to solve the
+problem a different way, let’s look at a more simple example that uses
+exceptions.  Let’s start with the following code.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">age</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;How old are you? &quot;</span><span class="p">))</span>
+<span class="k">if</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">18</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You are old enough to vote.&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You are not old enough to vote yet.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This code is all fine and dandy as long at the users properly enter an integer
+as their input.  If the user types something other than an integer (say,
+“cheetos”), the call to <code class="docutils literal notranslate"><span class="pre">int</span></code> will produce an exception named <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Traceback (most recent call last):
+  File &quot;s.py&quot;, line 1, in &lt;module&gt;
+    age = int(input(&quot;How old are you? &quot;))
+ValueError: invalid literal for int() with base 10: &#39;cheetos&#39;
+</pre></div>
+</div>
+<p>Instead, we can “try” a certain bit of code, and then also write code that
+should be executed only in the event we receive an exception, like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos">1</span><span class="k">try</span><span class="p">:</span>
+</span><span class="linenos">2</span>    <span class="n">age</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;How old are you? &quot;</span><span class="p">))</span>
+<span class="linenos">3</span>    <span class="k">if</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">18</span><span class="p">:</span>
+<span class="linenos">4</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You are old enough to vote.&quot;</span><span class="p">)</span>
+<span class="linenos">5</span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos">6</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You are not old enough to vote yet.&quot;</span><span class="p">)</span>
+<span class="hll"><span class="linenos">7</span><span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+</span><span class="hll"><span class="linenos">8</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;That does not look like a valid age.&quot;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<p>We “try” lines 2 through 6.  If we encounter a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>, we immediately jump
+down to line 8 and execute that code.  If we didn’t have <code class="docutils literal notranslate"><span class="pre">try</span></code> and <code class="docutils literal notranslate"><span class="pre">except</span></code>, we
+would have to write code like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">age</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;How old are you? &quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">age</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
+    <span class="n">age</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">age</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">18</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You are old enough to vote.&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You are not old enough to vote yet.&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;That does not look like a valid age.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>One of the next things about <code class="docutils literal notranslate"><span class="pre">try</span></code>/<code class="docutils literal notranslate"><span class="pre">except</span></code> is we can focus on “normal”
+conditions in our code and then handle “edge” cases in our <code class="docutils literal notranslate"><span class="pre">except</span></code> block.</p>
+<p>For the sake of completeness in our terminology, when a function generates an
+exception, we sometimes say that the function <em>throws</em> or <em>raises</em> an exception.
+The <code class="docutils literal notranslate"><span class="pre">except</span></code> block is responsible for <em>catching</em> or <em>handling</em> an exception.</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">try</span></code> block can be followed by more than one <code class="docutils literal notranslate"><span class="pre">except</span></code> block.  You might think of each <code class="docutils literal notranslate"><span class="pre">except</span></code> block as being like an <code class="docutils literal notranslate"><span class="pre">elif</span></code> in that we can have different blocks of code to be executed depending on the type of exception we catch.  Consider Listing <a class="reference internal" href="#multi-except"><span class="std std-numref">6.10</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="id12">
+<span id="multi-except"></span><div class="code-block-caption"><span class="caption-number">Listing 6.10 </span><span class="caption-text">Show and create menu with error checking</span><a class="headerlink" href="#id12" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># Try commenting out the different lines in the try block to see what</span>
+<span class="linenos"> 2</span><span class="c1"># exceptions get caught and handled.</span>
+<span class="linenos"> 3</span><span class="k">try</span><span class="p">:</span>
+<span class="linenos"> 4</span>    <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;cheetos&quot;</span><span class="p">)</span>
+<span class="linenos"> 5</span>    <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span><span class="s2">&quot;b&quot;</span><span class="p">][</span><span class="mi">7</span><span class="p">]</span>
+<span class="linenos"> 6</span>    <span class="n">x</span>
+<span class="linenos"> 7</span><span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+<span class="linenos"> 8</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ValueError&quot;</span><span class="p">)</span>
+<span class="linenos"> 9</span><span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+<span class="linenos">10</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;IndexError&quot;</span><span class="p">)</span>
+<span class="linenos">11</span><span class="k">except</span><span class="p">:</span>
+<span class="linenos">12</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Line 4 of Listing <a class="reference internal" href="#multi-except"><span class="std std-numref">6.10</span></a> generates a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>.  If we
+comment out line 4, then line 5 throws an <code class="docutils literal notranslate"><span class="pre">IndexError</span></code>.  If we comment out lines
+4 and 5, then line 6 throws a <code class="docutils literal notranslate"><span class="pre">NameError</span></code> since <code class="docutils literal notranslate"><span class="pre">x</span></code> is not defined.  The last
+<code class="docutils literal notranslate"><span class="pre">except</span></code> that starts on line 11 catches all other exceptions, including
+<code class="docutils literal notranslate"><span class="pre">NameError</span></code>.  Thus, we do not necessarily need to state the type of exception to
+catch.</p>
+<p>Now, let’s return to our file reading/writing example involving menus.  We can
+use exceptions to deal with the situation where there is no <code class="docutils literal notranslate"><span class="pre">menu.txt</span></code> file.
+Consider Listing <a class="reference internal" href="#menu-with-try"><span class="std std-numref">6.11</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="id13">
+<span id="menu-with-try"></span><div class="code-block-caption"><span class="caption-number">Listing 6.11 </span><span class="caption-text">Show and create menu with exception handling</span><a class="headerlink" href="#id13" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">create_new</span> <span class="o">=</span> <span class="s2">&quot;y&quot;</span>
+<span class="linenos"> 2</span>
+<span class="hll"><span class="linenos"> 3</span><span class="k">try</span><span class="p">:</span>
+</span><span class="linenos"> 4</span>    <span class="n">infile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;menu.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+<span class="linenos"> 5</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The current menu on file is:&quot;</span><span class="p">)</span>
+<span class="linenos"> 6</span>    <span class="k">for</span> <span class="n">menuitem</span> <span class="ow">in</span> <span class="n">infile</span><span class="p">:</span>
+<span class="linenos"> 7</span>        <span class="nb">print</span><span class="p">(</span><span class="n">menuitem</span><span class="o">.</span><span class="n">rstrip</span><span class="p">())</span>
+<span class="linenos"> 8</span>    <span class="n">infile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="linenos"> 9</span>    <span class="nb">print</span><span class="p">()</span>
+<span class="linenos">10</span>    <span class="n">create_new</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Would you like to throw away this menu &quot;</span> <span class="o">+</span>
+<span class="linenos">11</span>                        <span class="s2">&quot;and create a new one? (y/n): &quot;</span><span class="p">)</span>
+<span class="hll"><span class="linenos">12</span><span class="k">except</span><span class="p">:</span>
+</span><span class="hll"><span class="linenos">13</span>    <span class="k">pass</span>
+</span><span class="linenos">14</span>
+<span class="linenos">15</span><span class="k">if</span> <span class="n">create_new</span> <span class="o">==</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span>
+<span class="linenos">16</span>    <span class="n">outfile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;menu.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span>
+<span class="linenos">17</span>    <span class="n">food</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What do you want to eat? (Enter nothing to quit.) &quot;</span><span class="p">)</span>
+<span class="linenos">18</span>    <span class="k">while</span> <span class="n">food</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+<span class="linenos">19</span>        <span class="n">outfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">food</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">20</span>        <span class="n">food</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What do you want to eat? (Enter nothing to quit.) &quot;</span><span class="p">)</span>
+<span class="linenos">21</span>    <span class="n">outfile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">except</span></code> block in Listing <a class="reference internal" href="#menu-with-try"><span class="std std-numref">6.11</span></a> handles any exceptions
+encountered in lines 4 through 11.  Since <code class="docutils literal notranslate"><span class="pre">except</span></code> must have a body and there’s
+really nothing more to do once the exception is caught, we simply write <code class="docutils literal notranslate"><span class="pre">pass</span></code>.
+<code class="docutils literal notranslate"><span class="pre">pass</span></code> is just an empty statement in Python that doesn’t do anything other than
+serve as a placeholder.</p>
+<p>So how do exceptions get raised in the first place?  Consider the following
+example code (see Listing <a class="reference internal" href="#raise"><span class="std std-numref">6.12</span></a>).</p>
+<div class="literal-block-wrapper docutils container" id="id14">
+<span id="raise"></span><div class="code-block-caption"><span class="caption-number">Listing 6.12 </span><span class="caption-text">Raising an exception</span><a class="headerlink" href="#id14" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">try</span><span class="p">:</span>
+<span class="linenos">2</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span>
+<span class="hll"><span class="linenos">3</span>    <span class="k">raise</span> <span class="ne">Exception</span>
+</span><span class="linenos">4</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;goodbye&quot;</span><span class="p">)</span>
+<span class="linenos">5</span><span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+<span class="linenos">6</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Not so fast!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>The output of the code in Listing <a class="reference internal" href="#raise"><span class="std std-numref">6.12</span></a> is:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>hello
+Not so fast!
+</pre></div>
+</div>
+<p>Raising an exception can be a good way in code to say “something’s not right and
+we need the programmer to handle it appropriately.”</p>
+</section>
+<section id="machine-representation-a-k-a-bits-bytes-and-nybbles">
+<span id="sec-machine-rep"></span><h2><span class="section-number">6.5. </span>Machine Representation (a.k.a. Bits, Bytes, and Nybbles)<a class="headerlink" href="#machine-representation-a-k-a-bits-bytes-and-nybbles" title="Permalink to this headline">¶</a></h2>
+<p>The files our programs have accessed so far in this chapter have all been <em>text
+files</em>.  We have appended the file extension <code class="docutils literal notranslate"><span class="pre">.txt</span></code> to the file’s name to remind
+us that the files contain plain text.  Since they contain only plain text, it is
+easy to read their contents in any text editor, including Thonny.</p>
+<p>Not all files are text files.  In fact, many files are not text files.  Image
+files (which typically end with <code class="docutils literal notranslate"><span class="pre">.jpg</span></code>, <code class="docutils literal notranslate"><span class="pre">.png</span></code>, or <code class="docutils literal notranslate"><span class="pre">.bmp</span></code>, among others) are not
+easily examined by just opening the file in a text editor and examining the
+contents.  If you do, the file will look like gibberish.  Other programs such as
+image viewers or Web browsers must be used for us to view the contents of an
+image file.</p>
+<p>Image files belong to a class of files known as <em>binary files</em>.  Rather than
+consisting of lines of strings of characters, binary files contain <em>bytes</em>.
+(Actually, text files really consist of bytes, too, but don’t concern yourself
+with that now. We’ll come back to that later.)</p>
+<p>We can read bytes from files and we can write bytes to files if we want programs
+that create or modify images, manipulate music files, or edit video files.
+Before we get into that, we really need to understand what the heck a byte is in
+the first place.</p>
+<p>Okay, so here’s a byte:</p>
+<div class="math notranslate nohighlight">
+\[0110\text{ }0101_2\]</div>
+<p>What?</p>
+<p>Why is there a subscripted 2 after a bunch of zeroes and ones?  What is this
+supposed to mean to us?</p>
+<p>In short, this byte is a number, but it doesn’t look quite like we expect
+numbers to look.  To understand what this means, we have to digress a bit.  What
+follows is actually kind of cool.</p>
+<p>Consider something that looks more like a number.  How about 16?  Say the
+name of this number aloud.  If you said “sixteen”, then you’re correct!  But, what
+does this number <em>mean</em>?  It depends.  Maybe it conveys how many years you had
+been alive before you got your driver’s license.  Maybe it’s the number of
+Mountain Dews in your refrigerator.  Numbers represent a <em>magnitude</em>, or the
+<em>amount</em> of something.</p>
+<p>Even more importantly, we can look at a number and get a sense of just <em>how big</em>
+it is.  Why?</p>
+<ol class="arabic simple">
+<li><p>A number is just a string of symbols.</p></li>
+<li><p>The order of the symbols conveys magnitude.</p></li>
+<li><p>The symbols themselves are convey magnitude.</p></li>
+</ol>
+<p>There is a rule for what symbols we are allowed to use.  Each symbol can be a 0,
+1, 2, 3, 4, 5, 6, 7, 8, or 9.  Ever wondered why?</p>
+<p>Well, let’s go back to the number sixteen.  Here’s what the string of symbols
+that makes up the number sixteen (i.e., the “1” and “6”) tell us.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}16 &amp;= 1\times10^1 + 6\times10^0 \\
+   &amp;= 10 + 6\end{split}\]</div>
+<p>The “1” and the “6” tell us we have one ten and six ones.  Tens is a larger
+magnitude than ones.</p>
+<p>Suppose we have the number 9.  What happens when we add 1 to 9?</p>
+<div class="math notranslate nohighlight">
+\[9 + 1 = 10\]</div>
+<p>We run out of “room” in one digit to hold the magnitude of the number, so we add
+1 to the next digit to the left.  We now have a “ten,” not just ones.</p>
+<p>The numbers we use on a daily basis are called <em>decimal</em> numbers.  The position
+of each digit represents a power of ten, hence the prefix <em>deci-</em>.  Valid
+symbols in each digit position are 0 through 9.</p>
+<p>This may all seem very elementary, but it sets the table for what comes next,
+and it’s important to realize that numbers are actually strings whose pieces
+have meaning.</p>
+<p>With all this in mind, can you successfully write other numbers in the expanded
+form we used above?  In other words, if I give you 16, can you write
+<span class="math notranslate nohighlight">\(1\times10^1 + 6\times10^0\)</span>?  Let’s find out.</p>
+<p>Write 216 and 1000 in expanded form.</p>
+<p>Did you come up with the following?</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}216 &amp;= 2\times10^2 + 1\times10^1 + 6\times10^0 \\
+    &amp;= 200 + 10 + 6\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}1000 &amp;= 1\times10^3 + 0\times10^2 + 0\times10^1 + 0\times10^0 \\
+     &amp;= 1000 + 0 + 0 + 0\end{split}\]</div>
+<p>We will also refer to this expanded form as <em>sum of products</em> since the
+positions of the digits in a number tell us its value when we add up the values
+of the digits, each of which involve multiplication with a power of ten.</p>
+<p>When we think about computers, we can envision them as electrical machines.  At
+their simplest level, they consist of lots of very tiny electrical wires where
+each wire is either “on” or “off.”  Because of this, there’s no good way to
+store numbers in computers using the digits 0 through 9.  We can only have 0 and
+1 where we think of 0 as “off” and 1 as “on.”  (For a more comprehensive
+discussion of why it would be hard to create decimal computer, your author
+strongly encourages you to take an introductory physics course that covers
+electromagnetism!)</p>
+<p>Since we only have 0 and 1 to work with as symbols, we can no longer work in
+base-10, namely, having digit positions represent powers of ten.  Since digits 0 -
+9 allow us to work with powers of ten, digits 0 - 1 only allow us to represent
+powers of two.  We said that numbers whose symbols convey powers of ten are
+called <em>decimal</em> numbers.  Numbers whose symbols convey powers of two are called
+<em>binary numbers</em>.</p>
+<p>Let us consider the binary number 101.  It’s sum-of-products expanded form would
+be:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}101 &amp;= 1\times2^2 + 0\times2^1 + 1\times2^0 \\
+    &amp;= 4 + 0 + 1 \\
+    &amp;= 5\end{split}\]</div>
+<p>We took a lot of liberty with how we write numbers, because it looks like I just wrote <span class="math notranslate nohighlight">\(101 = 5\)</span>, which doesn’t make any sense!  We need a way to let people know if 101 is a binary number or a decimal number.  We will write the <em>base</em> of the number (base-2 binary or base-10 decimal) as a subscript following the number.  Thus:</p>
+<div class="math notranslate nohighlight">
+\[101_2 = 5_{10}\]</div>
+<p>In other words, “101” in binary means the same as “5” in decimal.</p>
+<p>To more exactly show sum-of-products in the prior example, we would write:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}101_2 &amp;= (1\times2^2 + 0\times2^1 + 1\times2^0)_{10} \\
+    &amp;= (4 + 0 + 1)_{10} \\
+    &amp;= 5_{10}\end{split}\]</div>
+<p>The subscript 10 following the parentheses says “the stuff in the parentheses is
+in base-10.”</p>
+<p>Okay, let’s see if this is making sense.  What is the decimal value of
+:math`11011_2` in binary?  Write sum-of-products expansion to figure it out.  Try
+it, and try not to look ahead until you have an answer.</p>
+<p>Here’s the answer, and we’ll show a few more steps this time so everything is
+more clear.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}11011_2 &amp;= (1\times2^4 + 1\times2^3 + 0\times2^2 + 1\times2^1 + 1\times2^0)_{10} \\
+    &amp;= (16 + 8 + 0 + 2 + 1)_{10} \\
+    &amp;= 27_{10}\end{split}\]</div>
+<p>Try another: <span class="math notranslate nohighlight">\(11111_2\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}11111_2 &amp;= (1\times2^4 + 1\times2^3 + 1\times2^2 + 1\times2^1 + 1\times2^0)_{10} \\
+    &amp;= (16 + 8 + 4 + 2 + 1)_{10} \\
+    &amp;= 31_{10}\end{split}\]</div>
+<p>The value of each digit in a binary number is twice the amount of the digit to
+its right. This is similar to how each digit in a decimal number is ten times
+the amount of the digit to its right.</p>
+<p>It’s worth seeing what it looks like to count in binary versus how we
+traditionally count in decimal.  Table <a class="reference internal" href="#tbl-dec-bin"><span class="std std-numref">6.1</span></a> shows a side-by-side
+comparison of counting in these two bases.  Note that we have done a few things
+to make the binary numbers easier to read and understand.  First, we have placed
+leading zeroes in front of the binary numbers. This is something that is
+commonly done with binary numbers so that it is easier to see where the 0’s are
+and where the 1’s are.  Also, we have placed a space between each group of four
+binary digits.  This also helps to tell which digit places are occupied by which
+0’s and 1’s.  This is similar to the use of commas in decimal numbers when we
+have larger numbers (e.g., 157,246,398).</p>
+<span id="tbl-dec-bin"></span><table class="colwidths-given docutils align-default" id="id15">
+<caption><span class="caption-number">Table 6.1 </span><span class="caption-text">Counting in decimal versus binary</span><a class="headerlink" href="#id15" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Decimal</p></th>
+<th class="head"><p>Binary</p></th>
+<th class="head"><p>Decimal</p></th>
+<th class="head"><p>Binary</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0000</span> <span class="pre">0000</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">10</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0000</span> <span class="pre">1010</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0000</span> <span class="pre">0001</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">11</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0000</span> <span class="pre">1011</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">2</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0000</span> <span class="pre">0010</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">12</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0000</span> <span class="pre">1100</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">3</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0000</span> <span class="pre">0011</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">13</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0000</span> <span class="pre">1101</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">4</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0000</span> <span class="pre">0100</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">14</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0000</span> <span class="pre">1110</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">5</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0000</span> <span class="pre">0101</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">15</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0000</span> <span class="pre">1111</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">6</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0000</span> <span class="pre">0110</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">16</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0001</span> <span class="pre">0000</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">7</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0000</span> <span class="pre">0111</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">17</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0001</span> <span class="pre">0001</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">8</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0000</span> <span class="pre">1000</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">18</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0001</span> <span class="pre">0010</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">9</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0000</span> <span class="pre">1001</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">19</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0001</span> <span class="pre">0011</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>Did you notice some of the patterns that emerge in Table <a class="reference internal" href="#tbl-dec-bin"><span class="std std-numref">6.1</span></a> when
+we count in binary?  The right-most binary digit flips between 0 and 1 with each
+new number we count.  Why?  Well, think about when we count in decimal.  When we
+add 1 repeatedly in decimal, it takes us until we reach 9 and then add 1 before
+we run out of “room” in the right-most digit, so we add one to the tens digit.
+In binary, we run out of “room” in the right-most digit every other time we add
+a 1.  Thus, that digit flips every time.  For the same reason, each binary digit
+“flips” half as often as the digit to its right.</p>
+<p>Let’s introduce some handy terminology.  The word <em>bit</em> is used to describe a
+binary digit.  A bit is either a 0 or a 1.  If a bit is a 1, we say the
+bit is <em>set</em>.  Bits are typically grouped into collections of 8.  8 bits is a
+<em>byte</em>.  We typically separate bits in a byte into groups of 4 bits for the sake
+of readability.  A group of 4 bits is called a <em>nybble</em> (I am not making this
+up!).</p>
+<p>Suppose we jumped ahead in our counting, and I told you that</p>
+<div class="math notranslate nohighlight">
+\[0011\,\,1111_{2} = 63_{10}.\]</div>
+<p>Can you use your powers of deduction to find <span class="math notranslate nohighlight">\(x\)</span> in</p>
+<div class="math notranslate nohighlight">
+\[0100\,\,0000_{2} = x_{10}?\]</div>
+<p>Think about it.</p>
+<p>What happens when we add 1 to a string of all 1’s with binary numbers?  Look
+again at Table <a class="reference internal" href="#tbl-dec-bin"><span class="std std-numref">6.1</span></a>.  Can you see how adding the 1 causes all of
+the digits to run out of “room” again.  Thus, adding a 1 to binary number
+consisting solely of 1’s results in all of the bits being “flipped.”  Therefore,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}0011\,\,1111_{2} &amp;= 63_{10} \\
+0100\,\,0000_{2} &amp;= 64_{10}\end{split}\]</div>
+<p>Also, we should expect <span class="math notranslate nohighlight">\(0100\,\,0000_{2}\)</span> to be a power of two since only a
+single bit is set.</p>
+<p>It’s easy to tell if a binary number is even or odd.  If the right-most bit is
+set, it’s odd.  Otherwise, it’s even.</p>
+<p>All information in a computer is stored as bytes.  Since bytes are numbers, you
+might wonder how things like character strings are stored in your computer. Each
+number corresponds to a character using something called a <em>character encoding</em>.
+For example, the number <code class="docutils literal notranslate"><span class="pre">65</span></code> (<code class="docutils literal notranslate"><span class="pre">0100</span> <span class="pre">0001</span></code> in binary) corresponds to the capital
+letter <code class="docutils literal notranslate"><span class="pre">A</span></code>.  There are different character encodings that computers use.  The
+most basic one is <a class="reference external" href="http://www.asciitable.com/">ASCII</a>.  More comprehensive ones
+exist that include characters from different languages, such as
+<a class="reference external" href="http://unicode.org/standard/WhatIsUnicode.html">Unicode</a>.  Unicode even
+includes encodings for emojis!</p>
+<p>If you look at the ASCII codes (use the link above), you can translate your name
+into the bytes that would represent it in computer memory.  For example, your
+author’s first name would reside in computer memory as:</p>
+<table class="colwidths-given docutils align-default" id="id16">
+<caption><span class="caption-number">Table 6.2 </span><span class="caption-text">ASCII translation</span><a class="headerlink" href="#id16" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Character</p></th>
+<th class="head"><p>Decimal ASCII Code</p></th>
+<th class="head"><p>Binary ASCII Code</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>J</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">65</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0100</span> <span class="pre">0001</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>a</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">97</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0110</span> <span class="pre">0001</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>s</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">115</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0111</span> <span class="pre">0011</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>o</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">111</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0110</span> <span class="pre">1111</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>n</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">110</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0110</span> <span class="pre">1110</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>The <code class="docutils literal notranslate"><span class="pre">J</span></code> would be stored first as <code class="docutils literal notranslate"><span class="pre">0100</span> <span class="pre">0001</span></code>, followed by the <code class="docutils literal notranslate"><span class="pre">a</span></code> as <code class="docutils literal notranslate"><span class="pre">0110</span>
+<span class="pre">0001</span></code>, and so forth.</p>
+</section>
+<section id="exercises">
+<span id="sec-files-excepts-exercises"></span><h2><span class="section-number">6.6. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<p>For each of these exercises, your code should properly handle situations where
+files that should exist fail to exist.  That is, rather than just allowing the
+program to crash, you should handle the exceptional condition and print a
+helpful error message, if possible.</p>
+<ol class="arabic">
+<li><p>Write code that reads lines from a file named <code class="docutils literal notranslate"><span class="pre">input.txt</span></code>.  It should then print each line to the screen, but it should prefix the line’s contents with the line number on which it appears.</p>
+<p>For example, if the contents of <code class="docutils literal notranslate"><span class="pre">input.txt</span></code> are:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Haikus are easy
+But sometimes they don&#39;t make sense
+Refrigerator
+</pre></div>
+</div>
+<p>Then the code should print to the screen:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>1. Haikus are easy
+2. But sometimes they don&#39;t make sense
+3. Refrigerator
+</pre></div>
+</div>
+</li>
+<li><p>Write code that reads from a file named <code class="docutils literal notranslate"><span class="pre">input.txt</span></code>.  The code should print to the screen the <em>even-numbered</em> lines in the file.  The lines should be prefixed with the line number on which they appear in the file (much like the previous problem).</p></li>
+<li><p>Repeat the previous problem, only this time the program should prompt the user for a file name rather than assuming <code class="docutils literal notranslate"><span class="pre">input.txt</span></code> should be used.</p></li>
+<li><p>Write code that writes the first 20 positive even numbers to a file named <code class="docutils literal notranslate"><span class="pre">evens.txt</span></code> such that each number is on a separate line in the file.</p></li>
+<li><p>Suppose we have a text file named <code class="docutils literal notranslate"><span class="pre">temps.txt</span></code> that contains a series of temperatures.  Each temperature is a <code class="docutils literal notranslate"><span class="pre">float</span></code> on a single line in the file.  Write code that prints the <em>average</em> temperature given all the temperatures in the file.</p></li>
+<li><p>Write code that replaces each line in a file with its reverse.  The program should prompt the user for a file name first.</p>
+<p>For example, if the contents of the file are:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>The quick brown fox jumps over the lazy dog.
+Pack my box with five dozen liquor jugs.
+</pre></div>
+</div>
+<p>Then the new contents should become:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>.god yzal eht revo spmuj xof nworb kciuq ehT
+.sguj rouqil nezod evif htiw xob ym kcaP
+</pre></div>
+</div>
+</li>
+<li><p>Repeat the previous exercise, only this time reverse the <em>order</em> of the lines in addition to the lines themselves.</p>
+<p>For example, if the contents of the file are:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>The quick brown fox jumps over the lazy dog.
+Pack my box with five dozen liquor jugs.
+(These are all pangrams.)
+</pre></div>
+</div>
+<p>Then the new contents should become:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>).smargnap lla era esehT(
+.sguj rouqil nezod evif htiw xob ym kcaP
+.god yzal eht revo spmuj xof nworb kciuq ehT
+</pre></div>
+</div>
+</li>
+<li><p>Suppose we have the following code.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;input.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">line</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>And, suppose <code class="docutils literal notranslate"><span class="pre">input.txt</span></code> contains each capital letter of the English alphabet
+on a single line, like this:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>A
+B
+C
+D
+E
+F
+... and so on through &#39;Z&#39;
+</pre></div>
+</div>
+<p>What is the output of this code?  Explain why.</p>
+</li>
+<li><p>Convert the following twos-complement 8-bit binary numbers into decimal.</p>
+<p><span class="math notranslate nohighlight">\(0001\,0000_2\)</span></p>
+<p><span class="math notranslate nohighlight">\(0000\,1111_2\)</span></p>
+<p><span class="math notranslate nohighlight">\(0001\,0100_2\)</span></p>
+<p><span class="math notranslate nohighlight">\(0010\,1000_2\)</span></p>
+<p><span class="math notranslate nohighlight">\(0011\,1111_2\)</span></p>
+<p><span class="math notranslate nohighlight">\(1011\,1111_2\)</span></p>
+<p><span class="math notranslate nohighlight">\(1001\,1001_2\)</span></p>
+<p><span class="math notranslate nohighlight">\(1000\,0001_2\)</span></p>
+</li>
+<li><p>Convert the following decimal numbers to twos-complement 8-bit binary numbers (use leading zeroes if necessary).</p>
+<p><span class="math notranslate nohighlight">\(15_{10}\)</span></p>
+<p><span class="math notranslate nohighlight">\(85_{10}\)</span></p>
+<p><span class="math notranslate nohighlight">\(102_{10}\)</span></p>
+<p><span class="math notranslate nohighlight">\(-102_{10}\)</span></p>
+<p><span class="math notranslate nohighlight">\(-128_{10}\)</span></p>
+<p><span class="math notranslate nohighlight">\(-127_{10}\)</span></p>
+</li>
+<li><p>Add the following binary numbers using binary arithmetic.  Show your work, especially anytime you carry a one.</p>
+<p><span class="math notranslate nohighlight">\(0101\,0101_2\)</span></p>
+<p><span class="math notranslate nohighlight">\(0001\,1101_2\)</span></p>
+</li>
+<li><p>Consider the following code.  What output does it produce?  Use <a class="reference external" href="http://www.asciitable.com/">asciitable.com</a> to figure it out.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s%s%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="mi">77</span><span class="p">),</span> <span class="nb">chr</span><span class="p">(</span><span class="mi">86</span><span class="p">),</span> <span class="nb">chr</span><span class="p">(</span><span class="mi">80</span><span class="p">)))</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Conversational Python</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ch1_basicio_types.html">1. Basic I/O, Statements, Expressions, Variables, and Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch2_cond.html">2. Conditionals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch3_loops.html">3. Loops and String Manipulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch4_funcs.html">4. Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch5_lists.html">5. Lists</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">6. Files and Exceptions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#opening-and-reading-files">6.1. Opening and Reading Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#reading-file-records">6.2. Reading File Records</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#writing-information-to-files">6.3. Writing Information to Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#exceptions">6.4. Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#machine-representation-a-k-a-bits-bytes-and-nybbles">6.5. Machine Representation (a.k.a. Bits, Bytes, and Nybbles)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#exercises">6.6. Exercises</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ch7_dicts.html">7. Dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch8_searchsort.html">8. Searching and Sorting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch9_classes.html">9. Classes, Object-Orientation, and Pygame</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="ch5_lists.html" title="previous chapter"><span class="section-number">5. </span>Lists</a></li>
+      <li>Next: <a href="ch7_dicts.html" title="next chapter"><span class="section-number">7. </span>Dictionaries</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, Jason B. Shepherd, Ph.D..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/ch6_files_excepts.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

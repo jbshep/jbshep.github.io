@@ -1,0 +1,530 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>8. Searching and Sorting &#8212; Conversational Python 2.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="9. Classes, Object-Orientation, and Pygame" href="ch9_classes.html" />
+    <link rel="prev" title="7. Dictionaries" href="ch7_dicts.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="searching-and-sorting">
+<span id="ch-searchsort"></span><h1><span class="section-number">8. </span>Searching and Sorting<a class="headerlink" href="#searching-and-sorting" title="Permalink to this headline">¶</a></h1>
+<section id="the-sorting-problem">
+<span id="sec-sort-prob"></span><h2><span class="section-number">8.1. </span>The Sorting Problem<a class="headerlink" href="#the-sorting-problem" title="Permalink to this headline">¶</a></h2>
+<p>Do you stream music online?  Do you click on a folder on your desktop to find
+and organize your files?  Have you ever used Microsoft Excel to keep information
+in a spreadsheet?  If we think for a moment about these software programs, we
+might realize that they have some features in common.  One we might notice is
+that they eventually allow a user to <em>sort</em> information.  In a music streaming
+app, you might choose to order your songs by title or by artist to make certain
+songs easier to find.  When you’re looking at a folder full of files, you might
+order your files by file name or by the date it was last modified.  In Excel, we
+can sort a column of data, which has the effect of rearranging the rows into a
+different order.</p>
+<p>Sorting is a very common thing that programs do, and it is an interesting
+problem that can be tackled in a lot of different ways.  In this introductory
+book you’re reading right now, we will look at only one of those ways.  In doing
+so, we’ll also get better at walking through a problem logically in order to
+write a program that solves a problem.  The end result will be that we improve
+our natural problem solving abilities, too.  If you continue learning about
+computer science through other courses and other books, you’ll encounter other
+ways to perform sorting, some of which have really interesting capabilities.
+Well, what are we waiting for?</p>
+</section>
+<section id="towards-an-algorithm-for-sorting">
+<span id="sec-sort-algo"></span><h2><span class="section-number">8.2. </span>Towards an Algorithm for Sorting<a class="headerlink" href="#towards-an-algorithm-for-sorting" title="Permalink to this headline">¶</a></h2>
+<p>In this section, we will start developing an algorithm for sorting.  An
+<em>algorithm</em> is a series of well defined steps for solving a problem that has an
+input, an output, and completes in a reasonable amount of time.  (The meaning of
+“reasonable” in this context is discussed in greater detail in more advanced
+computer science texts.)</p>
+<p>Suppose we have a list of numbers, defined as such.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>If we were to sort this list into <em>ascending</em> order, it would look like this.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>A thoughtful reader might ask what happens if we have duplicate numbers.  In
+other words, what if <code class="docutils literal notranslate"><span class="pre">numbers</span></code> were defined like this?</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Note that we have two 3’s in our list.  The sorted version would look like this.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>The two 3’s remain preserved in the sorted list.  We certainly wouldn’t want to
+lose items, so this makes sense.  We used the word <em>ascending</em> to describe how
+we sorted the numbers, but that’s not technically correct since the list does
+not “ascend” between the first and second 3.  A more correct phrase would be
+to describe the sort as <em>monotonically increasing</em>.  We should use that phrase
+from here forward because 1.) it’s technically correct, and 2.) it sounds
+cooler.</p>
+<p>So, how do we sort these numbers?  In other words, how do we change the
+positions of the numbers in the list without losing any of the numbers?</p>
+<p>Often, the best way to solve a problem is to think of a very simple instance of
+that problem, and then invent a simple solution.  If we can find the smallest
+number in the list, where in the list should it go?  The smallest number should
+always come first in the list, right?</p>
+<p>Suppose we have the following list.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>3 is the smallest number, so 3 should move to position 0, the start of the list.
+However, if we’re going to move the 3 to position 0, we need to find a new home
+for the 8.  So, we’ll put 8 where the 3 was.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Before</span>
+<span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="c1"># After</span>
+<span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>None of the other numbers are touched in moving the 3 and the 8.  Exchanging
+positions for the 3 and the 8 is called <em>swapping</em> the numbers.  In fact, you
+learned how to swap values in a list back in Chapter 5.  Now would be a good
+time to go back and view Listing <a class="reference internal" href="ch5_lists.html#swap-good"><span class="std std-numref">5.4</span></a> and Figure
+<a class="reference internal" href="ch5_lists.html#fig-swap-good"><span class="std std-numref">5.2</span></a> in Section <a class="reference internal" href="ch5_lists.html#sec-list-ops"><span class="std std-numref">5.1</span></a> again.</p>
+<p>Now that the smallest item has been moved into position 0, we can do the same
+thing with the next smallest item.  Where should the next smallest item go?  In
+other words, what position should hold the next smallest item?  If you said
+position 1, you’re correct!</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Original list</span>
+<span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="c1"># Moving the smallest to position 0 by swapping.</span>
+<span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="c1"># Moving the next smallest to position 1 by swapping.</span>
+<span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Oh dear!  Nothing changed!  Actually, nothing needed to change. The 4 was
+already at its desired position.  The computer doesn’t need to notice this.  We
+don’t need to check to see if they swap needs to happen.  We can always perform
+the swap, because we can swap a number with itself with no unfortunate side
+effects.</p>
+<p>We can continue this procedure to move each subsequent number to the correct
+position in the list.  When we have one final item remaining, we know that
+number is the biggest the number, and it should simply remain at the end of the
+list.</p>
+<p>In each step <code class="docutils literal notranslate"><span class="pre">x</span></code>, we swap the next smallest value to position <code class="docutils literal notranslate"><span class="pre">x</span></code>.  We scan
+across from position <code class="docutils literal notranslate"><span class="pre">x</span></code> to the end of the list, looking for and keeping track
+of the position of the smallest.  When we are done scanning, we perform the
+swap.  We can see what this procedure looks like in Figure
+<a class="reference internal" href="#fig-selsort-steps"><span class="std std-numref">8.1</span></a>.  We’ve underlined the eventual position
+of smallest item that we have selected and swapped.  In fact, this sort is
+named <em>selection sort</em> because of how we select the smallest item in each step.</p>
+<figure class="align-default" id="id1">
+<span id="fig-selsort-steps"></span><a class="reference internal image-reference" href="_images/selsort_steps.png"><img alt="Selection sort steps" src="_images/selsort_steps.png" style="width: 260.0px; height: 388.0px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 8.1 </span><span class="caption-text">Selection sort steps</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>There are a couple of things to note in the example shown that will help us
+write actual code.  This is often how we come up with code that solves problems.
+We make up an example to help us think more concretely, and then we use that
+concrete example to help us see patterns that become our code.  In Figure
+<a class="reference internal" href="#fig-selsort-steps"><span class="std std-numref">8.1</span></a>, you can see that we are starting each scan
+to find the smallest item at positions 0, 1, 2, and finally 3.  3 is one less
+than the last index in the list.  We will need a loop to perform the scan to
+select the smallest item, and we will need another loop (outside of the scan
+loop) to control where we start each scan.</p>
+<p>Try to write the code yourself before going on to the next section.  Don’t cheat
+and look ahead.  Make a focused attempt, hand-written on paper before you
+proceed.</p>
+</section>
+<section id="the-selection-sort">
+<span id="sec-selsort"></span><h2><span class="section-number">8.3. </span>The Selection Sort<a class="headerlink" href="#the-selection-sort" title="Permalink to this headline">¶</a></h2>
+<p>Let’s walk through the advice given at the end of Section
+<a class="reference internal" href="#sec-sort-algo"><span class="std std-numref">8.2</span></a>.  Rather than name our list <code class="docutils literal notranslate"><span class="pre">numbers</span></code>,
+we’ll name it <code class="docutils literal notranslate"><span class="pre">L</span></code> (hey, fewer keystrokes!).</p>
+<p>In each step of the selection sort, we scan across the list from beginning to
+end looking for the smallest item.  We want to note the position/index where the
+smallest item sits (we’ll call it <code class="docutils literal notranslate"><span class="pre">smallpos</span></code>).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">smallpos</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">2</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">)):</span>
+<span class="linenos">3</span>    <span class="k">if</span> <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">L</span><span class="p">[</span><span class="n">smallpos</span><span class="p">]:</span>
+<span class="linenos">4</span>        <span class="n">smallpos</span> <span class="o">=</span> <span class="n">i</span>
+</pre></div>
+</div>
+<p>This code assumes we start looking for the smallest at index 0.  We let index 0
+be the first smallest, and then we scan across from index 1 onward.  However, we
+don’t want to start at index 0 every time.  We want to start at index 0 to find
+the first smallest item, then we want to start at index 1 to find the next
+smallest, and so forth.  So, the starting position needs to become a variable
+since the starting position needs to change each time.  We’ll named that
+variable <code class="docutils literal notranslate"><span class="pre">start</span></code>.  Notice how the code changes on lines 1 and 2 of the code.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos">1</span><span class="n">smallpos</span> <span class="o">=</span> <span class="n">start</span>
+</span><span class="hll"><span class="linenos">2</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">)):</span>
+</span><span class="linenos">3</span>    <span class="k">if</span> <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">L</span><span class="p">[</span><span class="n">smallpos</span><span class="p">]:</span>
+<span class="linenos">4</span>        <span class="n">smallpos</span> <span class="o">=</span> <span class="n">i</span>
+</pre></div>
+</div>
+<p>Now that we have a <code class="docutils literal notranslate"><span class="pre">start</span></code> variable to control the starting position of each
+scan through the list, we need a loop to update it in each step of the
+algorithm.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos">1</span><span class="k">for</span> <span class="n">start</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">...</span><span class="p">):</span>
+</span><span class="linenos">2</span>    <span class="n">smallpos</span> <span class="o">=</span> <span class="n">start</span>
+<span class="linenos">3</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">)):</span>
+<span class="linenos">4</span>        <span class="k">if</span> <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">L</span><span class="p">[</span><span class="n">smallpos</span><span class="p">]:</span>
+<span class="linenos">5</span>            <span class="n">smallpos</span> <span class="o">=</span> <span class="n">i</span>
+</pre></div>
+</div>
+<p>What should we put in <code class="docutils literal notranslate"><span class="pre">range</span></code> in line 1?  The first value of <code class="docutils literal notranslate"><span class="pre">start</span></code> should
+clearly be 0.  What about the last value?  From looking at
+Figure <a class="reference internal" href="#fig-selsort-steps"><span class="std std-numref">8.1</span></a>, we want the last time through the
+loop to be the next to last index.  Therefore, the expression that ends the
+loop should be <code class="docutils literal notranslate"><span class="pre">len(L)-1</span></code>, like in the following code.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos">1</span><span class="k">for</span> <span class="n">start</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+</span><span class="linenos">2</span>    <span class="n">smallpos</span> <span class="o">=</span> <span class="n">start</span>
+<span class="linenos">3</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">)):</span>
+<span class="linenos">4</span>        <span class="k">if</span> <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">L</span><span class="p">[</span><span class="n">smallpos</span><span class="p">]:</span>
+<span class="linenos">5</span>            <span class="n">smallpos</span> <span class="o">=</span> <span class="n">i</span>
+</pre></div>
+</div>
+<p>This code now does successive scans across the list, but it doesn’t actually
+swap any values.  Once we’re finished with the scan, but before we do another
+scan, we need to swap values between the positions stored in <code class="docutils literal notranslate"><span class="pre">start</span></code> and
+<code class="docutils literal notranslate"><span class="pre">smallpos</span></code>.  The final solution is shown in Listing <a class="reference internal" href="#selsort"><span class="std std-numref">8.1</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<span id="selsort"></span><div class="code-block-caption"><span class="caption-number">Listing 8.1 </span><span class="caption-text">Selection Sort</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">start</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="c1"># Find the smallest value and keep track of its position.</span>
+    <span class="n">smallpos</span> <span class="o">=</span> <span class="n">start</span>
+    <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">L</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">L</span><span class="p">[</span><span class="n">smallpos</span><span class="p">]:</span>
+            <span class="n">smallpos</span> <span class="o">=</span> <span class="n">index</span>
+
+    <span class="c1"># Swap the smallest value to the correct location,</span>
+    <span class="c1"># i.e., where we started our walk through the list.</span>
+    <span class="n">temp</span> <span class="o">=</span> <span class="n">L</span><span class="p">[</span><span class="n">start</span><span class="p">]</span>
+    <span class="n">L</span><span class="p">[</span><span class="n">start</span><span class="p">]</span> <span class="o">=</span> <span class="n">L</span><span class="p">[</span><span class="n">smallpos</span><span class="p">]</span>
+    <span class="n">L</span><span class="p">[</span><span class="n">smallpos</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span>
+</pre></div>
+</div>
+</div>
+<p>This code works for any list we name <code class="docutils literal notranslate"><span class="pre">L</span></code> that has values that can be compared
+with the <code class="docutils literal notranslate"><span class="pre">&lt;</span></code> operator.  If we fill <code class="docutils literal notranslate"><span class="pre">L</span></code> with numbers, this code works.  If we
+fill <code class="docutils literal notranslate"><span class="pre">L</span></code> with strings, it also works (can you guess how it orders strings?).</p>
+<p>We can take this one step further and wrap it into a function that we can call.  See Listing <a class="reference internal" href="#selsort-func"><span class="std std-numref">8.2</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<span id="selsort-func"></span><div class="code-block-caption"><span class="caption-number">Listing 8.2 </span><span class="caption-text">Selection Sort as a Function</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">selsort</span><span class="p">(</span><span class="n">L</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">start</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="c1"># Find the smallest value and keep track of its position.</span>
+        <span class="n">smallpos</span> <span class="o">=</span> <span class="n">start</span>
+        <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">L</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">L</span><span class="p">[</span><span class="n">smallpos</span><span class="p">]:</span>
+                <span class="n">smallpos</span> <span class="o">=</span> <span class="n">index</span>
+
+        <span class="c1"># Swap the smallest value to the correct location,</span>
+        <span class="c1"># i.e., where we started our walk through the list.</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="n">L</span><span class="p">[</span><span class="n">start</span><span class="p">]</span>
+        <span class="n">L</span><span class="p">[</span><span class="n">start</span><span class="p">]</span> <span class="o">=</span> <span class="n">L</span><span class="p">[</span><span class="n">smallpos</span><span class="p">]</span>
+        <span class="n">L</span><span class="p">[</span><span class="n">smallpos</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span>
+</pre></div>
+</div>
+</div>
+<p>Then, we could call the function like this.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Becky&quot;</span><span class="p">,</span> <span class="s2">&quot;Allen&quot;</span><span class="p">,</span> <span class="s2">&quot;Derek&quot;</span><span class="p">,</span> <span class="s2">&quot;Casey&quot;</span><span class="p">]</span>
+<span class="n">selsort</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
+<span class="n">selsort</span><span class="p">(</span><span class="n">names</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>  <span class="c1"># Output is [1, 2, 3, 4, 5]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">names</span><span class="p">)</span>    <span class="c1"># Output is [&quot;Allen&quot;, &quot;Becky&quot;, &quot;Casey&quot;, &quot;Derek&quot;]</span>
+</pre></div>
+</div>
+</section>
+<section id="searching-for-items-in-sorted-data">
+<span id="sec-binsearch"></span><h2><span class="section-number">8.4. </span>Searching for Items in Sorted Data<a class="headerlink" href="#searching-for-items-in-sorted-data" title="Permalink to this headline">¶</a></h2>
+<p>Human beings can find things easier in a list that has been sorted because they
+can eliminate sections of the list as they quickly visually scan its contents.
+Computers, too, can more easily find items in a list that has been pre-sorted.</p>
+<p>Consider a long, unordered list of names.  In order to determine if the name
+“Ned” exists in the list using a computer program, we would need to linearly
+scan the list from beginning to end.  The number of comparisons we would need to
+do, in the worst case, would be equal to the number of items in the list.</p>
+<p>Suppose, however, that the list is pre-sorted.  We can reduce the number of
+comparisons between examining the middle item.  If the name we seek comes before
+that middle item, we know that if the name exists in the list, it must exist in
+the first half of the list.  Conversely, if the name we seek comes
+alphabetically after that middle item, we know that if the name exists in the
+list, it must exist in the latter half of the list.  In that first step, we have
+eliminated <em>half</em> of all the items.  This can speed up our search dramatically.
+Keep in mind that if the middle item is the name we were looking for in the
+first place, then we have found the name in only one comparison.</p>
+<p>The algorithm we just described is called a <em>binary search</em>.  To invent code
+that performs a binary search, let’s take the a similar approach to what we did
+with selection sort.  We will start with an example, and observe patterns that
+we can turn into code.</p>
+<p>Suppose we have a pre-sorted list <code class="docutils literal notranslate"><span class="pre">L</span></code> defined in the following way.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">25</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>The middle item in this list happens to be <code class="docutils literal notranslate"><span class="pre">10</span></code>, found at index <code class="docutils literal notranslate"><span class="pre">3</span></code>.  We know
+that <code class="docutils literal notranslate"><span class="pre">3</span></code> is the middle index because <code class="docutils literal notranslate"><span class="pre">len(L)</span> <span class="pre">==</span> <span class="pre">7</span></code> and <code class="docutils literal notranslate"><span class="pre">7</span> <span class="pre">//</span> <span class="pre">2</span> <span class="pre">==</span> <span class="pre">3</span></code> (recall
+that the <code class="docutils literal notranslate"><span class="pre">//</span></code> operator does integer division… it divides and then drops the
+fractional part).</p>
+<p>Let’s try to find <code class="docutils literal notranslate"><span class="pre">18</span></code> in <code class="docutils literal notranslate"><span class="pre">L</span></code>.  We compare <code class="docutils literal notranslate"><span class="pre">18</span> <span class="pre">&gt;</span> <span class="pre">10</span></code> to find that <code class="docutils literal notranslate"><span class="pre">18</span></code> is
+greater than the middle.  This means that if the <code class="docutils literal notranslate"><span class="pre">18</span></code> is in our list, it must be
+in the right half of the list.  So, we now only need to look at the sublist
+<code class="docutils literal notranslate"><span class="pre">[13,</span> <span class="pre">18,</span> <span class="pre">25]</span></code>.  We’ve reduced the number of items left to check to half!</p>
+<p>So, how do we proceed from here?  How do we keep track of which part of the list
+we’re currently examining.  Well, as always, if we want to keep track of
+something or somethings, we use variables.  Let’s let <code class="docutils literal notranslate"><span class="pre">i</span></code> and <code class="docutils literal notranslate"><span class="pre">j</span></code> be index
+variables that hold the positions of the leftmost item and rightmost item
+respectively.  Let’s also create a variable <code class="docutils literal notranslate"><span class="pre">m</span></code> to calculate the index of the
+middle item.  Figure <a class="reference internal" href="#fig-binsearch-1"><span class="std std-numref">8.2</span></a> demonstrates the steps that
+will find <code class="docutils literal notranslate"><span class="pre">18</span></code> in <code class="docutils literal notranslate"><span class="pre">L</span></code>. Observe how <code class="docutils literal notranslate"><span class="pre">i</span></code>, <code class="docutils literal notranslate"><span class="pre">j</span></code>, and <code class="docutils literal notranslate"><span class="pre">m</span></code> change in each step.</p>
+<figure class="align-default" id="id4">
+<span id="fig-binsearch-1"></span><a class="reference internal image-reference" href="_images/binsearch-1.png"><img alt="Binary search steps, scenario 1" src="_images/binsearch-1.png" style="width: 500.0px; height: 210.0px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 8.2 </span><span class="caption-text">Binary search steps, scenario 1</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>If <code class="docutils literal notranslate"><span class="pre">18</span></code> is greater than the middle (that is, if <code class="docutils literal notranslate"><span class="pre">18</span> <span class="pre">&gt;</span> <span class="pre">L[m]</span></code>), then we move <code class="docutils literal notranslate"><span class="pre">i</span></code>
+to the right of <code class="docutils literal notranslate"><span class="pre">m</span></code> (that is, <code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">=</span> <span class="pre">m</span> <span class="pre">+</span> <span class="pre">1</span></code>).  What would be do if <code class="docutils literal notranslate"><span class="pre">18</span></code> were less
+than the middle?  Then we would move <code class="docutils literal notranslate"><span class="pre">j</span></code> instead by moving it to the left of <code class="docutils literal notranslate"><span class="pre">m</span></code>
+(that is, <code class="docutils literal notranslate"><span class="pre">j</span> <span class="pre">=</span> <span class="pre">m</span> <span class="pre">-</span> <span class="pre">1</span></code>).</p>
+<p>We can see that in two steps, binary search is able to find the <code class="docutils literal notranslate"><span class="pre">18</span></code> in our
+example list.  That’s fast!  With a normal scan/search, it would have taken us 6
+comparisons.</p>
+<p>Wait a minute.  What happens if we apply these same steps to look for a number
+that doesn’t exist in <code class="docutils literal notranslate"><span class="pre">L</span></code>. How about <code class="docutils literal notranslate"><span class="pre">17</span></code>?  Figure <a class="reference internal" href="#fig-binsearch-2"><span class="std std-numref">8.3</span></a> walks
+us through that scenario.</p>
+<figure class="align-default" id="id5">
+<span id="fig-binsearch-2"></span><a class="reference internal image-reference" href="_images/binsearch-2.png"><img alt="Binary search steps, scenario 2" src="_images/binsearch-2.png" style="width: 560.0px; height: 310.0px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 8.3 </span><span class="caption-text">Binary search steps, scenario 2</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>We are left with the idea that we will probably need to use a loop that
+continues to look for our target number, and the job of the loop’s body will be
+to either move <code class="docutils literal notranslate"><span class="pre">i</span></code> or <code class="docutils literal notranslate"><span class="pre">j</span></code> in each step.  Terminal conditions for the loop are:</p>
+<ul class="simple">
+<li><p>We found our target number, or</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">i</span></code> and <code class="docutils literal notranslate"><span class="pre">j</span></code> have “crossed” (that is <code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">&gt;</span> <span class="pre">j</span></code>), so our target number cannot be found</p></li>
+</ul>
+<p>Okay, now its your turn.  Can you attempt to construct the code for a binary
+search?  Once the code is done, <code class="docutils literal notranslate"><span class="pre">m</span></code> should be set to the index of the found
+target number.  If we don’t find the number, let’s set <code class="docutils literal notranslate"><span class="pre">m</span></code> to <code class="docutils literal notranslate"><span class="pre">-1</span></code>.  Remember
+what we just said.  We need a loop whose job (the body of the loop) is to move
+<code class="docutils literal notranslate"><span class="pre">i</span></code> and <code class="docutils literal notranslate"><span class="pre">j</span></code> and calculate <code class="docutils literal notranslate"><span class="pre">m</span></code>.  The terminal conditions for the loop are given
+above.  There may not be one single right way to write this code, so don’t worry
+about trying to do the one right way.  Play around with it for a while on paper
+first.  Try your best before looking ahead.</p>
+<p>How far did you get?  Where did you get stuck?  You can learn a lot about how
+you solve problems and what types of things get you stuck by doing exercises
+like this.</p>
+<p>Here is one possible solution.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">x</span> <span class="o">=</span> <span class="mi">18</span>   <span class="c1"># x will be our target number</span>
+<span class="linenos"> 2</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos"> 3</span><span class="n">j</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="k">while</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">j</span><span class="p">:</span>
+<span class="linenos"> 6</span>    <span class="c1"># Find the middle index.</span>
+<span class="linenos"> 7</span>    <span class="n">m</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+<span class="linenos"> 8</span>    <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">L</span><span class="p">[</span><span class="n">m</span><span class="p">]:</span>
+<span class="linenos"> 9</span>        <span class="c1"># Look at the left half of L</span>
+<span class="linenos">10</span>        <span class="n">j</span> <span class="o">=</span> <span class="n">m</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="linenos">11</span>    <span class="k">elif</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">L</span><span class="p">[</span><span class="n">m</span><span class="p">]:</span>
+<span class="linenos">12</span>        <span class="c1"># Look at the right half of L</span>
+<span class="linenos">13</span>        <span class="n">i</span> <span class="o">=</span> <span class="n">m</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="linenos">14</span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos">15</span>        <span class="c1"># Found it</span>
+<span class="linenos">16</span>        <span class="k">break</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span><span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="n">j</span><span class="p">:</span>
+<span class="linenos">19</span>    <span class="n">m</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+</pre></div>
+</div>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">x</span></code> is not less than the middle and not greater than the middle, then
+it must be equal to the middle.</p>
+<p>We can easily place this code into a function that we could call to find items
+in a list.  We can pass to the function two values: 1.) the list <code class="docutils literal notranslate"><span class="pre">L</span></code>, and 2.)
+the target item <code class="docutils literal notranslate"><span class="pre">x</span></code>.  The function should return the correct value of <code class="docutils literal notranslate"><span class="pre">m</span></code>, which
+should be <code class="docutils literal notranslate"><span class="pre">-1</span></code> if we didn’t find the target item, or some integer <code class="docutils literal notranslate"><span class="pre">&gt;=</span> <span class="pre">0</span></code> if we
+did find it.  See Listing <a class="reference internal" href="#binsearch-func"><span class="std std-numref">8.3</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="id6">
+<span id="binsearch-func"></span><div class="code-block-caption"><span class="caption-number">Listing 8.3 </span><span class="caption-text">Binary Search as a Function</span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span> <span class="nf">binsearch</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<span class="linenos"> 2</span>    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos"> 3</span>    <span class="n">j</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span>    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">j</span><span class="p">:</span>
+<span class="linenos"> 6</span>        <span class="c1"># Find the middle index.</span>
+<span class="linenos"> 7</span>        <span class="n">m</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+<span class="linenos"> 8</span>        <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">L</span><span class="p">[</span><span class="n">m</span><span class="p">]:</span>
+<span class="linenos"> 9</span>            <span class="c1"># Look at the left half of L.</span>
+<span class="linenos">10</span>            <span class="n">j</span> <span class="o">=</span> <span class="n">m</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="linenos">11</span>        <span class="k">elif</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">L</span><span class="p">[</span><span class="n">m</span><span class="p">]:</span>
+<span class="linenos">12</span>            <span class="c1"># Look at the right half of L.</span>
+<span class="linenos">13</span>            <span class="n">i</span> <span class="o">=</span> <span class="n">m</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="linenos">14</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">15</span>            <span class="c1"># Found it.</span>
+<span class="linenos">16</span>            <span class="k">return</span> <span class="n">m</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span>    <span class="c1"># Didn&#39;t find x in the loop.</span>
+<span class="linenos">19</span>    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="optional-using-recursion-to-search">
+<span id="sec-recursion"></span><h2><span class="section-number">8.5. </span>(Optional) Using Recursion to Search<a class="headerlink" href="#optional-using-recursion-to-search" title="Permalink to this headline">¶</a></h2>
+<p>This section will be added at a later date.</p>
+</section>
+<section id="exercises">
+<span id="sec-searchsort-exercises"></span><h2><span class="section-number">8.6. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p>Demonstrate how selection sort would order the following list:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">27</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">13</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Show each step of the sort, even if that step does not move an item.</p>
+</li>
+<li><p>Demonstrate how selection sort would order the following list:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s2">&quot;carrots&quot;</span><span class="p">,</span> <span class="s2">&quot;peas&quot;</span><span class="p">,</span> <span class="s2">&quot;broccoli&quot;</span><span class="p">,</span> <span class="s2">&quot;bok choy&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Show each step of the sort, even if that step does not move an item.</p>
+</li>
+<li><p>Suppose we have two lists that represent students’ names and their grade point averages (GPAs).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Jennifer&quot;</span><span class="p">,</span> <span class="s2">&quot;Alfred&quot;</span><span class="p">,</span> <span class="s2">&quot;Jack&quot;</span><span class="p">]</span>
+<span class="n">gpas</span> <span class="o">=</span> <span class="p">[</span><span class="mf">4.0</span><span class="p">,</span> <span class="mf">3.1</span><span class="p">,</span> <span class="mf">2.7</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Also suppose that the names and GPAs line up with one another.  In other words, Jennifer’s GPA is 4.0, Alfred’s GPA is 2.7, and Javier’s GPA is 3.1.  If we were to sort <code class="docutils literal notranslate"><span class="pre">names</span></code> without also reordering <code class="docutils literal notranslate"><span class="pre">gpas</span></code>, Alfred’s GPA would become 4.0 (which I’m sure would make him happy, but it would be wrong).</p>
+<p>Define a function named <code class="docutils literal notranslate"><span class="pre">sort_all</span></code> that takes a list of lists.  The function should sort the first list and then reorder all other lists in the same way as the first list.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1:</span>
+<span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Jennifer&quot;</span><span class="p">,</span> <span class="s2">&quot;Alfred&quot;</span><span class="p">,</span> <span class="s2">&quot;Jack&quot;</span><span class="p">]</span>
+<span class="n">gpas</span> <span class="o">=</span> <span class="p">[</span><span class="mf">4.0</span><span class="p">,</span> <span class="mf">3.1</span><span class="p">,</span> <span class="mf">2.7</span><span class="p">]</span>
+<span class="n">sort_all</span><span class="p">([</span><span class="n">names</span><span class="p">,</span> <span class="n">gpas</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">names</span><span class="p">)</span>  <span class="c1"># Output is [&quot;Alfred&quot;, &quot;Jack&quot;, &quot;Jennifer&quot;]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">gpas</span><span class="p">)</span>   <span class="c1"># Output is [3.1, 2.7, 4.0]</span>
+
+<span class="c1"># Example 2:</span>
+<span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Jennifer&quot;</span><span class="p">,</span> <span class="s2">&quot;Alfred&quot;</span><span class="p">,</span> <span class="s2">&quot;Jack&quot;</span><span class="p">]</span>
+<span class="n">gpas</span> <span class="o">=</span> <span class="p">[</span><span class="mf">4.0</span><span class="p">,</span> <span class="mf">3.1</span><span class="p">,</span> <span class="mf">2.7</span><span class="p">]</span>
+<span class="n">sort_all</span><span class="p">([</span><span class="n">gpas</span><span class="p">,</span> <span class="n">names</span><span class="p">])</span> <span class="c1"># we are sorting by GPA this time</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">names</span><span class="p">)</span>  <span class="c1"># Output is [&quot;Jack&quot;, &quot;Alfred&quot;, &quot;Jennifer&quot;]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">gpas</span><span class="p">)</span>   <span class="c1"># Output is [2.7, 3.1, 4.0]</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Conversational Python</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ch1_basicio_types.html">1. Basic I/O, Statements, Expressions, Variables, and Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch2_cond.html">2. Conditionals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch3_loops.html">3. Loops and String Manipulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch4_funcs.html">4. Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch5_lists.html">5. Lists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch6_files_excepts.html">6. Files and Exceptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch7_dicts.html">7. Dictionaries</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">8. Searching and Sorting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#the-sorting-problem">8.1. The Sorting Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#towards-an-algorithm-for-sorting">8.2. Towards an Algorithm for Sorting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-selection-sort">8.3. The Selection Sort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#searching-for-items-in-sorted-data">8.4. Searching for Items in Sorted Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#optional-using-recursion-to-search">8.5. (Optional) Using Recursion to Search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#exercises">8.6. Exercises</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ch9_classes.html">9. Classes, Object-Orientation, and Pygame</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="ch7_dicts.html" title="previous chapter"><span class="section-number">7. </span>Dictionaries</a></li>
+      <li>Next: <a href="ch9_classes.html" title="next chapter"><span class="section-number">9. </span>Classes, Object-Orientation, and Pygame</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, Jason B. Shepherd, Ph.D..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/ch8_searchsort.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

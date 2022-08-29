@@ -1,0 +1,1513 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>1. Basic I/O, Statements, Expressions, Variables, and Types &#8212; Conversational Python 2.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="2. Conditionals" href="ch2_cond.html" />
+    <link rel="prev" title="Preface" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="basic-i-o-statements-expressions-variables-and-types">
+<span id="ch-intro"></span><h1><span class="section-number">1. </span>Basic I/O, Statements, Expressions, Variables, and Types<a class="headerlink" href="#basic-i-o-statements-expressions-variables-and-types" title="Permalink to this headline">¶</a></h1>
+<section id="getting-set-up-to-program">
+<h2><span class="section-number">1.1. </span>Getting set up to program<a class="headerlink" href="#getting-set-up-to-program" title="Permalink to this headline">¶</a></h2>
+<p>Computers consist of hardware and software.  Hardware is the physical stuff you
+can hold in your hands, like memory, disks, keyboards, etc.  Software tells the
+hardware what to do.  The hardware stores the software and “runs” it.  In this
+book, we’re going to learn how to create software. Creating software is called
+<em>programming</em> or <em>coding</em>.  When coding, we give the computer instructions for
+it to do, and then we tell the computer to “run” or “execute” our code.</p>
+<p>Typically, hardware consists of a bunch of electrical circuits.  Instructions
+for controlling the circuits are called <em>machine code</em> (which is basically a
+bunch of 1’s and 0’s that tell the computer which electrical circuits to turn on
+and off… beep beep boop boop).  However, we will not need to learn machine
+code or worry about electrical circuits.  We will write code that looks
+something more like normal human language, and then we will use another software
+program called a <em>compiler</em> or an <em>interpreter</em> to translate our nice, readable
+code into machine code that will control the hardware.  Nice, eh?</p>
+<p>The code we write will be written in a high-level programming language named
+<em>Python</em>.  Although programming languages might look technical, they are more
+human reader-friendly than the hardware’s machine code language.
+Figure <a class="reference internal" href="#interp"><span class="std std-numref">1.1</span></a> shows the relationship between Python language code, the
+interpreter, and the hardware.</p>
+<figure class="align-default" id="id2">
+<span id="interp"></span><a class="reference internal image-reference" href="_images/interp.jpg"><img alt="Code translated by an interpreter to hardware" src="_images/interp.jpg" style="width: 879.0px; height: 191.0px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 1.1 </span><span class="caption-text">Code translated by an interpreter to hardware</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>To get started programming in Python, we will need to install two software
+programs on our computer.  One program will help us write code for the computer
+to execute.  The second program will run our code so that we can see what it
+does.  The first program is named <em>Thonny</em>.  The second program is simply known
+as the <em>Python interpreter</em>.  Fortunately, we don’t need to download these two
+programs separately.  When we download and install Thonny, Thonny contains the
+Python interpreter as well for free!</p>
+<p>Let’s install Thonny, and by extension, the Python interpreter.</p>
+<ul class="simple">
+<li><p>Open your favorite Web browser, again (mine is Google Chrome).</p></li>
+<li><p>In your Web browser, go to the Web address <a class="reference external" href="http://thonny.org/">http://thonny.org/</a>.</p></li>
+<li><p>The Thonny Web page will appear.  In the upper-right hand you will see options
+to download Thonny for your computer.  If you have a Windows computer, choose
+Windows.  If you have Mac, choose Mac.  If you have Linux, choose Linux.</p></li>
+<li><p>Find the file that you’ve downloaded and double-click on it to run it.</p></li>
+<li><p>An installer program will be displayed.  Follow the steps in the installer to
+finish installing Thonny.  If you are unsure of what to do at a particular
+step, accept the default information in that step.</p></li>
+</ul>
+<p>Now, find the Thonny program on your computer and run it.  The main Thonny
+window is shown in Figure <a class="reference internal" href="#thonny-basic"><span class="std std-numref">1.2</span></a>.</p>
+<figure class="align-default" id="id3">
+<span id="thonny-basic"></span><a class="reference internal image-reference" href="_images/thonny_basic.png"><img alt="The Thonny window, consisting of the Shell and the output" src="_images/thonny_basic.png" style="width: 697.0px; height: 670.0px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 1.2 </span><span class="caption-text">The Thonny window, consisting of the Shell and the output</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>Notice that there are two “parts” to the Thonny window.  The top part is where
+you type Python code.  The bottom part is called the Python <em>Shell</em> window.  The
+shell is where you will see the result of your code, which we call the <em>output</em>.</p>
+<p>Normally, you’ll be able to write code in code window, save it to a file, and
+then run it to see the output in the Python Shell window.  Additionally, you can
+type single lines of code into the Python Shell window if you want to experiment
+a little bit before writing your finished program code.  We’ll encourage you to
+do both types of activities throughout this book.</p>
+<p>Notice that the code window in Thonny displays something like “untitled.”  Let’s
+go ahead and start saving any code we type into a file.  That way, after we
+close Thonny we can always come back and work on our code some more later.  In
+Thonny, choose <strong>File –&gt; Save As…</strong> from the top menu.  A dialog window will
+appear.  Choose an appropriate folder location for your new file (and all other
+Python code files you’ll create in this book), and then let’s name this first
+file <cite>hello.py</cite>.  Python files always end with the suffix <cite>.py</cite>.  This helps us
+remember what type of file it is.  We call these files Python source code files,
+or simply Python source files.  Click the <strong>Save</strong> button and return to the
+Thonny code window.</p>
+<p>Okay, let’s learn some Python!</p>
+</section>
+<section id="the-print-statement">
+<h2><span class="section-number">1.2. </span>The <cite>print</cite> statement<a class="headerlink" href="#the-print-statement" title="Permalink to this headline">¶</a></h2>
+<p>You are now ready to start typing <em>statements</em> into the file <cite>hello.py</cite>.  These
+statements will make up a program.  Each statement gives the computer an
+instruction.  A statement might tell the computer to put something on the screen
+(which is called “printing”), it might prompt the user to type something, or it
+might tell the computer to remember some information so that we can recall it
+and use it later in the program, etc.</p>
+<p>Any time from here forward that you click the play button in Thonny, Thonny will
+hand over your statements to the Python interpreter.  The Python interpreter will
+take each statement, one at a time, and change the statement into machine code
+that the computer can understand (again, 1’s and 0’s… beep beep boop boop).
+If any of your statements put words or numbers on the screen, those will show
+up in the Python Shell window.</p>
+<p>Let’s try to write a program that makes some text show up in the Shell
+window.  Again, this is called “printing” text to the screen.</p>
+<p>So, let’s type the following into your new <strong>hello.py</strong> file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Run your program by pressing the play button.</p>
+<p>What do you see?  You should see in your Python Shell window the word <code class="docutils literal notranslate"><span class="pre">Hello</span></code>
+on a separate line.  If you don’t, ask your friendly neighborhood programmer for
+help.</p>
+<p>Cool.  Why does this work, and can we break it and learn something in the
+process?</p>
+<p>(A word of warning: in this book we will frequently learn concepts more
+deeply by trying to mess up the code, that is, “break” the code and then
+learn how to fix it.  If we don’t make mistakes and learn
+how to fix them, we won’t know how to respond when we encounter different
+types of errors.  It’s been said that if you’re afraid of failure, you’ll
+never succeed.  This is especially true in computer programming.)</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">print</span></code> statement allows us to put words and numbers on the
+screen in the Python Shell window.  You type <code class="docutils literal notranslate"><span class="pre">print</span></code> and then in
+parentheses, you put what you want to appear on-screen.  What are those double
+quotes doing there?  Let’s get rid of them and then run the program to see what
+happens.  Replace your code with this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">Hello</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Notice the double quotes are gone.  Run your program using play button again.</p>
+<p>Oh no!  We’ve broken our computer!  Well, not really.  The word <code class="docutils literal notranslate"><span class="pre">print</span></code> means
+something to Python–it’s part of the language–but <code class="docutils literal notranslate"><span class="pre">Hello</span></code> doesn’t mean
+anything to Python.  The double quotes tell Python to actually print the text
+characters “Hello” onto the screen.</p>
+<p>Let’s delete the one line we have in our file, and replace it with the following
+three lines.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;How are you?&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Goodbye.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Run your code again and you will see these three lines appear on-screen in
+order.</p>
+<p>What if you change the order of the statements?</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Goodbye.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;How are you?&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Notice we switched the order of the last two statements.  Python will only
+execute your statements in the order you give them.  Consider the following
+analogy: programs are to computers as recipes are to cooking.  The order of the
+statements matter just like the order of steps in a recipe matter.  Imagine what
+would happen if you jumbled up the steps in a recipe for making a cake.  You
+might end up with a very strange-looking cake!</p>
+</section>
+<section id="the-input-statement">
+<h2><span class="section-number">1.3. </span>The <cite>input</cite> statement<a class="headerlink" href="#the-input-statement" title="Permalink to this headline">¶</a></h2>
+<p>Okay, let’s change our code again.  Delete the three lines you have so far and then add one new one:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello, Steve.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This code attempts to make our program more personalized, but it makes the bold
+(and unfortunate) assumption that the user’s name will always be Steve.  What if
+we wanted to ask users what their names are, and then greet the user by name?
+How many statements would we need?  We would need two: 1.) to ask for the name,
+and 2.) to greet the person using that name.  Here’s a good first attempt.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;What is your name? &quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello, name.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>What do you see?  The code does ask for the user’s name (that’s good), but it
+does not give the user the ability to type anything in (that’s bad).</p>
+<p>Let’s introduce a new type of statement called <code class="docutils literal notranslate"><span class="pre">input</span></code>.  All programs take
+<em>input</em> from the user (possibly from the keyboard, a mouse, or something else)
+and produce <em>output</em> (usually information is <em>printed</em> to the screen, but the
+information could be placed elsewhere, too, like placed in a file or sent over
+the Internet to a Web site or something).  The <code class="docutils literal notranslate"><span class="pre">input</span></code> statement will allow the
+user to type something in.</p>
+<p>Let’s try this.  Change the first <code class="docutils literal notranslate"><span class="pre">print</span></code> statement to an <code class="docutils literal notranslate"><span class="pre">input</span></code> statement.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What is your name? &quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello, name.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Run this code.  What happens?</p>
+<p>Cool!  The user (you) can now type in your name, and then the program waits until
+you’re done typing and you’ve hit the Enter or Return key on your keyboard.
+But, then the program fails to address the person (you, again) using that name.
+Bummer.</p>
+<p>We need to make the program <em>remember</em> the person’s name in the first statement so
+that it can be used later in the second statement.</p>
+<p>Let’s change the first statement from this</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What is your name? &quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>to this</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">firstname</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What is your name? &quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>See the difference?  We’ve put <code class="docutils literal notranslate"><span class="pre">firstname</span> <span class="pre">=</span></code> in front of the input command.</p>
+<p>Here’s how it works. The <code class="docutils literal notranslate"><span class="pre">input</span></code> command retrieves the text the user types in
+from the keyboard.  Then, we must <em>store</em> it somewhere so that we can use it
+later in the program.  The word <code class="docutils literal notranslate"><span class="pre">firstname</span></code> is a <strong>variable</strong>.  Variables are kind
+of like Post-It notes for the computer to help it remember different numbers and
+text that become important to us.  <em>Variables</em> store <strong>values</strong>.</p>
+<p>We can choose to name the variable almost whatever we want.  There are some
+rules for what you can and can’t name a variable.  Variables must start with a
+letter or an underscore (_).  After that, they can include any letters,
+numbers, or underscores, but no other symbols.  Variables cannot have spaces in
+their name.  Let me repeat that again.  <em>Variables cannot have spaces in their
+name</em>.  Thus, you can name a variable <code class="docutils literal notranslate"><span class="pre">cool_memes</span></code> but not <code class="docutils literal notranslate"><span class="pre">cool</span> <span class="pre">memes</span></code>.
+You also cannot name a variable one of the <strong>reserved words</strong> in
+Python.  Reserved words are like  “commands” that mean something to Python,
+like <code class="docutils literal notranslate"><span class="pre">if</span></code> or <code class="docutils literal notranslate"><span class="pre">while</span></code>.  Always name the variable so that you’ll remember
+its name.  Instead of</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">firstname</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What is your name? &quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We could have typed</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dudename</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What is your name? &quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">awesomename</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What is your name? &quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>or even</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">awesome_name</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What is your name? &quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>but for now we’ll stick with</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">firstname</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What is your name? &quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now, what about the second line?  It’s still</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello, name.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We need to use the variable <code class="docutils literal notranslate"><span class="pre">firstname</span></code> to retrieve the value we stored.  Change
+the print line to this</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello,&quot;</span><span class="p">,</span> <span class="n">firstname</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Run it.  Voila!  It works!</p>
+<p>Now, instead of putting one thing inside the parentheses after the word <code class="docutils literal notranslate"><span class="pre">print</span></code>,
+we’re listing two things, separated by a comma.  The first is a text value
+<code class="docutils literal notranslate"><span class="pre">&quot;Hello,&quot;</span></code>.  The second is the variable that stores the name.  Print will print
+both of those things, separated by a space.</p>
+<p>What if we don’t want spaces between the things we print?  We’ll get to that
+later, too.</p>
+<p>Awesome.  Try some stuff.  Try to break your code.  Don’t worry, you can always
+change your code back.  Our code so far should look like the code in
+Listing <a class="reference internal" href="#input1"><span class="std std-numref">1.1</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="id4">
+<span id="input1"></span><div class="code-block-caption"><span class="caption-number">Listing 1.1 </span><span class="caption-text">Reading and printing a name</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">firstname</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What is your name? &quot;</span><span class="p">)</span>
+<span class="linenos">2</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello,&quot;</span><span class="p">,</span> <span class="n">firstname</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Sometimes in this book we will show code snippets like we had been previously.
+Other times, if we want to show a series of statements in context, we will use a
+listing like we did above.  The listings will typically have line numbers before
+each code statement so that we can draw attention to individual statements if we
+wish.</p>
+<p>Let’s learn by breaking things.  In Listing <a class="reference internal" href="#input1"><span class="std std-numref">1.1</span></a>, change the second
+line by removing <code class="docutils literal notranslate"><span class="pre">first</span></code> from the variable name.  The code should now read</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">firstname</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What is your name? &quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello,&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Run this code.  What happens?  Why do you think this happens?</p>
+<p>Once you create a variable named <code class="docutils literal notranslate"><span class="pre">firstname</span></code>, it’s called <code class="docutils literal notranslate"><span class="pre">firstname</span></code> for the
+duration of the program.  In the first line, we’re creating <code class="docutils literal notranslate"><span class="pre">firstname</span></code>.  Then,
+in the second line, we try to use a variable called <code class="docutils literal notranslate"><span class="pre">name</span></code>, but there is no such
+variable called <code class="docutils literal notranslate"><span class="pre">name</span></code>.  Python rightly vomits red text all over the screen.</p>
+<p>It would be like if your name was Jorge and I tried to get your attention by
+yelling “Hey, Betty!”  You wouldn’t know I was trying to get your attention.</p>
+<p>Let’s try one more thing.  Let’s go back to our original code in
+Listing <a class="reference internal" href="#input1"><span class="std std-numref">1.1</span></a>.</p>
+<p>Change the variable <code class="docutils literal notranslate"><span class="pre">firstname</span></code> in the second line by capitalizing the first letter.  In other words, change <code class="docutils literal notranslate"><span class="pre">firstname</span></code> to <code class="docutils literal notranslate"><span class="pre">Firstname</span></code>, like this.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">firstname</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What is your name? &quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello,&quot;</span><span class="p">,</span> <span class="n">Firstname</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now run it and see what happens.  You get an error, don’t you?  <code class="docutils literal notranslate"><span class="pre">Firstname</span></code> and
+<code class="docutils literal notranslate"><span class="pre">firstname</span></code> are different variables.  Python is a <em>case-sensitive</em> language.  So
+we don’t make mistakes with mixing uppercase and lowercase in Python, we
+typically stick to lowercase.</p>
+<p>Remember how I said variable names can’t have spaces in them?  Let’s try it
+anyway.  What if we changed <code class="docutils literal notranslate"><span class="pre">firstname</span></code> to <code class="docutils literal notranslate"><span class="pre">first_name</span></code>?</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">first_name</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What is your name? &quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello,&quot;</span><span class="p">,</span> <span class="n">first_name</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Run it and watch our program crash and burn.  It’s a good things computers don’t
+have feelings because ours would probably be feeling rather abused right now.</p>
+<p>Notice that each time we tried to “break” our code, we ended up with different
+program errors. Pay attention to what the errors say.  At first, the errors look
+like “tech-ese” but eventually you’ll learn to make sense of them, and it will
+help you in correcting your programs.</p>
+<p>One cool thing about programming is it will give you a keener eye, and you’ll
+notice details and mistakes a lot better in other avenues of your life.  Well,
+we’ll hope so anyway.</p>
+</section>
+<section id="assignment-statements">
+<span id="asgn-stmts"></span><h2><span class="section-number">1.4. </span>Assignment statements<a class="headerlink" href="#assignment-statements" title="Permalink to this headline">¶</a></h2>
+<p>As it turns out, we now know a lot about Python even though we likely don’t
+realize it.  We know three kinds of statements.</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">print</span></code> statements</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">input</span></code> statements</p></li>
+<li><p><em>assignment</em> statements</p></li>
+</ol>
+<p>An assignment statement is a statement that creates or updates the value of a
+variable.  Our input statement in the previous example was also an assignment
+statement because it created the variable named <code class="docutils literal notranslate"><span class="pre">firstname</span></code>.</p>
+<p>Let’s look at more examples of assignment statements.  Consider the following.
+I live on an acreage, and we have a barn where cats tend to gather.  We didn’t
+have to buy any cats; they just show up.  It’s good they are around because they
+eat mice and we don’t like mice.</p>
+<p>Suppose we want to remember the number of cats we have in our barn at any given
+time, and suppose we currently have six cats.  To store this information in a
+Python variable, we would type the following.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cats</span> <span class="o">=</span> <span class="mi">6</span>
+</pre></div>
+</div>
+<p>To experiment with what’s happening here, let’s add two more lines so that your
+code now looks like Listing <a class="reference internal" href="#cats"><span class="std std-numref">1.2</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="id5">
+<span id="cats"></span><div class="code-block-caption"><span class="caption-number">Listing 1.2 </span><span class="caption-text">Cats example</span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">cats</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="linenos">2</span><span class="nb">print</span><span class="p">(</span><span class="n">cats</span><span class="p">)</span>
+<span class="linenos">3</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;cats&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Can you guess what will happen when you run this code?  It is very important to
+be able to read code line by line to figure out in your mind what will happen.
+Later on, when you’re programming and something doesn’t work right, you’ll need
+to look at your code line by line to make sure that it makes logical sense.
+This code will print</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>6
+cats
+</pre></div>
+</div>
+<p>There are two print statements in Listing <a class="reference internal" href="#cats"><span class="std std-numref">1.2</span></a>.  Since there are two
+print statements, we can reasonably assume there will be two lines that appear
+on the screen.  The first statement makes a new variable named <code class="docutils literal notranslate"><span class="pre">cats</span></code> and
+assigns it the value <code class="docutils literal notranslate"><span class="pre">6</span></code>.  The second statement prints the value stored in cats.
+The third statement prints the text string “cats” since there are double quotes
+around it.</p>
+<p>If we hadn’t created the variable <code class="docutils literal notranslate"><span class="pre">cats</span></code> before printing the value of <code class="docutils literal notranslate"><span class="pre">cats</span></code>,
+Python would have puked red text again saying that it doesn’t know what <code class="docutils literal notranslate"><span class="pre">cats</span></code>
+is.</p>
+<p>It’s worth noting that the first statement line <code class="docutils literal notranslate"><span class="pre">cats</span> <span class="pre">=</span> <span class="pre">6</span></code> does not print
+anything to the screen.  It’s just an assignment statement.  It’s only job is to
+<em>define</em> a new variable.  It does not print anything.  Only <code class="docutils literal notranslate"><span class="pre">print</span></code> statements
+actually print anything on the Python Shell window.</p>
+<p>Okay, let’s try to break things again!  What happens if we switch the order of
+<code class="docutils literal notranslate"><span class="pre">cats</span></code> and the number <code class="docutils literal notranslate"><span class="pre">6</span></code> in the first line of Listing <a class="reference internal" href="#cats"><span class="std std-numref">1.2</span></a>, like
+this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">6</span> <span class="o">=</span> <span class="n">cats</span>
+</pre></div>
+</div>
+<p>Run it.  Kablooey!  Now we’ve learned a rule about assignment statements.  Think
+of the = sign as being more like a left arrow (←).  When we write
+<code class="docutils literal notranslate"><span class="pre">cats</span> <span class="pre">=</span> <span class="pre">6</span></code>, we can think of it like <code class="docutils literal notranslate"><span class="pre">cats</span></code> ← <code class="docutils literal notranslate"><span class="pre">6</span></code> in that the
+value <code class="docutils literal notranslate"><span class="pre">6</span></code> is being assigned to the new variable <code class="docutils literal notranslate"><span class="pre">cats</span></code>.  You cannot change the
+order of <code class="docutils literal notranslate"><span class="pre">cats</span></code> and <code class="docutils literal notranslate"><span class="pre">6</span></code>.</p>
+<p>See?  Computers are picky.</p>
+<p>So, on the left-hand side of the equals sign in an assignment statement, we can
+give the name of a variable.  If the variable doesn’t exist, it is created brand
+new.  If the variable does already exist, the value of the variable is updated
+(or, overwritten – update and overwrite are synonymous).  So what can we put on
+the right-hand side of the equals?</p>
+<p>On the right-hand side, we can put any <em>expression</em> that produces a value.  Here
+are some examples of expressions.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">6</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">+</span> <span class="pre">4</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">6</span> <span class="pre">*</span> <span class="pre">1</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">8</span> <span class="pre">-</span> <span class="pre">2</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">12</span> <span class="pre">/</span> <span class="pre">2</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">12</span> <span class="pre">–</span> <span class="pre">(3</span> <span class="pre">*</span> <span class="pre">2)</span></code></p></li>
+</ul>
+<p>The asterisk (<code class="docutils literal notranslate"><span class="pre">*</span></code>) or star does multiplication.  The forward slash (<code class="docutils literal notranslate"><span class="pre">/</span></code>)
+performs division.  The double forward slash (<code class="docutils literal notranslate"><span class="pre">//</span></code>) performs whole number
+division by dropping the remainder.  For example, <code class="docutils literal notranslate"><span class="pre">5</span> <span class="pre">//</span> <span class="pre">2</span></code> produces the value
+<code class="docutils literal notranslate"><span class="pre">2</span></code>.  The percent (<code class="docutils literal notranslate"><span class="pre">%</span></code>) gives us the remainder.  This operation is also known as
+the modulus, or simply mod.  For example, <code class="docutils literal notranslate"><span class="pre">5</span> <span class="pre">%</span> <span class="pre">2</span></code> produces the value <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+<p>The  <code class="docutils literal notranslate"><span class="pre">+</span></code>, <code class="docutils literal notranslate"><span class="pre">-</span></code>, <code class="docutils literal notranslate"><span class="pre">*</span></code>, <code class="docutils literal notranslate"><span class="pre">/</span></code>, <code class="docutils literal notranslate"><span class="pre">//</span></code>, and <code class="docutils literal notranslate"><span class="pre">%</span></code> are known as <em>operators</em>.  Operators take
+two expressions (which produce values) and produces a new value.  Parentheses
+can be used to group expressions much like we do in mathematics.  Also as in
+mathematics, operators have precedence.  Expressions produce a value by
+evaluating the expression left-to-right while performing parenthetical
+expressions first, then multiplication and division, and finally addition and
+subtraction.</p>
+<p>Just for the heck of it, we could re-write the assignment statement <code class="docutils literal notranslate"><span class="pre">cats</span> <span class="pre">=</span> <span class="pre">6</span></code>
+as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cats</span> <span class="o">=</span> <span class="mi">12</span> <span class="o">-</span> <span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To recap, the left-hand side (abbreviated <em>LHS</em>) of an assignment statement is
+the name of a variable.  The variable will either be created (that is, defined)
+if it doesn’t already exist or updated (that is, overwritten) depending on
+whether the variable existed previously.  The right-hand side (abbreviated
+<em>RHS</em>) is an expression that, when evaluated by Python, produces a value.</p>
+<p>With all this in mind, let’s try something.  What happens when you change our
+code so that it looks like Listing <a class="reference internal" href="#cats-plus1"><span class="std std-numref">1.3</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="id6">
+<span id="cats-plus1"></span><div class="code-block-caption"><span class="caption-number">Listing 1.3 </span><span class="caption-text">Incrementing a value</span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">cats</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="linenos">2</span><span class="n">cats</span> <span class="o">=</span> <span class="n">cats</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="linenos">3</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You have&quot;</span><span class="p">,</span> <span class="n">cats</span><span class="p">,</span> <span class="s2">&quot;cats.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Remember how assignment statements work.  They work in two steps.</p>
+<ol class="arabic simple">
+<li><p>We determine the value produced on the RHS.</p></li>
+<li><p>That value is assigned to the variable on the LHS.</p></li>
+</ol>
+<p>What is the value on the RHS of <code class="docutils literal notranslate"><span class="pre">cats</span> <span class="pre">=</span> <span class="pre">cats</span> <span class="pre">+</span> <span class="pre">1</span></code>?  When we reach this
+statement, <code class="docutils literal notranslate"><span class="pre">cats</span></code> is <code class="docutils literal notranslate"><span class="pre">6</span></code>.  Thus, <code class="docutils literal notranslate"><span class="pre">cats</span> <span class="pre">+</span> <span class="pre">1</span></code> is the same as <code class="docutils literal notranslate"><span class="pre">6</span> <span class="pre">+</span> <span class="pre">1</span></code>, which is
+<code class="docutils literal notranslate"><span class="pre">7</span></code>.  Therefore, the assignment statement <code class="docutils literal notranslate"><span class="pre">cats</span> <span class="pre">=</span> <span class="pre">cats</span> <span class="pre">+</span> <span class="pre">1</span></code> is essentially the
+same as saying <code class="docutils literal notranslate"><span class="pre">cats</span> <span class="pre">=</span> <span class="pre">7</span></code>.</p>
+<p>We can visualize how this assignment statement is <em>evaluated</em> in
+Figure <a class="reference internal" href="#cats-eval"><span class="std std-numref">1.3</span></a>.</p>
+<figure class="align-default" id="id7">
+<span id="cats-eval"></span><a class="reference internal image-reference" href="_images/cats_eval.png"><img alt="Evaluating an assignment statement" src="_images/cats_eval.png" style="width: 180.0px; height: 190.0px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 1.3 </span><span class="caption-text">Evaluating an assignment statement</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>Remember, the equals sign performs assignment of the value produced by the RHS
+to the variable on the LHS.  Therefore, the equals sign is more like a left
+arrow that the mathematical equals sign that normally says “the thing on the LHS
+and the thing on the RHS have the same value.”  The fact that you can type
+<code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">1</span></code> in Python looks yucky to mathematicians.  Poor, poor mathematicians.
+We will try to avoid making fun of mathematicians in this book, but I make
+no promises.</p>
+<p>We will say more about the relationship between values, expressions, and
+statements in the next section.</p>
+</section>
+<section id="values-types-expressions-and-statements">
+<h2><span class="section-number">1.5. </span>Values, types, expressions, and statements<a class="headerlink" href="#values-types-expressions-and-statements" title="Permalink to this headline">¶</a></h2>
+<p>Let’s modify the code example from the previous section.  It is, after all,
+silly because you start with a fixed number of cats when, in fact, we could
+start with any number of cats.  Let’s ask users for how many cats they have in
+their barn.  Then, our program should calculate the number of cats they’ll have
+in the barn in a month’s time.  For the sake of argument, let’s arbitrarilysuppose
+the number of cats will increase by 4.</p>
+<p>A running program that solves this problem would look like this on the Python
+Shell window.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>How many cats do you have? 10
+In a month&#39;s time, you will have 14 cats!
+</pre></div>
+</div>
+<p>The 10 at the end of the first line is typed in by the user, as an example. Can
+you write this program?  Give it a try.  You know how to write code to get input
+from the user.  You know how to produce output.  You know how to create
+variables and perform calculations using expressions.  Try to write this
+program.</p>
+<p>(One attempt at a solution follows, but try to shield your eyes and don’t look
+at it right away.  You won’t learn very well if you don’t try and fail every now
+and then.)</p>
+<p>Listing <a class="reference internal" href="#cats-typeerror"><span class="std std-numref">1.4</span></a> shows an attempt that you might have made.</p>
+<div class="literal-block-wrapper docutils container" id="id8">
+<span id="cats-typeerror"></span><div class="code-block-caption"><span class="caption-number">Listing 1.4 </span><span class="caption-text">Type error</span><a class="headerlink" href="#id8" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">cats</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;How many cats do you have? &quot;</span><span class="p">)</span>
+<span class="linenos">2</span><span class="n">cats</span> <span class="o">=</span> <span class="n">cats</span> <span class="o">+</span> <span class="mi">4</span>
+<span class="linenos">3</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;In a month&#39;s time, you will have&quot;</span><span class="p">,</span> <span class="n">cats</span><span class="p">,</span> <span class="s2">&quot;cats.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>This seems reasonable and logical, but it doesn’t work!  Rather, you end up with an
+error.  Let’s take a very close look at the error.  It’s very important to
+understand how to read error messages.  If you know how, they often tell you
+exactly what’s wrong.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Traceback (most recent call last):
+  File &quot;/Users/shep/cs1/code/cats.py&quot;, line 2, in &lt;module&gt;
+    cats = cats + 4
+TypeError: Can&#39;t convert &#39;int&#39; object to str implicitly
+</pre></div>
+</div>
+<p>The error states that the problem is on line 2 of your code.  That’s helpful,
+but keep in mind line 2 is only where the error was <em>detected</em>.  It’s possible
+that what caused the error occurred earlier in the code than line 2.</p>
+<p>Note what the error message says: “Can’t convert ‘int’ object to str
+implicitly.”  What does this mean?  In order to understand what it means, we
+need to revisit some of the concepts we touched on in Section
+<a class="reference internal" href="#asgn-stmts"><span class="std std-numref">1.4</span></a>.</p>
+<p>A <em>statement</em> can consist of one or more expressions.  An <em>expression</em> is a
+piece of code that produces a <em>value</em>.  Every value has a <em>type</em>.  Consider the
+following example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">carrots</span> <span class="o">=</span> <span class="p">(</span><span class="mi">7</span> <span class="o">+</span> <span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span>
+</pre></div>
+</div>
+<p>This is one assignment statement whose right-hand side (RHS) consists of two
+expressions.  The first expression is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">7</span> <span class="o">+</span> <span class="mi">3</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">7</span></code> and <code class="docutils literal notranslate"><span class="pre">3</span></code> are values known as <em>integers</em>, which is just a fancy word for
+“whole number.”  In Python, an integer is called an <code class="docutils literal notranslate"><span class="pre">int</span></code>, for short.  <code class="docutils literal notranslate"><span class="pre">7</span></code> is a
+value and its type is <code class="docutils literal notranslate"><span class="pre">int</span></code>.  <code class="docutils literal notranslate"><span class="pre">3</span></code> is value and its type is <code class="docutils literal notranslate"><span class="pre">int</span></code>.  Since
+<code class="docutils literal notranslate"><span class="pre">7</span></code> is an <code class="docutils literal notranslate"><span class="pre">int</span></code> and <code class="docutils literal notranslate"><span class="pre">3</span></code> is an <code class="docutils literal notranslate"><span class="pre">int</span></code>, adding them together gives us the
+value <code class="docutils literal notranslate"><span class="pre">10</span></code>, which is also an <code class="docutils literal notranslate"><span class="pre">int</span></code>.  Thus, the following table describes
+what we know about this expression.</p>
+<table class="colwidths-given docutils align-default" id="id9">
+<caption><span class="caption-number">Table 1.1 </span><span class="caption-text">Expression/value/type</span><a class="headerlink" href="#id9" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Expression</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Type</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">7</span> <span class="pre">+</span> <span class="pre">3</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">10</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>Remember, an expression is a piece of code that produces a value.  Every value
+has a type.</p>
+<p>Say it again: an expression produces a value, and every value has a type.</p>
+<p>Say it again with me (yes, <em>again</em>, … ugh): an expression produces a value, and every value has a type.</p>
+<p>If you’re not sure what the type of an expression is, you can find out by typing
+the expression into the Python Shell.  If I entered <code class="docutils literal notranslate"><span class="pre">7</span> <span class="pre">+</span> <span class="pre">3</span></code>, the Python Shell
+would output <code class="docutils literal notranslate"><span class="pre">10</span></code>.  If I entered <code class="docutils literal notranslate"><span class="pre">type(7</span> <span class="pre">+</span> <span class="pre">3)</span></code>, the Python Shell would output
+<code class="docutils literal notranslate"><span class="pre">&quot;&lt;class</span> <span class="pre">'int'&gt;&quot;</span></code>.  Try out the type command to see what different expressions and
+different values have as their type.  Try <code class="docutils literal notranslate"><span class="pre">type(7)</span></code>, <code class="docutils literal notranslate"><span class="pre">type(7.52)</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">type(&quot;Hello&quot;)</span></code>.</p>
+<p>The next expression for us to consider in our current example is <code class="docutils literal notranslate"><span class="pre">(7</span> <span class="pre">+</span> <span class="pre">3)</span> <span class="pre">*</span> <span class="pre">2</span></code>.
+We can see from this expression that expressions can consist of other
+expressions.  We already know that <code class="docutils literal notranslate"><span class="pre">7</span> <span class="pre">+</span> <span class="pre">3</span></code> is an expression whose value is <code class="docutils literal notranslate"><span class="pre">10</span></code>
+and whose type is <code class="docutils literal notranslate"><span class="pre">int</span></code>.  Thus, we can determine the following about this
+expression.</p>
+<table class="colwidths-given docutils align-default" id="id10">
+<caption><span class="caption-number">Table 1.2 </span><span class="caption-text">Expression/value/type</span><a class="headerlink" href="#id10" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Expression</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Type</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">(7</span> <span class="pre">+</span> <span class="pre">3)</span> <span class="pre">*</span> <span class="pre">2</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">20</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>From this, we can determine that the variable <code class="docutils literal notranslate"><span class="pre">carrots</span></code> will have as its value
+<code class="docutils literal notranslate"><span class="pre">20</span></code> and its type will be <code class="docutils literal notranslate"><span class="pre">int</span></code>.</p>
+<p>There is another number type named <code class="docutils literal notranslate"><span class="pre">float</span></code>.  Floats are used to represent
+numbers that have a fractional part.  The value <code class="docutils literal notranslate"><span class="pre">5.2</span></code> is an example of a float.
+Float values can be expressed in scientific notation as well.  The value <code class="docutils literal notranslate"><span class="pre">3e2</span></code>
+is equivalent to <span class="math notranslate nohighlight">\(3 \times 10^2\)</span> which is 300, for example.  The value
+after the <code class="docutils literal notranslate"><span class="pre">e</span></code> is the power of ten to which we multiply the first number.</p>
+<p>Any time we type a specific value like <code class="docutils literal notranslate"><span class="pre">5</span></code> or <code class="docutils literal notranslate"><span class="pre">5.25</span></code> in a program, we call that
+value a <em>literal</em>.  That is, <code class="docutils literal notranslate"><span class="pre">5.25</span></code> is a float literal because it is “literally”
+the value <code class="docutils literal notranslate"><span class="pre">5.25</span></code>.  It’s important to have the word “literal” in your programmer
+vocabulary.</p>
+<p>Now let us consider a different example, shown in Listing <a class="reference internal" href="#firstlast"><span class="std std-numref">1.5</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="id11">
+<span id="firstlast"></span><div class="code-block-caption"><span class="caption-number">Listing 1.5 </span><span class="caption-text">String concatenation</span><a class="headerlink" href="#id11" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">firstname</span> <span class="o">=</span> <span class="s2">&quot;Kanye&quot;</span>
+<span class="linenos">2</span><span class="n">lastname</span> <span class="o">=</span> <span class="s2">&quot;West&quot;</span>
+<span class="linenos">3</span><span class="n">fullname</span> <span class="o">=</span> <span class="n">firstname</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">lastname</span>
+</pre></div>
+</div>
+</div>
+<p>These three statements all involve text values.  Text values have a special type
+called <em>string</em>.  In Python, a string is called a <code class="docutils literal notranslate"><span class="pre">str</span></code> for short.  If, in the
+Python Shell, I were to enter <code class="docutils literal notranslate"><span class="pre">type(&quot;Kanye&quot;)</span></code>, I would see the output <code class="docutils literal notranslate"><span class="pre">&lt;class</span>
+<span class="pre">'str'&gt;</span></code>.  If I entered the first statement <code class="docutils literal notranslate"><span class="pre">firstname</span> <span class="pre">=</span> <span class="pre">&quot;Kanye&quot;</span></code> and then
+afterwards entered <code class="docutils literal notranslate"><span class="pre">type(firstname)</span></code>, I would see the output <code class="docutils literal notranslate"><span class="pre">&lt;class</span> <span class="pre">'str'&gt;</span></code>.</p>
+<p>There are four expressions in these three statements.  They are shown in the
+following table.</p>
+<table class="colwidths-given docutils align-default" id="id12">
+<caption><span class="caption-number">Table 1.3 </span><span class="caption-text">Expression/value/type for string concatenation</span><a class="headerlink" href="#id12" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Expression</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Type</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;Kanye&quot;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;Kanye&quot;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;West&quot;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;West&quot;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">firstname</span> <span class="pre">+</span> <span class="pre">&quot;</span> <span class="pre">&quot;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;Kanye</span> <span class="pre">&quot;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">firstname</span> <span class="pre">+</span> <span class="pre">&quot;</span> <span class="pre">&quot;</span> <span class="pre">+</span> <span class="pre">lastname</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;Kanye</span> <span class="pre">West&quot;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>Some operators can work on strings, too.  When we use the plus (+) on two string
+values, it “smashes” the two strings together to form a new string.  Here, we
+are taking the first name and putting a space on the end of it.  Then, we are
+appending the last name onto that new string that consists of the first name and
+trailing space.  There is a geeky name for “smashing” two strings together to
+make a new string, and that name is <em>concatenation</em>.  We would say that the plus (+)
+<em>concatenates</em> two strings.</p>
+<p>Remember, an expression is a piece of code that produces a value.  Every value
+has a type.  Every variable has a value and a type.</p>
+<p>When we write a string literal, we always put quotes around it. The quotes are
+not part of the string value, however.  In other words, if I write <code class="docutils literal notranslate"><span class="pre">&quot;abc&quot;</span></code>, I
+know <code class="docutils literal notranslate"><span class="pre">&quot;abc&quot;</span></code> is a string literal, and I know the quotes are not a part of the
+string’s value.  Also, we can use either double quotes (<code class="docutils literal notranslate"><span class="pre">&quot;</span></code>) or single quotes
+(<code class="docutils literal notranslate"><span class="pre">'</span></code>) as long as they match one another.  That is, we can write <code class="docutils literal notranslate"><span class="pre">&quot;cheese&quot;</span></code> or
+<code class="docutils literal notranslate"><span class="pre">'cheese'</span></code> but not <code class="docutils literal notranslate"><span class="pre">'cheese&quot;</span></code>.</p>
+<p>Types and values are tremendously important in Python, and this is illustrated
+by our problematic code from earlier in this section.  Recall
+Listing <a class="reference internal" href="#cats-typeerror"><span class="std std-numref">1.4</span></a>, which is shown again below:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">cats</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;How many cats do you have? &quot;</span><span class="p">)</span>
+<span class="linenos">2</span><span class="n">cats</span> <span class="o">=</span> <span class="n">cats</span> <span class="o">+</span> <span class="mi">4</span>
+<span class="linenos">3</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;In a month&#39;s time, you will have&quot;</span><span class="p">,</span> <span class="n">cats</span><span class="p">,</span> <span class="s2">&quot;cats.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>When we ran this code, we got an error on line 2 that told us
+“<span class="red">Can’t convert ‘int’ object to str implicitly.</span>”  When line 2
+tries to do the plus operation, it gets confused because <code class="docutils literal notranslate"><span class="pre">4</span></code> is an <code class="docutils literal notranslate"><span class="pre">int</span></code> and it
+thinks that <code class="docutils literal notranslate"><span class="pre">cats</span></code> is a <code class="docutils literal notranslate"><span class="pre">str</span></code> rather than an <code class="docutils literal notranslate"><span class="pre">int</span></code>. Think about it.  Can you
+guess why?  Look back at line 2.  Look back at line 1.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">input</span></code> command in line 1 retrieves characters entered from the keyboard.
+These characters could be letters, symbols, and/or numbers.  Since the value
+placed into <code class="docutils literal notranslate"><span class="pre">cats</span></code> by <code class="docutils literal notranslate"><span class="pre">input</span></code> could be any of these things, the type of the
+value <code class="docutils literal notranslate"><span class="pre">input</span></code> gives us is <code class="docutils literal notranslate"><span class="pre">str</span></code>.  Suppose the user typed a <code class="docutils literal notranslate"><span class="pre">5</span></code> at the prompt
+“How many cats do you have?”  The initial value of the variable cats will be the
+<code class="docutils literal notranslate"><span class="pre">str</span></code> value <code class="docutils literal notranslate"><span class="pre">&quot;5&quot;</span></code> rather than the <code class="docutils literal notranslate"><span class="pre">int</span></code> value <code class="docutils literal notranslate"><span class="pre">5</span></code>.</p>
+<p>It doesn’t make sense to Python to add a string and an integer.  After all, what
+is reasonable to assume about the type and value of an expression like <code class="docutils literal notranslate"><span class="pre">&quot;Hello&quot;</span> <span class="pre">+</span>
+<span class="pre">32</span></code>?  In the above example, we need to convert <code class="docutils literal notranslate"><span class="pre">cats</span></code> from a string to an
+integer so that we can treat <code class="docutils literal notranslate"><span class="pre">cats</span></code> as an integer.  Let us add a new line of
+code after the <code class="docutils literal notranslate"><span class="pre">input</span></code> statement in Listing <a class="reference internal" href="#cats-cast"><span class="std std-numref">1.6</span></a> at line 2.</p>
+<div class="literal-block-wrapper docutils container" id="id13">
+<span id="cats-cast"></span><div class="code-block-caption"><span class="caption-number">Listing 1.6 </span><span class="caption-text">Casting to a str</span><a class="headerlink" href="#id13" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">cats</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;How many cats do you have? &quot;</span><span class="p">)</span>
+<span class="hll"><span class="linenos">2</span><span class="n">cats</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">cats</span><span class="p">)</span>
+</span><span class="linenos">3</span><span class="n">cats</span> <span class="o">=</span> <span class="n">cats</span> <span class="o">+</span> <span class="mi">4</span>
+<span class="linenos">4</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;In a month&#39;s time, you will have&quot;</span><span class="p">,</span> <span class="n">cats</span><span class="p">,</span> <span class="s2">&quot;cats.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">int</span></code> command converts the string value stored in <code class="docutils literal notranslate"><span class="pre">cats</span></code> to an integer, and
+then it overwrites the value of <code class="docutils literal notranslate"><span class="pre">cats</span></code> to this new <code class="docutils literal notranslate"><span class="pre">int</span></code> value.  Converting a
+value from one type to another is called <em>casting</em>.</p>
+<p>When we write code, it is bound to have errors we need to correct.  Sometimes,
+those errors make the program crash and we see an actual error message in
+red text on the screen.  Other times, however, we don’t get a
+nice error message.  Instead, the program appears to behave erroneously.
+Erroneous code is called a <em>bug</em>, and it is up to us to “debug” the program.</p>
+<p>At some point in this book’s sure-to-be-glorious future, we’ll have a nice
+detour in this box about the origin of the term “debug.”  It’s an amusing
+historical tale.  For now, read this: <a class="reference external" href="http://www.wired.com/2013/12/googles-doodle-honors-grace-hopper-and-entomology/">http://www.wired.com/2013/12/googles-doodle-honors-grace-hopper-and-entomology/</a>.</p>
+<p>Let’s practice detecting and fixing bugs.  We’ll again use
+Listing <a class="reference internal" href="#cats-typeerror"><span class="std std-numref">1.4</span></a> as our starting point, only this time instead
+of adding <code class="docutils literal notranslate"><span class="pre">4</span></code> to the number of cats, we will double the number of cats by
+multiplying by <code class="docutils literal notranslate"><span class="pre">2</span></code>.  After all, when it comes to feral barn cats, this is a more
+accurate representation of what happens to cat populations.  Consider our new
+Listing <a class="reference internal" href="#cats-mult"><span class="std std-numref">1.7</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="id14">
+<span id="cats-mult"></span><div class="code-block-caption"><span class="caption-number">Listing 1.7 </span><span class="caption-text">Multiplying cats</span><a class="headerlink" href="#id14" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">cats</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;How many cats do you have? &quot;</span><span class="p">)</span>
+<span class="hll"><span class="linenos">2</span><span class="n">cats</span> <span class="o">=</span> <span class="n">cats</span> <span class="o">*</span> <span class="mi">2</span>
+</span><span class="linenos">3</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;In a month&#39;s time, you will have&quot;</span><span class="p">,</span> <span class="n">cats</span><span class="p">,</span> <span class="s2">&quot;cats.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Note that we forgot to cast <code class="docutils literal notranslate"><span class="pre">cats</span></code> to be an <code class="docutils literal notranslate"><span class="pre">int</span></code>.  We might expect this
+program to have a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code> since it doesn’t make sense to multiply a string
+and an integer.  In fact, this is not what happens.  Type <code class="docutils literal notranslate"><span class="pre">3</span></code> for the number of
+cats.  What happens?</p>
+<p><code class="docutils literal notranslate"><span class="pre">33</span></code> cats?!  Good grief!  As it turns out, Python allows string values to be
+repeated using the asterisk/star (<code class="docutils literal notranslate"><span class="pre">*</span></code>) operator.  Instead of performing <code class="docutils literal notranslate"><span class="pre">3</span> <span class="pre">*</span> <span class="pre">2</span></code>,
+the expression we’ve inadvertently performed is <code class="docutils literal notranslate"><span class="pre">&quot;3&quot;</span> <span class="pre">*</span> <span class="pre">2</span></code>, which is the same as
+<code class="docutils literal notranslate"><span class="pre">&quot;3&quot;</span> <span class="pre">+</span> <span class="pre">&quot;3&quot;</span></code>, which is the same as <code class="docutils literal notranslate"><span class="pre">&quot;33&quot;</span></code>.  If we properly cast <code class="docutils literal notranslate"><span class="pre">cats</span></code> to an
+<code class="docutils literal notranslate"><span class="pre">int</span></code> before multiplying, we get the proper result and we have “debugged” the
+program.</p>
+<p>It is important to understand what operators are available to us.
+Tables <a class="reference internal" href="#arith-ops"><span class="std std-numref">1.4</span></a> and <a class="reference internal" href="#str-ops"><span class="std std-numref">1.5</span></a> provide more
+comprehensive lists of these operators and their function.</p>
+<span id="arith-ops"></span><table class="colwidths-given docutils align-default" id="id15">
+<caption><span class="caption-number">Table 1.4 </span><span class="caption-text">Arithmetic operators</span><a class="headerlink" href="#id15" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 85%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Operator</p></th>
+<th class="head"><p>Usage</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">+</span></code></p></td>
+<td><p>Addition</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>Subtraction</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">*</span></code></p></td>
+<td><p>Multiplication</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">/</span></code></p></td>
+<td><p>Division</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">//</span></code></p></td>
+<td><p>Integer-only division; example: <code class="docutils literal notranslate"><span class="pre">5</span> <span class="pre">//</span> <span class="pre">2</span></code> gives us <code class="docutils literal notranslate"><span class="pre">2</span></code> rather than <code class="docutils literal notranslate"><span class="pre">2.5</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%</span></code></p></td>
+<td><p>Modulus or “mod”, which returns the remainder from division; example: <code class="docutils literal notranslate"><span class="pre">5</span> <span class="pre">%</span> <span class="pre">2</span></code> gives us <code class="docutils literal notranslate"><span class="pre">1</span></code> since <code class="docutils literal notranslate"><span class="pre">5</span></code> divided by <code class="docutils literal notranslate"><span class="pre">2</span></code> is <code class="docutils literal notranslate"><span class="pre">2</span></code> remainder <code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">**</span></code></p></td>
+<td><p>Exponentiation, which returns the result of raising a number to a power; example: <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">**</span> <span class="pre">3</span></code> gives us <code class="docutils literal notranslate"><span class="pre">8</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<span id="str-ops"></span><table class="colwidths-given docutils align-default" id="id16">
+<caption><span class="caption-number">Table 1.5 </span><span class="caption-text">String operators</span><a class="headerlink" href="#id16" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 85%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Operator</p></th>
+<th class="head"><p>Usage</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">+</span></code></p></td>
+<td><p>Concatenation; example: <code class="docutils literal notranslate"><span class="pre">&quot;ab&quot;</span> <span class="pre">+</span> <span class="pre">&quot;cd&quot;</span></code> gives us <code class="docutils literal notranslate"><span class="pre">&quot;abcd&quot;</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">*</span></code></p></td>
+<td><p>Repetition: example: <code class="docutils literal notranslate"><span class="pre">&quot;-&quot;</span> <span class="pre">*</span> <span class="pre">5</span></code> gives us <code class="docutils literal notranslate"><span class="pre">&quot;-----&quot;</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%</span></code></p></td>
+<td><p>Formatting. The string format operator allows us to insert one string value into the middle of another string, which is known as the format string.  The format string can contain any number of format specifiers, which are placeholders for the values to be inserted.  See Table <a class="reference internal" href="#str-fmts"><span class="std std-numref">1.6</span></a> for a list of format specifier examples.</p>
+<blockquote>
+<div><p>Example 1:
+Suppose we have a variable <code class="docutils literal notranslate"><span class="pre">forks</span></code> that contains the integer value <code class="docutils literal notranslate"><span class="pre">5</span></code>.
+<code class="docutils literal notranslate"><span class="pre">&quot;There</span> <span class="pre">are</span> <span class="pre">%d</span> <span class="pre">forks</span> <span class="pre">on</span> <span class="pre">the</span> <span class="pre">table.&quot;</span> <span class="pre">%</span> <span class="pre">forks</span></code>
+would produce the string <code class="docutils literal notranslate"><span class="pre">&quot;There</span> <span class="pre">are</span> <span class="pre">5</span> <span class="pre">forks</span> <span class="pre">on</span> <span class="pre">the</span> <span class="pre">table.&quot;</span></code></p>
+<p>Example 2:
+Suppose we have two variables <code class="docutils literal notranslate"><span class="pre">first</span></code> and <code class="docutils literal notranslate"><span class="pre">last</span></code> that contain string
+values <code class="docutils literal notranslate"><span class="pre">&quot;Bob&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;Barker&quot;`</span></code>.  The expression
+<code class="docutils literal notranslate"><span class="pre">&quot;Hi,</span> <span class="pre">%s</span> <span class="pre">%s.&quot;</span> <span class="pre">%</span> <span class="pre">(first,</span> <span class="pre">last)</span></code> would produce the string <code class="docutils literal notranslate"><span class="pre">&quot;Hi,</span> <span class="pre">Bob</span> <span class="pre">Barker.&quot;</span></code>.
+Note that if we have multiple values to be inserted into the format string,
+we enclose them in parentheses and separate the values with commas.</p>
+<p>Example 3:
+Suppose we have a variable <code class="docutils literal notranslate"><span class="pre">ch</span></code> that contains a single character <code class="docutils literal notranslate"><span class="pre">'!'</span></code>
+<code class="docutils literal notranslate"><span class="pre">&quot;OMG\%c\%c\%c&quot;</span> <span class="pre">\%</span> <span class="pre">(ch,</span> <span class="pre">ch,</span> <span class="pre">ch)</span></code> would produce the string <code class="docutils literal notranslate"><span class="pre">&quot;OMG!!!&quot;</span></code>.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<span id="str-fmts"></span><table class="colwidths-given docutils align-default" id="id17">
+<caption><span class="caption-number">Table 1.6 </span><span class="caption-text">String format specifiers</span><a class="headerlink" href="#id17" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Specifier</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%d</span></code></p></td>
+<td><p>the value to be inserted is an integer</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%5d</span></code></p></td>
+<td><p>the value is aligned to the right across a 5-character column</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%-5d</span></code></p></td>
+<td><p>the value is aligned to the left across a 5-character column</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%f</span></code></p></td>
+<td><p>the value to be inserted is a float</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%10.2f</span></code></p></td>
+<td><p>the value to be inserted is a float aligned to the right across a 10-character column, and we should use two decimal places after the decimal point only</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%s</span></code></p></td>
+<td><p>the value to be inserted is a string</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%10s</span></code></p></td>
+<td><p>the value is aligned to the right across a 10-character column</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%-10s</span></code></p></td>
+<td><p>the value is aligned to the left across a 10-character column</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%c</span></code></p></td>
+<td><p>the value to be inserted is a single character</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="calling-functions">
+<h2><span class="section-number">1.6. </span>Calling functions<a class="headerlink" href="#calling-functions" title="Permalink to this headline">¶</a></h2>
+<p>In the <a class="reference internal" href="#assignment-statements">Assignment statements</a> section, we identified  the three types of statements
+that we knew at that point.</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">print</span></code> statements</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">input</span></code> statements</p></li>
+<li><p><em>assignment</em> statements</p></li>
+</ol>
+<p>We have since learned about other statements.  For example, we can use <code class="docutils literal notranslate"><span class="pre">type</span></code> to
+determine the type of an expression or <code class="docutils literal notranslate"><span class="pre">int</span></code> to cast a <code class="docutils literal notranslate"><span class="pre">str</span></code> to an <code class="docutils literal notranslate"><span class="pre">int</span></code>.  We
+have also been using the word <em>command</em> to refer to words like <code class="docutils literal notranslate"><span class="pre">print</span></code>, <code class="docutils literal notranslate"><span class="pre">input</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">type</span></code> that seem to have important meaning to Python.  In fact, these
+commands are actually called <em>functions</em>.  It’s important to learn to speak like
+a programmer when you are writing code, so we will call them <em>functions</em> from here
+forward.</p>
+<p>You’ll note that in this book, we try to steer clear of technical terms until we
+reach an appropriate time to introduce them.  This seems to be a better approach
+than throwing every possible technical term at you right away and then expect
+you to memorize them without any context whatsoever.</p>
+<p>So, let’s practice speaking like programmers.</p>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Instead of…</p></th>
+<th class="head"><p>Programmers would say…</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><em>use</em> a function</p></td>
+<td><p><em>call</em> a function</p></td>
+</tr>
+<tr class="row-odd"><td><p>function <em>produces</em> a value</p></td>
+<td><p>function <em>returns</em> a value</p></td>
+</tr>
+</tbody>
+</table>
+<p>Consider the following code.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">answer</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Do you wish to continue (y/n)? &quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Programmers would say they are <em>calling</em> the input function, and the input
+function will <em>return</em> a string value.</p>
+<p>All functions return a value, even something like <code class="docutils literal notranslate"><span class="pre">print</span></code>.  Just for fun
+(wheee!), type the following into the Python Shell window.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">var</span> <span class="o">=</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now, type <code class="docutils literal notranslate"><span class="pre">var</span></code> in the Shell window and press ENTER.  Hmm, normally when we type
+the name of a variable or we type an expression into the Python Shell window, it
+tells us its value.  We get nothing.  Type the expression <code class="docutils literal notranslate"><span class="pre">type(var)</span></code> into the
+Shell.  Aha!  The variable <code class="docutils literal notranslate"><span class="pre">var</span></code> has a special type called <code class="docutils literal notranslate"><span class="pre">NoneType</span></code>.  Every
+function call is an expression that returns some value, even if at least that
+value belongs to <code class="docutils literal notranslate"><span class="pre">NoneType</span></code>.</p>
+<p>Okay, it makes sense to have <code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>, and <code class="docutils literal notranslate"><span class="pre">str</span></code> because it’s easy to
+think of whole and fractional numbers and text values, but why does <code class="docutils literal notranslate"><span class="pre">NoneType</span></code>
+exist?  We’re really not ready for the answer yet, but rest assured we’ll cover
+it eventually.  The short answer is that seasoned Python programmers can use
+<code class="docutils literal notranslate"><span class="pre">NoneType</span></code> to make their code really easy to read in some circumstances.  Stay
+tuned.</p>
+<p>We can now simplify the list of statements we know about to these.</p>
+<ol class="arabic simple">
+<li><p>function call statements</p></li>
+<li><p>assignment statements</p></li>
+</ol>
+<p>From now on, we will refer to things like <code class="docutils literal notranslate"><span class="pre">print</span></code>, <code class="docutils literal notranslate"><span class="pre">input</span></code>, and <code class="docutils literal notranslate"><span class="pre">type</span></code> as
+functions rather than as commands.  Note that assignment statements can have
+function calls in them, like</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">name</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What is your name? &quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This statement is an assignment statement, and the RHS is a function call.</p>
+<p>The expressions that are placed between the parentheses after the function’s
+name are called <em>arguments</em>.  Some functions take no arguments, some functions
+take one argument, and some other functions can take several arguments.
+Arguments are separated with commas.  Arguments tell the function how to do its
+job.  The code in Listing <a class="reference internal" href="#age-inc"><span class="std std-numref">1.8</span></a> shows different examples of how to
+call functions with differing numbers of arguments.</p>
+<div class="literal-block-wrapper docutils container" id="id18">
+<span id="age-inc"></span><div class="code-block-caption"><span class="caption-number">Listing 1.8 </span><span class="caption-text">Calling functions with different numbers of arguments</span><a class="headerlink" href="#id18" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">age</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What is your age? &quot;</span><span class="p">)</span>
+<span class="linenos">2</span><span class="n">age</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">age</span><span class="p">)</span>
+<span class="linenos">3</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="linenos">4</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;In one year, you will be&quot;</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="s2">&quot;years old.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Lines 1 and 2 demonstrate calling a function with one argument.  Line 4 has
+three arguments.  The first is a string value, the second is a string variable,
+and the third is another string value.</p>
+<p>Because functions return values, we can call one function and immediately give
+its return value to another function.  Look at lines 1 and 2 in
+Listing~ref{code:age_inc} again.  Since casting can be performed on any
+expression, we could do both the <code class="docutils literal notranslate"><span class="pre">input</span></code> and the <code class="docutils literal notranslate"><span class="pre">int</span></code> cast on one line, like
+this.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">age</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What is your age? &quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">input</span></code> function is called first, and the result returned by <code class="docutils literal notranslate"><span class="pre">input</span></code> is then given to <code class="docutils literal notranslate"><span class="pre">int</span></code>, which casts the result from a string to an integer.  Students are often puzzled by what appears to be “double right parentheses” at the end of the above statement.  Note that the last right parenthesis matches the left parenthesis for <code class="docutils literal notranslate"><span class="pre">int</span></code>, and the next to last right parenthesis matches the left parenthesis for <code class="docutils literal notranslate"><span class="pre">input</span></code>.  This is shown visually in Figure <a class="reference internal" href="#match-parens"><span class="std std-numref">1.4</span></a>.</p>
+<figure class="align-default" id="id19">
+<span id="match-parens"></span><a class="reference internal image-reference" href="_images/match_parens.png"><img alt="Use of arrows to showing matching parentheses" src="_images/match_parens.png" style="width: 460.0px; height: 126.0px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 1.4 </span><span class="caption-text">Use of arrows to showing matching parentheses</span><a class="headerlink" href="#id19" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>If the user were to type <code class="docutils literal notranslate"><span class="pre">18</span></code>, the code above would be executed and “transformed” through the steps shown in Figure <a class="reference internal" href="#stmt-exec"><span class="std std-numref">1.5</span></a>.</p>
+<figure class="align-default" id="id20">
+<span id="stmt-exec"></span><a class="reference internal image-reference" href="_images/stmt_exec.png"><img alt="Statement execution" src="_images/stmt_exec.png" style="width: 437.0px; height: 169.0px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 1.5 </span><span class="caption-text">Statement execution</span><a class="headerlink" href="#id20" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>Just for fun (again: whee!!), let’s change line 4 of Listing <a class="reference internal" href="#age-inc"><span class="std std-numref">1.8</span></a> and try out the string formatting operator (<code class="docutils literal notranslate"><span class="pre">%</span></code>).  Instead of this,</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;In one year, you will be&quot;</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="s2">&quot;years old.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We could do this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;In one year, you will be </span><span class="si">%d</span><span class="s2"> years old.&quot;</span> <span class="o">%</span> <span class="n">age</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Here, the value of <code class="docutils literal notranslate"><span class="pre">age</span></code> gets inserted into the format string in place of the
+<code class="docutils literal notranslate"><span class="pre">%d</span></code>.  There is no advantage to one way or the other, per se.  There will be
+lots of ways to write code, though you should try to write code so that is
+<em>readable</em>.  If you write code that is easy to read, it will be easier to
+change.  Some programmers like the second way because it is easy to see the
+format of what the output will be, and it can be easier to control where the
+spaces go in the output.</p>
+<p>There is another way to do string formatting in Python that is newer and is now
+preferred as of Python 3.5.  We will introduce it later in the book.  However,
+we show this method for string formatting since this is an introductory computer
+science textbook, and this “style” of string formatting is one you’d encounter
+in other programming languages (e.g., C, Java, etc.).</p>
+<p>To review, we started with four lines of code.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">age</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What is your age? &quot;</span><span class="p">)</span>
+<span class="n">age</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">age</span><span class="p">)</span>
+<span class="n">age</span> <span class="o">=</span> <span class="n">age</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;In one year, you will be&quot;</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="s2">&quot;years old.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Then, we “tweaked” the code so that, ultimately, it looked like this.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">age</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What is your age? &quot;</span><span class="p">))</span>
+<span class="n">age</span> <span class="o">=</span> <span class="n">age</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;In one year, you will be </span><span class="si">%d</span><span class="s2"> years old.&quot;</span> <span class="o">%</span> <span class="n">age</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>As you program, you will develop your own coding style.  You will want to decide
+which of the two blocks of code (or a combination of them) looks the most
+readable to you.</p>
+</section>
+<section id="handy-functions">
+<h2><span class="section-number">1.7. </span>Handy functions<a class="headerlink" href="#handy-functions" title="Permalink to this headline">¶</a></h2>
+<p>The purpose of this book is to teach novice programmers how to program.  The
+purpose is not to have you learn every single thing about the Python programming
+language.  To that point, this book is not intended to be a desk reference for
+all things Python.  If you want to find information about a particular language
+feature or a list of available functions, the best way to look is to use a Web
+search (like Google) or go straight to the <a class="reference external" href="https://docs.python.org/">Python
+Documentation</a> online.</p>
+<p>That said, there are a number of handy functions that come “pre-packaged” with
+Python and ready for you to use.  We will list a few of them here in the
+subsections that follow, since we’re highly confident you’ll use them very soon.
+We’ll introduce more functions throughout the book.  Eventually, you’ll learn
+how to create your own functions.  That will happen in Chapter <a class="reference internal" href="ch4_funcs.html#ch-funcs"><span class="std std-numref">4</span></a>.
+Creating your own functions is pretty cool.</p>
+<p>Some functions can be called just by stating their name.  For example, we can
+use the <code class="docutils literal notranslate"><span class="pre">print</span></code> function just by typing something like <code class="docutils literal notranslate"><span class="pre">print(&quot;Hello&quot;)</span></code>.  Other
+functions are part of what we call <em>libraries</em>.  One example is the <code class="docutils literal notranslate"><span class="pre">math</span></code>
+library.  In order to use functions in the <code class="docutils literal notranslate"><span class="pre">math</span></code> library, we must do two
+things.  First, we must type the statement <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">math</span></code>.  Then, <code class="docutils literal notranslate"><span class="pre">math</span></code> library
+functions start with the prefix <code class="docutils literal notranslate"><span class="pre">math.</span></code> (read aloud as “math-dot”), so when we
+call them we must use the <code class="docutils literal notranslate"><span class="pre">math.</span></code> prefix.  Here is an example of using a
+function from a library (see Listing <a class="reference internal" href="#import-math"><span class="std std-numref">1.9</span></a>).</p>
+<div class="literal-block-wrapper docutils container" id="id21">
+<span id="import-math"></span><div class="code-block-caption"><span class="caption-number">Listing 1.9 </span><span class="caption-text">Importing and calling a function from a library</span><a class="headerlink" href="#id21" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos">1</span><span class="kn">import</span> <span class="nn">math</span>
+</span><span class="linenos">2</span>
+<span class="linenos">3</span><span class="n">number</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter a number: &quot;</span><span class="p">))</span>
+<span class="hll"><span class="linenos">4</span><span class="n">squared</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="n">number</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</span><span class="linenos">5</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Your number squared is </span><span class="si">%f</span><span class="s2">.&quot;</span> <span class="o">%</span> <span class="n">squared</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>In Listing <a class="reference internal" href="#import-math"><span class="std std-numref">1.9</span></a> line 4, the function named <code class="docutils literal notranslate"><span class="pre">pow</span></code> is contained
+in the library <code class="docutils literal notranslate"><span class="pre">math</span></code>.  Because of this, we must type <code class="docutils literal notranslate"><span class="pre">math.pow</span></code> for the
+function name in order to call it.  As you may be able to guess, <code class="docutils literal notranslate"><span class="pre">pow</span></code> raises a
+number to a power.  In this case, we are raising whatever number the user types
+to the second power, which is called squaring the number.</p>
+</section>
+<section id="math-functions">
+<h2><span class="section-number">1.8. </span>Math functions<a class="headerlink" href="#math-functions" title="Permalink to this headline">¶</a></h2>
+<p>Suppose <code class="docutils literal notranslate"><span class="pre">i</span></code> is an <code class="docutils literal notranslate"><span class="pre">int</span></code> variable and <code class="docutils literal notranslate"><span class="pre">f</span></code> and <code class="docutils literal notranslate"><span class="pre">g</span></code> are both <code class="docutils literal notranslate"><span class="pre">float</span></code> variables.
+Said another way, <code class="docutils literal notranslate"><span class="pre">type(i)</span></code> is <code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">type(f)</span></code> is <code class="docutils literal notranslate"><span class="pre">float</span></code>, and <code class="docutils literal notranslate"><span class="pre">type(g)</span></code> is <code class="docutils literal notranslate"><span class="pre">float</span></code>.
+Some of the functions in Table <a class="reference internal" href="#math-funcs"><span class="std std-numref">1.7</span></a> belong to the <code class="docutils literal notranslate"><span class="pre">math</span></code>
+library and some do not.  If we want to use these functions, we need to first type the
+statement <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">math</span></code>.  If we don’t write <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">math</span></code>, we will get a
+<code class="docutils literal notranslate"><span class="pre">NameError</span></code> that tells us <code class="docutils literal notranslate"><span class="pre">math</span></code> is not defined.</p>
+<p>Here is how to read Table <a class="reference internal" href="#math-funcs"><span class="std std-numref">1.7</span></a>.  If the function is shown as <code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">=</span>
+<span class="pre">math.ceil(f)</span></code>, that means the function expects us to pass it a <code class="docutils literal notranslate"><span class="pre">float</span></code> (hence
+the <code class="docutils literal notranslate"><span class="pre">f</span></code> in parentheses), and the function will return an <code class="docutils literal notranslate"><span class="pre">int</span></code> (hence the <code class="docutils literal notranslate"><span class="pre">i</span></code> on
+the LHS of the equals).</p>
+<p>There are many more functions found in <code class="docutils literal notranslate"><span class="pre">math</span></code>, but these are the ones you’re
+most likely to use in the near future.  Again, consult the online <a class="reference external" href="https://docs.python.org/">Python
+Documentation</a>) if there’s something specific you’re
+looking for that’s not mentioned in this subsection.</p>
+<span id="math-funcs"></span><table class="colwidths-given docutils align-default" id="id22">
+<caption><span class="caption-number">Table 1.7 </span><span class="caption-text">Math functions</span><a class="headerlink" href="#id22" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 70%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Returns</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">=</span> <span class="pre">round(f)</span></code></p></td>
+<td><p>The integer resulting from rounding <code class="docutils literal notranslate"><span class="pre">f</span></code>.</p>
+<p>Examples:</p>
+<p><code class="docutils literal notranslate"><span class="pre">round(5.2)</span></code> is <code class="docutils literal notranslate"><span class="pre">5</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">round(5.78)</span></code> is <code class="docutils literal notranslate"><span class="pre">6</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">round(6)</span></code> is <code class="docutils literal notranslate"><span class="pre">6</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">round(-1.2)</span></code> is <code class="docutils literal notranslate"><span class="pre">-1</span></code></p>
+</td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">=</span> <span class="pre">math.ceil(f)</span></code></p></td>
+<td><p>The smallest integer <span class="math notranslate nohighlight">\(\geq\)</span> <code class="docutils literal notranslate"><span class="pre">f</span></code>.</p>
+<p>Examples:</p>
+<p><code class="docutils literal notranslate"><span class="pre">math.ceil(5.2)</span></code> is <code class="docutils literal notranslate"><span class="pre">6</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">math.ceil(5.78)</span></code> is <code class="docutils literal notranslate"><span class="pre">6</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">math.ceil(6)</span></code> is <code class="docutils literal notranslate"><span class="pre">6</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">math.ceil(-1.2)</span></code> is <code class="docutils literal notranslate"><span class="pre">-1</span></code></p>
+</td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">=</span> <span class="pre">math.floor(f)</span></code></p></td>
+<td><p>The largest integer <span class="math notranslate nohighlight">\(\leq\)</span> <code class="docutils literal notranslate"><span class="pre">f</span></code>.</p>
+<p>Examples:</p>
+<p><code class="docutils literal notranslate"><span class="pre">math.floor(5.2)</span></code> is <code class="docutils literal notranslate"><span class="pre">5</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">math.floor(5.78)</span></code> is <code class="docutils literal notranslate"><span class="pre">5</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">math.floor(6)</span></code> is <code class="docutils literal notranslate"><span class="pre">6</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">math.floor(-1.2)</span></code> is <code class="docutils literal notranslate"><span class="pre">-2</span></code></p>
+</td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">g</span> <span class="pre">=</span> <span class="pre">abs(f)</span></code></p></td>
+<td><p>The absolute value of <code class="docutils literal notranslate"><span class="pre">f</span></code>.</p>
+<p>Examples:</p>
+<p><code class="docutils literal notranslate"><span class="pre">abs(23.2)</span></code> is <code class="docutils literal notranslate"><span class="pre">23.2</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">abs(-23.2)</span></code> is <code class="docutils literal notranslate"><span class="pre">23.2</span></code></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Let’s consider an example of how we might use some of these functions.</p>
+<p>Suppose we want to buy a whole bunch of fidget spinners in bulk and then re-sell
+them to make a profit.  (Yes, this is a terrible idea. The fidget spinner fad is
+long since dead, but stick with me here.  It’s just an example.)
+If we buy them in bulk, then we can get a good deal
+because they’ll be cheaper per fidget spinner.  Let’s have users enter the
+number of fidget spinners they want and the number of spinners that come in a
+case.  The program should tell them how many cases they’ll need to buy to get at
+least that many number of fidget spinners.</p>
+<p>To write this program, we’ll need to ask for two inputs: the number of spinners
+and the number of spinners per case.  Then, we’ll need to calculate the number
+of cases needed and then output that number.  Listing <a class="reference internal" href="#spinner-cases"><span class="std std-numref">1.10</span></a>
+shows how to do this in Python code.</p>
+<div class="literal-block-wrapper docutils container" id="id23">
+<span id="spinner-cases"></span><div class="code-block-caption"><span class="caption-number">Listing 1.10 </span><span class="caption-text">Fidget spinner example</span><a class="headerlink" href="#id23" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">spinners</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;How many spinners do you need? &quot;</span><span class="p">))</span>
+<span class="linenos">2</span><span class="n">spins_per_case</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;How many spinners come in a case? &quot;</span><span class="p">))</span>
+<span class="linenos">3</span>
+<span class="linenos">4</span><span class="n">cases</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">spinners</span> <span class="o">/</span> <span class="n">spins_per_case</span><span class="p">)</span>
+<span class="linenos">5</span>
+<span class="linenos">6</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You need to order </span><span class="si">%d</span><span class="s2"> cases.&quot;</span> <span class="o">%</span> <span class="n">cases</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>In line 4 of Listing <a class="reference internal" href="#spinner-cases"><span class="std std-numref">1.10</span></a>, we divide <code class="docutils literal notranslate"><span class="pre">spinners</span></code> by
+<code class="docutils literal notranslate"><span class="pre">spins_per_case</span></code> to get how many cases we’ll need.  But this gives us a
+fractional number potentially.  For example, if we wanted <code class="docutils literal notranslate"><span class="pre">18</span></code> spinners and <code class="docutils literal notranslate"><span class="pre">12</span></code>
+come in a case, that would be <code class="docutils literal notranslate"><span class="pre">1.5</span></code> cases, but we can’t order one case and then
+another half of a case.  We actually need <code class="docutils literal notranslate"><span class="pre">2</span></code> cases.  This is where <code class="docutils literal notranslate"><span class="pre">math.ceil</span></code>
+comes in.  We take the “fractional” number of cases needed and find the
+<em>ceiling</em> of it.  This makes <code class="docutils literal notranslate"><span class="pre">cases</span></code> an integer that is greater than or equal to
+the number of fractional cases.</p>
+</section>
+<section id="random-functions">
+<h2><span class="section-number">1.9. </span>Random functions<a class="headerlink" href="#random-functions" title="Permalink to this headline">¶</a></h2>
+<p>The library <code class="docutils literal notranslate"><span class="pre">random</span></code> has functions that help us generate random numbers.  This
+is useful for writing programs that involve random chance, for example, rolling
+dice, flipping coins, etc.  There are several useful functions in <code class="docutils literal notranslate"><span class="pre">random</span></code>, but
+the two we’ll focus on right now are <code class="docutils literal notranslate"><span class="pre">random</span></code> and <code class="docutils literal notranslate"><span class="pre">randint</span></code>.</p>
+<p>Suppose <code class="docutils literal notranslate"><span class="pre">i</span></code>, <code class="docutils literal notranslate"><span class="pre">start</span></code>, and <code class="docutils literal notranslate"><span class="pre">end</span></code> are <code class="docutils literal notranslate"><span class="pre">int</span></code> variables and <code class="docutils literal notranslate"><span class="pre">f</span></code> is a
+<code class="docutils literal notranslate"><span class="pre">float</span></code> variable.</p>
+<span id="rand-funcs"></span><table class="colwidths-given docutils align-default" id="id24">
+<caption><span class="caption-number">Table 1.8 </span><span class="caption-text">Random functions</span><a class="headerlink" href="#id24" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Returns</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">=</span> <span class="pre">random.random()</span></code></p></td>
+<td><p>A float value between <code class="docutils literal notranslate"><span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">1</span></code> inclusive.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">=</span> <span class="pre">random.randint(start,</span> <span class="pre">end)</span></code></p></td>
+<td><p>An integer value between <code class="docutils literal notranslate"><span class="pre">start</span></code> and <code class="docutils literal notranslate"><span class="pre">end</span></code> inclusive.</p></td>
+</tr>
+</tbody>
+</table>
+<p>Listing <a class="reference internal" href="#rand-ex"><span class="std std-numref">1.11</span></a> shows an example of how one might use a <code class="docutils literal notranslate"><span class="pre">random</span></code>
+library function.</p>
+<div class="literal-block-wrapper docutils container" id="id25">
+<span id="rand-ex"></span><div class="code-block-caption"><span class="caption-number">Listing 1.11 </span><span class="caption-text">Random function example</span><a class="headerlink" href="#id25" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">import</span> <span class="nn">random</span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Rolling a six-sided die......&quot;</span><span class="p">)</span>
+<span class="linenos">4</span><span class="n">die_roll</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="linenos">5</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You rolled a </span><span class="si">%d</span><span class="s2">.&quot;</span> <span class="o">%</span> <span class="n">die_roll</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>The code in Listing <a class="reference internal" href="#rand-ex"><span class="std std-numref">1.11</span></a> may produce a different die roll every
+time you run the program.</p>
+</section>
+<section id="comments">
+<h2><span class="section-number">1.10. </span>Comments<a class="headerlink" href="#comments" title="Permalink to this headline">¶</a></h2>
+<p>As we go forward in learning Python, our programs will get longer and more
+intricate.  It may be helpful to annotate our code with short comments to remind
+us what our code does.  Listing <a class="reference internal" href="#age-w-comments"><span class="std std-numref">1.12</span></a> shows a (somewhat
+silly) example.</p>
+<div class="literal-block-wrapper docutils container" id="id26">
+<span id="age-w-comments"></span><div class="code-block-caption"><span class="caption-number">Listing 1.12 </span><span class="caption-text">Age code with comments</span><a class="headerlink" href="#id26" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1"># Get the user&#39;s age.</span>
+<span class="linenos">2</span><span class="n">age</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What is your age? &quot;</span><span class="p">)</span>
+<span class="linenos">3</span><span class="n">age</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">age</span><span class="p">)</span>
+<span class="linenos">4</span>
+<span class="linenos">5</span><span class="c1"># Tell the user his or her age one year from now.</span>
+<span class="linenos">6</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="linenos">7</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;In one year, you will be&quot;</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="s2">&quot;years old.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>The lines that start with a <code class="docutils literal notranslate"><span class="pre">#</span></code> symbol are called comments.  Any line that
+starts with <code class="docutils literal notranslate"><span class="pre">#</span></code> will be ignored by the Python interpreter.  Those lines are only
+for the programmer to read.  Again, this is a somewhat silly example because our
+code is relatively simple and probably does not require comments.</p>
+<p>Programmers will also use comments at the beginning of a code file to document
+what the program does.  Here is an example (see Listing <a class="reference internal" href="#comment-hdr"><span class="std std-numref">1.13</span></a>).</p>
+<div class="literal-block-wrapper docutils container" id="id27">
+<span id="comment-hdr"></span><div class="code-block-caption"><span class="caption-number">Listing 1.13 </span><span class="caption-text">A header comment at the top of a code file</span><a class="headerlink" href="#id27" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Program: tictactoe.py</span>
+<span class="c1"># Programmer: Susan McConnell</span>
+<span class="c1"># Description:</span>
+<span class="c1">#   This program allows users to play Tic Tac Toe against</span>
+<span class="c1">#   a computer opponent.  Users choose the row and column</span>
+<span class="c1">#   to place their ‘X&#39; or ‘O&#39; on the game grid in each turn.</span>
+</pre></div>
+</div>
+</div>
+<p>Because placing a <code class="docutils literal notranslate"><span class="pre">#</span></code> symbol at the start of a line hides the code from Python,
+another use of comments is to hide old code.  Sometimes, we want to save old
+code without deleting it.  This can occur when we’re not sure if new code we’re
+trying out is going to work, and so we may not want to lose our old code in case
+we need to go back to it later.  Listing~ref{code:comment_out} demonstrates
+this concept.</p>
+<div class="literal-block-wrapper docutils container" id="id28">
+<span id="comment-out"></span><div class="code-block-caption"><span class="caption-number">Listing 1.14 </span><span class="caption-text">Commenting out code</span><a class="headerlink" href="#id28" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos">1</span><span class="c1">#age = input(&quot;What is your age? &quot;)</span>
+</span><span class="hll"><span class="linenos">2</span><span class="c1">#age = int(age)</span>
+</span><span class="linenos">3</span>
+<span class="linenos">4</span><span class="n">age</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What is your age? &quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<p>Python will not execute lines 1 and 2 because they are “commented out.”
+It will, however, execute line 4.</p>
+<p>Another use for comments is to help us program.  As human beings, we do not
+naturally think in code.  Even experienced programmers struggle to think purely
+in terms of programming language code.  One good way to program is to write
+comments first in plain English to help us organize our logic and thoughts, and
+then we write Python code beneath the comments.  For example, we might start
+with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the user&#39;s age.</span>
+
+<span class="c1"># Print how old they&#39;ll be in a year.</span>
+</pre></div>
+</div>
+<p>Then, we can fill in the details.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the user&#39;s age.</span>
+<span class="n">age</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What is your age? &quot;</span><span class="p">)</span>
+<span class="n">age</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">age</span><span class="p">)</span>
+
+<span class="c1"># Print how old they&#39;ll be in a year.</span>
+<span class="n">age</span> <span class="o">=</span> <span class="n">age</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;In one year, you will be&quot;</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="s2">&quot;years old.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Comments end up being very important later on in the book when we start creating
+our own functions (yes, we get to make our own functions eventually).  Practice
+writing comments when you write your own code.</p>
+</section>
+<section id="exercises">
+<h2><span class="section-number">1.11. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Write a program that creates as its output a face on the screen by arranging different symbols, letters, and/or numbers.  Here is an example.</p></li>
+</ol>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>\\///
+ 0 0
+  v
+ ---
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>What is the output of the following program?</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="mi">2</span>
+<span class="n">c</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">b</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>What is the output of the following program?</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="mi">2</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">b</span> <span class="o">**</span> <span class="n">a</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">c</span> <span class="o">%</span> <span class="mi">2</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>What is the output of the following program?</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">a</span> <span class="o">//</span> <span class="mi">2</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">/</span> <span class="mi">2</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">%</span> <span class="mi">2</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="5">
+<li><p>What is the output of the following program if the user enters a <code class="docutils literal notranslate"><span class="pre">2</span></code> at the first prompt and a <code class="docutils literal notranslate"><span class="pre">3</span></code> at the second prompt?</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter a whole number: &quot;</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter another whole number: &quot;</span><span class="p">)</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>(Be careful.  Try to type this program into the Python Shell and see what you get.)</p>
+<ol class="arabic simple" start="6">
+<li><p>Write a program that asks users for two whole numbers.  It should then add them and print the result.  Here is an example of what the output should look like.</p></li>
+</ol>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Enter a whole number: 2
+Enter another whole number: 3
+
+2 + 3 = 5
+</pre></div>
+</div>
+<ol class="arabic simple" start="7">
+<li><p>What is the output of the following program?</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;John&quot;</span>
+<span class="n">t</span> <span class="o">=</span> <span class="s2">&quot;Smith&quot;</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">s</span> <span class="o">+</span> <span class="n">t</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="8">
+<li><p>What is the output of the following program?</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;John&quot;</span>
+<span class="n">t</span> <span class="o">=</span> <span class="s2">&quot;Smith&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">s</span><span class="p">))</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="9">
+<li><p>What is the output of the following program?</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;John&quot;</span>
+<span class="n">t</span> <span class="o">=</span> <span class="s2">&quot;Smith&quot;</span>
+<span class="n">r</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="10">
+<li><p>What is the output of the following program?</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;John&quot;</span>
+<span class="n">t</span> <span class="o">=</span> <span class="s2">&quot;Smith&quot;</span>
+<span class="n">r</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">r</span> <span class="o">%</span> <span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">s</span><span class="p">))</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="11">
+<li><p>What is the output of the following program?  Write down the answer exactly how it would appear on-screen.</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="s2">&quot;Item&quot;</span><span class="p">,</span> <span class="s2">&quot;Price&quot;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="s2">&quot;Soda&quot;</span><span class="p">,</span> <span class="mf">1.75</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="s2">&quot;Pizza&quot;</span><span class="p">,</span> <span class="mf">2.00</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="s2">&quot;Hot Dog&quot;</span><span class="p">,</span> <span class="mf">1.50</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="s2">&quot;Crab Legs&quot;</span><span class="p">,</span> <span class="mf">30.99</span><span class="p">))</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="12">
+<li><p>What is the output of the following program?  Write down the answer exactly how it would appear on-screen.</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%-10s</span><span class="s2"> </span><span class="si">%10s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="s2">&quot;Item&quot;</span><span class="p">,</span> <span class="s2">&quot;Price&quot;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%-10s</span><span class="s2"> </span><span class="si">%10.2f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="s2">&quot;Soda&quot;</span><span class="p">,</span> <span class="mf">1.75</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%-10s</span><span class="s2"> </span><span class="si">%10.2f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="s2">&quot;Pizza&quot;</span><span class="p">,</span> <span class="mf">2.00</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%-10s</span><span class="s2"> </span><span class="si">%10.2f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="s2">&quot;Hot Dog&quot;</span><span class="p">,</span> <span class="mf">1.50</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%-10s</span><span class="s2"> </span><span class="si">%10.2f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="s2">&quot;Crab Legs&quot;</span><span class="p">,</span> <span class="mf">30.99</span><span class="p">))</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="13">
+<li><p>What is the output of the following program?  Write down the answer exactly how it would appear on-screen.</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%-10s</span><span class="s2"> </span><span class="si">%10s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="s2">&quot;Item&quot;</span><span class="p">,</span> <span class="s2">&quot;Price&quot;</span><span class="p">))</span>
+<span class="n">fmt</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%-10s</span><span class="s2"> </span><span class="si">%10.2f</span><span class="s2">&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fmt</span> <span class="o">%</span> <span class="p">(</span><span class="s2">&quot;Soda&quot;</span><span class="p">,</span> <span class="mf">1.75</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fmt</span> <span class="o">%</span> <span class="p">(</span><span class="s2">&quot;Pizza&quot;</span><span class="p">,</span> <span class="mf">2.00</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fmt</span> <span class="o">%</span> <span class="p">(</span><span class="s2">&quot;Hot Dog&quot;</span><span class="p">,</span> <span class="mf">1.50</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fmt</span> <span class="o">%</span> <span class="p">(</span><span class="s2">&quot;Crab Legs&quot;</span><span class="p">,</span> <span class="mf">30.99</span><span class="p">))</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="14">
+<li><p>What is the output of the following program?  Write down the answer exactly how it would appear on-screen.</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%-10s</span><span class="s2"> </span><span class="si">%10s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="s2">&quot;Item&quot;</span><span class="p">,</span> <span class="s2">&quot;Price&quot;</span><span class="p">))</span>
+<span class="n">fmt</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%-10s</span><span class="s2"> </span><span class="si">%10.2f</span><span class="s2">&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fmt</span> <span class="o">%</span> <span class="p">(</span><span class="s2">&quot;Soda&quot;</span><span class="p">,</span> <span class="mf">1.75</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fmt</span> <span class="o">%</span> <span class="p">(</span><span class="s2">&quot;Pizza&quot;</span><span class="p">,</span> <span class="mf">2.00</span><span class="p">))</span>
+<span class="c1">#print(fmt % (&quot;Hot Dog&quot;, 1.50))</span>
+<span class="c1">#print(fmt % (&quot;Crab Legs&quot;, 30.99))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fmt</span> <span class="o">%</span> <span class="p">(</span><span class="s2">&quot;Pretzel&quot;</span><span class="p">,</span> <span class="mf">1.50</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fmt</span> <span class="o">%</span> <span class="p">(</span><span class="s2">&quot;Nachos&quot;</span><span class="p">,</span> <span class="mf">2.25</span><span class="p">))</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="15">
+<li><p>Write a program that asks the user for a single character.  The program should then greet them in block letters “HI” consisting solely of that character.  Here is an example of a running program.</p></li>
+</ol>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Enter a character: @
+
+@@  @@  @@@@@
+@@@@@@    @
+@@  @@  @@@@@
+</pre></div>
+</div>
+<p>Here is another example of a running program if the user were to type a different character.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Enter a character: +
+
+++  ++  +++++
+++++++    +
+++  ++  +++++
+</pre></div>
+</div>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Conversational Python</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">1. Basic I/O, Statements, Expressions, Variables, and Types</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#getting-set-up-to-program">1.1. Getting set up to program</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-print-statement">1.2. The <cite>print</cite> statement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-input-statement">1.3. The <cite>input</cite> statement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#assignment-statements">1.4. Assignment statements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#values-types-expressions-and-statements">1.5. Values, types, expressions, and statements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#calling-functions">1.6. Calling functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#handy-functions">1.7. Handy functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#math-functions">1.8. Math functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#random-functions">1.9. Random functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#comments">1.10. Comments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#exercises">1.11. Exercises</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ch2_cond.html">2. Conditionals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch3_loops.html">3. Loops and String Manipulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch4_funcs.html">4. Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch5_lists.html">5. Lists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch6_files_excepts.html">6. Files and Exceptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch7_dicts.html">7. Dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch8_searchsort.html">8. Searching and Sorting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch9_classes.html">9. Classes, Object-Orientation, and Pygame</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Preface</a></li>
+      <li>Next: <a href="ch2_cond.html" title="next chapter"><span class="section-number">2. </span>Conditionals</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, Jason B. Shepherd, Ph.D..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/ch1_basicio_types.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,1033 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>4. Functions &#8212; Conversational Python 2.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="5. Lists" href="ch5_lists.html" />
+    <link rel="prev" title="3. Loops and String Manipulation" href="ch3_loops.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="functions">
+<span id="ch-funcs"></span><h1><span class="section-number">4. </span>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h1>
+<section id="introduction-to-functions">
+<span id="sec-func-intro"></span><h2><span class="section-number">4.1. </span>Introduction to Functions<a class="headerlink" href="#introduction-to-functions" title="Permalink to this headline">¶</a></h2>
+<p>Consider Listing <a class="reference internal" href="#one-prog"><span class="std std-numref">4.1</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<span id="one-prog"></span><div class="code-block-caption"><span class="caption-number">Listing 4.1 </span><span class="caption-text">One program consisting of two sub-programs</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This is program one.&quot;</span><span class="p">)</span>
+<span class="linenos"> 2</span><span class="n">x</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter a string: &quot;</span><span class="p">)</span>
+<span class="linenos"> 3</span><span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="s2">&quot;aeiou&quot;</span><span class="p">:</span>
+<span class="linenos"> 4</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;That string starts with a vowel.&quot;</span><span class="p">)</span>
+<span class="linenos"> 5</span><span class="k">else</span><span class="p">:</span>
+<span class="linenos"> 6</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;That string does not start with a vowel.&quot;</span><span class="p">)</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This is program two.&quot;</span><span class="p">)</span>
+<span class="linenos"> 9</span><span class="n">x</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter a string: &quot;</span><span class="p">)</span>
+<span class="linenos">10</span><span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">isalnum</span><span class="p">():</span>
+<span class="linenos">11</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;That string only contains only a-z&#39;s and 0-9&#39;s.&quot;</span><span class="p">)</span>
+<span class="linenos">12</span><span class="k">else</span><span class="p">:</span>
+<span class="linenos">13</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;That string contains some </span><span class="se">\&quot;</span><span class="s2">weird</span><span class="se">\&quot;</span><span class="s2"> characters.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Each of these two sections of code are supposed to be their own separate
+programs.  If I type this code into one code file and run it, of course, both
+programs will be executed, one after the other.  This is, after all, how
+programs work.  Python executes each statement, one after another, and since
+“program one” comes before “program two,” all of program one’s statements will
+be executed and then all of program two’s statements will be executed.</p>
+<p>In program one, we are checking the first character of <code class="docutils literal notranslate"><span class="pre">x</span></code> using the expression
+<code class="docutils literal notranslate"><span class="pre">x[0]</span></code> (see line 3 of Listing <a class="reference internal" href="#one-prog"><span class="std std-numref">4.1</span></a>).  We change it to lowercase,
+and then we use the <code class="docutils literal notranslate"><span class="pre">in</span></code> operator to see if that single character is a vowel.
+Without using the <code class="docutils literal notranslate"><span class="pre">in</span></code> operator, we would need to write an <code class="docutils literal notranslate"><span class="pre">if</span></code> statement
+that looks something like this.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;a&quot;</span> <span class="ow">or</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;e&quot;</span> <span class="ow">or</span> \
+   <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;i&quot;</span> <span class="ow">or</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;o&quot;</span> <span class="ow">or</span> \
+   <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;u&quot;</span><span class="p">:</span>
+</pre></div>
+</div>
+<p>Yuck.</p>
+<p>Let’s try something new.  Let’s construct Listing <a class="reference internal" href="#two-progs1"><span class="std std-numref">4.2</span></a> by
+modifying Listing <a class="reference internal" href="#one-prog"><span class="std std-numref">4.1</span></a> using a new language construct.</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<span id="two-progs1"></span><div class="code-block-caption"><span class="caption-number">Listing 4.2 </span><span class="caption-text">First functions example, attempt 1</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span> <span class="nf">one</span><span class="p">():</span>
+<span class="linenos"> 2</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This is program one.&quot;</span><span class="p">)</span>
+<span class="linenos"> 3</span>    <span class="n">x</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter a string: &quot;</span><span class="p">)</span>
+<span class="linenos"> 4</span>    <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="s2">&quot;aeiou&quot;</span><span class="p">:</span>
+<span class="linenos"> 5</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;That string starts with a vowel.&quot;</span><span class="p">)</span>
+<span class="linenos"> 6</span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos"> 7</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;That string does not start with a vowel.&quot;</span><span class="p">)</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span><span class="k">def</span> <span class="nf">two</span><span class="p">():</span>
+<span class="linenos">10</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This is program two.&quot;</span><span class="p">)</span>
+<span class="linenos">11</span>    <span class="n">x</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter a string: &quot;</span><span class="p">)</span>
+<span class="linenos">12</span>    <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">isalnum</span><span class="p">():</span>
+<span class="linenos">13</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;That string only contains only a-z’s and 0-9’s.&quot;</span><span class="p">)</span>
+<span class="linenos">14</span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos">15</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;That string contains some </span><span class="se">\&quot;</span><span class="s2">weird</span><span class="se">\&quot;</span><span class="s2"> characters.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Now run this code.  What happens?  Yes, nothing!  There is absolutely no output,
+which suggests that none of our statements ran.  Oh dear.  Well, let’s add a bit
+more code (see the highlighted lines in Listing <a class="reference internal" href="#two-progs2"><span class="std std-numref">4.3</span></a>).</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<span id="two-progs2"></span><div class="code-block-caption"><span class="caption-number">Listing 4.3 </span><span class="caption-text">First functions example, attempt 2</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span> <span class="nf">one</span><span class="p">():</span>
+<span class="linenos"> 2</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This is program one.&quot;</span><span class="p">)</span>
+<span class="linenos"> 3</span>    <span class="n">x</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter a string: &quot;</span><span class="p">)</span>
+<span class="linenos"> 4</span>    <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="s2">&quot;aeiou&quot;</span><span class="p">:</span>
+<span class="linenos"> 5</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;That string starts with a vowel.&quot;</span><span class="p">)</span>
+<span class="linenos"> 6</span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos"> 7</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;That string does not start with a vowel.&quot;</span><span class="p">)</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span><span class="k">def</span> <span class="nf">two</span><span class="p">():</span>
+<span class="linenos">10</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This is program two.&quot;</span><span class="p">)</span>
+<span class="linenos">11</span>    <span class="n">x</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter a string: &quot;</span><span class="p">)</span>
+<span class="linenos">12</span>    <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">isalnum</span><span class="p">():</span>
+<span class="linenos">13</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;That string only contains only a-z’s and 0-9’s.&quot;</span><span class="p">)</span>
+<span class="linenos">14</span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos">15</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;That string contains some </span><span class="se">\&quot;</span><span class="s2">weird</span><span class="se">\&quot;</span><span class="s2"> characters.&quot;</span><span class="p">)</span>
+<span class="linenos">16</span>
+<span class="hll"><span class="linenos">17</span><span class="c1"># Add the following line.</span>
+</span><span class="hll"><span class="linenos">18</span><span class="n">one</span><span class="p">()</span>
+</span></pre></div>
+</div>
+</div>
+<p>Try again.  Aha!  Only the statements of code listed underneath <code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">one():</span></code> are
+executed.  Now, try changing <code class="docutils literal notranslate"><span class="pre">one()</span></code> to <code class="docutils literal notranslate"><span class="pre">two()</span></code> on line 18 in
+Listing <a class="reference internal" href="#two-progs2"><span class="std std-numref">4.3</span></a>.  Run it.  Now only the statements under <code class="docutils literal notranslate"><span class="pre">def</span>
+<span class="pre">two():</span></code> are executed.</p>
+<p>What’s happening here?  Any code that is not indented at all is considered part
+of the <em>main</em> program.  Code that is indented beneath a line that starts with
+<code class="docutils literal notranslate"><span class="pre">def</span></code> is like a little mini-program.  <code class="docutils literal notranslate"><span class="pre">def</span></code> stands for “define.”  In this case,
+we are defining a mini-program and giving it a name.  Mini-programs are better
+known as… (*drum roll please*)… <em>functions</em>!</p>
+<p>So, in Listing <a class="reference internal" href="#two-progs2"><span class="std std-numref">4.3</span></a>, the main program is simply on lines 17 and
+18 (though line 17 is just a comment).  Let’s change the main program to see
+what happens.  See Listing <a class="reference internal" href="#two-progs3"><span class="std std-numref">4.4</span></a> (specifically lines 17 - 19).</p>
+<div class="literal-block-wrapper docutils container" id="id4">
+<span id="two-progs3"></span><div class="code-block-caption"><span class="caption-number">Listing 4.4 </span><span class="caption-text">First functions example, attempt 3</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span> <span class="nf">one</span><span class="p">():</span>
+<span class="linenos"> 2</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This is program one.&quot;</span><span class="p">)</span>
+<span class="linenos"> 3</span>    <span class="n">x</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter a string: &quot;</span><span class="p">)</span>
+<span class="linenos"> 4</span>    <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="s2">&quot;aeiou&quot;</span><span class="p">:</span>
+<span class="linenos"> 5</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;That string starts with a vowel.&quot;</span><span class="p">)</span>
+<span class="linenos"> 6</span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos"> 7</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;That string does not start with a vowel.&quot;</span><span class="p">)</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span><span class="k">def</span> <span class="nf">two</span><span class="p">():</span>
+<span class="linenos">10</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This is program two.&quot;</span><span class="p">)</span>
+<span class="linenos">11</span>    <span class="n">x</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter a string: &quot;</span><span class="p">)</span>
+<span class="linenos">12</span>    <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">isalnum</span><span class="p">():</span>
+<span class="linenos">13</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;That string only contains only a-z’s and 0-9’s.&quot;</span><span class="p">)</span>
+<span class="linenos">14</span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos">15</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;That string contains some </span><span class="se">\&quot;</span><span class="s2">weird</span><span class="se">\&quot;</span><span class="s2"> characters.&quot;</span><span class="p">)</span>
+<span class="linenos">16</span>
+<span class="hll"><span class="linenos">17</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Main: calling a function.&quot;</span><span class="p">)</span>
+</span><span class="hll"><span class="linenos">18</span><span class="n">two</span><span class="p">()</span>
+</span><span class="hll"><span class="linenos">19</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Main: end of program.&quot;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+</div>
+<p>Run this, and notice what happens.  The code starts in the main non-indented
+section by printing <code class="docutils literal notranslate"><span class="pre">&quot;Main:</span> <span class="pre">calling</span> <span class="pre">a</span> <span class="pre">function.&quot;</span></code> Then, the expression <code class="docutils literal notranslate"><span class="pre">two()</span></code>
+calls the function, which makes the program “jump” up to the definition of the
+function, which starts with <code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">two():</span></code>.  Each of the statements indented under
+<code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">two():</span></code> are executed, one by one, and then once those statements are
+finished, we jump back down to where <code class="docutils literal notranslate"><span class="pre">two()</span></code> was called in the first place.
+Finally, the main program resumes and we print <code class="docutils literal notranslate"><span class="pre">&quot;Main:</span> <span class="pre">end</span> <span class="pre">of</span> <span class="pre">program.&quot;</span></code></p>
+<p>In a sense, functions are like “tangents” (not the math kind of tangent – the
+tangent where we deviate from a conversation to another topic briefly)  With
+functions, we can momentarily leave the main program to execute some
+pre-prepared code.  We have been <em>calling</em> functions throughout the entire book
+already.  We have used functions like <code class="docutils literal notranslate"><span class="pre">print</span></code>, <code class="docutils literal notranslate"><span class="pre">input</span></code>, and <code class="docutils literal notranslate"><span class="pre">int</span></code>.  Now we have
+a sense of how to <em>define</em> our own new functions.</p>
+<p>When we define a new function, we give the function a name and we give the
+function an indented section known as the function’s <em>body</em>.  There can be more
+pieces to a function as well, and we will learn about those in the next
+few sections.</p>
+</section>
+<section id="parameters">
+<span id="sec-params"></span><h2><span class="section-number">4.2. </span>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<p>Let’s look at another example of how we can define our own functions that we can
+call later.  Suppose, at a certain fictitious university named Higher Ed
+University, students are given email addresses that follow a naming convention.
+To form the email address, we take the first four characters of a student’s last
+name, then the first three characters of a student’s first name, and then append
+“&#64;heu.edu” to it.  We could write a function to determine and print out such an
+email address.</p>
+<div class="literal-block-wrapper docutils container" id="id5">
+<span id="print-email"></span><div class="code-block-caption"><span class="caption-number">Listing 4.5 </span><span class="caption-text">Defining <cite>print_email</cite></span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">print_email</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">last</span><span class="p">):</span>
+<span class="linenos">2</span>    <span class="n">username</span> <span class="o">=</span> <span class="n">last</span><span class="o">.</span><span class="n">lower</span><span class="p">()[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
+<span class="linenos">3</span>    <span class="n">username</span> <span class="o">=</span> <span class="n">username</span> <span class="o">+</span> <span class="n">first</span><span class="o">.</span><span class="n">lower</span><span class="p">()[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+<span class="linenos">4</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">@heu.edu&quot;</span> <span class="o">%</span> <span class="n">username</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Notice that the <code class="docutils literal notranslate"><span class="pre">print_email</span></code> function is defined differently than <code class="docutils literal notranslate"><span class="pre">one</span></code> or
+<code class="docutils literal notranslate"><span class="pre">two</span></code> in Listing <a class="reference internal" href="#two-progs3"><span class="std std-numref">4.4</span></a> in Section <a class="reference internal" href="#sec-func-intro"><span class="std std-numref">4.1</span></a>.  In our previous example when we defined those functions, their definitions
+had empty parentheses after the function name.  Now, we have two things that
+look a lot like variables inside the parentheses.  In fact, they are variables,
+and their values are used inside the function’s body.  Variables that are given
+inside the parentheses in a function definition are called the function’s
+<em>parameters</em>.</p>
+<p>Let us call this function.  We might type this.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">print_email</span><span class="p">(</span><span class="s2">&quot;Jack&quot;</span><span class="p">,</span> <span class="s2">&quot;Jackson&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This would print:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>jackjac@heu.edu
+</pre></div>
+</div>
+<p>Or, if we typed this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">print_email</span><span class="p">(</span><span class="s2">&quot;Shania&quot;</span><span class="p">,</span> <span class="s2">&quot;Carrington&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>It would print:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>carrsha@heu.edu
+</pre></div>
+</div>
+<p>How does this work?  When we call a function, we must provide the correct number
+of values to the function, in the right order.  The correct number of values is
+based on how many parameters the function has.  In this case, the function
+<code class="docutils literal notranslate"><span class="pre">print_email</span></code> has two parameters, <code class="docutils literal notranslate"><span class="pre">first</span></code> and <code class="docutils literal notranslate"><span class="pre">last</span></code>.  The <em>values</em> we pass to
+the definition of a function are called the <em>arguments</em>.  When a function is
+called, the arguments’ values become the parameters’ values.  Thus, <code class="docutils literal notranslate"><span class="pre">first</span></code> gets
+the value <code class="docutils literal notranslate"><span class="pre">&quot;Shania&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">last</span></code> gets the value <code class="docutils literal notranslate"><span class="pre">&quot;Carrington&quot;</span></code>.</p>
+<p>Clever readers might suspect that this function has a bug.  It looks like if the
+last name is fewer than four characters long or the first name is fewer than
+three characters long, the program would crash.  Surprisingly, in Python the
+string range operator is very forgiving.  If you were to type the expression
+<code class="docutils literal notranslate"><span class="pre">&quot;abc&quot;[0:20]</span></code>, the substring returned will still be <code class="docutils literal notranslate"><span class="pre">&quot;abc&quot;</span></code>.  We can read this
+substring operation aloud as “Start at index 0 and return any characters up to
+index 20, if it exists.”  Therefore, there is no bug, but skeptical thinking
+like this will help us as we program in the future.</p>
+<p>What happens when you switch the order of the arguments?</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">print_email</span><span class="p">(</span><span class="s2">&quot;Carrington&quot;</span><span class="p">,</span> <span class="s2">&quot;Shania&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>What happens if you do not have the correct number of arguments?</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">print_email</span><span class="p">(</span><span class="s2">&quot;Shania&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Try these things on your own to see what happens.  Try to guess what they do
+before you actually run the code.  If they produce errors, make a mental note of
+what the error looks like.  That way, if you encounter that error again in the
+future, you’ll know what caused it and how to fix it.</p>
+<p>Let’s move on to a different example.  Let us write code that defines a new function, and then let’s write some code to call that new function (see Listing <a class="reference internal" href="#print-money"><span class="std std-numref">4.6</span></a>).</p>
+<div class="literal-block-wrapper docutils container" id="id6">
+<span id="print-money"></span><div class="code-block-caption"><span class="caption-number">Listing 4.6 </span><span class="caption-text">Defining and calling <cite>print_money</cite></span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">print_money</span><span class="p">(</span><span class="n">amount</span><span class="p">):</span>
+<span class="linenos">2</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;$</span><span class="si">%.2f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">amount</span><span class="p">)</span>
+<span class="linenos">3</span>
+<span class="linenos">4</span><span class="n">my_money</span> <span class="o">=</span> <span class="mf">50.25</span>
+<span class="linenos">5</span><span class="n">print_money</span><span class="p">(</span><span class="n">my_money</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>This code will print:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$50.25
+</pre></div>
+</div>
+<p>It does not matter when we give an argument to a function call if we provide a
+value or an expression that returns a value (in this case, the name of a
+variable).</p>
+<p>Now, let’s make one more change to the code (see Listing
+<a class="reference internal" href="#print-money-change-var"><span class="std std-numref">4.7</span></a>).</p>
+<div class="literal-block-wrapper docutils container" id="id7">
+<span id="print-money-change-var"></span><div class="code-block-caption"><span class="caption-number">Listing 4.7 </span><span class="caption-text">Defining and calling <cite>print_money</cite>, attempt 2</span><a class="headerlink" href="#id7" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">print_money</span><span class="p">(</span><span class="n">amount</span><span class="p">):</span>
+<span class="linenos">2</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;$</span><span class="si">%.2f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">amount</span><span class="p">)</span>
+<span class="hll"><span class="linenos">3</span>    <span class="n">amount</span> <span class="o">=</span> <span class="n">amount</span> <span class="o">+</span> <span class="mf">10.00</span>
+</span><span class="linenos">4</span>
+<span class="linenos">5</span><span class="n">my_money</span> <span class="o">=</span> <span class="mf">50.25</span>
+<span class="linenos">6</span><span class="n">print_money</span><span class="p">(</span><span class="n">my_money</span><span class="p">)</span>
+<span class="hll"><span class="linenos">7</span><span class="n">print_money</span><span class="p">(</span><span class="n">my_money</span><span class="p">)</span>
+</span></pre></div>
+</div>
+</div>
+<p>In this example, we are doing something new.  We are taking the parameter
+<code class="docutils literal notranslate"><span class="pre">amount</span></code> and actually changing its value in the last statement of the function’s
+body.  Where does <code class="docutils literal notranslate"><span class="pre">amount</span></code>’s value come from?  It is passed the value of
+<code class="docutils literal notranslate"><span class="pre">my_money</span></code> down in the main program.  One thing we should look out for is “side
+effects.”  Does changing the value of <code class="docutils literal notranslate"><span class="pre">amount</span></code> have any effect on the value of
+<code class="docutils literal notranslate"><span class="pre">my_money</span></code>?  In other words, does changing <code class="docutils literal notranslate"><span class="pre">amount</span></code> also change <code class="docutils literal notranslate"><span class="pre">my_money</span></code>?  If
+it did, we would expect the second call to <code class="docutils literal notranslate"><span class="pre">print_money</span></code> to print a different
+value than the first.</p>
+<p>As it turns out, when we run the code, we see this:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$50.25
+$50.25
+</pre></div>
+</div>
+<p>Changing <code class="docutils literal notranslate"><span class="pre">amount</span></code> does not change <code class="docutils literal notranslate"><span class="pre">my_money</span></code>.  This is because arguments are
+passed to parameters in Python using their value alone.  This is called <em>pass by
+value</em>.  If changing the parameter had actually changed the argument, then we
+would have said Python practices <em>pass by reference</em>, where a reference to the
+original variable would have been given to the function rather than just the
+value.  Remember that Python uses pass by value when you are writing function
+definitions.</p>
+<p>It is generally bad programming practice to change the values of parameter
+variables in the body of a function – again, generally speaking – but there are
+exceptions.  For the most part, a programmer should be able to consult the
+parameters at any point in the function’s body to see what the “input” to the
+function was.  There is one situation, however, where it is desirable to modify
+the parameter values passed to a function.  We will discuss this situation in
+Chapter <a class="reference internal" href="ch5_lists.html#ch-lists"><span class="std std-numref">5</span></a>.</p>
+<p>Terminology time!  The first line of a function definition is called the
+function’s <em>signature</em>.  The signature tells us the name of the function and how
+many parameters it has.  For example, suppose we have the following function
+signature.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">print_uppercase</span><span class="p">(</span><span class="n">words</span><span class="p">):</span>
+    <span class="c1"># function body omitted</span>
+</pre></div>
+</div>
+<p>We can see from this signature that if we want to call this function, we must
+use the name <code class="docutils literal notranslate"><span class="pre">print_uppercase</span></code> and we must pass one argument to the function.
+The argument will be assigned to the parameter <code class="docutils literal notranslate"><span class="pre">words</span></code>.</p>
+<p>We will use the term signature again in this book, so you should learn to use
+it, too!</p>
+</section>
+<section id="return-values">
+<span id="sec-ret-vals"></span><h2><span class="section-number">4.3. </span>Return values<a class="headerlink" href="#return-values" title="Permalink to this headline">¶</a></h2>
+<p>If we think of functions in terms of them being like mini-programs, we might
+observe that programs tend to ask for input, they doing something with the
+input, and then finally they produce output.  In a sense, parameters give
+programmers the ability to pass “input” to a function.  What then might we do to
+allow functions to provide “output” back to the main program?</p>
+<p>As you might recall, we have already seen functions that do this – functions that
+Python already has defined for us.  For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ssn</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter your social security number: &quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">input</span></code> is a function.  It allows the programmer to provide an argument, which
+is the string to use for prompting the user.  We can imagine that somewhere,
+some programmer has written a function definition for <code class="docutils literal notranslate"><span class="pre">input</span></code> that looks
+something like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">input</span><span class="p">(</span><span class="n">prompt</span><span class="p">):</span>
+    <span class="c1"># Code that makes input work goes here.</span>
+</pre></div>
+</div>
+<p>Notice that the <code class="docutils literal notranslate"><span class="pre">input</span></code> function returns a value, which we then assign to a
+variable.  In a function’s body, we can tell Python what value to return using
+the <code class="docutils literal notranslate"><span class="pre">return</span></code> statement.  Let’s start with an overly simple example so that we
+understand the mechanics of the <code class="docutils literal notranslate"><span class="pre">return</span></code> keyword.  Suppose we define the
+function shown in Listing <a class="reference internal" href="#forty-two"><span class="std std-numref">4.8</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="id8">
+<span id="forty-two"></span><div class="code-block-caption"><span class="caption-number">Listing 4.8 </span><span class="caption-text">A function that always returns 42 no matter what</span><a class="headerlink" href="#id8" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">favorite_number</span><span class="p">():</span>
+<span class="linenos">2</span>    <span class="k">return</span> <span class="mi">42</span>
+<span class="linenos">3</span>
+<span class="linenos">4</span><span class="n">number</span> <span class="o">=</span> <span class="n">favorite_number</span><span class="p">()</span>
+<span class="linenos">5</span><span class="nb">print</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Whenever a <code class="docutils literal notranslate"><span class="pre">return</span></code> statement is encountered in a function’s body, the function
+stops immediately and returns to where the function was called.  The value that
+is returned from the function is whatever value was listed in the <code class="docutils literal notranslate"><span class="pre">return</span></code>
+statement.  In Listing <a class="reference internal" href="#forty-two"><span class="std std-numref">4.8</span></a>, there is only one statement in the
+body of the <code class="docutils literal notranslate"><span class="pre">favorite_number</span></code> function: the return statement itself.</p>
+<p>To interpret the code in Listing <a class="reference internal" href="#forty-two"><span class="std std-numref">4.8</span></a>, we start at line 4, which
+is the first line of the main program.  The <code class="docutils literal notranslate"><span class="pre">favorite_number</span></code> function is
+called, so the program “jumps” up to <code class="docutils literal notranslate"><span class="pre">favorite_number</span></code>’s definition.  The
+program enters the function’s body and encounters the <code class="docutils literal notranslate"><span class="pre">return</span></code> statement.  The
+<code class="docutils literal notranslate"><span class="pre">42</span></code> listed in the <code class="docutils literal notranslate"><span class="pre">return</span></code> statement causes the function to end, and the value
+<code class="docutils literal notranslate"><span class="pre">42</span></code> is sent back to line 4.  Finally, line 4 can finish as the <code class="docutils literal notranslate"><span class="pre">42</span></code> is assigned
+to the variable <code class="docutils literal notranslate"><span class="pre">number</span></code>.</p>
+<p>Now, let’s see how a function might take a parameter value and then return
+something based on the parameter value.  To experiment with this, we will define
+a function named <code class="docutils literal notranslate"><span class="pre">next_int</span></code> that takes an integer as a parameter.  Whatever
+integer is given, the function will return the “next” integer.  If we give
+<code class="docutils literal notranslate"><span class="pre">next_int</span></code> the value <code class="docutils literal notranslate"><span class="pre">3</span></code>, it will return <code class="docutils literal notranslate"><span class="pre">4</span></code>.  Said another way, <code class="docutils literal notranslate"><span class="pre">next_int(3)</span> <span class="pre">==</span>
+<span class="pre">4</span></code>.  If we give <code class="docutils literal notranslate"><span class="pre">next_int</span></code> the value <code class="docutils literal notranslate"><span class="pre">-2</span></code>, it will return <code class="docutils literal notranslate"><span class="pre">-1</span></code>.  Said another
+way, <code class="docutils literal notranslate"><span class="pre">next_int(-2)</span> <span class="pre">==</span> <span class="pre">-1</span></code>.  We define <code class="docutils literal notranslate"><span class="pre">next_int</span></code> in Listing <a class="reference internal" href="#next-int"><span class="std std-numref">4.9</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="id9">
+<span id="next-int"></span><div class="code-block-caption"><span class="caption-number">Listing 4.9 </span><span class="caption-text">Function definition for <cite>next_int</cite></span><a class="headerlink" href="#id9" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">next_int</span><span class="p">(</span><span class="n">int_value</span><span class="p">):</span>
+<span class="linenos">2</span>    <span class="n">next_value</span> <span class="o">=</span> <span class="n">int_value</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="linenos">3</span>    <span class="k">return</span> <span class="n">next_value</span>
+</pre></div>
+</div>
+</div>
+<p>Now, let’s call our function and print its resulting value:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">next_int</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">next_int</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>which produces the following output:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>4
+-1
+</pre></div>
+</div>
+<p>Notice in <code class="docutils literal notranslate"><span class="pre">next_int</span></code>’s function body how we create a new variable named
+<code class="docutils literal notranslate"><span class="pre">next_value</span></code>.  <code class="docutils literal notranslate"><span class="pre">next_value</span></code> holds the value we will return from our function.
+There is no rule that says we must return the value of a variable.  Any
+expression that produces a value can follow the <code class="docutils literal notranslate"><span class="pre">return</span></code> keyword.  In other
+words, we could have simply returned <code class="docutils literal notranslate"><span class="pre">int_value</span> <span class="pre">+</span> <span class="pre">1</span></code>, as shown in
+Listing <a class="reference internal" href="#next-int2"><span class="std std-numref">4.10</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="id10">
+<span id="next-int2"></span><div class="code-block-caption"><span class="caption-number">Listing 4.10 </span><span class="caption-text">Function definition for <cite>next_int</cite></span><a class="headerlink" href="#id10" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">next_int</span><span class="p">(</span><span class="n">int_value</span><span class="p">):</span>
+<span class="linenos">2</span>    <span class="k">return</span> <span class="n">int_value</span> <span class="o">+</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<p>Time to move on and look at a different example function.  Consider
+Listing <a class="reference internal" href="#pig-latin-word"><span class="std std-numref">4.11</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="id11">
+<span id="pig-latin-word"></span><div class="code-block-caption"><span class="caption-number">Listing 4.11 </span><span class="caption-text">Function definition for <cite>piglatin</cite></span><a class="headerlink" href="#id11" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">piglatin</span><span class="p">(</span><span class="n">english</span><span class="p">):</span>
+<span class="linenos">2</span>    <span class="k">if</span> <span class="n">english</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="s2">&quot;aeiou&quot;</span><span class="p">:</span>
+<span class="linenos">3</span>        <span class="k">return</span> <span class="n">english</span> <span class="o">+</span> <span class="s2">&quot;-way&quot;</span>
+<span class="linenos">4</span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos">5</span>        <span class="k">return</span> <span class="n">english</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span> <span class="o">+</span> <span class="n">english</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;ay&quot;</span>
+</pre></div>
+</div>
+</div>
+<p>Whenever a <code class="docutils literal notranslate"><span class="pre">return</span></code> statement is encountered in a function’s body, the function
+stops immediately and returns to where the function was called.  The value that
+is returned from the function is whatever value is given to the return
+statement.  Maybe you already understand this, but it bears repeating because it
+is very important to understand this concept if you are going to be able to
+understand functions.</p>
+<p>In Listing <a class="reference internal" href="#pig-latin-word"><span class="std std-numref">4.11</span></a>, we have a function named <code class="docutils literal notranslate"><span class="pre">piglatin</span></code>.  This
+example comes from the exercises in Section <a class="reference internal" href="ch3_loops.html#sec-loops-exercises"><span class="std std-numref">3.7</span></a> from
+Chapter <a class="reference internal" href="ch3_loops.html#ch-loops"><span class="std std-numref">3</span></a>.  We can pass to <code class="docutils literal notranslate"><span class="pre">piglatin</span></code> an English word, and for
+simplicity’s sake, suppose the word always consists solely of lowercase letters.
+We are only handling two cases for now: 1.) the word starts with a vowel, or 2.)
+the word starts with a single consonant letter.</p>
+<p>A function may have zero, one, or many return statements, but as soon as the
+program encounters a return statement, the function ends and the value is
+returned immediately.</p>
+<p>How might we call this function?  There are several ways we could do it.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">engword</span> <span class="o">=</span> <span class="s2">&quot;apple&quot;</span>
+<span class="n">pigword</span> <span class="o">=</span> <span class="n">piglatin</span><span class="p">(</span><span class="n">engword</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The pig latin of apple is </span><span class="si">%s</span><span class="s2">.&quot;</span> <span class="o">%</span> <span class="n">pigword</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The pig latin of catalog is </span><span class="si">%s</span><span class="s2">.&quot;</span> <span class="o">%</span> <span class="n">piglatin</span><span class="p">(</span><span class="s2">&quot;catalog&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Since <code class="docutils literal notranslate"><span class="pre">piglatin</span></code> returns a string, we can call <code class="docutils literal notranslate"><span class="pre">piglatin</span></code> anywhere we would
+normally put a string.</p>
+<p>It’s hard for new programmers to learn to write their own functions.  It takes
+practice.  It’s helpful to see how to define a lot of example functions, and
+it’s also helpful to try writing your own functions and seeing what problems you
+run into.  Let’s take a look at a bunch of example functions, and at some point,
+you should go back and try to define these functions on your own without looking
+at the code.</p>
+<p>Listing <a class="reference internal" href="#get-area"><span class="std std-numref">4.12</span></a> is a function definition that, given the radius of a
+circle, will return the area of the circle.</p>
+<div class="literal-block-wrapper docutils container" id="id12">
+<span id="get-area"></span><div class="code-block-caption"><span class="caption-number">Listing 4.12 </span><span class="caption-text">Function definition for <cite>get_area</cite></span><a class="headerlink" href="#id12" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">import</span> <span class="nn">math</span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="k">def</span> <span class="nf">get_area</span><span class="p">(</span><span class="n">radius</span><span class="p">):</span>
+<span class="linenos">4</span>    <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">radius</span> <span class="o">*</span> <span class="n">radius</span>
+</pre></div>
+</div>
+</div>
+<p>Listing <a class="reference internal" href="#roll"><span class="std std-numref">4.13</span></a> is a function definition that simulates rolling a
+6-sided die.</p>
+<div class="literal-block-wrapper docutils container" id="id13">
+<span id="roll"></span><div class="code-block-caption"><span class="caption-number">Listing 4.13 </span><span class="caption-text">Function definition for <cite>roll</cite></span><a class="headerlink" href="#id13" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">import</span> <span class="nn">random</span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="k">def</span> <span class="nf">roll</span><span class="p">():</span>
+<span class="linenos">4</span>    <span class="k">return</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Listing <a class="reference internal" href="#posintsum"><span class="std std-numref">4.14</span></a> defines a function named <code class="docutils literal notranslate"><span class="pre">posintsum</span></code> that prints
+the sum of the first <code class="docutils literal notranslate"><span class="pre">n</span></code> positive integers.  The listing also shows how you
+might call this function.  For example, <code class="docutils literal notranslate"><span class="pre">posintsum(4)</span></code> would calculate the
+result of <code class="docutils literal notranslate"><span class="pre">1+2+3+4</span></code> as <code class="docutils literal notranslate"><span class="pre">10</span></code>.  As another example, <code class="docutils literal notranslate"><span class="pre">posintsum(10)</span></code> would
+calculate the result of <code class="docutils literal notranslate"><span class="pre">1+2+3+4+5+6+7+8+9+10</span></code> as <code class="docutils literal notranslate"><span class="pre">55</span></code>.  Note how we use a <code class="docutils literal notranslate"><span class="pre">for</span></code>
+loop and a variable named <code class="docutils literal notranslate"><span class="pre">total</span></code> to accomplish this before returning the result
+in <code class="docutils literal notranslate"><span class="pre">total</span></code>.</p>
+<div class="literal-block-wrapper docutils container" id="id14">
+<span id="posintsum"></span><div class="code-block-caption"><span class="caption-number">Listing 4.14 </span><span class="caption-text">Function definition and sample function calls for <cite>posintsum</cite></span><a class="headerlink" href="#id14" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">posintsum</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="linenos">2</span>    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">3</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+<span class="linenos">4</span>        <span class="n">total</span> <span class="o">+=</span> <span class="n">i</span>
+<span class="linenos">5</span>    <span class="k">return</span> <span class="n">total</span>
+<span class="linenos">6</span>
+<span class="linenos">7</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;1+2+3+4 = </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">posintsum</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+<span class="linenos">8</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;1+2+3+4+5+6+7+8+9+10 = </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">posintsum</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<p>What if we had forgotten the return statement at the end of the function?  In
+other words, what if our function definition looked like
+Listing <a class="reference internal" href="#posintsum-missing-return"><span class="std std-numref">4.15</span></a>?</p>
+<div class="literal-block-wrapper docutils container" id="id15">
+<span id="posintsum-missing-return"></span><div class="code-block-caption"><span class="caption-number">Listing 4.15 </span><span class="caption-text">Forgotten <cite>return</cite> statement in <cite>posintsum</cite></span><a class="headerlink" href="#id15" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">posintsum</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="linenos">2</span>    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">3</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+<span class="linenos">4</span>        <span class="n">total</span> <span class="o">+=</span> <span class="n">i</span>
+<span class="hll"><span class="linenos">5</span>    <span class="c1"># Oh no! I need to remember to actually return total.</span>
+</span></pre></div>
+</div>
+</div>
+<p>As it turns out, all functions in Python return something no matter what.  If a
+function does not have a <code class="docutils literal notranslate"><span class="pre">return</span></code> statement, the function will return a special
+value known as <code class="docutils literal notranslate"><span class="pre">None</span></code>.  The type of the value <code class="docutils literal notranslate"><span class="pre">None</span></code> is <code class="docutils literal notranslate"><span class="pre">NoneType</span></code>.  You may
+have already seen <code class="docutils literal notranslate"><span class="pre">None</span></code> if you got confused on the difference between <code class="docutils literal notranslate"><span class="pre">print</span></code>
+and <code class="docutils literal notranslate"><span class="pre">input</span></code>, as many new programmers do.  Suppose we did the following.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Enter a number: &quot;</span><span class="p">)</span>
+<span class="c1"># Oops.  x == None</span>
+</pre></div>
+</div>
+<p>Clearly, we meant to use <code class="docutils literal notranslate"><span class="pre">input</span></code> rather than <code class="docutils literal notranslate"><span class="pre">print</span></code>.  <code class="docutils literal notranslate"><span class="pre">print</span></code> returns <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</section>
+<section id="modularizing-code-with-functions">
+<span id="sec-func-mod"></span><h2><span class="section-number">4.4. </span>Modularizing Code with Functions<a class="headerlink" href="#modularizing-code-with-functions" title="Permalink to this headline">¶</a></h2>
+<p>Now that we can make “mini-programs” using functions, we can begin composing
+full programs made out of mini-programs.  We will use functions to help organize
+our code so that our code is easier to read and easier to maintain.  This will
+also make it easier to cope with errors, particularly user error, as we will see
+in the following example.  Let’s take an idea from the previous section and
+suppose that we want to write a simple program that asks the user for a positive
+integer <code class="docutils literal notranslate"><span class="pre">n</span></code>.  Our program should print out the sum of all positive integers up
+through that <code class="docutils literal notranslate"><span class="pre">n</span></code>.  We will also want to only accept valid input, so we will need
+to re-ask for input if what the user types is incorrect.  Examples of bad input
+might be <code class="docutils literal notranslate"><span class="pre">23r5</span></code> (since there is a <code class="docutils literal notranslate"><span class="pre">r</span></code> in the number) or <code class="docutils literal notranslate"><span class="pre">-2</span></code> (since <code class="docutils literal notranslate"><span class="pre">-2</span></code> is
+negative).</p>
+<p>It is often difficult for novice programmers to know where to begin in writing a
+program.  One very effective approach is to start by writing comments in English
+that describe, step-by-step, what our program needs to do.  So, we might do
+this.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ask for a positive whole number &#39;n&#39; (i.e., a positive integer).</span>
+
+<span class="c1"># Compute the sum of 1 + 2 + ... + n and print it.</span>
+</pre></div>
+</div>
+<p>That’s a good start.  Now, let’s become “lazy” programmers.  Laziness is a good
+thing in some situations, and this is one of those situations.  In fact, a
+famous programmer named Larry Wall once stated that laziness is one of three
+“virtues” that programmers should seek (look it up on the Web).</p>
+<p>In order to be “lazy,” we should pretend that someone has already defined
+functions for us, and by calling these functions, our program will be done!</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ask for a positive whole number &#39;n&#39; (i.e., a positive integer).</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">getposint</span><span class="p">()</span>
+
+<span class="c1"># Compute the sum of 1 + 2 + ... + n and print it.</span>
+<span class="n">total</span> <span class="o">=</span> <span class="n">getsum</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The sum of the first </span><span class="si">%d</span><span class="s2"> positive whole numbers is </span><span class="si">%d</span><span class="s2">.&quot;</span>
+       <span class="o">%</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">total</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Hooray!  We’ve written our program in three lines of actual code!  Well, we
+haven’t really, but now we can focus on the “pieces” of the program by defining</p>
+<p>Now, let’s try to define <code class="docutils literal notranslate"><span class="pre">getsum</span></code> in Listing <a class="reference internal" href="#getsum"><span class="std std-numref">4.16</span></a>.  Keep in mind
+that <code class="docutils literal notranslate"><span class="pre">getsum</span></code> has a single argument, so it needs a single parameter, too.</p>
+<div class="literal-block-wrapper docutils container" id="id16">
+<span id="getsum"></span><div class="code-block-caption"><span class="caption-number">Listing 4.16 </span><span class="caption-text">Function definition for <cite>getsum</cite></span><a class="headerlink" href="#id16" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">getsum</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="linenos">2</span>    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">3</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+<span class="linenos">4</span>        <span class="n">total</span> <span class="o">+=</span> <span class="n">i</span>
+<span class="linenos">5</span>    <span class="k">return</span> <span class="n">total</span>
+</pre></div>
+</div>
+</div>
+<p>Note that in line 3 of Listing <a class="reference internal" href="#getsum"><span class="std std-numref">4.16</span></a> the second expression in
+<code class="docutils literal notranslate"><span class="pre">range</span></code> is <code class="docutils literal notranslate"><span class="pre">n+1</span></code>.  Since we want to add up all the values from <code class="docutils literal notranslate"><span class="pre">1</span></code> to <code class="docutils literal notranslate"><span class="pre">n</span></code>, the
+value that will make us leave the look is one more than <code class="docutils literal notranslate"><span class="pre">n</span></code>, that is, <code class="docutils literal notranslate"><span class="pre">n+1</span></code>.
+the functions that will actually make this program work.  Let’s define
+<code class="docutils literal notranslate"><span class="pre">getposint</span></code> first (see Listing <a class="reference internal" href="#getposint"><span class="std std-numref">4.17</span></a>).</p>
+<div class="literal-block-wrapper docutils container" id="id17">
+<span id="getposint"></span><div class="code-block-caption"><span class="caption-number">Listing 4.17 </span><span class="caption-text">Function definition for <cite>getposint</cite></span><a class="headerlink" href="#id17" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">getposint</span><span class="p">():</span>
+<span class="linenos">2</span>    <span class="n">s</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter a positive whole number: &quot;</span><span class="p">)</span>
+<span class="linenos">3</span>    <span class="k">while</span> <span class="ow">not</span> <span class="n">s</span><span class="o">.</span><span class="n">isdigit</span><span class="p">()</span> <span class="ow">and</span> <span class="n">s</span> <span class="o">!=</span> <span class="s2">&quot;0&quot;</span><span class="p">:</span>
+<span class="linenos">4</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sorry, that does not look like a positive whole</span>
+<span class="linenos">5</span>               <span class="n">number</span><span class="o">.</span>  <span class="n">Please</span> <span class="k">try</span> <span class="n">again</span><span class="o">.</span><span class="s2">&quot;)</span>
+<span class="linenos">6</span>        <span class="n">s</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter a positive whole number: &quot;</span><span class="p">)</span>
+<span class="linenos">7</span>    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Writing functions takes practice.  The more you try, the better you will get at
+it.  A program with everything defined is shown in
+Listing <a class="reference internal" href="#compute-posintsum"><span class="std std-numref">4.18</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="id18">
+<span id="compute-posintsum"></span><div class="code-block-caption"><span class="caption-number">Listing 4.18 </span><span class="caption-text">Code composed with functions</span><a class="headerlink" href="#id18" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span> <span class="nf">getposint</span><span class="p">():</span>
+<span class="linenos"> 2</span>    <span class="n">s</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter a positive whole number: &quot;</span><span class="p">)</span>
+<span class="linenos"> 3</span>    <span class="k">while</span> <span class="ow">not</span> <span class="n">s</span><span class="o">.</span><span class="n">isdigit</span><span class="p">()</span> <span class="ow">and</span> <span class="n">s</span> <span class="o">!=</span> <span class="s2">&quot;0&quot;</span><span class="p">:</span>
+<span class="linenos"> 4</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sorry, that does not look like a positive whole</span>
+<span class="linenos"> 5</span>               <span class="n">number</span><span class="o">.</span>  <span class="n">Please</span> <span class="k">try</span> <span class="n">again</span><span class="o">.</span><span class="s2">&quot;)</span>
+<span class="linenos"> 6</span>        <span class="n">s</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter a positive whole number: &quot;</span><span class="p">)</span>
+<span class="linenos"> 7</span>    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span><span class="k">def</span> <span class="nf">getsum</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="linenos">10</span>    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">11</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+<span class="linenos">12</span>        <span class="n">total</span> <span class="o">+=</span> <span class="n">i</span>
+<span class="linenos">13</span>    <span class="k">return</span> <span class="n">total</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span><span class="c1"># Ask for a positive whole number &#39;n&#39; (i.e., a positive integer).</span>
+<span class="linenos">17</span><span class="n">n</span> <span class="o">=</span> <span class="n">getposint</span><span class="p">()</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span><span class="c1"># Compute the sum of 1 + 2 + ... + n and print it.</span>
+<span class="linenos">20</span><span class="n">total</span> <span class="o">=</span> <span class="n">getsum</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The sum of the first </span><span class="si">%d</span><span class="s2"> positive whole numbers is </span><span class="si">%d</span><span class="s2">.&quot;</span>
+<span class="linenos">23</span>       <span class="o">%</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">total</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<p>Sometimes, programmers even like to put their main program code into its own
+function.  That way, all of the code exists in some function.
+Listing <a class="reference internal" href="#compute-posintsum-final"><span class="std std-numref">4.19</span></a> shows how we would do this.</p>
+<div class="literal-block-wrapper docutils container" id="id19">
+<span id="compute-posintsum-final"></span><div class="code-block-caption"><span class="caption-number">Listing 4.19 </span><span class="caption-text">Code composed with functions, using kode{main}</span><a class="headerlink" href="#id19" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span> <span class="nf">getposint</span><span class="p">():</span>
+<span class="linenos"> 2</span>    <span class="n">s</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter a positive whole number: &quot;</span><span class="p">)</span>
+<span class="linenos"> 3</span>    <span class="k">while</span> <span class="ow">not</span> <span class="n">s</span><span class="o">.</span><span class="n">isdigit</span><span class="p">()</span> <span class="ow">and</span> <span class="n">s</span> <span class="o">!=</span> <span class="s2">&quot;0&quot;</span><span class="p">:</span>
+<span class="linenos"> 4</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sorry, that does not look like a positive whole</span>
+<span class="linenos"> 5</span>               <span class="n">number</span><span class="o">.</span>  <span class="n">Please</span> <span class="k">try</span> <span class="n">again</span><span class="o">.</span><span class="s2">&quot;)</span>
+<span class="linenos"> 6</span>        <span class="n">s</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter a positive whole number: &quot;</span><span class="p">)</span>
+<span class="linenos"> 7</span>    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span><span class="k">def</span> <span class="nf">getsum</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="linenos">10</span>    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">11</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+<span class="linenos">12</span>        <span class="n">total</span> <span class="o">+=</span> <span class="n">i</span>
+<span class="linenos">13</span>    <span class="k">return</span> <span class="n">total</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="linenos">16</span>    <span class="c1"># Ask for a positive whole number &#39;n&#39; (i.e., a positive integer).</span>
+<span class="linenos">17</span>    <span class="n">n</span> <span class="o">=</span> <span class="n">getposint</span><span class="p">()</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span>    <span class="c1"># Compute the sum of 1 + 2 + ... + n and print it.</span>
+<span class="linenos">20</span>    <span class="n">total</span> <span class="o">=</span> <span class="n">getsum</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The sum of the first </span><span class="si">%d</span><span class="s2"> positive whole numbers is </span><span class="si">%d</span><span class="s2">.&quot;</span>
+<span class="linenos">23</span>           <span class="o">%</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">total</span><span class="p">))</span>
+<span class="linenos">24</span>
+<span class="linenos">25</span><span class="c1"># Run the program by calling main().</span>
+<span class="linenos">26</span><span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>Some other programming languages like C++ and Java actually require programs to
+start by calling a function named <code class="docutils literal notranslate"><span class="pre">main</span></code>.  If we always put our main program
+code into a function named <code class="docutils literal notranslate"><span class="pre">main</span></code>, it will ease our transition from Python to
+other languages.</p>
+</section>
+<section id="variable-scope">
+<span id="sec-var-scope"></span><h2><span class="section-number">4.5. </span>Variable Scope<a class="headerlink" href="#variable-scope" title="Permalink to this headline">¶</a></h2>
+<p>You may have noticed in the previous section that our programs are starting to
+get longer in terms of number of lines of code (LOC).  As our programs get
+longer, we will start to define more variables to help our programs do their
+work.  Eventually, we will find that sometimes we can’t access a variable in one
+part of the program that is defined in another part of the program.  This is due
+to <em>variable scope</em>.  The <em>scope</em> of a variable is the part of the code where
+the variable can be accessed.  In terms of accessing a variable, we need to make
+the distinction between <em>reading</em> a variable’s value and <em>writing</em> to a
+variable’s value.  Reading a variable means using–but not modifying–its
+current value.  Writing to a variable means modifying its value.  Consider the
+following code.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>In this code, we are <em>reading</em> from <code class="docutils literal notranslate"><span class="pre">x</span></code>.  We are <em>writing</em> to <code class="docutils literal notranslate"><span class="pre">y</span></code>.  When we say
+<em>access</em> a variable’s value, we mean the same thing as <em>reading</em> the variable.</p>
+<p>Now, let’s explore the notion of variable scope.  Consider the (non-working)
+code in Listing <a class="reference internal" href="#sumsq-no-init"><span class="std std-numref">4.20</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="id20">
+<span id="sumsq-no-init"></span><div class="code-block-caption"><span class="caption-number">Listing 4.20 </span><span class="caption-text">Sum of squares, with <cite>NameError</cite></span><a class="headerlink" href="#id20" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">):</span>
+<span class="linenos">2</span>    <span class="n">square</span> <span class="o">=</span> <span class="n">k</span> <span class="o">*</span> <span class="n">k</span>
+<span class="linenos">3</span>    <span class="n">total</span> <span class="o">=</span> <span class="n">total</span> <span class="o">+</span> <span class="n">square</span>
+<span class="linenos">4</span>
+<span class="linenos">5</span><span class="nb">print</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>The code in Listing <a class="reference internal" href="#sumsq-no-init"><span class="std std-numref">4.20</span></a> is supposed to compute the sum of
+squares, that is, 1<sup>2</sup> + 2<sup>2</sup> + 3<sup>2</sup> + … + 10<sup>2</sup>.  It computes each square’s
+value and adds it to a variable named <code class="docutils literal notranslate"><span class="pre">total</span></code>.  However, when we run the code,
+we get the following error.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Traceback (most recent call last):
+  File &quot;&lt;stdin&gt;&quot;, line 3, in &lt;module&gt;
+NameError: name &#39;total&#39; is not defined
+</pre></div>
+</div>
+<p>Let’s take a closer look at line 3.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">total</span> <span class="o">=</span> <span class="n">total</span> <span class="o">+</span> <span class="n">square</span>
+</pre></div>
+</div>
+<p>On the right-hand side (RHS) of the <code class="docutils literal notranslate"><span class="pre">=</span></code> in line 3, we are <em>reading</em> from both
+<code class="docutils literal notranslate"><span class="pre">total</span></code> and <code class="docutils literal notranslate"><span class="pre">square</span></code>, and then adding their values together.  Since we did not
+previously define <code class="docutils literal notranslate"><span class="pre">total</span></code>, it is not yet <em>in scope</em>.  The error produced in
+Python is called a <code class="docutils literal notranslate"><span class="pre">NameError</span></code> because Python doesn’t have information about a
+variable named <code class="docutils literal notranslate"><span class="pre">total</span></code>.  To correct this problem, we must <em>initialize</em> <code class="docutils literal notranslate"><span class="pre">total</span></code>
+with a starting value.  Initializing a variable means to create the variable by
+giving it a starting value. Listing <a class="reference internal" href="#sumsq"><span class="std std-numref">4.21</span></a> shows the corrected code.
+Note that <code class="docutils literal notranslate"><span class="pre">total</span></code> is created prior to the start of the loop.</p>
+<div class="literal-block-wrapper docutils container" id="id21">
+<span id="sumsq"></span><div class="code-block-caption"><span class="caption-number">Listing 4.21 </span><span class="caption-text">Sum of squares, corrected</span><a class="headerlink" href="#id21" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos">1</span><span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span class="linenos">2</span><span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">):</span>
+<span class="linenos">3</span>    <span class="n">square</span> <span class="o">=</span> <span class="n">k</span> <span class="o">*</span> <span class="n">k</span>
+<span class="linenos">4</span>    <span class="n">total</span> <span class="o">=</span> <span class="n">total</span> <span class="o">+</span> <span class="n">square</span>
+<span class="linenos">5</span>
+<span class="linenos">6</span><span class="nb">print</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Always remember to initialize your variables.</p>
+<p>Say it again: a variable’s scope is the part of the program where the variable
+may be accessed (i.e., “read”).</p>
+<p>We are bringing up the topic of variable scope in this chapter because variable
+scope has particular relevance in functions. Suppose we were to write the code
+in Listing <a class="reference internal" href="#local-variable-bogus"><span class="std std-numref">4.22</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="id22">
+<span id="local-variable-bogus"></span><div class="code-block-caption"><span class="caption-number">Listing 4.22 </span><span class="caption-text">Local variable example</span><a class="headerlink" href="#id22" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">import</span> <span class="nn">math</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="linenos"> 4</span>    <span class="n">people</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="linenos"> 5</span>    <span class="n">slices_per_pizza</span> <span class="o">=</span> <span class="mi">12</span>
+<span class="linenos"> 6</span>    <span class="n">slices_per_person</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="linenos"> 7</span>    <span class="n">pizzas</span> <span class="o">=</span> <span class="n">number_of_pizzas</span><span class="p">()</span>
+<span class="linenos"> 8</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You need to order </span><span class="si">%d</span><span class="s2"> pizzas.&quot;</span> <span class="o">%</span> <span class="n">pizzas</span><span class="p">)</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="k">def</span> <span class="nf">number_of_pizzas</span><span class="p">():</span>
+<span class="linenos">11</span>    <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">people</span> <span class="o">*</span> <span class="n">slices_per_person</span> <span class="o">/</span> <span class="n">slices_per_pizza</span><span class="p">)</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span><span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>Take a gander at Listing <a class="reference internal" href="#local-variable-bogus"><span class="std std-numref">4.22</span></a> and try to guess
+what might happen?  Well, what do you think?  Try to come up with a few
+possibilities.  On one hand, it might set the variables <code class="docutils literal notranslate"><span class="pre">people</span></code>,
+<code class="docutils literal notranslate"><span class="pre">slices_per_pizza</span></code>, and <code class="docutils literal notranslate"><span class="pre">slices_per_person</span></code>, and then use them to calculate
+the number of pizzas one needs to order.  Another possibility is that the
+program crashes hideously…  but why?</p>
+<p>Try running this code on your own.  Of course, it ends up crashing.  This code
+is a hot mess!  The error reads as follows.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Traceback (most recent call last):
+  File &quot;test.py&quot;, line 13, in &lt;module&gt;
+    main()
+  File &quot;test.py&quot;, line 7, in main
+    pizzas = number_of_pizzas()
+  File &quot;test.py&quot;, line 11, in number_of_pizzas
+    return math.ceil(people * slices_per_person / slices_per_pizza)
+NameError: name &#39;people&#39; is not defined
+</pre></div>
+</div>
+<p>When the code reaches the <code class="docutils literal notranslate"><span class="pre">number_of_pizzas</span></code> function, it does not remember that
+there is a variable named <code class="docutils literal notranslate"><span class="pre">people</span></code> that was defined in the <code class="docutils literal notranslate"><span class="pre">main</span></code> function.
+That’s interesting.  This suggests that when we define a variable within a
+function’s body, that variable is only visible within that function.</p>
+<p>Think about it this way.  Functions are like little houses.  What happens in
+your house is your business.  Other people shouldn’t be able to see in your
+house from within their house.</p>
+<p>So, if we define a variable in one function, it only “lives” in that function.
+This is a good thing!  It means that if you define a variable somewhere in your
+program, a function you call can’t mess with the variables you’ve already
+defined.  If a function could mess with your variables without you being aware
+of it, then your program could have unintended side effects.  If functions had
+surprising side effects, it would be very difficult to reason through programs
+and predict their behavior and output.  One of the great things about computers
+is that they are logical and predictable.</p>
+<p>A variable that is defined inside a function is called a <em>local variable</em>.  If
+we define a variable in the body of a function, we say that the variable is
+<em>local</em> to that function.  In this case, the variables <code class="docutils literal notranslate"><span class="pre">people</span></code>,
+<code class="docutils literal notranslate"><span class="pre">slices_per_pizza</span></code>, and <code class="docutils literal notranslate"><span class="pre">slices_per_person</span></code> are local variables in <code class="docutils literal notranslate"><span class="pre">main</span></code>.</p>
+<p>All right, let’s fix the problem.  The best thing to do is to pass
+these values to the <code class="docutils literal notranslate"><span class="pre">number_of_pizzas</span></code> function, which means we’ll need
+<code class="docutils literal notranslate"><span class="pre">number_of_pizzas</span></code> to have three parameters in its definition, as we can see in
+the updated code found in Listing <a class="reference internal" href="#local-variable-good"><span class="std std-numref">4.23</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="id23">
+<span id="local-variable-good"></span><div class="code-block-caption"><span class="caption-number">Listing 4.23 </span><span class="caption-text">Local variable example, fixed</span><a class="headerlink" href="#id23" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">import</span> <span class="nn">math</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="hll"><span class="linenos"> 4</span>    <span class="n">pizzas</span> <span class="o">=</span> <span class="n">number_of_pizzas</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</span><span class="linenos"> 5</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You need to order </span><span class="si">%d</span><span class="s2"> pizzas.&quot;</span> <span class="o">%</span> <span class="n">pizzas</span><span class="p">)</span>
+<span class="linenos"> 6</span>
+<span class="hll"><span class="linenos"> 7</span><span class="k">def</span> <span class="nf">number_of_pizzas</span><span class="p">(</span><span class="n">people</span><span class="p">,</span> <span class="n">slices_per_pizza</span><span class="p">,</span> <span class="n">slices_per_person</span><span class="p">):</span>
+</span><span class="linenos"> 8</span>    <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">people</span> <span class="o">*</span> <span class="n">slices_per_person</span> <span class="o">/</span> <span class="n">slices_per_pizza</span><span class="p">)</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>Hey, this works splendidly!</p>
+<p>Let’s go back to the “houses” metaphor we presented a few paragraphs ago. Recall
+that I asked you to think of functions as being like little houses.  What do you
+think happens when you define a variable outside of all the “houses.”  In other
+words, what if I define a variable in what is normally the main part of the
+program that exists outside of any function’s body?  Consider
+Listing <a class="reference internal" href="#global-bogus"><span class="std std-numref">4.24</span></a>, where you’ll notice we’ve done away with a
+<code class="docutils literal notranslate"><span class="pre">main</span></code> function entirely.</p>
+<div class="literal-block-wrapper docutils container" id="id24">
+<span id="global-bogus"></span><div class="code-block-caption"><span class="caption-number">Listing 4.24 </span><span class="caption-text">Global variable example</span><a class="headerlink" href="#id24" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">balance</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="k">def</span> <span class="nf">withdraw</span><span class="p">(</span><span class="n">amount</span><span class="p">):</span>
+<span class="linenos">4</span>    <span class="k">if</span> <span class="n">balance</span> <span class="o">&gt;=</span> <span class="n">amount</span><span class="p">:</span>
+<span class="linenos">5</span>        <span class="n">balance</span> <span class="o">=</span>  <span class="n">balance</span> <span class="o">-</span> <span class="n">amount</span>
+<span class="linenos">6</span>
+<span class="linenos">7</span><span class="n">withdraw</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+<span class="linenos">8</span><span class="nb">print</span><span class="p">(</span><span class="n">balance</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>If you run Listing <a class="reference internal" href="#global-bogus"><span class="std std-numref">4.24</span></a>, you’ll see there is a problem.
+We’ll resolve the problem shortly, however let’s consider the intent of the
+code.  The main program consists of three lines of code.  They are (in order):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">balance</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">withdraw</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">balance</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>After we have defined <code class="docutils literal notranslate"><span class="pre">balance</span></code>, we define a function named <code class="docutils literal notranslate"><span class="pre">withdraw</span></code> that can
+be used to subtract an amount of money from <code class="docutils literal notranslate"><span class="pre">balance</span></code>, but only if there is
+sufficient money available in <code class="docutils literal notranslate"><span class="pre">balance</span></code>.</p>
+<p>Since <code class="docutils literal notranslate"><span class="pre">balance</span></code> is not defined in the body of any function, it is known as a
+<em>global variable</em>.  Global variables are accessible anywhere in the program,
+including inside functions.  Consider the following code.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">gl</span> <span class="o">=</span> <span class="mi">7</span>
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">gl</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>As we would expect, this code prints <code class="docutils literal notranslate"><span class="pre">10</span></code>.</p>
+<p>Although global variables are accessible (i.e., they may be “read”) from within
+functions, they cannot be modified from within a function unless we explicitly
+tell Python that’s what we intend to do.  Do you remember a little bit ago when
+I said that if function could mess with your variables without you being aware
+of it, then your program could have unintended side effects, and that side
+effects are bad?  Well, here we are again.  If you ran the code in
+Listing <a class="reference internal" href="#global-bogus"><span class="std std-numref">4.24</span></a>, you would see this:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Traceback (most recent call last):
+  File &quot;variable_scope.py&quot;, line 38, in &lt;module&gt;
+    withdraw(1000)
+  File &quot;variable_scope.py&quot;, line 35, in withdraw
+    if balance &gt;= amount:
+UnboundLocalError: local variable &#39;balance&#39; referenced before assignment
+</pre></div>
+</div>
+<p>Python assumes that any variable you wish to <em>write</em> to inside a function is a
+local variable, even if there is a global variable of the same name.  Python
+does allow us to write to global variables, but we have to tell Python that we
+intend to do so and that we know the potential consequences!  We can use the
+<em>global</em> statement to allow a function to write to a global variable; see
+Listing <a class="reference internal" href="#global-good"><span class="std std-numref">4.25</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="id25">
+<span id="global-good"></span><div class="code-block-caption"><span class="caption-number">Listing 4.25 </span><span class="caption-text">Global variable example, fixed</span><a class="headerlink" href="#id25" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">balance</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="k">def</span> <span class="nf">withdraw</span><span class="p">(</span><span class="n">amount</span><span class="p">):</span>
+<span class="hll"><span class="linenos">4</span>    <span class="k">global</span> <span class="n">balance</span>
+</span><span class="linenos">5</span>    <span class="k">if</span> <span class="n">balance</span> <span class="o">&gt;=</span> <span class="n">amount</span><span class="p">:</span>
+<span class="linenos">6</span>        <span class="n">balance</span> <span class="o">=</span>  <span class="n">balance</span> <span class="o">-</span> <span class="n">amount</span>
+<span class="linenos">7</span>
+<span class="linenos">8</span><span class="n">withdraw</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+<span class="linenos">9</span><span class="nb">print</span><span class="p">(</span><span class="n">balance</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>The output of Listing <a class="reference internal" href="#global-good"><span class="std std-numref">4.25</span></a> is now <code class="docutils literal notranslate"><span class="pre">9000</span></code>, as we would expect.</p>
+<p><code class="docutils literal notranslate"><span class="pre">global</span></code> should be used sparingly.  It is generally better to pass values to
+functions rather than storing those values in global variables, though in some
+cases we will manage common information in global variables, especially when we
+program video games.  Stay tuned!</p>
+</section>
+<section id="exercises">
+<span id="sec-funcs-exercises"></span><h2><span class="section-number">4.6. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p>Determine the output of the following code.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f1</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;f1 called&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">f2</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;f2 called&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Main 1&quot;</span><span class="p">)</span>
+<span class="n">f2</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Main 2&quot;</span><span class="p">)</span>
+<span class="n">f1</span><span class="p">()</span>
+</pre></div>
+</div>
+</li>
+<li><p>Determine the output of the following code.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f1</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;f1 called&quot;</span><span class="p">)</span>
+    <span class="n">f2</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">f2</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;f2 called&quot;</span><span class="p">)</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Main 1&quot;</span><span class="p">)</span>
+<span class="n">f2</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Main 2&quot;</span><span class="p">)</span>
+<span class="n">f1</span><span class="p">()</span>
+</pre></div>
+</div>
+</li>
+<li><p>Determine the output of the following code.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f1</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+    <span class="k">return</span> <span class="n">z</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Answer: </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">f1</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Answer: </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">f1</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+</li>
+<li><p>Determine the output of the following code.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f1</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+    <span class="k">return</span> <span class="n">z</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Answer: </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">f1</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Answer: </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">f1</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+</li>
+<li><p>Determine the output of the following code.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">umkay</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">message</span> <span class="o">+</span> <span class="s2">&quot;, umkay?&quot;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">umkay</span><span class="p">(</span><span class="s2">&quot;Do your homework&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</li>
+<li><p>Define a function named <code class="docutils literal notranslate"><span class="pre">circum</span></code> that takes the radius of a circle as a parameter and returns the circumference of that circle.</p></li>
+<li><p>Define a function named <code class="docutils literal notranslate"><span class="pre">smallest</span></code> that takes three float parameters and returns the smallest value of the three.</p></li>
+<li><p>Define a function named <code class="docutils literal notranslate"><span class="pre">find_vowel</span></code> that takes a string as a parameter and returns the index of the first vowel in the string.</p></li>
+<li><p>Define a function named <code class="docutils literal notranslate"><span class="pre">count_words</span></code> that takes a string as a parameter and returns the number of words in the string (where words are separated by a single space).</p></li>
+</ol>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Conversational Python</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ch1_basicio_types.html">1. Basic I/O, Statements, Expressions, Variables, and Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch2_cond.html">2. Conditionals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch3_loops.html">3. Loops and String Manipulation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">4. Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction-to-functions">4.1. Introduction to Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#parameters">4.2. Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#return-values">4.3. Return values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#modularizing-code-with-functions">4.4. Modularizing Code with Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#variable-scope">4.5. Variable Scope</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#exercises">4.6. Exercises</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ch5_lists.html">5. Lists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch6_files_excepts.html">6. Files and Exceptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch7_dicts.html">7. Dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch8_searchsort.html">8. Searching and Sorting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch9_classes.html">9. Classes, Object-Orientation, and Pygame</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="ch3_loops.html" title="previous chapter"><span class="section-number">3. </span>Loops and String Manipulation</a></li>
+      <li>Next: <a href="ch5_lists.html" title="next chapter"><span class="section-number">5. </span>Lists</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, Jason B. Shepherd, Ph.D..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/ch4_funcs.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

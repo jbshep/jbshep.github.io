@@ -1,0 +1,1399 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>5. Lists &#8212; Conversational Python 2.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="6. Files and Exceptions" href="ch6_files_excepts.html" />
+    <link rel="prev" title="4. Functions" href="ch4_funcs.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="lists">
+<span id="ch-lists"></span><h1><span class="section-number">5. </span>Lists<a class="headerlink" href="#lists" title="Permalink to this headline">¶</a></h1>
+<section id="list-operations">
+<span id="sec-list-ops"></span><h2><span class="section-number">5.1. </span>List Operations<a class="headerlink" href="#list-operations" title="Permalink to this headline">¶</a></h2>
+<p>Yay!  Finally, we get to talk about <em>lists</em>.  Lists are very useful and powerful
+structures in Python, and their use is critical when we start working with
+real-world data.  So, let’s get cracking!</p>
+<p>Let’s motivate the need for lists.  Suppose I wanted to write software that
+keeps track of students’ names and test scores.  Let’s store their names first.
+Given what we know so far, we would need a separate variable for each student
+name.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">student1</span> <span class="o">=</span> <span class="s2">&quot;John Smith&quot;</span>
+<span class="n">student2</span> <span class="o">=</span> <span class="s2">&quot;Judy Adams&quot;</span>
+<span class="n">student3</span> <span class="o">=</span> <span class="s2">&quot;Frank Johnson&quot;</span>
+</pre></div>
+</div>
+<p>If we had another student enroll in the class, we’d need to add another
+variable.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">student1</span> <span class="o">=</span> <span class="s2">&quot;John Smith&quot;</span>
+<span class="n">student2</span> <span class="o">=</span> <span class="s2">&quot;Judy Adams&quot;</span>
+<span class="n">student3</span> <span class="o">=</span> <span class="s2">&quot;Frank Johnson&quot;</span>
+<span class="hll"><span class="n">student4</span> <span class="o">=</span> <span class="s2">&quot;Paige McConnell&quot;</span>
+</span></pre></div>
+</div>
+<p>How many variables do we need?  Well, I guess we’d need as many as we think we
+might possibly need.  If we were using this software at a large public
+university, we might have 500 students in a Computer Science 1 class, so our
+code might look like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">student1</span> <span class="o">=</span> <span class="s2">&quot;John Smith&quot;</span>
+<span class="n">student2</span> <span class="o">=</span> <span class="s2">&quot;Judy Adams&quot;</span>
+<span class="n">student3</span> <span class="o">=</span> <span class="s2">&quot;Frank Johnson&quot;</span>
+<span class="c1"># ...</span>
+<span class="c1"># ...</span>
+<span class="c1"># ... definitions for student4 through student498 omitted ...</span>
+<span class="c1"># ...</span>
+<span class="c1"># ...</span>
+<span class="n">student499</span> <span class="o">=</span> <span class="s2">&quot;Sally Schmidt&quot;</span>
+<span class="n">student500</span> <span class="o">=</span> <span class="s2">&quot;Maxwell Masterson&quot;</span>
+</pre></div>
+</div>
+<p>That’s a lot of variables, and this is getting ridiculous.</p>
+<p>What if instead of a whole bunch of variables to store all of our students, we
+could have just one variable to store all of the students.  We can!  Contrast
+the code we’ve presented so far with the code in Listing <a class="reference internal" href="#list-ex1"><span class="std std-numref">5.1</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<span id="list-ex1"></span><div class="code-block-caption"><span class="caption-number">Listing 5.1 </span><span class="caption-text">First list example</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">students</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;John Smith&quot;</span><span class="p">,</span> <span class="s2">&quot;Judy Adams&quot;</span><span class="p">,</span> <span class="s2">&quot;Frank Johnson&quot;</span><span class="p">,</span> <span class="s2">&quot;Paige McConnell&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">students</span></code> variable holds a <em>list</em> of values.  In this case, each value is a
+single string value, and there are four strings stored in this list.  We use
+the square bracket symbols <code class="docutils literal notranslate"><span class="pre">[</span></code> and <code class="docutils literal notranslate"><span class="pre">]</span></code> when we want to create a list.</p>
+<p>In Listing <a class="reference internal" href="#list-ex1"><span class="std std-numref">5.1</span></a>, whenever we want to store more students, we
+don’t need to create more variables.  We can just dump their names into this
+<code class="docutils literal notranslate"><span class="pre">students</span></code> variable.  Cool, huh?  Actually, we haven’t even scratched the
+surface of how useful this is going to be.</p>
+<p>So, what can we do with a list once we’ve made one?  Table <a class="reference internal" href="#tbl-list-ops"><span class="std std-numref">5.1</span></a>
+shows several handy list expressions and list functions.  To make sense of the
+table, suppose we have the following variables.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Let...
+   L be a list,
+   L1 be a sub-list of L,
+   v be a value we wish to store in a list,
+   i be an index integer,
+   j be another index integer,
+   s be a string, and
+   p be a string
+</pre></div>
+</div>
+<p>You’ll notice in Table <a class="reference internal" href="#tbl-list-ops"><span class="std std-numref">5.1</span></a> that some of the same operations that can be performed on strings can also be performed on lists.</p>
+<span id="tbl-list-ops"></span><table class="colwidths-given docutils align-default" id="id2">
+<caption><span class="caption-number">Table 5.1 </span><span class="caption-text">Expression/value/type</span><a class="headerlink" href="#id2" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Expression</p></th>
+<th class="head"><p>Explanation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">v</span> <span class="pre">=</span> <span class="pre">L[i]</span></code></p></td>
+<td><p>The indexing operator: gets the i<sup>th</sup> item from <code class="docutils literal notranslate"><span class="pre">L</span></code> and places it in the variable <code class="docutils literal notranslate"><span class="pre">v</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">L1</span> <span class="pre">=</span> <span class="pre">L[i:j]</span></code></p></td>
+<td><p>The slicing operator: makes a new list <code class="docutils literal notranslate"><span class="pre">L1</span></code>, which is a sub-list of <code class="docutils literal notranslate"><span class="pre">L</span></code> consisting of <code class="docutils literal notranslate"><span class="pre">L</span></code>’s items from index <code class="docutils literal notranslate"><span class="pre">i</span></code> up to–but not including–index <code class="docutils literal notranslate"><span class="pre">j</span></code>. Both <code class="docutils literal notranslate"><span class="pre">i</span></code> and <code class="docutils literal notranslate"><span class="pre">j</span></code> may be omitted.  If <code class="docutils literal notranslate"><span class="pre">i</span></code> is omitted, the beginning of the list is assumed.  If <code class="docutils literal notranslate"><span class="pre">j</span></code> is omitted, the end of the list is assumed.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">L.append(v)</span></code></p></td>
+<td><p>Adds the value <code class="docutils literal notranslate"><span class="pre">v</span></code> to the end of the list <code class="docutils literal notranslate"><span class="pre">L</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">L.insert(i,</span> <span class="pre">v)</span></code></p></td>
+<td><p>Inserts the value <code class="docutils literal notranslate"><span class="pre">v</span></code> into the list <code class="docutils literal notranslate"><span class="pre">L</span></code> at position <code class="docutils literal notranslate"><span class="pre">i</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">L.remove(v)</span></code></p></td>
+<td><p>Removes the first instance of the value <code class="docutils literal notranslate"><span class="pre">v</span></code> in the list <code class="docutils literal notranslate"><span class="pre">L</span></code>.  If there are more instances of <code class="docutils literal notranslate"><span class="pre">v</span></code> in <code class="docutils literal notranslate"><span class="pre">L</span></code>, they will be ignored.  If <code class="docutils literal notranslate"><span class="pre">v</span></code> does not exist in <code class="docutils literal notranslate"><span class="pre">L</span></code>, the program will trigger a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">v</span> <span class="pre">=</span> <span class="pre">L.pop(i)</span></code></p></td>
+<td><p>Removes the value in <code class="docutils literal notranslate"><span class="pre">L</span></code> at index <code class="docutils literal notranslate"><span class="pre">i</span></code> and places it in the variable <code class="docutils literal notranslate"><span class="pre">v</span></code>.  <code class="docutils literal notranslate"><span class="pre">i</span></code> may be omitted, in which case the last item in the list is removed.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">L</span> <span class="pre">=</span> <span class="pre">s.split()</span></code></p></td>
+<td><p>Uses the parts of a string to make a list.  Does so by splitting a string up into pieces separated by whitespace and placing the resulting items into the list <code class="docutils literal notranslate"><span class="pre">L</span></code>. It does not modify the original string <code class="docutils literal notranslate"><span class="pre">s</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">L</span> <span class="pre">=</span> <span class="pre">s.split(p)</span></code></p></td>
+<td><p>Uses the parts of a string to make a list. Does so by splitting a string up into pieces separated by the string pattern <code class="docutils literal notranslate"><span class="pre">p</span></code> and placing the resulting items into the list <code class="docutils literal notranslate"><span class="pre">L</span></code>. It does not modify the original string <code class="docutils literal notranslate"><span class="pre">s</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">=</span> <span class="pre">p.join(L)</span></code></p></td>
+<td><p>Joins the items in the list <code class="docutils literal notranslate"><span class="pre">L</span></code> to form a new string (stored in <code class="docutils literal notranslate"><span class="pre">s</span></code>) by joining the items together with the string <code class="docutils literal notranslate"><span class="pre">p</span></code>.</p></td>
+</tr>
+</tbody>
+</table>
+<p>The more you program, the easier it will become to read tables like
+Table <a class="reference internal" href="#tbl-list-ops"><span class="std std-numref">5.1</span></a>.  For most beginning programmers, however, it is easier
+to learn by looking at examples. Listing <a class="reference internal" href="#list-ops-ex"><span class="std std-numref">5.2</span></a> demonstrates a
+few “toy” examples of how to use these list operations.  The result of most of
+the operations is printed, and the effect of each statement is shown in a
+comment to the right of the statement.</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<span id="list-ops-ex"></span><div class="code-block-caption"><span class="caption-number">Listing 5.2 </span><span class="caption-text">List operations example</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">cheeses</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;cheddar&quot;</span><span class="p">,</span> <span class="s2">&quot;swiss&quot;</span><span class="p">,</span> <span class="s2">&quot;feta&quot;</span><span class="p">,</span> <span class="s2">&quot;gouda&quot;</span><span class="p">,</span> <span class="s2">&quot;parmesan&quot;</span><span class="p">]</span>
+<span class="linenos"> 2</span><span class="n">line</span> <span class="o">=</span> <span class="s2">&quot;red,green,blue,teal,cyan&quot;</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="nb">print</span><span class="p">(</span><span class="n">cheeses</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>           <span class="c1"># prints swiss</span>
+<span class="linenos"> 5</span><span class="nb">print</span><span class="p">(</span><span class="n">cheeses</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span>         <span class="c1"># prints [&quot;cheddar&quot;, &quot;swiss&quot;]</span>
+<span class="linenos"> 6</span><span class="nb">print</span><span class="p">(</span><span class="n">cheeses</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>          <span class="c1"># prints parmesan</span>
+<span class="linenos"> 7</span><span class="nb">print</span><span class="p">(</span><span class="n">cheeses</span><span class="p">[</span><span class="mi">3</span><span class="p">:])</span>          <span class="c1"># prints [&quot;gouda&quot;, &quot;parmesan&quot;]</span>
+<span class="linenos"> 8</span><span class="nb">print</span><span class="p">(</span><span class="n">cheeses</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span>          <span class="c1"># prints [&quot;cheddar&quot;, &quot;swiss&quot;]</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="n">cheeses</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;parmesan&quot;</span><span class="p">)</span>  <span class="c1"># cheeses is now [&quot;cheddar&quot;, &quot;swiss&quot;, &quot;feta&quot;, &quot;gouda&quot;]</span>
+<span class="linenos">11</span><span class="n">cheeses</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>             <span class="c1"># cheeses is now [&quot;cheddar&quot;, &quot;swiss&quot;, &quot;feta&quot;]</span>
+<span class="linenos">12</span><span class="n">cheeses</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>               <span class="c1"># cheeses is now [&quot;cheddar&quot;, &quot;swiss&quot;]</span>
+<span class="linenos">13</span><span class="n">cheeses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;jack&quot;</span><span class="p">)</span>      <span class="c1"># cheeses is now [&quot;cheddar&quot;, &quot;swiss&quot;, &quot;jack&quot;]</span>
+<span class="linenos">14</span><span class="n">cheeses</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;brie&quot;</span><span class="p">)</span>   <span class="c1"># cheeses is now [&quot;brie&quot;, &quot;cheddar&quot;, &quot;swiss&quot;, &quot;jack&quot;]</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span><span class="n">colors</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>    <span class="c1"># colors is now [&quot;red&quot;,&quot;green&quot;,&quot;blue&quot;,&quot;teal&quot;,&quot;cyan&quot;]</span>
+<span class="linenos">17</span><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">colors</span><span class="p">))</span>          <span class="c1"># prints 5</span>
+<span class="linenos">18</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">colors</span><span class="p">))</span>    <span class="c1"># prints red, green, blue, teal, cyan</span>
+<span class="linenos">19</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot; -&gt; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">colors</span><span class="p">))</span>  <span class="c1"># prints red -&gt; green -&gt; blue -&gt; teal -&gt; cyan</span>
+</pre></div>
+</div>
+</div>
+<p>Okay, let’s test our understanding by trying to apply what we’ve learned.
+Suppose we have a list named <code class="docutils literal notranslate"><span class="pre">lst</span></code> defined as:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">lst</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Maria&quot;</span><span class="p">,</span> <span class="s2">&quot;Sheryl&quot;</span><span class="p">,</span> <span class="s2">&quot;Barbara&quot;</span><span class="p">,</span> <span class="s2">&quot;Shafi&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Can we write code to modify <code class="docutils literal notranslate"><span class="pre">lst</span></code> so that the first item is moved to the end of
+the list?  In other words, the end result should look like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">lst</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Sheryl&quot;</span><span class="p">,</span> <span class="s2">&quot;Barbara&quot;</span><span class="p">,</span> <span class="s2">&quot;Shafi&quot;</span><span class="p">,</span> <span class="s2">&quot;Maria&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>We can use any number of statements that we want.  Try it.  Try mocking up a
+solution using comments first, and then write your code beneath each of the
+comments.</p>
+<p>Here’s one approach.  First, let’s start with comments.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Remove the first item and store it.</span>
+
+<span class="c1"># Put the stored item on the end of the list.</span>
+</pre></div>
+</div>
+<p>Now, let’s fill in the details of how we accomplish these steps.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Remove the first item and store it.</span>
+<span class="n">value</span> <span class="o">=</span> <span class="n">lst</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Put the stored item on the end of the list.</span>
+<span class="n">lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Good!  This is a suitable way to accomplish this task, and more importantly, it
+is easy to read what the code does even if there are no comments to explain the
+statements.  To see what I mean, let’s strip away the comments.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">value</span> <span class="o">=</span> <span class="n">lst</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We can clearly see that the first statement extracts the first item, and the
+second statement puts it back on the end of the list.  We should always try to
+write our code in such a way that it is easily read and understood.  This was
+best articulated in the preface of the book <em>Structure and Interpretation of
+Computer Programs</em> (a.k.a. “SICP”) by Harold Abelson and Gerald Sussman:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&quot;Programs must be written for people to read, and only incidentally for machines to execute.&quot;
+</pre></div>
+</div>
+<p>We could have also written this code as a one-liner, like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lst</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>One could argue this is harder to read, at least initially.</p>
+<p>Let’s try another example.  What if we wanted to “swap” the locations of the
+first and second items in the list, regardless of what the values in those locations happen to be?  Consider the following definition of <code class="docutils literal notranslate"><span class="pre">lst</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">lst</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Maria&quot;</span><span class="p">,</span> <span class="s2">&quot;Sheryl&quot;</span><span class="p">,</span> <span class="s2">&quot;Barbara&quot;</span><span class="p">,</span> <span class="s2">&quot;Shafi&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Can we write code that makes <cite>lst</cite> look like this?</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">lst</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Sheryl&quot;</span><span class="p">,</span> <span class="s2">&quot;Maria&quot;</span><span class="p">,</span> <span class="s2">&quot;Barbara&quot;</span><span class="p">,</span> <span class="s2">&quot;Shafi&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Try to write code that does this.  Make a good, honest attempt before reading
+ahead.</p>
+<p>We know that we want the value of the expression <code class="docutils literal notranslate"><span class="pre">lst[0]</span></code> to be changed to the
+value of the expression <code class="docutils literal notranslate"><span class="pre">lst[1]</span></code> and vice versa.  So, our first attempt might be
+Listing <a class="reference internal" href="#swap-bad"><span class="std std-numref">5.3</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="id4">
+<span id="swap-bad"></span><div class="code-block-caption"><span class="caption-number">Listing 5.3 </span><span class="caption-text">First attempt at swapping value in a list</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">lst</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">lst</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">lst</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">lst</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<p>Consider the effect of the first statement <code class="docutils literal notranslate"><span class="pre">lst[0]</span> <span class="pre">=</span> <span class="pre">lst[1]</span></code>, which is shown in
+Figure <a class="reference internal" href="#fig-swap-bad"><span class="std std-numref">5.1</span></a>.</p>
+<figure class="align-default" id="id5">
+<span id="fig-swap-bad"></span><a class="reference internal image-reference" href="_images/swap-bad.png"><img alt="Incorrect attempt at swapping values in a list" src="_images/swap-bad.png" style="width: 400.0px; height: 146.0px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 5.1 </span><span class="caption-text">Incorrect attempt at swapping values in a list</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>Uh oh!  Our first statement overwrites “Maria” and she disappears forever!  That
+is not good at all.</p>
+<p>What we need to do is save “Maria” somewhere first so she doesn’t get
+obliterated.  So let’s create a <em>temporary variable</em> – a one-use variable that
+will help us accomplish a task, and then we’ll likely never use it again.  Think
+of a temporary variable (or just “temp variable” for short) like a Post-It note.
+We may write something on a Post-It note to remind ourselves of something for a
+brief period of time.  Consider our next attempt in Listing <a class="reference internal" href="#swap-good"><span class="std std-numref">5.4</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="id6">
+<span id="swap-good"></span><div class="code-block-caption"><span class="caption-number">Listing 5.4 </span><span class="caption-text">Correctly swapping values in a list</span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">temp</span> <span class="o">=</span> <span class="n">lst</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">lst</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">lst</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">lst</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span>
+</pre></div>
+</div>
+</div>
+<p>Let’s visualize how this works (see Figure <a class="reference internal" href="#fig-swap-good"><span class="std std-numref">5.2</span></a>).</p>
+<figure class="align-default" id="id7">
+<span id="fig-swap-good"></span><a class="reference internal image-reference" href="_images/swap-good.png"><img alt="Swapping values in a list" src="_images/swap-good.png" style="width: 870.8px; height: 242.2px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 5.2 </span><span class="caption-text">Swapping values in a list</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>The statement labeled number <code class="docutils literal notranslate"><span class="pre">1</span></code> copies the value at index <code class="docutils literal notranslate"><span class="pre">0</span></code> (in this case,
+<code class="docutils literal notranslate"><span class="pre">&quot;Maria&quot;</span></code>) into the <code class="docutils literal notranslate"><span class="pre">temp</span></code> variable for safe keeping.  Then, statement number
+<code class="docutils literal notranslate"><span class="pre">2</span></code> writes the value at index <code class="docutils literal notranslate"><span class="pre">1</span></code> over the top of the value at index <code class="docutils literal notranslate"><span class="pre">0</span></code>.  At
+this point (after executing statement number <code class="docutils literal notranslate"><span class="pre">2</span></code>), there are two “Sheryl”
+strings in the list, but that’s okay because we have saved <code class="docutils literal notranslate"><span class="pre">&quot;Maria&quot;</span></code> in our temp
+variable.  Finally, in statement number <code class="docutils literal notranslate"><span class="pre">3</span></code>, we take the value saved in <code class="docutils literal notranslate"><span class="pre">temp</span></code>
+and we overwrite the value in index <code class="docutils literal notranslate"><span class="pre">1</span></code> with <code class="docutils literal notranslate"><span class="pre">temp</span></code>’s value.  The list contents
+are now correctly <code class="docutils literal notranslate"><span class="pre">[&quot;Sheryl&quot;,</span> <span class="pre">&quot;Maria&quot;,</span> <span class="pre">&quot;Barbara&quot;,</span> <span class="pre">&quot;Shafi&quot;]</span></code>.</p>
+<p>Index <code class="docutils literal notranslate"><span class="pre">0</span></code> and index <code class="docutils literal notranslate"><span class="pre">1</span></code> are hardcoded in Listing <a class="reference internal" href="#swap-good"><span class="std std-numref">5.4</span></a>.  If we
+wanted, we could invent two variables <code class="docutils literal notranslate"><span class="pre">i</span></code> and <code class="docutils literal notranslate"><span class="pre">j</span></code> to hold the indices whose
+values we wish to swap (see Listing <a class="reference internal" href="#swap-good-nohc"><span class="std std-numref">5.5</span></a>).</p>
+<div class="literal-block-wrapper docutils container" id="id8">
+<span id="swap-good-nohc"></span><div class="code-block-caption"><span class="caption-number">Listing 5.5 </span><span class="caption-text">Swapping values in a list, no hard-coded indices</span><a class="headerlink" href="#id8" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># or, whatever index we wish</span>
+<span class="n">j</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># or, whatever other index we wish</span>
+<span class="n">temp</span> <span class="o">=</span> <span class="n">lst</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="n">lst</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">lst</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+<span class="n">lst</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="assignment-statements-revisited-multiple-assignment">
+<span id="sec-multi-assign"></span><h2><span class="section-number">5.2. </span>Assignment Statements Revisited: Multiple Assignment<a class="headerlink" href="#assignment-statements-revisited-multiple-assignment" title="Permalink to this headline">¶</a></h2>
+<p>Since this book is purely an introduction to programming more so than a
+definitive guide to the nuances of Python, we could stop our discussion right
+here.  This same programming technique will work with most other programming
+language as you encounter them (e.g., C++, Java, etc.).  However, Python has a
+really cool way of performing swaps called <em>multiple assignment</em> that your
+author (that’s me!) simply can’t help himself from showing you!  We can replace
+the code in Listing <a class="reference internal" href="#swap-good-nohc"><span class="std std-numref">5.5</span></a> with Listing
+<a class="reference internal" href="#swap-good-multiassign"><span class="std std-numref">5.6</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="id9">
+<span id="swap-good-multiassign"></span><div class="code-block-caption"><span class="caption-number">Listing 5.6 </span><span class="caption-text">Swapping values in a list using multiple assignment</span><a class="headerlink" href="#id9" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># or, whatever index we wish</span>
+<span class="n">j</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># or, whatever other index we wish</span>
+<span class="n">lst</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">lst</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">lst</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">lst</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<p>Wizardry!</p>
+<p>How does this work?  Let’s approach it visually as in
+Figure <a class="reference internal" href="#fig-multi-assign"><span class="std std-numref">5.3</span></a>.</p>
+<figure class="align-default" id="id10">
+<span id="fig-multi-assign"></span><a class="reference internal image-reference" href="_images/multi_assign.png"><img alt="Multiple assignment" src="_images/multi_assign.png" style="width: 300.0px; height: 103.0px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 5.3 </span><span class="caption-text">Multiple assignment</span><a class="headerlink" href="#id10" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>Multiple assignment is a Python feature known in the computer science community
+as <em>syntactic sugar</em>.  Syntax is how you arrange a statement so that it can be
+understood.  In the English language, sentences have a syntax consisting of a
+noun phrase followed by a verb phrase followed by terminating punctuation
+(like a period or exclamation point).  That’s how we start <em>parsing</em> (or
+“breaking apart and making sense of”) a sentence.  “Sugar” in this case means
+non-essential.  So, syntactic sugar refers to language features that make
+something easier or more expressive but are non-essential.  Usually, syntactic
+sugar is converted by the compiler behind the scenes to another form through
+a process called <em>desugaring</em>.  If you continue on in studying computer science,
+this won’t be the last time you hear about desugaring, hopefully.</p>
+<p>Desugaring in this case first evaluates the expressions on the RHS, and then
+converts this</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">lst</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">lst</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Sheryl&quot;</span><span class="p">,</span> <span class="s2">&quot;Maria&quot;</span>
+</pre></div>
+</div>
+<p>behind the scenes into this</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">lst</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Sheryl&quot;</span>
+<span class="n">lst</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Maria&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="list-variables-references-versus-values">
+<span id="sec-list-refs"></span><h2><span class="section-number">5.3. </span>List Variables: References Versus Values<a class="headerlink" href="#list-variables-references-versus-values" title="Permalink to this headline">¶</a></h2>
+<p>Here is some fairly simple code that creates variables, changes one of them, and
+then prints their values.</p>
+<div class="literal-block-wrapper docutils container" id="id11">
+<span id="simple-assign"></span><div class="code-block-caption"><span class="caption-number">Listing 5.7 </span><span class="caption-text">Simple assignment statements</span><a class="headerlink" href="#id11" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">x</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>   <span class="c1"># prints 4</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>   <span class="c1"># prints 3</span>
+</pre></div>
+</div>
+</div>
+<p>Let’s do something similar, only this time we’ll use lists of numbers.</p>
+<div class="literal-block-wrapper docutils container" id="id12">
+<span id="list-assign"></span><div class="code-block-caption"><span class="caption-number">Listing 5.8 </span><span class="caption-text">Assignment with list variables</span><a class="headerlink" href="#id12" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">xlist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+<span class="n">ylist</span> <span class="o">=</span> <span class="n">xlist</span>
+<span class="n">xlist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">xlist</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ylist</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>You may have expected the first print statement to yield <code class="docutils literal notranslate"><span class="pre">[2,</span> <span class="pre">4,</span> <span class="pre">6,</span> <span class="pre">8]</span></code> and the
+second one to yield <code class="docutils literal notranslate"><span class="pre">[2,</span> <span class="pre">4,</span> <span class="pre">6]</span></code>, but that isn’t what happens at all!  Instead,
+the output is:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[2, 4, 6, 8]
+[2, 4, 6, 8]
+</pre></div>
+</div>
+<p>How is it that changing <code class="docutils literal notranslate"><span class="pre">xlist</span></code> has the side-effect of changing <code class="docutils literal notranslate"><span class="pre">ylist</span></code>?  What
+is this sorcery?!</p>
+<p>The good news is that the reason is really fairly simple, especially when we
+explain it with pictures.  Consider the first example in
+Listing <a class="reference internal" href="#simple-assign"><span class="std std-numref">5.7</span></a> where we had integer variables <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code>
+(see picture in Figure <a class="reference internal" href="#fig-inc-assign"><span class="std std-numref">5.4</span></a>).</p>
+<figure class="align-default" id="id13">
+<span id="fig-inc-assign"></span><a class="reference internal image-reference" href="_images/inc_assign.png"><img alt="Visualizing Listing :numref:`%s &lt;simple_assign&gt;`" src="_images/inc_assign.png" style="width: 160.0px; height: 224.8px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 5.4 </span><span class="caption-text">Visualizing Listing <a class="reference internal" href="#simple-assign"><span class="std std-numref">5.7</span></a></span><a class="headerlink" href="#id13" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>No surprises there.  Now, let’s see what happens in the example with <code class="docutils literal notranslate"><span class="pre">xlist</span></code> and
+<code class="docutils literal notranslate"><span class="pre">ylist</span></code>.  It turns out that list variables don’t actually contain lists
+themselves.  Instead, they contain something called a <em>reference</em> to a list. The
+list is actually stored somewhere else.  Think of a reference as being like a
+“pointer” or an arrow to somewhere else in the computer’s memory.  With this in
+mind, we can represent the code in Listing <a class="reference internal" href="#list-assign"><span class="std std-numref">5.8</span></a> visually in
+Figure <a class="reference internal" href="#fig-list-assign"><span class="std std-numref">5.5</span></a>.</p>
+<figure class="align-default" id="id14">
+<span id="fig-list-assign"></span><a class="reference internal image-reference" href="_images/list_assign.png"><img alt="Visualizing Listing :numref:`%s &lt;list_assign&gt;`" src="_images/list_assign.png" style="width: 409.6px; height: 240.8px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 5.5 </span><span class="caption-text">Visualizing Listing <a class="reference internal" href="#list-assign"><span class="std std-numref">5.8</span></a></span><a class="headerlink" href="#id14" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>If we attempt to modify <code class="docutils literal notranslate"><span class="pre">xlist</span></code> or <code class="docutils literal notranslate"><span class="pre">ylist</span></code>, either will affect the same list.
+You might ask why this happens in Python, and there is a perfectly good reason
+that we will explore in Section <a class="reference internal" href="#sec-list-funcs"><span class="std std-numref">5.4</span></a>.  For now, recognize
+that we want to know how to make <code class="docutils literal notranslate"><span class="pre">ylist</span></code> be a copy of <code class="docutils literal notranslate"><span class="pre">xlist</span></code>.  We could do the
+following.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ylist</span> <span class="o">=</span> <span class="n">xlist</span><span class="p">[:]</span>    <span class="c1"># the right way to make a copy of a list</span>
+</pre></div>
+</div>
+<p>This code assigns a slice of <code class="docutils literal notranslate"><span class="pre">xlist</span></code> to the new variable <code class="docutils literal notranslate"><span class="pre">ylist</span></code>.  Why no integers before or after the colon (<code class="docutils literal notranslate"><span class="pre">:</span></code>)?  Recall that the integers around the colon are optional.  If no integers are given, it selects the entire list.  The end result is shown in Figure <a class="reference internal" href="#fig-list-copy"><span class="std std-numref">5.6</span></a>.</p>
+<figure class="align-default" id="id15">
+<span id="fig-list-copy"></span><a class="reference internal image-reference" href="_images/list_copy.png"><img alt="Copying a list using the slicing (``[:]``) operator" src="_images/list_copy.png" style="width: 384.0px; height: 132.0px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 5.6 </span><span class="caption-text">Copying a list using the slicing (<code class="docutils literal notranslate"><span class="pre">[:]</span></code>) operator</span><a class="headerlink" href="#id15" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>Now if we perform <code class="docutils literal notranslate"><span class="pre">xlist.append(8)</span></code> this time, we end up with the result in Figure <a class="reference internal" href="#fig-list-append-after-copy"><span class="std std-numref">5.7</span></a>.</p>
+<figure class="align-default" id="id16">
+<span id="fig-list-append-after-copy"></span><a class="reference internal image-reference" href="_images/list_append_after_copy.png"><img alt="Appending an item after copying the list" src="_images/list_append_after_copy.png" style="width: 409.6px; height: 119.2px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 5.7 </span><span class="caption-text">Appending an item after copying the list</span><a class="headerlink" href="#id16" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="functions-with-lists">
+<span id="sec-list-funcs"></span><h2><span class="section-number">5.4. </span>Functions with Lists<a class="headerlink" href="#functions-with-lists" title="Permalink to this headline">¶</a></h2>
+<p>In the previous section, we learned that list variables do not contain the lists
+themselves.  Rather, they contain a <em>reference</em> to a list.  There are a number
+of perfectly good reasons for this, the first of which has to do with how
+functions interact with lists.</p>
+<p>Let’s consider an example.  Suppose we have a list of strings that happen to be
+integers, like <code class="docutils literal notranslate"><span class="pre">[&quot;1&quot;,</span> <span class="pre">&quot;2&quot;,</span> <span class="pre">&quot;3&quot;,</span> <span class="pre">&quot;4&quot;]</span></code>.  We wish to change the list so that the
+values are actually integers rather than strings, that is, <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">4]</span></code>.  We
+would need to pass the list to the function as an argument.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_int_list</span><span class="p">(</span><span class="n">lst</span><span class="p">):</span>
+    <span class="c1"># function body goes here</span>
+
+
+<span class="c1"># main section of code</span>
+<span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span> <span class="s2">&quot;&quot;&quot;Somehow we get a bunch of strings here.&quot;&quot;&quot;</span> <span class="p">]</span>
+<span class="n">make_int_list</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
+<span class="c1"># Now &#39;numbers&#39; has been changed from a list of strings</span>
+<span class="c1"># to a list of integers.</span>
+</pre></div>
+</div>
+<p>We have named the parameter <code class="docutils literal notranslate"><span class="pre">lst</span></code>, but you can name it whatever seems
+appropriate.  We named it <code class="docutils literal notranslate"><span class="pre">lst</span></code> rather than <code class="docutils literal notranslate"><span class="pre">list</span></code> since the word <code class="docutils literal notranslate"><span class="pre">list</span></code> is
+already used in Python as the name of a type.</p>
+<p>As we learned in Section <a class="reference internal" href="ch4_funcs.html#sec-params"><span class="std std-numref">4.2</span></a>, Python passes arguments
+to function parameters by value.  That is, a copy of the value in the main
+program is sent to the function.  Imagine if list variables contained the
+lists themselves rather than “references” to the list.  Let’s examine the
+fall out if that were the case.  In the above example, a copy of the numbers
+list would be sent to <code class="docutils literal notranslate"><span class="pre">make_int_list</span></code>, so <code class="docutils literal notranslate"><span class="pre">lst</span></code> would be a complete
+copy of numbers (see Figure <a class="reference internal" href="#fig-numbers-copy"><span class="std std-numref">5.8</span></a>).</p>
+<figure class="align-default" id="id17">
+<span id="fig-numbers-copy"></span><a class="reference internal image-reference" href="_images/numbers_copy.png"><img alt="Variable `lst` if list variables contained the list itself (rather than a reference)" src="_images/numbers_copy.png" style="width: 320.0px; height: 78.4px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 5.8 </span><span class="caption-text">Variable <cite>lst</cite> if list variables contained the list itself (rather than a reference)</span><a class="headerlink" href="#id17" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>If we program properly, <cite>make_int_list</cite> would convert all the strings in the
+list to integers so the end result would be as shown in
+Figure <a class="reference internal" href="#fig-numbers-lst-diff"><span class="std std-numref">5.9</span></a>.</p>
+<figure class="align-default" id="id18">
+<span id="fig-numbers-lst-diff"></span><a class="reference internal image-reference" href="_images/numbers_lst_diff.png"><img alt="Desired result of ``make_int_list``" src="_images/numbers_lst_diff.png" style="width: 320.0px; height: 82.4px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 5.9 </span><span class="caption-text">Desired result of <code class="docutils literal notranslate"><span class="pre">make_int_list</span></code></span><a class="headerlink" href="#id18" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>But, the original list that we wanted to change, namely <code class="docutils literal notranslate"><span class="pre">numbers</span></code>, hasn’t
+changed as we would like!</p>
+<p>Now, consider what happens since list variables contain references to
+lists instead of the actual lists themselves.  The reference is passed by
+value, so <code class="docutils literal notranslate"><span class="pre">lst</span></code> now “points” at the same list as <code class="docutils literal notranslate"><span class="pre">numbers</span></code>
+(see Figure <a class="reference internal" href="#fig-numbers-lst-same"><span class="std std-numref">5.10</span></a>).</p>
+<figure class="align-default" id="id19">
+<span id="fig-numbers-lst-same"></span><a class="reference internal image-reference" href="_images/numbers_lst_same.png"><img alt="List reference passed to ``make_int_list``" src="_images/numbers_lst_same.png" style="width: 409.6px; height: 171.20000000000002px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 5.10 </span><span class="caption-text">List reference passed to <code class="docutils literal notranslate"><span class="pre">make_int_list</span></code></span><a class="headerlink" href="#id19" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>Now when <code class="docutils literal notranslate"><span class="pre">make_int_list</span></code> has returned, all changes made to <code class="docutils literal notranslate"><span class="pre">lst</span></code> are also made
+to <code class="docutils literal notranslate"><span class="pre">numbers</span></code> because both <code class="docutils literal notranslate"><span class="pre">lst</span></code> and <code class="docutils literal notranslate"><span class="pre">numbers</span></code> refer to the same list (see
+Figure <a class="reference internal" href="#fig-numbers-lst-mod"><span class="std std-numref">5.11</span></a>)!</p>
+<figure class="align-default" id="id20">
+<span id="fig-numbers-lst-mod"></span><a class="reference internal image-reference" href="_images/numbers_lst_mod.png"><img alt="``make_int_list`` makes changes to the list" src="_images/numbers_lst_mod.png" style="width: 409.6px; height: 173.60000000000002px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 5.11 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">make_int_list</span></code> makes changes to the list</span><a class="headerlink" href="#id20" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>We should probably go ahead and write the function’s body.  We use a loop to
+walk through each index.  At each index, we can convert the string to an <code class="docutils literal notranslate"><span class="pre">int</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_int_list</span><span class="p">(</span><span class="n">lst</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">lst</span><span class="p">)):</span>
+        <span class="n">lst</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">lst</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>That’s it!</p>
+<p>There is another advantage to passing a list to a function given that lists are
+stored by reference rather than by value.  Suppose we had a very large list of
+information (say, 500 million strings).  If the entire list was passed to the
+function rather than just a reference to the list, Python would have to make a
+copy of the entire list, all 500 million items.  That takes precious time, and
+even though computers are fast, there are limits even to what computers can do
+(more on this in a later chapter).  It also uses an unnecessary amount of
+memory, because now instead of having one list containing 500 million strings,
+we now have two lists containing a cumulative total of 1 billion strings.  There
+are some computer languages that let you pick whether you pass arguments to
+functions by value or by reference no matter what the type of the variable is.
+It is common practice in those languages to pass large lists by reference for
+that reason alone.</p>
+<p>Let’s look at another way we might use functions on lists.  We won’t always
+define functions that modify lists directly.  Sometimes, we will pass a list to
+a function, and then the function will <em>return</em> a value or an entirely new list
+based on the original list.  For example, there is a function named <code class="docutils literal notranslate"><span class="pre">sum</span></code> that
+takes a list of numbers and returns the sum of all the numbers in the list.  We
+could use it like this.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">money</span> <span class="o">=</span> <span class="p">[</span><span class="mf">30.50</span><span class="p">,</span> <span class="mf">72.25</span><span class="p">,</span> <span class="mf">10.00</span><span class="p">]</span>
+<span class="n">grand_total</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">money</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You have $</span><span class="si">%.2f</span><span class="s2">.&quot;</span> <span class="o">%</span> <span class="n">grand_total</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">sum</span></code> takes a list as a parameter and returns a <code class="docutils literal notranslate"><span class="pre">float</span></code>.  It does not modify the list in any way.  How did the person who wrote the <code class="docutils literal notranslate"><span class="pre">sum</span></code> function do it?   Let’s find out by writing our own, only we need to give ours a different name.  Let’s call it <code class="docutils literal notranslate"><span class="pre">total</span></code>.  Once we define our function named <code class="docutils literal notranslate"><span class="pre">total</span></code>, we will be able to do this.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">money</span> <span class="o">=</span> <span class="p">[</span><span class="mf">30.50</span><span class="p">,</span> <span class="mf">72.25</span><span class="p">,</span> <span class="mf">10.00</span><span class="p">]</span>
+<span class="n">grand_total</span> <span class="o">=</span> <span class="n">total</span><span class="p">(</span><span class="n">money</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You have $</span><span class="si">%.2f</span><span class="s2">.&quot;</span> <span class="o">%</span> <span class="n">grand_total</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Let’s begin.  We know that we need the name of the function to be <code class="docutils literal notranslate"><span class="pre">total</span></code>, and
+it needs to accept a single list parameter, so we can write:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">total</span><span class="p">(</span><span class="n">numbers</span><span class="p">):</span>
+    <span class="c1"># function body goes here</span>
+</pre></div>
+</div>
+<p>Now, the function body will need to loop through the list of numbers and add
+each of them to a variable.  The variable will keep track of the running total.
+So, let’s create the variable (we’ll call it <code class="docutils literal notranslate"><span class="pre">running_total</span></code>) and then write the
+loop.</p>
+<div class="literal-block-wrapper docutils container" id="id21">
+<span id="total"></span><div class="code-block-caption"><span class="caption-number">Listing 5.9 </span><span class="caption-text">Function definition for <code class="docutils literal notranslate"><span class="pre">total</span></code></span><a class="headerlink" href="#id21" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">total</span><span class="p">(</span><span class="n">numbers</span><span class="p">):</span>
+    <span class="n">running_total</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">numbers</span><span class="p">)):</span>
+        <span class="n">running_total</span> <span class="o">+=</span> <span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">running_total</span>
+</pre></div>
+</div>
+</div>
+<p>This should work.  Go ahead and test it out.  The key ideas here are:</p>
+<ol class="arabic simple">
+<li><p>We’re passing a list to a function.</p></li>
+<li><p>We’re using a loop to walk through the list’s items.</p></li>
+<li><p>We’re creating a variable that we will update in each iteration of the loop.</p></li>
+</ol>
+<p><strong>These key ideas will show up a lot when we write functions that
+operate on lists.</strong></p>
+<p>Let’s try out a different example, and let’s see if we can apply some of the
+same ideas mentioned in the prior paragraph.  Suppose we have a list of numbers.
+We want to know the smallest value in that list of numbers.  Let’s write
+function that determines this for us.</p>
+<p>First, let’s pick a name for our function: <code class="docutils literal notranslate"><span class="pre">smallest</span></code>.</p>
+<p>Next, let’s write the function signature.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">smallest</span><span class="p">(</span><span class="n">numbers</span><span class="p">):</span>
+    <span class="c1"># FIXME</span>
+</pre></div>
+</div>
+<p>Notice how I have a comment with the all-caps word <code class="docutils literal notranslate"><span class="pre">FIXME</span></code> in place of the
+function’s body?  This is a common idiom that programmers use to remind them
+that they need to add code to a particular part of a file.  I suppose it’s silly
+to do this since we’re going to replace the function body very shortly, but it’s
+worth bringing up since 1.) many programmers do this, and 2.) many programs for
+editing code will keep track of your <code class="docutils literal notranslate"><span class="pre">FIXME</span></code>’s and then help you find them
+before you test out your code.</p>
+<p>Okay, now let’s use a loop to walk through the list’s items as we described
+above.  We’ll use a variable to keep track of the smallest value we’ve seen so
+far with each step of the loop.</p>
+<div class="literal-block-wrapper docutils container" id="id22">
+<span id="smallest-firstattempt"></span><div class="code-block-caption"><span class="caption-number">Listing 5.10 </span><span class="caption-text">Function definition for <code class="docutils literal notranslate"><span class="pre">smallest</span></code>, first attempt</span><a class="headerlink" href="#id22" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">smallest</span><span class="p">(</span><span class="n">numbers</span><span class="p">):</span>
+<span class="linenos">2</span>    <span class="n">small</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="linenos">3</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">numbers</span><span class="p">)):</span>
+<span class="linenos">4</span>        <span class="k">if</span> <span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">small</span><span class="p">:</span>
+<span class="linenos">5</span>            <span class="n">small</span> <span class="o">=</span> <span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="linenos">6</span>    <span class="k">return</span> <span class="n">small</span>
+</pre></div>
+</div>
+</div>
+<p>It’s kind of crazy how similar <code class="docutils literal notranslate"><span class="pre">smallest</span></code> is to <code class="docutils literal notranslate"><span class="pre">total</span></code>, isn’t it?  In computer
+science, we take a whole bunch of problems (many of them very complicated) and
+rearrange them so we can apply simple solutions to them.  That’s one of the cool
+things about computer science; it teaches us to define and organize our problems
+so that we can manage the complexity of the problem.  Yay computer science!</p>
+<p>Okay, let’s not pat ourselves on the back too much here.  We haven’t tested this
+code yet.  Let’s try it out.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">smallest</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">smallest</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">20</span><span class="p">]))</span>
+</pre></div>
+</div>
+<p>The output of these tests is:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>-5
+0.0
+</pre></div>
+</div>
+<p>The first line is correct.  The second line is BOGUS!  What went wrong?  Can you
+figure it out on your own?  (Sure you can.  Take a deep breath and debug it.)</p>
+<p>The problem is on line 2 of Listing <a class="reference internal" href="#smallest-firstattempt"><span class="std std-numref">5.10</span></a>.  We needed
+to give the variable <code class="docutils literal notranslate"><span class="pre">small</span></code> a good first value, but we weren’t sure what a good
+first value was at the time.  We picked <code class="docutils literal notranslate"><span class="pre">0.0</span></code>.  Unfortunately, nothing in
+<code class="docutils literal notranslate"><span class="pre">numbers</span></code> is going to be smaller than <code class="docutils literal notranslate"><span class="pre">0.0</span></code> when all the numbers are greater
+than zero, so <code class="docutils literal notranslate"><span class="pre">smallest</span></code> returns <code class="docutils literal notranslate"><span class="pre">0.0</span></code> even though there is no zero in
+<code class="docutils literal notranslate"><span class="pre">numbers.</span></code></p>
+<p>So, what would be a better starting choice for <code class="docutils literal notranslate"><span class="pre">small</span></code> than zero?  Some students
+might say, “How about a really big number!”  That’s not a bad idea.  We could do
+something like Listing <a class="reference internal" href="#smallest-secondattempt"><span class="std std-numref">5.11</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="id23">
+<span id="smallest-secondattempt"></span><div class="code-block-caption"><span class="caption-number">Listing 5.11 </span><span class="caption-text">Function definition for <code class="docutils literal notranslate"><span class="pre">smallest</span></code>, second attempt</span><a class="headerlink" href="#id23" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">smallest</span><span class="p">(</span><span class="n">numbers</span><span class="p">):</span>
+<span class="hll"><span class="linenos">2</span>    <span class="n">small</span> <span class="o">=</span> <span class="mf">1000000000.0</span>
+</span><span class="linenos">3</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">numbers</span><span class="p">)):</span>
+<span class="linenos">4</span>        <span class="k">if</span> <span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">small</span><span class="p">:</span>
+<span class="linenos">5</span>            <span class="n">small</span> <span class="o">=</span> <span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="linenos">6</span>    <span class="k">return</span> <span class="n">small</span>
+</pre></div>
+</div>
+</div>
+<p>This will work really well… until we have all numbers that are bigger than 1
+billion.</p>
+<p>Let’s try one more strategy.  Let’s let the first smallest number be the first
+number in the list.  Suppose <code class="docutils literal notranslate"><span class="pre">numbers[0]</span></code> is <code class="docutils literal notranslate"><span class="pre">10.0</span></code>.  Then, the first value of
+<code class="docutils literal notranslate"><span class="pre">small</span></code> can just be <code class="docutils literal notranslate"><span class="pre">10.0</span></code>.  This should work nicely.  If the first number in
+the list is the smallest, <code class="docutils literal notranslate"><span class="pre">small</span></code> will stay set to that number.  If there is a
+smaller number down the line in the list, eventually it will get changed.  This
+should work, and our final function definition for <code class="docutils literal notranslate"><span class="pre">smallest</span></code> is shown in
+Listing <a class="reference internal" href="#smallest"><span class="std std-numref">5.12</span></a>.  Naturally, we’ll want to test it, however.</p>
+<div class="literal-block-wrapper docutils container" id="id24">
+<span id="smallest"></span><div class="code-block-caption"><span class="caption-number">Listing 5.12 </span><span class="caption-text">Function definition for <code class="docutils literal notranslate"><span class="pre">smallest</span></code>, corrected</span><a class="headerlink" href="#id24" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">smallest</span><span class="p">(</span><span class="n">numbers</span><span class="p">):</span>
+<span class="hll"><span class="linenos">2</span>    <span class="n">small</span> <span class="o">=</span> <span class="n">numbers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span class="linenos">3</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">numbers</span><span class="p">)):</span>
+<span class="linenos">4</span>        <span class="k">if</span> <span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">small</span><span class="p">:</span>
+<span class="linenos">5</span>            <span class="n">small</span> <span class="o">=</span> <span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="linenos">6</span>    <span class="k">return</span> <span class="n">small</span>
+</pre></div>
+</div>
+</div>
+<p>This final code works… as long as there is at least one item in the list.  If
+the list is empty, then calling <code class="docutils literal notranslate"><span class="pre">smallest</span></code> doesn’t make much sense in the first
+place.  After all, a list with no items does not have a smallest item, per se.</p>
+<p>Are these examples starting to help?  How about if we do a few more examples?</p>
+<p>Here’s a different one.  Suppose we have a list of student exam percentages.
+Such a list might look like this (we’ll call it <code class="docutils literal notranslate"><span class="pre">scores</span></code>):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">scores</span> <span class="o">=</span> <span class="p">[</span><span class="mf">82.5</span><span class="p">,</span> <span class="mf">77.0</span><span class="p">,</span> <span class="mf">95.0</span><span class="p">,</span> <span class="mf">56.0</span><span class="p">,</span> <span class="mf">74.5</span><span class="p">,</span> <span class="mf">46.0</span><span class="p">,</span> <span class="mf">97.5</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>In this example, there are seven student scores.  We could think of other
+examples where there could be far more scores.  Suppose we’re interested in the
+number of students who passed the exam, i.e., the number whose score is <cite>60</cite> or
+above.  Let us define a function named <code class="docutils literal notranslate"><span class="pre">number_passed</span></code> that returns the number
+of passing students.</p>
+<p>First, write the function signature (Listing <a class="reference internal" href="#number-passed-sig"><span class="std std-numref">5.13</span></a>).</p>
+<div class="literal-block-wrapper docutils container" id="id25">
+<span id="number-passed-sig"></span><div class="code-block-caption"><span class="caption-number">Listing 5.13 </span><span class="caption-text">Function signature for <code class="docutils literal notranslate"><span class="pre">number_passed</span></code></span><a class="headerlink" href="#id25" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">number_passed</span><span class="p">(</span><span class="n">scores</span><span class="p">):</span>
+    <span class="c1"># FIXME</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+<p>I’ve written <code class="docutils literal notranslate"><span class="pre">pass</span></code> for the body of the function.  We’ll delete it very shortly,
+but I thought now would be a good time to introduce <code class="docutils literal notranslate"><span class="pre">pass</span></code>.  What does <code class="docutils literal notranslate"><span class="pre">pass</span></code> do
+exactly?  Python expects there to be an indented block of statements after a
+function signature.  If there is no indented statement or block of statements,
+our code will crash.  Comments don’t count, so naturally <code class="docutils literal notranslate"><span class="pre">FIXME</span></code> comments don’t
+count either.  This way I can still run any other code in my file even if I
+haven’t finished the definition of <code class="docutils literal notranslate"><span class="pre">number_passed</span></code>.</p>
+<p>Okay, let’s delete the <code class="docutils literal notranslate"><span class="pre">pass</span></code> statement and the <code class="docutils literal notranslate"><span class="pre">FIXME</span></code> comment and replace them
+with an actual function body.  What are we trying to accomplish again?  We want
+to scan the list and keep track of how many students passed.  Any time we need
+to scan a list, we should immediately think of using a loop.  We’ve used <code class="docutils literal notranslate"><span class="pre">for</span></code>
+loops mostly, but we can use <code class="docutils literal notranslate"><span class="pre">while</span></code> loops just as easily.  It’s up to you as
+the programmer to express your code however you want.  Let’s write some code
+that scans through the list.  Listing <a class="reference internal" href="#number-passed-1"><span class="std std-numref">5.14</span></a> shows a loop
+with a lot of pseudocode surrounding it.</p>
+<div class="literal-block-wrapper docutils container" id="id26">
+<span id="number-passed-1"></span><div class="code-block-caption"><span class="caption-number">Listing 5.14 </span><span class="caption-text">Partial function definition for <code class="docutils literal notranslate"><span class="pre">number_passed</span></code>, attempt 1</span><a class="headerlink" href="#id26" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">number_passed</span><span class="p">(</span><span class="n">scores</span><span class="p">):</span>
+    <span class="c1"># Probably use a variable to keep track of something.</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">scores</span><span class="p">)):</span>
+        <span class="c1"># Do something with scores[i]</span>
+    <span class="c1"># Return a thing.</span>
+</pre></div>
+</div>
+</div>
+<p>This function definition follows the same pattern as <code class="docutils literal notranslate"><span class="pre">total</span></code> and <code class="docutils literal notranslate"><span class="pre">smallest</span></code>.
+Since we wish to keep track of the number of students who’ve passed, we’ll use a
+variable and that variable’s value will be what this function returns.  Let’s
+update those lines (Listing <a class="reference internal" href="#number-passed-2"><span class="std std-numref">5.15</span></a>).</p>
+<div class="literal-block-wrapper docutils container" id="id27">
+<span id="number-passed-2"></span><div class="code-block-caption"><span class="caption-number">Listing 5.15 </span><span class="caption-text">Partial function definition for <code class="docutils literal notranslate"><span class="pre">number_passed</span></code>, attempt 2</span><a class="headerlink" href="#id27" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">number_passed</span><span class="p">(</span><span class="n">scores</span><span class="p">):</span>
+<span class="hll"><span class="linenos">2</span>    <span class="n">passed</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span class="linenos">3</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">scores</span><span class="p">)):</span>
+<span class="linenos">4</span>        <span class="c1"># Do something with scores[i]</span>
+<span class="hll"><span class="linenos">5</span>    <span class="k">return</span> <span class="n">passed</span>
+</span></pre></div>
+</div>
+</div>
+<p>Notice how we’re writing the code non-linearly.  Often, it’s best to write what
+you can at the time, use comments when you’re not ready to fill in the details,
+and then go back later and fill in the details.  Otherwise, it’s easy to get
+lost in the details.</p>
+<p>Lastly, we need to increment <code class="docutils literal notranslate"><span class="pre">passed</span></code> whenever we encounter a passing score, i.e., <code class="docutils literal notranslate"><span class="pre">scores[i]</span></code>.  Checking <code class="docutils literal notranslate"><span class="pre">scores[i]</span></code> involves an <code class="docutils literal notranslate"><span class="pre">if</span></code> statement (Listingref{code:number_passed_final}).</p>
+<div class="literal-block-wrapper docutils container" id="id28">
+<span id="number-passed-final"></span><div class="code-block-caption"><span class="caption-number">Listing 5.16 </span><span class="caption-text">Function definition for <code class="docutils literal notranslate"><span class="pre">number_passed</span></code></span><a class="headerlink" href="#id28" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">number_passed</span><span class="p">(</span><span class="n">scores</span><span class="p">):</span>
+<span class="linenos">2</span>    <span class="n">passed</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">3</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">scores</span><span class="p">)):</span>
+<span class="hll"><span class="linenos">4</span>        <span class="k">if</span> <span class="n">scores</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mf">60.0</span><span class="p">:</span>
+</span><span class="hll"><span class="linenos">5</span>            <span class="n">passed</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span class="linenos">6</span>    <span class="k">return</span> <span class="n">passed</span>
+</pre></div>
+</div>
+</div>
+<p>This looks simply grand!  Now, you test it!</p>
+<p>Write some test cases.  Use the examples of test code that we’re written in
+previous examples.  Go ahead.  I’ll wait.  I could use a break from writing this
+book.  Writing a book is hard work, you know.</p>
+<p>Okay, I’m back.  Did you come up with something like this?</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">number_passed</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">70</span><span class="p">]))</span>    <span class="c1"># should print 2</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">number_passed</span><span class="p">([</span><span class="mi">90</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">60</span><span class="p">]))</span>   <span class="c1"># should print 4</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">number_passed</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span>          <span class="c1"># should print 0</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">number_passed</span><span class="p">([]))</span>                 <span class="c1"># should print 0</span>
+</pre></div>
+</div>
+</section>
+<section id="using-several-lists-to-store-related-data">
+<span id="sec-lists-rel-data"></span><h2><span class="section-number">5.5. </span>Using Several Lists to Store Related Data<a class="headerlink" href="#using-several-lists-to-store-related-data" title="Permalink to this headline">¶</a></h2>
+<p>We’ve been using lists thus far to store groups of related information.  In
+Section <a class="reference internal" href="#sec-list-funcs"><span class="std std-numref">5.4</span></a>, for example, we kept a series of
+exam scores in a list variable we named <code class="docutils literal notranslate"><span class="pre">scores</span></code>.  We might store a series
+of names in a list called <code class="docutils literal notranslate"><span class="pre">names</span></code>.</p>
+<p>But, what if we want to keep track of both names and scores.  That is, we want
+to associate students’ names with their scores.  In this way, we can know that
+Michelle got a 90% while Susan got a 76%.  There are a number of ways to
+accomplish this, and in fact we will explore some rather slick ways to do this
+in Chapters <a class="reference internal" href="ch7_dicts.html#ch-dict"><span class="std std-numref">7</span></a> and <a class="reference internal" href="ch9_classes.html#ch-classes"><span class="std std-numref">9</span></a> respectively.
+However, there is a very good way to do this by simply using more than one list.
+Observe Listing <a class="reference internal" href="#names-scores-lists"><span class="std std-numref">5.17</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="id29">
+<span id="names-scores-lists"></span><div class="code-block-caption"><span class="caption-number">Listing 5.17 </span><span class="caption-text">Using several lists to store related data</span><a class="headerlink" href="#id29" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Aubrey Bell&quot;</span><span class="p">,</span> <span class="s2">&quot;Adam Jamison&quot;</span><span class="p">,</span> <span class="s2">&quot;Susan Stratford&quot;</span><span class="p">,</span> <span class="s2">&quot;Michelle Wang&quot;</span><span class="p">]</span>
+<span class="linenos">2</span><span class="n">scores</span> <span class="o">=</span> <span class="p">[</span><span class="mf">82.5</span><span class="p">,</span> <span class="mf">87.0</span><span class="p">,</span> <span class="mf">76.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<p>Notice that <code class="docutils literal notranslate"><span class="pre">names</span></code> and <code class="docutils literal notranslate"><span class="pre">scores</span></code> contain the same number of items.  Let us assume that the positions of each name matches the position of the score in each list.  For example, <code class="docutils literal notranslate"><span class="pre">&quot;Aubrey</span> <span class="pre">Bell&quot;</span></code> got an <code class="docutils literal notranslate"><span class="pre">82.5</span></code> since both values exist at index <code class="docutils literal notranslate"><span class="pre">0</span></code> in both lists.  Likewise, <code class="docutils literal notranslate"><span class="pre">Susan</span> <span class="pre">Stratford</span></code> got a <code class="docutils literal notranslate"><span class="pre">76.0</span></code> because they are both at index <code class="docutils literal notranslate"><span class="pre">2</span></code> in both lists.</p>
+<p>In the example found in Listing <a class="reference internal" href="#names-scores-lists"><span class="std std-numref">5.17</span></a>, we are using
+different lists to store different attributes of people.  Each list has the same
+number of items.  One attribute is the person’s name, which is stored in its own
+list.  Another attribute is a person’s score, which is stored in its own list as
+well.  Each person is uniquely identified by an index.
+Figure <a class="reference internal" href="#fig-names-scores-indices"><span class="std std-numref">5.12</span></a> shows this relationship appears visually,
+using indices to associate names and scores.  (Note: not all items and indices
+are shown in the figure to keep the image smaller).</p>
+<figure class="align-default" id="id30">
+<span id="fig-names-scores-indices"></span><a class="reference internal image-reference" href="_images/names_scores_indices.png"><img alt="The relationship between values in two lists" src="_images/names_scores_indices.png" style="width: 744.6px; height: 228.0px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 5.12 </span><span class="caption-text">The relationship between values in two lists</span><a class="headerlink" href="#id30" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>The definitions in Listing <a class="reference internal" href="#names-scores-lists"><span class="std std-numref">5.17</span></a> allows us to write code like the following (see Listing <a class="reference internal" href="#iter-names-scores-lists"><span class="std std-numref">5.18</span></a>).</p>
+<div class="literal-block-wrapper docutils container" id="id31">
+<span id="iter-names-scores-lists"></span><div class="code-block-caption"><span class="caption-number">Listing 5.18 </span><span class="caption-text">Iterating through related lists</span><a class="headerlink" href="#id31" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">names</span><span class="p">)):</span>
+<span class="linenos">2</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The score for </span><span class="si">%s</span><span class="s2"> is </span><span class="si">%.2f%%</span><span class="s2">.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">names</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="n">scores</span><span class="p">[</span><span class="n">index</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<p>The output of the example code in Listing <a class="reference internal" href="#iter-names-scores-lists"><span class="std std-numref">5.18</span></a> is:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>The score for Aubrey Bell is 82.50%.
+The score for Adam Jamison is 87.00%.
+The score for Susan Stratford is 76.00%.
+The score for Michelle Wang is 90.00%.
+</pre></div>
+</div>
+</section>
+<section id="coding-conventions-for-lists-spanning-multiple-lines">
+<span id="sec-code-conv-multi-lists"></span><h2><span class="section-number">5.6. </span>Coding Conventions for Lists Spanning Multiple Lines<a class="headerlink" href="#coding-conventions-for-lists-spanning-multiple-lines" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes the lists we define will have a whole lot of items, and it will be cumbersome to manage their contents on a single line.  We can “spread out” the definition of such a list using the convention shown in Listing <a class="reference internal" href="#multi-line-list1"><span class="std std-numref">5.19</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="id32">
+<span id="multi-line-list1"></span><div class="code-block-caption"><span class="caption-number">Listing 5.19 </span><span class="caption-text">List definition spanning multiple lines</span><a class="headerlink" href="#id32" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">cheeses</span> <span class="o">=</span> <span class="p">[</span>
+<span class="linenos">2</span>    <span class="s2">&quot;cheddar&quot;</span><span class="p">,</span>
+<span class="linenos">3</span>    <span class="s2">&quot;provolone&quot;</span><span class="p">,</span>
+<span class="linenos">4</span>    <span class="s2">&quot;colby jack&quot;</span><span class="p">,</span>
+<span class="linenos">5</span>    <span class="s2">&quot;gorgonzola&quot;</span><span class="p">,</span>
+<span class="linenos">6</span>    <span class="s2">&quot;brief&quot;</span><span class="p">,</span>
+<span class="linenos">7</span>    <span class="s2">&quot;pepper jack&quot;</span>
+<span class="linenos">8</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<p>This is the preferred way to format a list that spans multiple lines as defined
+by the <a class="reference external" href="https://www.python.org/dev/peps/pep-0008/">PEP8</a> coding standard.  PEP8
+is a document available on the Web that tells Python programmers how best to
+format their code so that any programmer can more easily read and modify code
+written by others.  The PEP8 document tells us this is one of the two ways that
+are best for defining multi-line lists.  This particular way is the one we will
+use through the remainder of this book.</p>
+<p>Note that we are still using commas to separate the items in the list.  If we
+wanted to add another cheese to the end of this list, we would need to add a comma after <code class="docutils literal notranslate"><span class="pre">&quot;pepper</span> <span class="pre">jack&quot;</span></code> and then add the last cheese, like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">cheeses</span> <span class="o">=</span> <span class="p">[</span>
+<span class="linenos">2</span>    <span class="s2">&quot;cheddar&quot;</span><span class="p">,</span>
+<span class="linenos">3</span>    <span class="s2">&quot;provolone&quot;</span><span class="p">,</span>
+<span class="linenos">4</span>    <span class="s2">&quot;colby jack&quot;</span><span class="p">,</span>
+<span class="linenos">5</span>    <span class="s2">&quot;gorgonzola&quot;</span><span class="p">,</span>
+<span class="linenos">6</span>    <span class="s2">&quot;brief&quot;</span><span class="p">,</span>
+<span class="linenos">7</span>    <span class="s2">&quot;pepper jack&quot;</span><span class="p">,</span>
+<span class="linenos">8</span>    <span class="s2">&quot;mozzarella&quot;</span>
+<span class="linenos">9</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>This is cumbersome, so the people who invented Python decided we should be able to leave a trailing comma at the end of any list (either single line or multiple line) in case we want to add more values.  This allows us to change the look of our definition to Listing <a class="reference internal" href="#multi-line-list2"><span class="std std-numref">5.20</span></a> (note line 7).</p>
+<div class="literal-block-wrapper docutils container" id="id33">
+<span id="multi-line-list2"></span><div class="code-block-caption"><span class="caption-number">Listing 5.20 </span><span class="caption-text">List definition spanning multiple lines</span><a class="headerlink" href="#id33" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">cheeses</span> <span class="o">=</span> <span class="p">[</span>
+<span class="linenos">2</span>    <span class="s2">&quot;cheddar&quot;</span><span class="p">,</span>
+<span class="linenos">3</span>    <span class="s2">&quot;provolone&quot;</span><span class="p">,</span>
+<span class="linenos">4</span>    <span class="s2">&quot;colby jack&quot;</span><span class="p">,</span>
+<span class="linenos">5</span>    <span class="s2">&quot;gorgonzola&quot;</span><span class="p">,</span>
+<span class="linenos">6</span>    <span class="s2">&quot;brief&quot;</span><span class="p">,</span>
+<span class="hll"><span class="linenos">7</span>    <span class="s2">&quot;pepper jack&quot;</span><span class="p">,</span>
+</span><span class="linenos">8</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<p>Now if we want to add <code class="docutils literal notranslate"><span class="pre">&quot;mozzarella&quot;</span></code>, we can just hit the <code class="docutils literal notranslate"><span class="pre">Enter</span></code> or <code class="docutils literal notranslate"><span class="pre">Return</span></code>
+key and start typing.  This is handy if we want to copy and paste a bunch of
+lines.</p>
+<div class="literal-block-wrapper docutils container" id="id34">
+<div class="code-block-caption"><span class="caption-number">Listing 5.21 </span><span class="caption-text">List definition spanning multiple lines</span><a class="headerlink" href="#id34" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">cheeses</span> <span class="o">=</span> <span class="p">[</span>
+<span class="linenos">2</span>    <span class="s2">&quot;cheddar&quot;</span><span class="p">,</span>
+<span class="linenos">3</span>    <span class="s2">&quot;provolone&quot;</span><span class="p">,</span>
+<span class="linenos">4</span>    <span class="s2">&quot;colby jack&quot;</span><span class="p">,</span>
+<span class="linenos">5</span>    <span class="s2">&quot;gorgonzola&quot;</span><span class="p">,</span>
+<span class="linenos">6</span>    <span class="s2">&quot;brief&quot;</span><span class="p">,</span>
+<span class="linenos">7</span>    <span class="s2">&quot;pepper jack&quot;</span><span class="p">,</span>
+<span class="hll"><span class="linenos">8</span>    <span class="s2">&quot;mozzarella&quot;</span><span class="p">,</span>
+</span><span class="linenos">9</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="lists-of-lists">
+<span id="sec-lists-of-lists"></span><h2><span class="section-number">5.7. </span>Lists of Lists<a class="headerlink" href="#lists-of-lists" title="Permalink to this headline">¶</a></h2>
+<p>We’ve been using lists to store a series of items in a row. Each of these items
+can have any type: string, integer, float, … or even another list!  This might
+sound kind of weird and scary at first, but you may be surprised to know that a
+list containing lists is nothing more than a matrix, a grid, a table, a
+spreadsheet, or whatever other term you might use to describe rows and columns
+of data.</p>
+<p>Watch this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">votes</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span>  <span class="mi">2</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">19</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span>  <span class="mi">1</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">25</span><span class="p">,</span>  <span class="mi">4</span><span class="p">,</span>  <span class="mi">5</span><span class="p">],</span>
+    <span class="p">[</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">20</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">40</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">29</span><span class="p">],</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>Hey, it’s a grid!  Let’s try to type some expressions using <code class="docutils literal notranslate"><span class="pre">votes</span></code> to see what
+we can do with it.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">votes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>      <span class="c1"># prints [25, 18, 2]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">votes</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>     <span class="c1"># prints [40, 30, 29]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">votes</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>   <span class="c1"># prints 18</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">votes</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>   <span class="c1"># prints 19</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">votes</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">2</span><span class="p">])</span>   <span class="c1"># prints 5</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">votes</span><span class="p">[</span><span class="mi">20</span><span class="p">][</span><span class="mi">20</span><span class="p">])</span> <span class="c1"># Kablooey!  IndexError!  The max index of votes is 4.</span>
+</pre></div>
+</div>
+<p>How does an expression like <code class="docutils literal notranslate"><span class="pre">votes[0][1]</span></code> work?  Well, the first part of the
+expression <code class="docutils literal notranslate"><span class="pre">votes[0]</span></code> gives us the list <code class="docutils literal notranslate"><span class="pre">[25,</span> <span class="pre">18,</span> <span class="pre">2]</span></code>.  Essentially,
+<code class="docutils literal notranslate"><span class="pre">votes[0][1]</span></code> becomes <code class="docutils literal notranslate"><span class="pre">[25,</span> <span class="pre">18,</span> <span class="pre">2][1]</span></code>.  Then, the <code class="docutils literal notranslate"><span class="pre">[1]</span></code> gives us the value of
+the list at index <code class="docutils literal notranslate"><span class="pre">1</span></code>, so <code class="docutils literal notranslate"><span class="pre">[25,</span> <span class="pre">18,</span> <span class="pre">2][1]</span></code> becomes <code class="docutils literal notranslate"><span class="pre">18</span></code>.</p>
+<p>When we use two sets of square brackets, the first square bracketed value
+selects the row number and the second bracketed value selects the column, as in
+<code class="docutils literal notranslate"><span class="pre">votes[row][column]</span></code>.</p>
+<p>Now, let’s see a practical example.  I’ve named this list of lists <code class="docutils literal notranslate"><span class="pre">votes</span></code> for a
+reason.  Suppose we have an election and we want to keep track of the votes for
+each candidate.  Suppose we also want to be more detailed in tracking votes, so
+we want not just total votes but votes by county in a particular state.  Let’s
+let the columns represent the candidates.  Since we have three columns, that
+must mean we have three candidates!  Then, let’s let the rows represent the
+counties.  We have five rows, so we should assume we have five counties we are
+tracking.</p>
+<p>So, let’s see who won the election.  No Electoral College here folks; we’ll
+count raw votes.  Let’s total them up.  Only, let’s do it like real programmers.
+We could write <code class="docutils literal notranslate"><span class="pre">total0</span> <span class="pre">=</span> <span class="pre">votes[0][0]</span> <span class="pre">+</span> <span class="pre">votes[1][0]</span> <span class="pre">+</span> <span class="pre">votes[2][0]</span> <span class="pre">+</span> <span class="pre">votes[3][0]</span> <span class="pre">+</span>
+<span class="pre">votes[4][0]</span></code>, but that’s really lame and we’d have to change our totaling code
+if we ever add more counties.  So, let’s do this instead (Listing <a class="reference internal" href="#total-one-cand"><span class="std std-numref">5.22</span></a>).</p>
+<div class="literal-block-wrapper docutils container" id="id35">
+<span id="total-one-cand"></span><div class="code-block-caption"><span class="caption-number">Listing 5.22 </span><span class="caption-text">Total votes for one candidate</span><a class="headerlink" href="#id35" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">2</span><span class="k">for</span> <span class="n">countyindex</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">votes</span><span class="p">)):</span>
+<span class="linenos">3</span>    <span class="n">total</span> <span class="o">=</span> <span class="n">total</span> <span class="o">+</span> <span class="n">votes</span><span class="p">[</span><span class="n">countyindex</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="linenos">4</span>
+<span class="linenos">5</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total votes for candidate 0: </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">total</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Then, we could copy and paste this code for candidates <code class="docutils literal notranslate"><span class="pre">1</span></code> and <code class="docutils literal notranslate"><span class="pre">2</span></code>, or we could
+put all of this code in another loop and “loop through” the candidates
+(Listing <a class="reference internal" href="#total-all-cand"><span class="std std-numref">5.23</span></a>).</p>
+<div class="literal-block-wrapper docutils container" id="id36">
+<span id="total-all-cand"></span><div class="code-block-caption"><span class="caption-number">Listing 5.23 </span><span class="caption-text">Total votes for all candidates</span><a class="headerlink" href="#id36" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos">1</span><span class="k">for</span> <span class="n">candindex</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">votes</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
+</span><span class="linenos">2</span>    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">3</span>    <span class="k">for</span> <span class="n">countyindex</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">votes</span><span class="p">)):</span>
+<span class="linenos">4</span>        <span class="n">total</span> <span class="o">=</span> <span class="n">total</span> <span class="o">+</span> <span class="n">votes</span><span class="p">[</span><span class="n">countyindex</span><span class="p">][</span><span class="n">candindex</span><span class="p">]</span>
+<span class="linenos">5</span>
+<span class="linenos">6</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total votes for candidate </span><span class="si">%d</span><span class="s2">: </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">candindex</span><span class="p">,</span> <span class="n">total</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<p>Let’s stop referring to the candidates as “Candidate 0”, “Candidate 1”, etc.
+Let’s give them actual names and store them in code somewhere.  How about a
+using a list?</p>
+<div class="literal-block-wrapper docutils container" id="id37">
+<span id="cand-list"></span><div class="code-block-caption"><span class="caption-number">Listing 5.24 </span><span class="caption-text">A list for candidates</span><a class="headerlink" href="#id37" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">candidates</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Ronald Rump&quot;</span><span class="p">,</span> <span class="s2">&quot;Billary Blimpton&quot;</span><span class="p">,</span> <span class="s2">&quot;A Giant Meteor&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<p>Similarities of these names to candidates in recent U.S. presidential elections
+is purely coincidental… or not.</p>
+<p>Now, check this out.  See how we can use a loop with this new <code class="docutils literal notranslate"><span class="pre">candidates</span></code> list
+to label the columns of our <code class="docutils literal notranslate"><span class="pre">votes</span></code> grid when totaling up the results (see
+Listing <a class="reference internal" href="#total-all-cand-names"><span class="std std-numref">5.25</span></a>).</p>
+<div class="literal-block-wrapper docutils container" id="id38">
+<span id="total-all-cand-names"></span><div class="code-block-caption"><span class="caption-number">Listing 5.25 </span><span class="caption-text">Total votes for all candidates, with names</span><a class="headerlink" href="#id38" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">votes</span> <span class="o">=</span> <span class="p">[</span>
+<span class="linenos"> 2</span>    <span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span>  <span class="mi">2</span><span class="p">],</span>
+<span class="linenos"> 3</span>    <span class="p">[</span><span class="mi">19</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span>  <span class="mi">1</span><span class="p">],</span>
+<span class="linenos"> 4</span>    <span class="p">[</span><span class="mi">25</span><span class="p">,</span>  <span class="mi">4</span><span class="p">,</span>  <span class="mi">5</span><span class="p">],</span>
+<span class="linenos"> 5</span>    <span class="p">[</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">20</span><span class="p">],</span>
+<span class="linenos"> 6</span>    <span class="p">[</span><span class="mi">40</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">29</span><span class="p">],</span>
+<span class="linenos"> 7</span><span class="p">]</span>
+<span class="hll"><span class="linenos"> 8</span><span class="n">candidates</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Ronald Rump&quot;</span><span class="p">,</span> <span class="s2">&quot;Billary Blimpton&quot;</span><span class="p">,</span> <span class="s2">&quot;A Giant Meteor&quot;</span><span class="p">]</span>
+</span><span class="linenos"> 9</span><span class="k">for</span> <span class="n">candindex</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">votes</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
+<span class="linenos">10</span>    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">11</span>    <span class="k">for</span> <span class="n">countyindex</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">votes</span><span class="p">)):</span>
+<span class="linenos">12</span>        <span class="n">total</span> <span class="o">=</span> <span class="n">total</span> <span class="o">+</span> <span class="n">votes</span><span class="p">[</span><span class="n">countyindex</span><span class="p">][</span><span class="n">candindex</span><span class="p">]</span>
+<span class="linenos">13</span>
+<span class="hll"><span class="linenos">14</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total votes for </span><span class="si">%s</span><span class="s2">: </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">candidates</span><span class="p">[</span><span class="n">candindex</span><span class="p">],</span> <span class="n">total</span><span class="p">))</span>
+</span></pre></div>
+</div>
+</div>
+<p>The output of Listing <a class="reference internal" href="#total-all-cand-names"><span class="std std-numref">5.25</span></a> is:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Total votes for Ronald Rump: 114
+Total votes for Billary Blimpton: 96
+Total votes for A Giant Meteor: 57
+</pre></div>
+</div>
+<p>This code is pretty slick.  This code is also a good example of where we should
+be heading as programmers.  We should be getting pretty comfortable with
+iterating through a list using a loop.</p>
+<p>What makes this code slick?  Well, if we change the structure of the <code class="docutils literal notranslate"><span class="pre">votes</span></code>
+grid, the code still works perfectly.  In other words, we could add or subtract
+candidates, or we could add or subtract counties, and the code still works
+because we have not hard-coded the number of candidates or counties.</p>
+<p>To verify this, let’s redefine <code class="docutils literal notranslate"><span class="pre">votes</span></code> (and <code class="docutils literal notranslate"><span class="pre">candidates</span></code>, so that its length
+matches the number of columns in <code class="docutils literal notranslate"><span class="pre">votes</span></code>) and then try to run our code again.  A
+new, full listing can be found in Listing <a class="reference internal" href="#bigger-votes"><span class="std std-numref">5.26</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="id39">
+<span id="bigger-votes"></span><div class="code-block-caption"><span class="caption-number">Listing 5.26 </span><span class="caption-text">Total votes for all candidates, again</span><a class="headerlink" href="#id39" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">votes</span> <span class="o">=</span> <span class="p">[</span>
+<span class="hll"><span class="linenos"> 2</span>    <span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span>  <span class="mi">4</span><span class="p">,</span>  <span class="mi">2</span><span class="p">],</span>
+</span><span class="hll"><span class="linenos"> 3</span>    <span class="p">[</span><span class="mi">19</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span>  <span class="mi">8</span><span class="p">,</span>  <span class="mi">1</span><span class="p">],</span>
+</span><span class="hll"><span class="linenos"> 4</span>    <span class="p">[</span><span class="mi">25</span><span class="p">,</span>  <span class="mi">4</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">5</span><span class="p">],</span>
+</span><span class="hll"><span class="linenos"> 5</span>    <span class="p">[</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">20</span><span class="p">],</span>
+</span><span class="hll"><span class="linenos"> 6</span>    <span class="p">[</span><span class="mi">40</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span>  <span class="mi">5</span><span class="p">,</span> <span class="mi">29</span><span class="p">],</span>
+</span><span class="hll"><span class="linenos"> 7</span>    <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">1</span><span class="p">],</span>
+</span><span class="linenos"> 8</span><span class="p">]</span>
+<span class="hll"><span class="linenos"> 9</span><span class="n">candidates</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Ronald Rump&quot;</span><span class="p">,</span> <span class="s2">&quot;Billary Blimpton&quot;</span><span class="p">,</span>
+</span><span class="hll"><span class="linenos">10</span>              <span class="s2">&quot;Johnny Third-Party&quot;</span><span class="p">,</span> <span class="s2">&quot;A Giant Meteor&quot;</span><span class="p">]</span>
+</span><span class="linenos">11</span><span class="k">for</span> <span class="n">candindex</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">votes</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
+<span class="linenos">12</span>    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">13</span>    <span class="k">for</span> <span class="n">countyindex</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">votes</span><span class="p">)):</span>
+<span class="linenos">14</span>        <span class="n">total</span> <span class="o">=</span> <span class="n">total</span> <span class="o">+</span> <span class="n">votes</span><span class="p">[</span><span class="n">countyindex</span><span class="p">][</span><span class="n">candindex</span><span class="p">]</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total votes for </span><span class="si">%s</span><span class="s2">: </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">candidates</span><span class="p">[</span><span class="n">candindex</span><span class="p">],</span> <span class="n">total</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<p>Because we have not hard-coded the lengths of the lists, and because the number of <code class="docutils literal notranslate"><span class="pre">votes</span></code> columns matches the length of <code class="docutils literal notranslate"><span class="pre">candidates</span></code>, the code works as shown below.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Total votes for Ronald Rump: 124
+Total votes for Billary Blimpton: 108
+Total votes for Johnny Third-Party: 40
+Total votes for A Giant Meteor: 58
+</pre></div>
+</div>
+<p>Poor Johnny Third-Party – the Giant Meteor got more votes than he did.  Maybe
+Johnny should re-think his political career aspirations if he can’t manage to
+beat an eschatological, extra-terrestrial projectile of doom!</p>
+<p>Spend a little time thinking about how you might write code to do different
+things with <code class="docutils literal notranslate"><span class="pre">votes</span></code> and <code class="docutils literal notranslate"><span class="pre">candidates</span></code>.  How many different ways can we
+slice-and-dice this data?  In Section <a class="reference internal" href="#sec-lists-exercises"><span class="std std-numref">5.10</span></a> (the
+Chapter <a class="reference internal" href="#ch-lists"><span class="std std-numref">5</span></a> Exercises), you’ll be asked to report the
+winner of each county, and you’ll need to give each county a name.  Be
+thinking about how you might accomplish that.</p>
+</section>
+<section id="optional-functional-programming-with-lists">
+<span id="sec-func-prog"></span><h2><span class="section-number">5.8. </span>(Optional) Functional Programming with Lists<a class="headerlink" href="#optional-functional-programming-with-lists" title="Permalink to this headline">¶</a></h2>
+<p>It’s not uncommon to have a list that contains items that we wish to modify.
+Or, we may have a list, and we wish to create a new list based on the original
+list.  You may recall an exercise in a previous chapter where we were asked to
+create a program that translated English into Pig Latin.  If you do not recall
+this exercise, it is sufficient to understand that an English word can be
+translated into the fictional “Pig Latin” language by taking the first consonant
+in the word, moving it to the end of the word, and then adding “ay” to the end.
+Thus, “cat” becomes “at-cay.”  There are other pertinent rules for forming Pig
+Latin words, but for the example that follows, this understanding is sufficient.</p>
+<p>If we take a string containing an English sentence and we transform it into a
+list of words, creating a program that translates English to Pig Latin becomes
+as simple as creating a new list from our original list where each word has been
+translated into its Pig Latin equivalent.  Written another way, suppose we have
+a list like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;jim&quot;</span><span class="p">,</span> <span class="s2">&quot;likes&quot;</span><span class="p">,</span> <span class="s2">&quot;radishes&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>And we wish to make a new list that looks like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pig_words</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;im-jay&quot;</span><span class="p">,</span> <span class="s2">&quot;ikes-lay&quot;</span><span class="p">,</span> <span class="s2">&quot;adishes-ray&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>We could easily write a function to translate a single word at a time.  Consider
+the following simple function.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">piglatin</span><span class="p">(</span><span class="n">english</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">english</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span> <span class="o">+</span> <span class="n">english</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;ay&quot;</span>
+</pre></div>
+</div>
+<p>Then, we could construct a new list by using this <code class="docutils literal notranslate"><span class="pre">piglatin</span></code> function on each
+item in the original list.  Observe:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sentence</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter a sentence: &quot;</span><span class="p">)</span>
+<span class="c1"># sentence is now something like &quot;jim likes radishes&quot;</span>
+
+<span class="n">words</span> <span class="o">=</span> <span class="n">sentence</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+<span class="c1"># words is now something like [&quot;jim&quot;, &quot;likes&quot;, &quot;radishes&quot;]</span>
+
+<span class="n">pig_words</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+    <span class="n">pig_word</span> <span class="o">=</span> <span class="n">piglatin</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+    <span class="n">pig_words</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pig_word</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>There is a far more concise way to do this in Python using something called
+<em>functional programming</em>.  Observe that all we wish to do is make a new list
+from an original list by applying a function to each item in the list.  The
+original list is <code class="docutils literal notranslate"><span class="pre">words</span></code>.  The new list is <code class="docutils literal notranslate"><span class="pre">pig_words</span></code>.  The function is named
+<code class="docutils literal notranslate"><span class="pre">piglatin</span></code>.  We can compress the above code into the following code.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sentence</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter a sentence: &quot;</span><span class="p">)</span>
+<span class="c1"># sentence is now something like &quot;jim likes radishes&quot;</span>
+
+<span class="n">words</span> <span class="o">=</span> <span class="n">sentence</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+<span class="c1"># words is now something like [&quot;jim&quot;, &quot;likes&quot;, &quot;radishes&quot;]</span>
+
+<span class="n">pig_words</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">piglatin</span><span class="p">,</span> <span class="n">words</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Look at the last line of the above code.  This statement tells Python to “map”
+the function <code class="docutils literal notranslate"><span class="pre">piglatin</span></code> onto all of the items in <code class="docutils literal notranslate"><span class="pre">words</span></code>.  That is, it tells
+Python to pass each of the items in <code class="docutils literal notranslate"><span class="pre">words</span></code> to <code class="docutils literal notranslate"><span class="pre">piglatin</span></code>, and then take all the
+return values and make a new list out of them.</p>
+<p>The expression <code class="docutils literal notranslate"><span class="pre">map(piglatin,</span> <span class="pre">words)</span></code> creates something that is like a <code class="docutils literal notranslate"><span class="pre">list</span></code>.
+We then must convert its return value to a <code class="docutils literal notranslate"><span class="pre">list</span></code>.  Notice that <code class="docutils literal notranslate"><span class="pre">map</span></code> takes two
+arguments.  The second is a list, but the first is actually a function.  We can
+pass function as parameters to other functions.  Python allows us to do this
+because we can store a reference to a function in any variable, including
+parameter variables.</p>
+<p>To understand how to pass a function to another function, consider the following
+“toy” example.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">call_function</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+
+<span class="n">call_function</span><span class="p">(</span><span class="nb">print</span><span class="p">,</span> <span class="s2">&quot;Hi there&quot;</span><span class="p">)</span>
+<span class="c1"># prints &quot;Hi there&quot;</span>
+
+<span class="k">def</span> <span class="nf">square</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="n">call_function</span><span class="p">(</span><span class="n">square</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="c1"># prints 9</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">call_function</span></code> takes the first parameter <code class="docutils literal notranslate"><span class="pre">func</span></code> and calls it.  It uses <code class="docutils literal notranslate"><span class="pre">val</span></code> as
+the argument to <code class="docutils literal notranslate"><span class="pre">func</span></code>.</p>
+<p>Consider (roughly) how <code class="docutils literal notranslate"><span class="pre">map</span></code> works.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">map</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">inlist</span><span class="p">):</span>
+    <span class="n">outlist</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">inlist</span><span class="p">:</span>
+        <span class="n">outlist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">func</span><span class="p">(</span><span class="n">item</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">outlist</span>
+</pre></div>
+</div>
+<p>We say this is how <code class="docutils literal notranslate"><span class="pre">map</span></code> works “roughly” because <code class="docutils literal notranslate"><span class="pre">map</span></code> does not actually return
+a <code class="docutils literal notranslate"><span class="pre">list</span></code>; it returns something like a <code class="docutils literal notranslate"><span class="pre">list</span></code> that we can convert to a <code class="docutils literal notranslate"><span class="pre">list</span></code>.
+The reason for this is beyond the scope of this book.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">map</span></code> function is pretty slick! Consider the following examples.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">xs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">]</span>
+<span class="n">ys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">xs</span><span class="p">))</span>
+<span class="c1"># ys is now [1, 2, 3]</span>
+
+<span class="n">strings</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;cheese&quot;</span><span class="p">,</span> <span class="s2">&quot;ate&quot;</span><span class="p">,</span> <span class="s2">&quot;sand&quot;</span><span class="p">]</span>
+<span class="n">lengths</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">len</span><span class="p">,</span> <span class="n">strings</span><span class="p">))</span>
+<span class="c1"># lengths is now [6, 3, 4]</span>
+</pre></div>
+</div>
+<p>This is really the tip of the iceberg when it comes to functional programming!
+This is just a taste, and most other programming languages support some form of
+functional programming.  There are a lot more things you can do with functional
+programming that are super powerful and really concise in terms of coding.  If
+you take future computer science classes and read more books, it is likely
+you’ll encounter functional programming again.  Functional programming is used
+frequently in “real world” code.  In fact, Google’s data processing pipeline is
+built around a functional programming paradigm known as “Map-Reduce.”  Google
+it!</p>
+</section>
+<section id="optional-list-comprehensions">
+<span id="sec-list-comprehensions"></span><h2><span class="section-number">5.9. </span>(Optional) List Comprehensions<a class="headerlink" href="#optional-list-comprehensions" title="Permalink to this headline">¶</a></h2>
+<p>Based on what we know so far, we can construct lists in two ways.  If we know
+the items we want in a list at the time we create the list, we can do so as
+follows.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mylist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Alternatively, we could create an empty list and then add items to it later, like this.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mylist</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="c1"># Then, later on...</span>
+<span class="n">mylist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">mylist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">mylist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">mylist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">mylist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>There is an additional way to create lists that is somewhat unique to Python.
+This method is called a <em>list comprehension</em>.  Consider the following code.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">squares</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+    <span class="n">squares</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">num</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1"># squares is now [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]</span>
+</pre></div>
+</div>
+<p>The list comprehension-way to write this is:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">squares</span> <span class="o">=</span> <span class="p">[</span><span class="n">num</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)]</span>
+</pre></div>
+</div>
+<p>A list comprehension consists of square brackets containing an expression
+followed by a loop that gives the expression a sequence of values.  The loop can
+contain additional loops or even if statements.  Consider this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">evens</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+<span class="c1"># evens is now [0, 2, 4, 6, 8, 10, 12, 14]</span>
+</pre></div>
+</div>
+<p>The value for each item in <code class="docutils literal notranslate"><span class="pre">evens</span></code> is <code class="docutils literal notranslate"><span class="pre">x</span></code>, but only if <code class="docutils literal notranslate"><span class="pre">x</span></code> is divisible
+by <code class="docutils literal notranslate"><span class="pre">2</span></code>.  The <code class="docutils literal notranslate"><span class="pre">if</span></code> expression can be used to “filter” items in the list.</p>
+<p>List comprehensions can be handy if you have one list and you wish to make
+another new list based the values in the first list.  For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sentence</span> <span class="o">=</span> <span class="s2">&quot;Sheamus Shaughnessy is HUNGRY.&quot;</span>
+<span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="n">w</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">sentence</span><span class="o">.</span><span class="n">split</span><span class="p">()]</span>
+<span class="c1"># words is now:</span>
+<span class="c1">#     [&#39;sheamus&#39;, &#39;shaughnessy&#39;, &#39;is&#39;, &#39;hungry&#39;]</span>
+</pre></div>
+</div>
+<p>Another example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">nonprimes</span> <span class="o">=</span> <span class="p">[</span><span class="n">y</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="n">x</span><span class="p">)]</span>
+<span class="n">primes</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">nonprimes</span><span class="p">]</span>
+<span class="c1"># primes is now:</span>
+<span class="c1">#     [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47]</span>
+</pre></div>
+</div>
+<p>Neat-o burrito!</p>
+<p>(Mmm… burritos.  Those who happen to be in Storm Lake, Iowa, may want to take
+a break from studying and head to <a class="reference external" href="https://www.google.com/maps/place/La+Juanita/&#64;42.644911,-95.200439,15z/data=!4m5!3m4!1s0x0:0x9641e72e9da91650!8m2!3d42.644911!4d-95.200439">La
+Juanitas</a>
+for some exceptional, authentic Mexican food.)</p>
+</section>
+<section id="exercises">
+<span id="sec-lists-exercises"></span><h2><span class="section-number">5.10. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p>Suppose we define a list as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mylist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>What is the type and value of each of the following expressions?</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mylist</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">mylist</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">mylist</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">mylist</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">mylist</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">mylist</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">mylist</span><span class="p">[</span><span class="mi">3</span><span class="p">:]</span>
+<span class="n">mylist</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
+<span class="mi">7</span> <span class="ow">in</span> <span class="n">mylist</span>
+<span class="mi">8</span> <span class="ow">in</span> <span class="n">mylist</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">mylist</span><span class="p">)</span>
+<span class="nb">sum</span><span class="p">(</span><span class="n">mylist</span><span class="p">)</span>
+<span class="nb">min</span><span class="p">(</span><span class="n">mylist</span><span class="p">)</span>
+<span class="nb">max</span><span class="p">(</span><span class="n">mylist</span><span class="p">)</span>
+<span class="n">mylist</span><span class="p">[</span><span class="n">mylist</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+<span class="nb">str</span><span class="p">(</span><span class="n">mylist</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;cat&quot;</span><span class="p">,</span> <span class="s2">&quot;dog&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</li>
+<li><p>What is the output of the following code?</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">xs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">ys</span> <span class="o">=</span> <span class="n">xs</span>
+<span class="n">xs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">ys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ys</span><span class="p">)</span>
+<span class="n">ys</span> <span class="o">=</span> <span class="n">xs</span><span class="p">[:]</span>
+<span class="n">ys</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">ys</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ys</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Define a function named <code class="docutils literal notranslate"><span class="pre">biggest</span></code> that takes a <code class="docutils literal notranslate"><span class="pre">list</span></code> of numbers as a parameter and returns the biggest number in the list.</p></li>
+<li><p>Define a function named <code class="docutils literal notranslate"><span class="pre">average</span></code> that takes a <code class="docutils literal notranslate"><span class="pre">list</span></code> of numbers as a parameter and returns the mean/average of the numbers as a <code class="docutils literal notranslate"><span class="pre">float</span></code>.</p></li>
+<li><p>Define a function named <code class="docutils literal notranslate"><span class="pre">contains_chuck</span></code> that takes a <code class="docutils literal notranslate"><span class="pre">list</span></code> of names and returns <code class="docutils literal notranslate"><span class="pre">True</span></code>/<code class="docutils literal notranslate"><span class="pre">False</span></code> whether <code class="docutils literal notranslate"><span class="pre">&quot;Chuck</span> <span class="pre">Norris&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;Carlos</span> <span class="pre">Norris&quot;</span></code> is in the list.</p></li>
+<li><p>Define a function named <code class="docutils literal notranslate"><span class="pre">count_chucks</span></code> that takes a <code class="docutils literal notranslate"><span class="pre">list</span></code> of names and returns an integer representing the number of names that start with <code class="docutils literal notranslate"><span class="pre">&quot;Chuck&quot;</span></code> in the list.</p></li>
+<li><p>Define a function named <code class="docutils literal notranslate"><span class="pre">cull_cullens</span></code> that takes a <code class="docutils literal notranslate"><span class="pre">list</span></code> of names and returns a new <code class="docutils literal notranslate"><span class="pre">list</span></code> based on the original list, only in the new list any name ending in <code class="docutils literal notranslate"><span class="pre">&quot;Cullen&quot;</span></code> has been removed.  For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ow">in</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Sarah James&quot;</span><span class="p">,</span> <span class="s2">&quot;Edward Cullen&quot;</span><span class="p">,</span> <span class="s2">&quot;Mary Smith&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;Bella Cullen&quot;</span><span class="p">]</span>
+<span class="n">out</span> <span class="o">=</span> <span class="n">cull_cullens</span><span class="p">(</span><span class="ow">in</span><span class="p">)</span>
+<span class="c1"># out contains only [&quot;Sarah James&quot;, &quot;Mary Smith&quot;]</span>
+</pre></div>
+</div>
+</li>
+<li><p>Define a function named <code class="docutils literal notranslate"><span class="pre">replace</span></code> that takes a list of values, an “old” value, and a “new” value.  The function should modify the list of values by replacing any “old” values with the “new” value.  For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">game</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;duck&quot;</span><span class="p">,</span> <span class="s2">&quot;duck&quot;</span><span class="p">,</span> <span class="s2">&quot;grey duck&quot;</span><span class="p">,</span> <span class="s2">&quot;duck&quot;</span><span class="p">,</span> <span class="s2">&quot;grey duck&quot;</span><span class="p">]</span>
+<span class="n">replace</span><span class="p">(</span><span class="n">game</span><span class="p">,</span> <span class="s2">&quot;grey duck&quot;</span><span class="p">,</span> <span class="s2">&quot;goose&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">game</span><span class="p">)</span>
+<span class="c1"># This should print [&quot;duck&quot;, &quot;duck&quot;, &quot;goose&quot;, &quot;duck&quot;, &quot;goose&quot;]</span>
+</pre></div>
+</div>
+</li>
+<li><p>Define a function named <code class="docutils literal notranslate"><span class="pre">shuffle_list</span></code> that takes a <code class="docutils literal notranslate"><span class="pre">list</span></code> as a parameter and returns a <code class="docutils literal notranslate"><span class="pre">list</span></code> of the same size only with the items in the parameter list in different positions.  That is, the returned list should have the items randomly assigned to new positions; granted, it is possible that some of the items may still be in their original positions.  For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cards</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;4D&quot;</span><span class="p">,</span> <span class="s2">&quot;AS&quot;</span><span class="p">,</span> <span class="s2">&quot;3C&quot;</span><span class="p">,</span> <span class="s2">&quot;JH&quot;</span><span class="p">,</span> <span class="s2">&quot;5C&quot;</span><span class="p">]</span>
+<span class="n">new_cards</span> <span class="o">=</span> <span class="n">shuffle_list</span><span class="p">(</span><span class="n">cards</span><span class="p">)</span>
+<span class="c1"># new_cards will be different than cards, for example:</span>
+<span class="c1">#    [&quot;JH&quot;, &quot;3C&quot;, &quot;4D&quot;, &quot;5C&quot;, &quot;AS&quot;]</span>
+</pre></div>
+</div>
+</li>
+<li><p>Define a function <code class="docutils literal notranslate"><span class="pre">shuffle_this</span></code> just like the function <code class="docutils literal notranslate"><span class="pre">shuffle_list</span></code> in the previous problem, only this time change the original list rather returning a new list.  For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cards</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;4D&quot;</span><span class="p">,</span> <span class="s2">&quot;AS&quot;</span><span class="p">,</span> <span class="s2">&quot;3C&quot;</span><span class="p">,</span> <span class="s2">&quot;JH&quot;</span><span class="p">,</span> <span class="s2">&quot;5C&quot;</span><span class="p">]</span>
+<span class="n">shuffle_this</span><span class="p">(</span><span class="n">cards</span><span class="p">)</span>
+<span class="c1"># cards will now contain something like:</span>
+<span class="c1">#    [&quot;JH&quot;, &quot;3C&quot;, &quot;4D&quot;, &quot;5C&quot;, &quot;AS&quot;]</span>
+</pre></div>
+</div>
+</li>
+<li><p>Define a function named <code class="docutils literal notranslate"><span class="pre">merge</span></code> that takes two lists and returns a new single list that is the result of interleaving the two original lists.  If one list is exhausted before the other, the remaining items are tacked on to the end of the resulting list.  To perform the merge, the function should select the first item from the first list, the first item from the second list, the second item from the first list, the second item from the second list, etc.  For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">new_list</span> <span class="o">=</span> <span class="n">merge</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+<span class="c1"># new_list should be [1, 2, 3, 4, 5, 6, 7]</span>
+</pre></div>
+</div>
+</li>
+<li><p>Suppose we have a list of lists (a “grid”) representing exam grades in a class.  The rows are individual students’ scores.  The columns are the exam scores for each student.  Each score is based on a possible score of 100 points.</p>
+<p>Define a function named <code class="docutils literal notranslate"><span class="pre">print_averages</span></code> that takes a grades “grid” and a names <code class="docutils literal notranslate"><span class="pre">list</span></code> as parameters, and then it should print the exam average for each student along with the student’s name.  The function does not need to return anything.</p>
+<p>NOTE: you cannot assume that there will only be three scores or three students.  The code you write should still work correctly even if we were to add columns or rows.  The code below serves only as an example.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">grades</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span><span class="mf">100.0</span><span class="p">,</span> <span class="mf">98.0</span><span class="p">,</span> <span class="mf">99.0</span><span class="p">],</span>
+           <span class="p">[</span> <span class="mf">68.5</span><span class="p">,</span> <span class="mf">79.0</span><span class="p">,</span> <span class="mf">85.5</span><span class="p">],</span>
+           <span class="p">[</span> <span class="mf">88.5</span><span class="p">,</span> <span class="mf">99.0</span><span class="p">,</span> <span class="mf">87.5</span><span class="p">]</span> <span class="p">]</span>
+<span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Samantha Beeson&quot;</span><span class="p">,</span> <span class="s2">&quot;Reginald Ronald&quot;</span><span class="p">,</span> <span class="s2">&quot;Dani Smith&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</li>
+<li><p>Recall the <code class="docutils literal notranslate"><span class="pre">votes</span></code> grid example in the section on lists of lists (i.e., Section <a class="reference internal" href="#sec-lists-of-lists"><span class="std std-numref">5.7</span></a>).  Define a function named <code class="docutils literal notranslate"><span class="pre">county_winners</span></code> that prints the name of the candidate who wins each county.  The output should display a line for each county.  Each output line should be of the form <code class="docutils literal notranslate"><span class="pre">&quot;CANDIDATE</span> <span class="pre">has</span> <span class="pre">won</span> <span class="pre">COUNTY.&quot;</span></code> where <code class="docutils literal notranslate"><span class="pre">CANDIDATE</span></code> is the candidate’s name and <code class="docutils literal notranslate"><span class="pre">COUNTY</span></code> is the name of the county.  To define this function, you will need to create a list that stores the names of the counties in addition to defining the function body itself.</p>
+<p>An example of needed list definitions are:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">votes</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span>  <span class="mi">2</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">19</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span>  <span class="mi">1</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">25</span><span class="p">,</span>  <span class="mi">4</span><span class="p">,</span>  <span class="mi">5</span><span class="p">],</span>
+<span class="p">]</span>
+<span class="n">candidates</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Ronald Rump&quot;</span><span class="p">,</span> <span class="s2">&quot;Billary Blimpton&quot;</span><span class="p">,</span> <span class="s2">&quot;A Giant Meteor&quot;</span><span class="p">]</span>
+<span class="n">counties</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Poweshiek&quot;</span><span class="p">,</span> <span class="s2">&quot;Winneshiek&quot;</span><span class="p">,</span> <span class="s2">&quot;Ironsheik&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Sample output:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Ronald Rump has won Poweshiek county.
+Billary Blimpton has won Winneshiek county.
+Ronald Rump has won Ironsheik county.
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Conversational Python</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ch1_basicio_types.html">1. Basic I/O, Statements, Expressions, Variables, and Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch2_cond.html">2. Conditionals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch3_loops.html">3. Loops and String Manipulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch4_funcs.html">4. Functions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">5. Lists</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#list-operations">5.1. List Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#assignment-statements-revisited-multiple-assignment">5.2. Assignment Statements Revisited: Multiple Assignment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#list-variables-references-versus-values">5.3. List Variables: References Versus Values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#functions-with-lists">5.4. Functions with Lists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-several-lists-to-store-related-data">5.5. Using Several Lists to Store Related Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#coding-conventions-for-lists-spanning-multiple-lines">5.6. Coding Conventions for Lists Spanning Multiple Lines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lists-of-lists">5.7. Lists of Lists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#optional-functional-programming-with-lists">5.8. (Optional) Functional Programming with Lists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#optional-list-comprehensions">5.9. (Optional) List Comprehensions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#exercises">5.10. Exercises</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ch6_files_excepts.html">6. Files and Exceptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch7_dicts.html">7. Dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch8_searchsort.html">8. Searching and Sorting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch9_classes.html">9. Classes, Object-Orientation, and Pygame</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="ch4_funcs.html" title="previous chapter"><span class="section-number">4. </span>Functions</a></li>
+      <li>Next: <a href="ch6_files_excepts.html" title="next chapter"><span class="section-number">6. </span>Files and Exceptions</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, Jason B. Shepherd, Ph.D..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/ch5_lists.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

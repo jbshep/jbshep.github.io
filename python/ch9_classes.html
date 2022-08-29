@@ -1,0 +1,1593 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>9. Classes, Object-Orientation, and Pygame &#8212; Conversational Python 2.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="8. Searching and Sorting" href="ch8_searchsort.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="classes-object-orientation-and-pygame">
+<span id="ch-classes"></span><h1><span class="section-number">9. </span>Classes, Object-Orientation, and Pygame<a class="headerlink" href="#classes-object-orientation-and-pygame" title="Permalink to this headline">¶</a></h1>
+<section id="getting-started">
+<span id="sec-getting-started"></span><h2><span class="section-number">9.1. </span>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
+<p>You’re still reading this book?!  Hurray!  Good for you.  Now that you’re here,
+you’ll be pleased to know that this is the best chapter of the whole book, so
+pay attention!</p>
+<p>Thus far, all of our programs have been text-only programs.  In this chapter, we
+will make programs that have graphics.  To do this, we’ll use a Python code
+library named <em>Pygame</em>.  Very shortly, we’ll learn how to install Pygame on your
+computer.  Then, we’ll write some simple graphical programs and eventually
+animate the graphics to make them move around the screen.</p>
+<p>Sounds like a big jump, right?  Actually, it isn’t.  You’ll find that
+Pygame graphics are just a re-application of the same principles we’ve been
+learning all along.  That’s partly why this is the last chapter.  We
+get to apply what we’ve learned to make something cool and interactive.</p>
+<p>Eventually, we will reach a point in this chapter while learning about graphics
+where things will get a little frustrating.  We will want to detect when two
+graphical things collide with one another, and that will seem hard to
+manage, especially when we have lots of graphical things flying around the
+screen.  So, we will need to learn about things called
+<em>objects</em> and <em>classes</em> that will help us tremendously, and will make
+programming graphical video games way more fun.</p>
+<p>Let’s get started by installing Pygame.  Open Thonny and find the <code class="docutils literal notranslate"><span class="pre">Tools</span></code> menu.
+Under the <code class="docutils literal notranslate"><span class="pre">Tools</span></code> menu you will see an option named “Manage packages…”  Click
+that option.  A dialog window will be displayed to you.  The dialog has a
+textbox and a button at the top of its window.  Enter “pygame” into the textbox
+and press the button (which reads “Find package from PyPI”).  Information about
+the <code class="docutils literal notranslate"><span class="pre">pygame</span></code> package should then be displayed in the main part of the dialog
+window, and beneath it should be a button labeled “Install”.  Click the
+“Install” button.  After pygame has installed, click the “Close” button.</p>
+<p>How do you know if the installation worked?  In the Python shell window, you
+should be able to type <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">pygame</span></code>.  If nothing bad happens, it worked!  If
+instead that statement makes Python puke red text, it did not work.  At that
+point, you may wish to solicit help from the nearest knowledgeable, techie human.</p>
+<p>Assuming everything worked, it’s time to write code that uses Pygame!</p>
+</section>
+<section id="basic-pygame-drawing-graffiti">
+<span id="sec-pygame-basics"></span><h2><span class="section-number">9.2. </span>Basic Pygame: Drawing Graffiti<a class="headerlink" href="#basic-pygame-drawing-graffiti" title="Permalink to this headline">¶</a></h2>
+<p>Pygame can do a lot for us as programmers.  Pygame can make a separate window to
+display our graphical program.  Pygame then allows us to draw graphics on that
+separate window.  Using Pygame, we can draw different types of graphics (shapes,
+colors, etc.), play sounds, and use a whole host of other features.</p>
+<p>Because Pygame does a lot, the first Pygame program you see might look a bit
+daunting.  So, let’s dive in.  You can see our first Pygame program in
+Listing <a class="reference internal" href="#pygame-template"><span class="std std-numref">9.1</span></a>, and if you’d like to avoid typing this code
+or using copy/paste, you can download the code directly from <a class="reference external" href="https://raw.githubusercontent.com/jbshep/conversational-python/master/code/pygame-template.py">this
+link</a>.</p>
+<p>In the paragraphs that follow, we will break down
+Listing <a class="reference internal" href="#pygame-template"><span class="std std-numref">9.1</span></a> section by section.</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<span id="pygame-template"></span><div class="code-block-caption"><span class="caption-number">Listing 9.1 </span><span class="caption-text">A basic Pygame code template</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">import</span> <span class="nn">pygame</span>
+<span class="linenos"> 2</span><span class="kn">from</span> <span class="nn">pygame.locals</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="n">pygame</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span><span class="n">white</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+<span class="linenos"> 7</span><span class="n">black</span> <span class="o">=</span> <span class="p">(</span>  <span class="mi">0</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span>   <span class="mi">0</span><span class="p">)</span>
+<span class="linenos"> 8</span><span class="n">green</span> <span class="o">=</span> <span class="p">(</span>  <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span>   <span class="mi">0</span><span class="p">)</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="n">screenwidth</span> <span class="o">=</span> <span class="mi">800</span>
+<span class="linenos">11</span><span class="n">screenheight</span> <span class="o">=</span> <span class="mi">600</span>
+<span class="linenos">12</span><span class="n">screensize</span> <span class="o">=</span> <span class="p">[</span><span class="n">screenwidth</span><span class="p">,</span> <span class="n">screenheight</span><span class="p">]</span>
+<span class="linenos">13</span><span class="n">screen</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">set_mode</span><span class="p">(</span><span class="n">screensize</span><span class="p">)</span>
+<span class="linenos">14</span><span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">set_caption</span><span class="p">(</span><span class="s2">&quot;WINDOW TITLE HERE&quot;</span><span class="p">)</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span><span class="n">clock</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">Clock</span><span class="p">()</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span><span class="n">done</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos">19</span>
+<span class="linenos">20</span><span class="k">while</span> <span class="ow">not</span> <span class="n">done</span><span class="p">:</span>
+<span class="linenos">21</span>    <span class="c1"># 1. Process events</span>
+<span class="linenos">22</span>    <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">pygame</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">():</span>
+<span class="linenos">23</span>        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">QUIT</span><span class="p">:</span>
+<span class="linenos">24</span>            <span class="n">done</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="linenos">25</span>
+<span class="linenos">26</span>    <span class="c1"># 2. Program logic, change variables, etc.</span>
+<span class="linenos">27</span>
+<span class="linenos">28</span>    <span class="c1"># 3. Draw stuff</span>
+<span class="linenos">29</span>    <span class="n">screen</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">white</span><span class="p">)</span>
+<span class="linenos">30</span>    <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">green</span><span class="p">,</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">],</span> <span class="p">[</span><span class="mi">150</span><span class="p">,</span> <span class="mi">300</span><span class="p">],</span> <span class="mi">3</span><span class="p">)</span>
+<span class="linenos">31</span>    <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">green</span><span class="p">,</span> <span class="p">[</span><span class="mi">150</span><span class="p">,</span> <span class="mi">300</span><span class="p">],</span> <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">],</span> <span class="mi">3</span><span class="p">)</span>
+<span class="linenos">32</span>
+<span class="linenos">33</span>    <span class="c1"># Flip the buffer and do short delay to maintain framerate</span>
+<span class="linenos">34</span>    <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+<span class="linenos">35</span>    <span class="n">clock</span><span class="o">.</span><span class="n">tick</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="linenos">36</span>
+<span class="linenos">37</span><span class="n">pygame</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>The result of the code in Listing <a class="reference internal" href="#pygame-template"><span class="std std-numref">9.1</span></a> is the window shown in Figure <a class="reference internal" href="#fig-pygame-template"><span class="std std-numref">9.1</span></a>.</p>
+<figure class="align-default" id="id2">
+<span id="fig-pygame-template"></span><a class="reference internal image-reference" href="_images/pygame_template.png"><img alt="The window produced by the code in Listing :numref:`%s &lt;pygame_template&gt;`" src="_images/pygame_template.png" style="width: 547.1999999999999px; height: 440.4px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 9.1 </span><span class="caption-text">The window produced by the code in Listing <a class="reference internal" href="#pygame-template"><span class="std std-numref">9.1</span></a></span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>That’s a lot of code to throw at someone, or at least it seems that way right
+now.  It’s actually not a huge deal if we just slow down and take this code step
+by step.  We’ll look at a block of code and then we’ll explain what it does.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pygame</span>
+<span class="kn">from</span> <span class="nn">pygame.locals</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">pygame</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The first two lines in this code snippet make it so we can use Pygame variables
+and functions in our code.  The last line gets Pygame ready to start making
+graphical windows.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">white</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+<span class="n">black</span> <span class="o">=</span> <span class="p">(</span>  <span class="mi">0</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span>   <span class="mi">0</span><span class="p">)</span>
+<span class="n">green</span> <span class="o">=</span> <span class="p">(</span>  <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span>   <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In this code snippet, we define colors that we think we’ll use in our program.
+Colors are “mixed” together using amounts of red, green, and blue (in that
+order, specifically).  The amounts of each range from <code class="docutils literal notranslate"><span class="pre">0</span></code> to <code class="docutils literal notranslate"><span class="pre">255</span></code>.  Thus, when
+we type <code class="docutils literal notranslate"><span class="pre">green</span> <span class="pre">=</span> <span class="pre">(0,</span> <span class="pre">255,</span> <span class="pre">0)</span></code>, we are telling Python to make a color that has
+<code class="docutils literal notranslate"><span class="pre">0</span></code> of red, lots of green (that is, <code class="docutils literal notranslate"><span class="pre">255</span></code>, which is the maximum), and <code class="docutils literal notranslate"><span class="pre">0</span></code> of
+blue.</p>
+<p>You might be wondering what the parentheses do.  Note that this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Kind of looks like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Notice all we did was change the type of braces – parentheses versus square
+brackets.  We know that square brackets surround lists.  If we use parentheses,
+it makes a list-like thing called a <em>tuple</em>.  A tuple is a list that cannot be
+changed once it is created.  We use tuples to make colors.</p>
+<p>Sometimes students are confused by the indentation I’ve used in the above code
+snippet.  Here is the code again:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">white</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+<span class="n">black</span> <span class="o">=</span> <span class="p">(</span>  <span class="mi">0</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span>   <span class="mi">0</span><span class="p">)</span>
+<span class="n">green</span> <span class="o">=</span> <span class="p">(</span>  <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span>   <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Notice the extra spacing around the zeroes.  This extra spacing doesn’t do
+anything special.  It just makes the code look more readable. You’re allowed
+(and encouraged) to be artistic in writing code.  Make your code pretty!</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">screenwidth</span> <span class="o">=</span> <span class="mi">800</span>
+<span class="n">screenheight</span> <span class="o">=</span> <span class="mi">600</span>
+<span class="n">screensize</span> <span class="o">=</span> <span class="p">[</span><span class="n">screenwidth</span><span class="p">,</span> <span class="n">screenheight</span><span class="p">]</span>
+<span class="n">screen</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">set_mode</span><span class="p">(</span><span class="n">screensize</span><span class="p">)</span>
+<span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">set_caption</span><span class="p">(</span><span class="s2">&quot;WINDOW TITLE HERE&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This code actually creates a graphical window.  It chooses a width and height
+and then uses the function <code class="docutils literal notranslate"><span class="pre">pygame.display.set_mode</span></code> to set up the window, which
+makes it appear on the screen for the first time.  The part of the code that
+reads <code class="docutils literal notranslate"><span class="pre">pygame.display</span></code> is the name of a code module that contains the <code class="docutils literal notranslate"><span class="pre">set_mode</span></code>
+function.  Much of the code in Pygame is stored in different modules that have
+descriptive names.</p>
+<p>The last line changes the text in the title bar of the window.  This text is
+called the window’s <em>caption</em>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">clock</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">Clock</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This line of code creates a “clock” that “ticks.”  We’ll talk more about what
+this <code class="docutils literal notranslate"><span class="pre">clock</span></code> variable is for in a little bit, but for now just remember that we
+created a variable named <code class="docutils literal notranslate"><span class="pre">clock</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">done</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="k">while</span> <span class="ow">not</span> <span class="n">done</span><span class="p">:</span>
+</pre></div>
+</div>
+<p>You’ve seen loops a lot in this book.  Often, we’ve used loops to repeatedly ask
+for a number, a string, or a value in a list.  In this case, the loop is going
+to repeatedly draw things on the screen.</p>
+<p>Computer programs that create graphics don’t just draw those graphics on the
+screen and then wait.  Computer monitors continually refresh their graphics
+on-screen, so programs need to be written to continually re-paint their shapes,
+colors, and images.  This is the start of the loop that accomplishes this.</p>
+<p>We create a Boolean variable named <code class="docutils literal notranslate"><span class="pre">done</span></code>.  The loop will keep running until
+<code class="docutils literal notranslate"><span class="pre">done</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>.  Presumably, something inside the loop will change <code class="docutils literal notranslate"><span class="pre">done</span></code>
+from <code class="docutils literal notranslate"><span class="pre">False</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code>.  We’ll see that very shortly.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Process events</span>
+
+<span class="c1"># 2. Program logic, change variables, etc.</span>
+
+<span class="c1"># 3. Draw stuff</span>
+</pre></div>
+</div>
+<p>Okay, so I’ve removed some code so that you can focus on the three main comment
+sections of the loop.  In fact, I’ve labeled them 1, 2, and 3.  Each time
+through the loop, we’re going to do three basic things.</p>
+<p>First, we’ll handle events.  Events are things like the user pressing a keyboard
+key or moving the mouse.</p>
+<p>Second, we’ll perform program logic.  If we want to change where graphics show
+up on the screen, or possibly check to see if there are any collisions between
+our graphics, we would do that in this section of code.  We will use variables
+to keep track of where things should appear on the screen, and in this section
+we will update the values of those variables.</p>
+<p>Third and finally, we’ll use the variables modified in the second section of
+code to actually draw shapes on the screen.</p>
+<p>It is a really good idea to stick to this organization in the loop.  Consider if
+we decided to try to draw something on-screen in part 1.  It is possible that
+whatever we drew would end up erased or overwritten in part 3.  This would also
+make our code really hard to debug.</p>
+<p>Now, let’s look at the code under each of these comment sections.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Process events</span>
+<span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">pygame</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">QUIT</span><span class="p">:</span>
+        <span class="n">done</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>The function <code class="docutils literal notranslate"><span class="pre">pygame.event.get</span></code> gives us a list of all the events that have
+happened to the program.  This could be mouse clicks, key presses, etc.  We are
+using a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop to cycle through the events, one at a time.  If the event
+happens to be a <code class="docutils literal notranslate"><span class="pre">pygame.QUIT</span></code> event, this tell us that the user has clicked on
+the “close” button typically found at the top corner of the window.  We should
+respond by setting <code class="docutils literal notranslate"><span class="pre">done</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> so that the loop can exit at the top of the
+<code class="docutils literal notranslate"><span class="pre">while</span></code> loop and then the program can end.</p>
+<p>In future Pygame programs, we will handle more types of events in different
+ways.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 2. Program logic, change variables, etc.</span>
+</pre></div>
+</div>
+<p>There’s no code in this section right now.  This is because in this code sample,
+all we are doing in the next section (part 3) is drawing two lines at
+fixed locations.  There is no real program logic.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 3. Draw stuff</span>
+<span class="n">screen</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">white</span><span class="p">)</span>
+<span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">green</span><span class="p">,</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">],</span> <span class="p">[</span><span class="mi">150</span><span class="p">,</span> <span class="mi">300</span><span class="p">],</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">green</span><span class="p">,</span> <span class="p">[</span><span class="mi">150</span><span class="p">,</span> <span class="mi">300</span><span class="p">],</span> <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">],</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Think of drawing on the screen in Pygame as being like painting on a wall or a
+canvas.  When we start painting on a surface, we want to make sure the canvas is
+clear and uniform.  If our canvas already had drawings on it and we wanted to
+start over, perhaps we could paint over the existing drawings using one
+background color.  That is what we accomplish in the first line with
+<code class="docutils literal notranslate"><span class="pre">screen.fill(white)</span></code>.</p>
+<p>Each of the next two lines of code draw a single line using the <code class="docutils literal notranslate"><span class="pre">green</span></code> color on
+the <code class="docutils literal notranslate"><span class="pre">screen</span></code> variable we created earlier.  The <code class="docutils literal notranslate"><span class="pre">pygame.draw.line</span></code> function
+accepts five arguments.  The first is the <code class="docutils literal notranslate"><span class="pre">screen</span></code>.  The next is the color.  The
+third and fourth arguments are lists, each of which represents a point on the
+screen.  The points are the ends of the line segment we wish to draw.  Each list
+is of the form <code class="docutils literal notranslate"><span class="pre">[X,</span> <span class="pre">Y]</span></code> where <code class="docutils literal notranslate"><span class="pre">X</span></code> is the x-coordinate and <code class="docutils literal notranslate"><span class="pre">Y</span></code> is the
+y-coordinate.  Each X/Y point is called a <strong>pixel</strong>.  However, the X’s and
+Y’s work a little differently than what you might be used to in past mathematics
+courses or other experiences in life.</p>
+<p>In Figure <a class="reference internal" href="#fig-xy-plot"><span class="std std-numref">9.2</span></a>, we can see that as X goes from the left side of the screen
+to the right side of the screen, the X value gets bigger.  It starts at zero
+on the left side of the screen, and it gets bigger until it reaches the
+pixel width value of the screen (which, in this example code, we have set to
+<code class="docutils literal notranslate"><span class="pre">screenwidth</span> <span class="pre">=</span> <span class="pre">800</span></code>).  Also in Figure <a class="reference internal" href="#fig-xy-plot"><span class="std std-numref">9.2</span></a>, we can see
+that as Y goes down from the top of the screen to the bottom of the screen, the
+Y value gets bigger.  This is probably backwards from what you have experienced
+in mathematics.  The Y values start at zero on the top of the screen and get
+larger until the Y value reaches the pixel height value of the screen’s height
+(which, in the example code, we have set to <code class="docutils literal notranslate"><span class="pre">screenheight</span> <span class="pre">=</span> <span class="pre">600</span></code>).
+Additionally in Figure <a class="reference internal" href="#fig-xy-plot"><span class="std std-numref">9.2</span></a>, we can see the X/Y points
+that describe the endpoints of the two green lines drawn using <code class="docutils literal notranslate"><span class="pre">pygame.draw.line</span></code>.</p>
+<figure class="align-default" id="id3">
+<span id="fig-xy-plot"></span><a class="reference internal image-reference" href="_images/xy-plot.png"><img alt="Using the X/Y coordinate system to draw on a screen" src="_images/xy-plot.png" style="width: 760.8000000000001px; height: 526.4px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 9.2 </span><span class="caption-text">Using the X/Y coordinate system to draw on a screen</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>Close to the end of the loop body are the following two statements.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Flip the buffer and do short delay to maintain framerate</span>
+<span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+<span class="n">clock</span><span class="o">.</span><span class="n">tick</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>As we use functions from the <code class="docutils literal notranslate"><span class="pre">pygame.draw</span></code> library, these functions
+actually draw graphics off-screen on something called a graphics “buffer.”
+When the time comes to show our final work of art, we “flip” the on-screen
+and off-screen buffers so that what we’ve drawn finally appears on the
+screen.  The technical name for this is called <em>double buffering</em>.
+If we didn’t use double buffering, it’s possible the user would perceive
+each line-draw stroke and the drawing process would look choppy.  Just know
+that we need to call <code class="docutils literal notranslate"><span class="pre">pygame.display.flip()</span></code> near the end of the loop
+body to make our graphics appear.  Figures <a class="reference internal" href="#fig-pre-flip"><span class="std std-numref">9.3</span></a>
+and <a class="reference internal" href="#fig-post-flip"><span class="std std-numref">9.4</span></a> demonstrate the effect of flipping our
+double buffered displays if we had just drawn a face on the off-screen
+buffer.</p>
+<figure class="align-default" id="id4">
+<span id="fig-pre-flip"></span><a class="reference internal image-reference" href="_images/pre-flip.png"><img alt="Before calling ``pygame.display.flip``" src="_images/pre-flip.png" style="width: 524.4px; height: 379.2px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 9.3 </span><span class="caption-text">Before calling <code class="docutils literal notranslate"><span class="pre">pygame.display.flip</span></code></span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id5">
+<span id="fig-post-flip"></span><a class="reference internal image-reference" href="_images/post-flip.png"><img alt="After calling ``pygame.display.flip``" src="_images/post-flip.png" style="width: 522.0px; height: 377.7px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 9.4 </span><span class="caption-text">After calling <code class="docutils literal notranslate"><span class="pre">pygame.display.flip</span></code></span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>The statement <code class="docutils literal notranslate"><span class="pre">clock.tick(20)</span></code> controls the <em>framerate</em> of the program.
+This introduces a small delay in the loop.  Eventually in this chapter,
+we will begin animating our graphics.  Animation is simply the process of
+drawing graphics at slightly different coordinates on the screen.  A person’s
+vision interprets images drawn at slightly different locations over time
+as movement.  The small delay introduced by <code class="docutils literal notranslate"><span class="pre">clock.tick</span></code> helps a human
+being to perceive these changes in position over time.  The argument passed
+to <code class="docutils literal notranslate"><span class="pre">clock.tick</span></code> (in this case, <code class="docutils literal notranslate"><span class="pre">20</span></code>) is the framerate in milliseconds.</p>
+<p>Finally, once the program leaves the loop body, the code executes the
+following code.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pygame</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">pygame.quit()</span></code> closes the window.  If we forget to call <code class="docutils literal notranslate"><span class="pre">pygame.quit()</span></code>,
+the program will freeze and we will need to terminate the program through
+another means (like the Windows Task Manager or the macOS Force Quit feature)..</p>
+<p>We need to be able to draw more than just lines.  Let’s consider ellipses
+(which include circles) and rectangles.</p>
+<p>To draw an ellipse, do this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">green</span><span class="p">,</span> <span class="p">[</span><span class="mi">400</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">150</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># The arguments used are:</span>
+<span class="c1">#</span>
+<span class="c1"># screen is the surface window on which we wish to draw</span>
+<span class="c1"># green is the color tuple</span>
+<span class="c1"># [400, 300, 200, 150] is the list describing the X/Y position</span>
+<span class="c1">#   of the ellipse and the width and height of an invisible</span>
+<span class="c1">#   rectangle surrounding the ellipse</span>
+<span class="c1"># 2 is the pixel width of the border surrounding the ellipse</span>
+<span class="c1">#</span>
+<span class="c1"># Thus, this statement draws an ellipse inside an invisible</span>
+<span class="c1"># rectangle whose upper left corner is at [400,300] that</span>
+<span class="c1"># is wider (200 pixels) than it is taller (150 pixels).  It</span>
+<span class="c1"># draws the ellipse with a green border.</span>
+</pre></div>
+</div>
+<p>We can change the pixel width to 0, and it will fill in the ellipse instead
+(rather than changing the border color), like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">green</span><span class="p">,</span> <span class="p">[</span><span class="mi">400</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">150</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To draw a rectangle, do this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">rect</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">green</span><span class="p">,</span> <span class="p">[</span><span class="mi">400</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">150</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Knowing what you now know about drawing lines and ellipses, can you draw
+the face in Figure <a class="reference internal" href="#fig-pre-flip"><span class="std std-numref">9.3</span></a>?  Give it a try!</p>
+<p>How did you do?  Did you realize you needed to create a yellow color first?
+Then, did you notice that the yellow circle had a black border around it?</p>
+<p>Here is one way you could have drawn the face (see Listing
+<a class="reference internal" href="#draw-face"><span class="std std-numref">9.2</span></a>).  Notice line 8 that defines <code class="docutils literal notranslate"><span class="pre">yellow</span></code>.  Then,
+notice lines 32 - 33.  To get a yellow circle with a black border, we
+actually draw the circle twice.  First, we draw the yellow circle using
+<code class="docutils literal notranslate"><span class="pre">pygame.draw.ellipse</span></code>.  Then, we draw the same circle over the top, only
+this time we only draw a black border.</p>
+<div class="literal-block-wrapper docutils container" id="id6">
+<span id="draw-face"></span><div class="code-block-caption"><span class="caption-number">Listing 9.2 </span><span class="caption-text">Drawing a face</span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">import</span> <span class="nn">pygame</span>
+<span class="linenos"> 2</span><span class="kn">from</span> <span class="nn">pygame.locals</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="n">pygame</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span><span class="n">white</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+<span class="linenos"> 7</span><span class="n">black</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="hll"><span class="linenos"> 8</span><span class="n">yellow</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span><span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="n">screenwidth</span> <span class="o">=</span> <span class="mi">800</span>
+<span class="linenos">11</span><span class="n">screenheight</span> <span class="o">=</span> <span class="mi">600</span>
+<span class="linenos">12</span><span class="n">screensize</span> <span class="o">=</span> <span class="p">[</span><span class="n">screenwidth</span><span class="p">,</span> <span class="n">screenheight</span><span class="p">]</span>
+<span class="linenos">13</span><span class="n">screen</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">set_mode</span><span class="p">(</span><span class="n">screensize</span><span class="p">)</span>
+<span class="linenos">14</span><span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">set_caption</span><span class="p">(</span><span class="s2">&quot;WINDOW TITLE HERE&quot;</span><span class="p">)</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span><span class="n">clock</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">Clock</span><span class="p">()</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span><span class="n">done</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos">19</span>
+<span class="linenos">20</span><span class="k">while</span> <span class="ow">not</span> <span class="n">done</span><span class="p">:</span>
+<span class="linenos">21</span>    <span class="c1"># 1. Process events</span>
+<span class="linenos">22</span>    <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">pygame</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">():</span>
+<span class="linenos">23</span>        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">QUIT</span><span class="p">:</span>
+<span class="linenos">24</span>            <span class="n">done</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="linenos">25</span>
+<span class="linenos">26</span>    <span class="c1"># 2. Program logic, change variables, etc.</span>
+<span class="linenos">27</span>
+<span class="linenos">28</span>    <span class="c1"># 3. Draw stuff</span>
+<span class="linenos">29</span>    <span class="n">screen</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">white</span><span class="p">)</span>
+<span class="linenos">30</span>
+<span class="linenos">31</span>    <span class="c1"># Draw the head</span>
+<span class="hll"><span class="linenos">32</span>    <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">yellow</span><span class="p">,</span> <span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">400</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+</span><span class="hll"><span class="linenos">33</span>    <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">black</span><span class="p">,</span> <span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">400</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
+</span><span class="linenos">34</span>
+<span class="linenos">35</span>    <span class="c1"># Draw the eyes</span>
+<span class="linenos">36</span>    <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">black</span><span class="p">,</span> <span class="p">[</span><span class="mi">145</span><span class="p">,</span> <span class="mi">145</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+<span class="linenos">37</span>    <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">black</span><span class="p">,</span> <span class="p">[</span><span class="mi">300</span><span class="p">,</span> <span class="mi">145</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+<span class="linenos">38</span>
+<span class="linenos">39</span>    <span class="c1"># Draw the mouth</span>
+<span class="linenos">40</span>    <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">black</span><span class="p">,</span> <span class="p">[</span><span class="mi">175</span><span class="p">,</span> <span class="mi">340</span><span class="p">],</span> <span class="p">[</span><span class="mi">325</span><span class="p">,</span> <span class="mi">340</span><span class="p">],</span> <span class="mi">6</span><span class="p">)</span>
+<span class="linenos">41</span>
+<span class="linenos">42</span>    <span class="c1"># Flip the buffer and do short delay to maintain framerate</span>
+<span class="linenos">43</span>    <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+<span class="linenos">44</span>    <span class="n">clock</span><span class="o">.</span><span class="n">tick</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="linenos">45</span>
+<span class="linenos">46</span><span class="n">pygame</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>Drawing lines, ellipses, and rectangles is a tedious exercise, but it’s
+worth doing to get a sense of how to draw primitive graphics on an
+X/Y coordinate surface.  As we progress through this chapter, we will
+find easier ways of dealing with drawing graphics, so keep reading!</p>
+<p>The next thing we will learn to do is to take an image in a file and
+draw it on the screen.  First, find an image you like.  I’m going to use
+the one shown in Figure <a class="reference internal" href="#fig-niccage"><span class="std std-numref">9.5</span></a>, which you can download
+<a class="reference external" href="https://raw.githubusercontent.com/jbshep/conversational-python/master/docs/source/images/ch9/niccage_rabbit.png">here</a>.  If you use this image, note that
+the image’s filename is <code class="docutils literal notranslate"><span class="pre">niccage_rabbit.png</span></code>.</p>
+<figure class="align-default" id="id7">
+<span id="fig-niccage"></span><a class="reference internal image-reference" href="_images/niccage_rabbit.png"><img alt="Behold! Nicolas Cage as a rabbit!" src="_images/niccage_rabbit.png" style="width: 400.0px; height: 418.0px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 9.5 </span><span class="caption-text">Behold! Nicolas Cage as a rabbit!</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>Ensure that your image is located in the same folder as your code.  This is
+very important.  Then, you can use the following code to draw the image
+onto the screen.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">niccage</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;niccage_rabbit.png&quot;</span><span class="p">)</span>
+<span class="n">screen</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">niccage</span><span class="p">,</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>This code first loads the image into a variable named <code class="docutils literal notranslate"><span class="pre">niccage</span></code>.  Then
+We “blit” the image onto the screen at coordinates <code class="docutils literal notranslate"><span class="pre">[5,</span> <span class="pre">10]</span></code> or wherever
+we would like our image to appear.  “Blit” stands for “Block Transfer” and
+it is how we copy the contents of one surface onto another.  The image
+stored in our <code class="docutils literal notranslate"><span class="pre">niccage</span></code> variable is technically of type <code class="docutils literal notranslate"><span class="pre">Surface</span></code>, just
+like our <code class="docutils literal notranslate"><span class="pre">screen</span></code>.</p>
+<p>If you find an image that you want to use is too big or too small, it’s best
+to use an image editing program to resize it, like Photoshop or Illustrator
+(or Microsoft Paint, egads!).  Resizing images in code is cumbersome and
+can be costly when we have fairly sophisticated graphical programs.</p>
+<p>If you want to draw a background image, you’ll simply want to make sure
+the image fills up the screen, and then you’ll want to draw it at position
+<code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">0]</span></code> so that it fits nicely up against the upper left corner of the
+screen.</p>
+<p>There is one more important point to realize.  Graphics appear in the order
+they are drawn in your code.  If you draw one graphical object A and then
+another graphical object B that overlaps A, B will appear on top of A.  Thus,
+if you want to have background with images drawn on top of it, you would
+need to draw the background first, and then draw the other images afterwards.</p>
+</section>
+<section id="animation-part-1">
+<span id="sec-anim-pt1"></span><h2><span class="section-number">9.3. </span>Animation, Part 1<a class="headerlink" href="#animation-part-1" title="Permalink to this headline">¶</a></h2>
+<p>In the previous section, we briefly introduced the notion of animation.
+To animate graphics, we simply draw graphical objects at different coordinates
+on the screen, each time after a slight delay.  A person’s vision interprets
+images drawn at slightly different locations over time as movement.</p>
+<p>To get a sense of how we will do animation, let’s revisit our game loop.
+The game loop looks something like this (with most of the code omitted):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">while</span> <span class="ow">not</span> <span class="n">done</span><span class="p">:</span>
+    <span class="c1"># 1. Process events</span>
+
+    <span class="c1"># 2. Program logic, change variables, etc.</span>
+
+    <span class="c1"># 3. Draw stuff</span>
+
+
+    <span class="c1"># Flip the buffer and do short delay to maintain framerate</span>
+    <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+    <span class="n">clock</span><span class="o">.</span><span class="n">tick</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In Section <a class="reference internal" href="#sec-pygame-basics"><span class="std std-numref">9.2</span></a>, we had code for part 1 and part 3
+of the loop, but nothing for part 2.  In this section, we will add code to parts
+1 and 2 to move our graphical objects and start to detect collisions.</p>
+<p>First, we will animate graphics using keystrokes.  Specifically, when the user
+presses an arrow key, we will move the face in that direction.  After we have
+figured that out, in Section <a class="reference internal" href="#sec-anim-pt2"><span class="std std-numref">9.4</span></a> we will animate
+graphics automatically without any kind of user intervention.</p>
+<p>Let’s use Listing <a class="reference internal" href="#draw-face"><span class="std std-numref">9.2</span></a> as our starting point, which was the
+code where we drew a face with eyes and a mouth on the screen.  Let’s see
+if we can make the face move using the arrow keys.</p>
+<p>If we are going to draw the face in different locations on the screen based on
+presses of the arrow keys, we’ll want to keep track of where the face is
+currently.  This will require some variables.  Let’s create variables named
+<code class="docutils literal notranslate"><span class="pre">facex</span></code> and <code class="docutils literal notranslate"><span class="pre">facey</span></code> to track the X and Y location of upper left corner of the
+face.  Let’s create those variables near the top of our program where we
+create other variables but before the <code class="docutils literal notranslate"><span class="pre">while</span></code> loop.</p>
+<div class="literal-block-wrapper docutils container" id="id8">
+<div class="code-block-caption"><span class="caption-number">Listing 9.3 </span><span class="caption-text">Introducing <code class="docutils literal notranslate"><span class="pre">facex</span></code> and <code class="docutils literal notranslate"><span class="pre">facey</span></code> variables</span><a class="headerlink" href="#id8" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">import</span> <span class="nn">pygame</span>
+<span class="linenos"> 2</span><span class="kn">from</span> <span class="nn">pygame.locals</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="n">pygame</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span><span class="n">white</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+<span class="linenos"> 7</span><span class="n">black</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="linenos"> 8</span><span class="n">yellow</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="n">screenwidth</span> <span class="o">=</span> <span class="mi">800</span>
+<span class="linenos">11</span><span class="n">screenheight</span> <span class="o">=</span> <span class="mi">600</span>
+<span class="linenos">12</span><span class="n">screensize</span> <span class="o">=</span> <span class="p">[</span><span class="n">screenwidth</span><span class="p">,</span> <span class="n">screenheight</span><span class="p">]</span>
+<span class="linenos">13</span><span class="n">screen</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">set_mode</span><span class="p">(</span><span class="n">screensize</span><span class="p">)</span>
+<span class="linenos">14</span><span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">set_caption</span><span class="p">(</span><span class="s2">&quot;WINDOW TITLE HERE&quot;</span><span class="p">)</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span><span class="n">clock</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">Clock</span><span class="p">()</span>
+<span class="linenos">17</span>
+<span class="hll"><span class="linenos">18</span><span class="n">facex</span> <span class="o">=</span> <span class="mi">50</span>
+</span><span class="hll"><span class="linenos">19</span><span class="n">facey</span> <span class="o">=</span> <span class="mi">50</span>
+</span><span class="linenos">20</span>
+<span class="linenos">21</span><span class="n">done</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos">22</span>
+<span class="linenos">23</span><span class="c1"># THE REST OF THE CODE IS OMITTED FOR NOW...</span>
+</pre></div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">facex</span></code> and <code class="docutils literal notranslate"><span class="pre">facey</span></code> represent the “state” of the program.  When we
+try to build video games, we will talk often about the game’s state,
+which is always managed through a series of variables that change during
+the game loop.</p>
+<p>I’ve decided to keep the face at coordinates <code class="docutils literal notranslate"><span class="pre">[50,50]</span></code> for now.  Now, let’s
+adjust our drawing code to draw the face using our variables.  Thus, our drawing
+code changes from this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Draw the head</span>
+<span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">yellow</span><span class="p">,</span> <span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">400</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">black</span><span class="p">,</span> <span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">400</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>to this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Draw the head</span>
+<span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">yellow</span><span class="p">,</span> <span class="p">[</span><span class="n">facex</span><span class="p">,</span> <span class="n">facey</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">400</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">black</span><span class="p">,</span> <span class="p">[</span><span class="n">facex</span><span class="p">,</span> <span class="n">facey</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">400</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If we run our code now, we won’t see any difference, which is good!  The
+code still draws the face in the same location.  It’s just using variables
+to decide where to draw the face now.</p>
+<p>Okay, let’s change the values of <code class="docutils literal notranslate"><span class="pre">facex</span></code> and <code class="docutils literal notranslate"><span class="pre">facey</span></code> whenever the user
+presses and arrow key.  To set this up, let’s create a function whose job
+it is to handle key presses.  We will name it <code class="docutils literal notranslate"><span class="pre">handle_keys</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">handle_keys</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">facex</span><span class="p">,</span> <span class="n">facey</span>
+    <span class="n">keys</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">get_pressed</span><span class="p">()</span>
+
+    <span class="c1"># FIXME do something with the key presses</span>
+</pre></div>
+</div>
+<p>And then down in the <code class="docutils literal notranslate"><span class="pre">while</span></code> loop in part 1 of the loop body, we will call
+<code class="docutils literal notranslate"><span class="pre">handle_keys</span></code> every time we re-enter the loop:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">while</span> <span class="ow">not</span> <span class="n">done</span><span class="p">:</span>
+<span class="linenos">2</span>    <span class="c1"># 1. Process events</span>
+<span class="linenos">3</span>    <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">pygame</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">():</span>
+<span class="linenos">4</span>        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">QUIT</span><span class="p">:</span>
+<span class="linenos">5</span>            <span class="n">done</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="linenos">6</span>
+<span class="hll"><span class="linenos">7</span>    <span class="n">handle_keys</span><span class="p">()</span>
+</span></pre></div>
+</div>
+<p>If we look at the definition of the <code class="docutils literal notranslate"><span class="pre">handle_keys</span></code> function, we might wonder
+what the <code class="docutils literal notranslate"><span class="pre">keys</span></code> variable is – the one we are creating using
+<code class="docutils literal notranslate"><span class="pre">pygame.key.get_pressed()</span></code>.  The <code class="docutils literal notranslate"><span class="pre">keys</span></code> variables is actually a really
+big <code class="docutils literal notranslate"><span class="pre">list</span></code> of <code class="docutils literal notranslate"><span class="pre">bool</span></code> values.  It might look something like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="kc">False</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Each index represents a different key on the keyboard.  So, which index
+represents the left arrow?  Which one represents the “J” key?  What about the
+space bar?  Well, fortunately, there are a series of variables that tell us
+what the index of left arrow is, for example, and we already imported those
+variables at the top of our program when we did this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pygame.locals</span> <span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+<p>The names of the variables we’re describing all start with <code class="docutils literal notranslate"><span class="pre">K_</span></code>.  For example,
+<code class="docutils literal notranslate"><span class="pre">K_LEFT</span></code> is the left arrow.  <code class="docutils literal notranslate"><span class="pre">K_SPACE</span></code> is the space bar.  <code class="docutils literal notranslate"><span class="pre">K_a</span></code> is
+the “A” key.  So, if we want to know if the left arrow is pressed, we might
+examine the expression <code class="docutils literal notranslate"><span class="pre">keys[K_LEFT]</span></code> to see if it’s <code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<p>Thus, if we want the left arrow to change the face’s X coordinate but subtracting
+pixels from it, we might do something like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">handle_keys</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">facex</span><span class="p">,</span> <span class="n">facey</span>
+    <span class="n">keys</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">get_pressed</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">keys</span><span class="p">[</span><span class="n">K_LEFT</span><span class="p">]:</span>
+        <span class="c1"># move the face to the left</span>
+        <span class="n">facex</span> <span class="o">-=</span> <span class="mi">5</span>
+</pre></div>
+</div>
+<p>Splendid.  Let’s keep going.  Based on this kind of logic, can you continue
+adding code so that the remaining arrow keys have their desired effect?</p>
+<p>Try it.  I’ll wait.</p>
+<p>Okay, how’d you do?</p>
+<p>Listing <a class="reference internal" href="#handle-keys-1"><span class="std std-numref">9.4</span></a> offers a solution:</p>
+<div class="literal-block-wrapper docutils container" id="id9">
+<span id="handle-keys-1"></span><div class="code-block-caption"><span class="caption-number">Listing 9.4 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">handle_keys</span></code> function, attempt 1</span><a class="headerlink" href="#id9" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span> <span class="nf">handle_keys</span><span class="p">():</span>
+<span class="linenos"> 2</span>    <span class="k">global</span> <span class="n">facex</span><span class="p">,</span> <span class="n">facey</span>
+<span class="linenos"> 3</span>    <span class="n">keys</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">get_pressed</span><span class="p">()</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span>    <span class="k">if</span> <span class="n">keys</span><span class="p">[</span><span class="n">K_LEFT</span><span class="p">]:</span>
+<span class="linenos"> 6</span>        <span class="c1"># move the face to the left</span>
+<span class="linenos"> 7</span>        <span class="n">facex</span> <span class="o">-=</span> <span class="mi">5</span>
+<span class="linenos"> 8</span>    <span class="k">if</span> <span class="n">keys</span><span class="p">[</span><span class="n">K_RIGHT</span><span class="p">]:</span>
+<span class="linenos"> 9</span>        <span class="c1"># move the face to the right</span>
+<span class="linenos">10</span>        <span class="n">facex</span> <span class="o">+=</span> <span class="mi">5</span>
+<span class="linenos">11</span>    <span class="k">if</span> <span class="n">keys</span><span class="p">[</span><span class="n">K_UP</span><span class="p">]:</span>
+<span class="linenos">12</span>        <span class="c1"># move the face up</span>
+<span class="linenos">13</span>        <span class="n">facey</span> <span class="o">-=</span> <span class="mi">5</span>
+<span class="linenos">14</span>    <span class="k">if</span> <span class="n">keys</span><span class="p">[</span><span class="n">K_DOWN</span><span class="p">]:</span>
+<span class="linenos">15</span>        <span class="c1"># move the face down</span>
+<span class="linenos">16</span>        <span class="n">facey</span> <span class="o">+=</span> <span class="mi">5</span>
+</pre></div>
+</div>
+</div>
+<p>Why did I use <code class="docutils literal notranslate"><span class="pre">if</span></code> rather than <code class="docutils literal notranslate"><span class="pre">elif</span></code> for each subsequent arrow key?
+Realize that a user could simultaneously press the DOWN and RIGHT arrow
+keys to attempt to move diagonally down and right.  If we used <code class="docutils literal notranslate"><span class="pre">elif</span></code> on
+lines 8 and 14, line 8 would be <code class="docutils literal notranslate"><span class="pre">True</span></code> and we would never reach line 14.</p>
+<p>Let’s put all of this code together in Listing <a class="reference internal" href="#move-face-1"><span class="std std-numref">9.5</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="id10">
+<span id="move-face-1"></span><div class="code-block-caption"><span class="caption-number">Listing 9.5 </span><span class="caption-text">Moving a face with arrow keys, attempt 1</span><a class="headerlink" href="#id10" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pygame</span>
+<span class="kn">from</span> <span class="nn">pygame.locals</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">pygame</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+
+<span class="n">white</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+<span class="n">black</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">yellow</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="n">screenwidth</span> <span class="o">=</span> <span class="mi">800</span>
+<span class="n">screenheight</span> <span class="o">=</span> <span class="mi">600</span>
+<span class="n">screensize</span> <span class="o">=</span> <span class="p">[</span><span class="n">screenwidth</span><span class="p">,</span> <span class="n">screenheight</span><span class="p">]</span>
+<span class="n">screen</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">set_mode</span><span class="p">(</span><span class="n">screensize</span><span class="p">)</span>
+<span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">set_caption</span><span class="p">(</span><span class="s2">&quot;WINDOW TITLE HERE&quot;</span><span class="p">)</span>
+
+<span class="n">clock</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">Clock</span><span class="p">()</span>
+
+<span class="n">facex</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">facey</span> <span class="o">=</span> <span class="mi">50</span>
+
+<span class="k">def</span> <span class="nf">handle_keys</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">facex</span><span class="p">,</span> <span class="n">facey</span>
+    <span class="n">keys</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">get_pressed</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">keys</span><span class="p">[</span><span class="n">K_LEFT</span><span class="p">]:</span>
+        <span class="c1"># move the face to the left</span>
+        <span class="n">facex</span> <span class="o">-=</span> <span class="mi">5</span>
+    <span class="k">if</span> <span class="n">keys</span><span class="p">[</span><span class="n">K_RIGHT</span><span class="p">]:</span>
+        <span class="c1"># move the face to the right</span>
+        <span class="n">facex</span> <span class="o">+=</span> <span class="mi">5</span>
+    <span class="k">if</span> <span class="n">keys</span><span class="p">[</span><span class="n">K_UP</span><span class="p">]:</span>
+        <span class="c1"># move the face up</span>
+        <span class="n">facey</span> <span class="o">-=</span> <span class="mi">5</span>
+    <span class="k">if</span> <span class="n">keys</span><span class="p">[</span><span class="n">K_DOWN</span><span class="p">]:</span>
+        <span class="c1"># move the face down</span>
+        <span class="n">facey</span> <span class="o">+=</span> <span class="mi">5</span>
+
+<span class="n">done</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="k">while</span> <span class="ow">not</span> <span class="n">done</span><span class="p">:</span>
+    <span class="c1"># 1. Process events</span>
+    <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">pygame</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">QUIT</span><span class="p">:</span>
+            <span class="n">done</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">handle_keys</span><span class="p">()</span>
+
+    <span class="c1"># 2. Program logic, change variables, etc.</span>
+
+    <span class="c1"># 3. Draw stuff</span>
+    <span class="n">screen</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">white</span><span class="p">)</span>
+
+    <span class="c1"># Draw the head</span>
+    <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">yellow</span><span class="p">,</span> <span class="p">[</span><span class="n">facex</span><span class="p">,</span> <span class="n">facey</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">400</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">black</span><span class="p">,</span> <span class="p">[</span><span class="n">facex</span><span class="p">,</span> <span class="n">facey</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">400</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
+
+    <span class="c1"># Draw the eyes</span>
+    <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">black</span><span class="p">,</span> <span class="p">[</span><span class="mi">145</span><span class="p">,</span> <span class="mi">145</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">black</span><span class="p">,</span> <span class="p">[</span><span class="mi">300</span><span class="p">,</span> <span class="mi">145</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># Draw the mouth</span>
+    <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">black</span><span class="p">,</span> <span class="p">[</span><span class="mi">175</span><span class="p">,</span> <span class="mi">340</span><span class="p">],</span> <span class="p">[</span><span class="mi">325</span><span class="p">,</span> <span class="mi">340</span><span class="p">],</span> <span class="mi">6</span><span class="p">)</span>
+
+    <span class="c1"># Flip the buffer and do short delay to maintain framerate</span>
+    <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+    <span class="n">clock</span><span class="o">.</span><span class="n">tick</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="n">pygame</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>Run the code in Listing <a class="reference internal" href="#move-face-1"><span class="std std-numref">9.5</span></a>.  Oh no!  When we
+press the arrow keys, the head moves… but the eyes and mouth stay put.
+Do you have an idea why this might be?</p>
+<p>Notice that we use the values of <code class="docutils literal notranslate"><span class="pre">facex</span></code> and <code class="docutils literal notranslate"><span class="pre">facey</span></code> to draw the head,
+but we don’t use them to draw the rest of the face.  As <code class="docutils literal notranslate"><span class="pre">facex</span></code> and
+<code class="docutils literal notranslate"><span class="pre">facey</span></code> change, the head gets re-drawn each time in the loop body
+using those new values, but the eyes and mouth are always drawn using
+<em>absolute</em> coordinates.</p>
+<p>To fix this, we will need to draw the position of the eyes and mouth
+<em>relative to</em> <code class="docutils literal notranslate"><span class="pre">facex</span></code> and <code class="docutils literal notranslate"><span class="pre">facey</span></code>.  For example, the left eye’s X
+coordinate is 145, which is 145 - 50 = 95 pixels left of <code class="docutils literal notranslate"><span class="pre">facex</span></code>.
+The left eye’s Y coordinate is the same: 145 - 50 = 95.  We can apply
+this same thought process to the right eye and mouth, which yields this
+code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Draw the head</span>
+<span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">yellow</span><span class="p">,</span> <span class="p">[</span><span class="n">facex</span><span class="p">,</span> <span class="n">facey</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">400</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">black</span><span class="p">,</span> <span class="p">[</span><span class="n">facex</span><span class="p">,</span> <span class="n">facey</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">400</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Draw the eyes</span>
+<span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">black</span><span class="p">,</span> <span class="p">[</span><span class="n">facex</span> <span class="o">+</span> <span class="mi">95</span><span class="p">,</span> <span class="n">facey</span> <span class="o">+</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">black</span><span class="p">,</span> <span class="p">[</span><span class="n">facex</span> <span class="o">+</span> <span class="mi">250</span><span class="p">,</span> <span class="n">facey</span> <span class="o">+</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Draw the mouth</span>
+<span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">black</span><span class="p">,</span> <span class="p">[</span><span class="n">facex</span> <span class="o">+</span> <span class="mi">125</span><span class="p">,</span> <span class="n">facey</span> <span class="o">+</span> <span class="mi">290</span><span class="p">],</span>
+                                <span class="p">[</span><span class="n">facex</span> <span class="o">+</span> <span class="mi">275</span><span class="p">,</span> <span class="n">facey</span> <span class="o">+</span> <span class="mi">290</span><span class="p">],</span> <span class="mi">6</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If you’d like to download a “fresh copy” of our code so far, you can download
+it here: <a class="reference external" href="https://raw.githubusercontent.com/jbshep/conversational-python/master/code/move-face.py">move-face.py</a>.</p>
+</section>
+<section id="animation-part-2">
+<span id="sec-anim-pt2"></span><h2><span class="section-number">9.4. </span>Animation, Part 2<a class="headerlink" href="#animation-part-2" title="Permalink to this headline">¶</a></h2>
+<p>Now that we have figured out how to animate graphics using keyboard keys,
+let us attempt to move graphics autonomously, in other words, make them
+move on their own without user intervention.</p>
+<p>We will use the following starting code, in which we’ve made the face a little
+smaller so that it does not take up so much of the screen.  We’ve also removed
+the <code class="docutils literal notranslate"><span class="pre">handle_keys</span></code> function.  You are encouraged to download your own copy
+of this code here: <a class="reference external" href="https://raw.githubusercontent.com/jbshep/conversational-python/master/code/bounce-face-starter.py">bounce-face-starter.py</a>.  Go ahead and rename
+your code <code class="docutils literal notranslate"><span class="pre">bounce-face.py</span></code>.</p>
+<div class="literal-block-wrapper docutils container" id="id11">
+<span id="bounce-face-starter"></span><div class="code-block-caption"><span class="caption-number">Listing 9.6 </span><span class="caption-text">Starter code for bouncing a face around the screen</span><a class="headerlink" href="#id11" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pygame</span>
+<span class="kn">from</span> <span class="nn">pygame.locals</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">pygame</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+
+<span class="n">white</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+<span class="n">black</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">yellow</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="n">screenwidth</span> <span class="o">=</span> <span class="mi">800</span>
+<span class="n">screenheight</span> <span class="o">=</span> <span class="mi">600</span>
+<span class="n">screensize</span> <span class="o">=</span> <span class="p">[</span><span class="n">screenwidth</span><span class="p">,</span> <span class="n">screenheight</span><span class="p">]</span>
+<span class="n">screen</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">set_mode</span><span class="p">(</span><span class="n">screensize</span><span class="p">)</span>
+<span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">set_caption</span><span class="p">(</span><span class="s2">&quot;WINDOW TITLE HERE&quot;</span><span class="p">)</span>
+
+<span class="n">clock</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">Clock</span><span class="p">()</span>
+
+<span class="n">facex</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">facey</span> <span class="o">=</span> <span class="mi">50</span>
+
+<span class="n">done</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="k">while</span> <span class="ow">not</span> <span class="n">done</span><span class="p">:</span>
+    <span class="c1"># 1. Process events</span>
+    <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">pygame</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">QUIT</span><span class="p">:</span>
+            <span class="n">done</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="c1"># 2. Program logic, change variables, etc.</span>
+
+    <span class="c1"># 3. Draw stuff</span>
+    <span class="n">screen</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">white</span><span class="p">)</span>
+
+    <span class="c1"># Draw the head</span>
+    <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">yellow</span><span class="p">,</span> <span class="p">[</span><span class="n">facex</span><span class="p">,</span> <span class="n">facey</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">150</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">black</span><span class="p">,</span> <span class="p">[</span><span class="n">facex</span><span class="p">,</span> <span class="n">facey</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">150</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
+
+    <span class="c1"># Draw the eyes</span>
+    <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">black</span><span class="p">,</span> <span class="p">[</span><span class="n">facex</span> <span class="o">+</span> <span class="mi">40</span><span class="p">,</span> <span class="n">facey</span> <span class="o">+</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">black</span><span class="p">,</span> <span class="p">[</span><span class="n">facex</span> <span class="o">+</span> <span class="mi">100</span><span class="p">,</span> <span class="n">facey</span> <span class="o">+</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># Draw the mouth</span>
+    <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">black</span><span class="p">,</span> <span class="p">[</span><span class="n">facex</span> <span class="o">+</span> <span class="mi">45</span><span class="p">,</span> <span class="n">facey</span> <span class="o">+</span> <span class="mi">100</span><span class="p">],</span>
+                                    <span class="p">[</span><span class="n">facex</span> <span class="o">+</span> <span class="mi">100</span><span class="p">,</span> <span class="n">facey</span> <span class="o">+</span> <span class="mi">100</span><span class="p">],</span> <span class="mi">3</span><span class="p">)</span>
+
+    <span class="c1"># Flip the buffer and do short delay to maintain framerate</span>
+    <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+    <span class="n">clock</span><span class="o">.</span><span class="n">tick</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="n">pygame</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>We are going to move the face autonomously (i.e, on its own).  This is as
+simple as changing <code class="docutils literal notranslate"><span class="pre">facex</span></code> and <code class="docutils literal notranslate"><span class="pre">facey</span></code> in the body of the loop in
+part 2., like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 2. Program logic, change variables, etc.</span>
+<span class="n">facex</span> <span class="o">+=</span> <span class="mi">5</span>
+<span class="n">facey</span> <span class="o">+=</span> <span class="mi">5</span>
+</pre></div>
+</div>
+<p>We are sending the face down and to the right.  Each time through the loop
+body, we update the location of the face, so it gets drawn slightly farther down
+the screen each time.</p>
+<p>Add this code and run it!</p>
+<p>Off it goes!  There goes the face.  Going… going… gone!  Why did it move
+off the screen?  Why didn’t it stop when it reached the edge?  The answer, of
+course, is because we told it to.  As long as the program is running, we keep
+adding 5 to <code class="docutils literal notranslate"><span class="pre">facex</span></code> and <code class="docutils literal notranslate"><span class="pre">facey</span></code>.  The dimensions of our screen are <code class="docutils literal notranslate"><span class="pre">800x600</span></code>,
+so once <code class="docutils literal notranslate"><span class="pre">facex</span></code> and <code class="docutils literal notranslate"><span class="pre">facey</span></code> exceed that, the face will leave the screen.</p>
+<p>Before we go any further, we should put all of the face movement code into
+its own function.  Change part 2 of the loop to this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 2. Program logic, change variables, etc.</span>
+<span class="n">move_face</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>and define the new function like so:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">move_face</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">facex</span><span class="p">,</span> <span class="n">facey</span>
+
+    <span class="n">facex</span> <span class="o">+=</span> <span class="mi">5</span>
+    <span class="n">facey</span> <span class="o">+=</span> <span class="mi">5</span>
+</pre></div>
+</div>
+<p>Very good.  Now, the problem with <code class="docutils literal notranslate"><span class="pre">move_face</span></code> is that it adds <code class="docutils literal notranslate"><span class="pre">5</span></code> to
+<code class="docutils literal notranslate"><span class="pre">facex</span></code> and <code class="docutils literal notranslate"><span class="pre">facey</span></code> no matter what.  If the face touches a “wall”
+(that is, the top, bottom, left, or right edge of the screen), we may need
+to subtract rather than add <code class="docutils literal notranslate"><span class="pre">5</span></code> pixels to <code class="docutils literal notranslate"><span class="pre">facex</span></code> or <code class="docutils literal notranslate"><span class="pre">facey</span></code>.</p>
+<p>Let’s state this another way, and consider horizontal movement only for now.
+To move the face horizontally, we always want to add some amount to <code class="docutils literal notranslate"><span class="pre">facex</span></code>,
+and that amount is how much we want to change the position
+of the face.  If the amount is +5, we are moving the face to the right.
+If the amount is -5, we are moving the face to the left.</p>
+<p>What if we made a variable named <code class="docutils literal notranslate"><span class="pre">xchange</span></code>.  <code class="docutils literal notranslate"><span class="pre">xchange</span></code> can keep track
+of whether we are adding +5 or -5 to <code class="docutils literal notranslate"><span class="pre">facex</span></code>.  If the face touches an edge,
+we change the sign of <code class="docutils literal notranslate"><span class="pre">xchange</span></code>.  Changing the sign from positive to negative
+or from negative to positive is as simple as multiplying it by -1.  So,
+consider the following pseudocode.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">move_face</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">facex</span><span class="p">,</span> <span class="n">facey</span>
+
+    <span class="c1"># if we touch the left or right wall</span>
+    <span class="c1">#    change the sign of xchange</span>
+    <span class="c1">#</span>
+    <span class="c1"># add xchange to facex no matter what</span>
+</pre></div>
+</div>
+<p>Okay.  Now let’s change our pseudocode to actual Python code.
+First, let’s do the left wall.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">move_face</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">facex</span><span class="p">,</span> <span class="n">facey</span>
+
+    <span class="k">if</span> <span class="n">facex</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span> <span class="c1"># just the left wall first</span>
+        <span class="n">xchange</span> <span class="o">=</span> <span class="n">xchange</span> <span class="o">*</span> <span class="o">-</span><span class="mi">1</span>
+
+    <span class="n">facex</span> <span class="o">+=</span> <span class="n">xchange</span>
+</pre></div>
+</div>
+<p>Recall that <code class="docutils literal notranslate"><span class="pre">facex</span></code> is the X coordinate of the upper left corner of the face.
+If it’s zero (or if it accidentally goes past zero into the negatives),
+we will flip the direction so that it heads towards the right.  If we want to
+detect whether the face has touched the right wall, we cannot just do this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">move_face</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">facex</span><span class="p">,</span> <span class="n">facey</span>
+
+    <span class="k">if</span> <span class="n">facex</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">facex</span> <span class="o">&gt;=</span> <span class="n">screenwidth</span><span class="p">:</span> <span class="c1"># the right wall logic is WRONG</span>
+        <span class="n">xchange</span> <span class="o">=</span> <span class="n">xchange</span> <span class="o">*</span> <span class="o">-</span><span class="mi">1</span>
+
+    <span class="n">facex</span> <span class="o">+=</span> <span class="n">xchange</span>
+</pre></div>
+</div>
+<p>While it is correct that <code class="docutils literal notranslate"><span class="pre">screenwidth</span></code> tells us the pixel location of the
+right wall, we have failed to account for the width of the face.  When we
+drew the face, the width we used was <code class="docutils literal notranslate"><span class="pre">150</span></code>.  Thus, the expression
+<code class="docutils literal notranslate"><span class="pre">facex</span> <span class="pre">+</span> <span class="pre">150</span></code> tells us the X of the right side of the face, like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">move_face</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">facex</span><span class="p">,</span> <span class="n">facey</span>
+
+    <span class="k">if</span> <span class="n">facex</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">facex</span> <span class="o">+</span> <span class="mi">150</span> <span class="o">&gt;=</span> <span class="n">screenwidth</span><span class="p">:</span>
+        <span class="n">xchange</span> <span class="o">=</span> <span class="n">xchange</span> <span class="o">*</span> <span class="o">-</span><span class="mi">1</span>
+
+    <span class="n">facex</span> <span class="o">+=</span> <span class="n">xchange</span>
+</pre></div>
+</div>
+<p>If we define <code class="docutils literal notranslate"><span class="pre">xchange</span></code> globally and then add <code class="docutils literal notranslate"><span class="pre">xchange</span></code> to our list of
+globals, we should be all set.  We will choose <code class="docutils literal notranslate"><span class="pre">5</span></code> as the starting value
+of <code class="docutils literal notranslate"><span class="pre">xchange</span></code>, which will send the face to the right initially.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">facex</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">facey</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">xchange</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">ychange</span> <span class="o">=</span> <span class="mi">5</span>
+</pre></div>
+</div>
+<p>and then,</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">move_face</span><span class="p">():</span>
+<span class="hll"><span class="linenos">2</span>    <span class="k">global</span> <span class="n">facex</span><span class="p">,</span> <span class="n">facey</span><span class="p">,</span> <span class="n">xchange</span><span class="p">,</span> <span class="n">ychange</span>
+</span><span class="linenos">3</span>
+<span class="linenos">4</span>    <span class="k">if</span> <span class="n">facex</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">facex</span> <span class="o">+</span> <span class="mi">150</span> <span class="o">&gt;=</span> <span class="n">screenwidth</span><span class="p">:</span>
+<span class="linenos">5</span>        <span class="n">xchange</span> <span class="o">=</span> <span class="n">xchange</span> <span class="o">*</span> <span class="o">-</span><span class="mi">1</span>
+<span class="linenos">6</span>
+<span class="linenos">7</span>    <span class="n">facex</span> <span class="o">+=</span> <span class="n">xchange</span>
+</pre></div>
+</div>
+<p>Now that the X coordinate logic is done, the Y coordinate logic is basically
+the same (only we use <code class="docutils literal notranslate"><span class="pre">facey</span></code>, <code class="docutils literal notranslate"><span class="pre">ychange</span></code>, and <code class="docutils literal notranslate"><span class="pre">screenheight</span></code>).
+Before we do that, we should probably talk about <em>magic numbers</em>.  Magic
+numbers are number values in your code that you are forcing yourself to
+remember, like <code class="docutils literal notranslate"><span class="pre">150</span></code> being the width of the face.  To a programmer looking
+at your code for the first time, they might ask “Why are you adding 150 here?”
+That’s not good, and it makes your code harder to maintain.</p>
+<p>Instead of having a magic number like 150, let’s replace it with a variable
+whose name describes what it is, i.e., <code class="docutils literal notranslate"><span class="pre">facewidth</span></code>.  Likewise, we’ll have
+<code class="docutils literal notranslate"><span class="pre">faceheight</span></code> to describe how tall the face is.</p>
+<p>The end result, with Y coordinate logic added and magic numbers replaced with
+descriptive variables, is shown in Listing <a class="reference internal" href="#bounce-face-final"><span class="std std-numref">9.7</span></a>.
+You’ll notice I’ve also introduced a variable <code class="docutils literal notranslate"><span class="pre">facespeed</span></code> in place of <code class="docutils literal notranslate"><span class="pre">5</span></code>.
+That way, we can change the speed of the face simply by changing one variable.
+Nifty!</p>
+<p>I’ve included one more little extra surprise in Listing <a class="reference internal" href="#bounce-face-final"><span class="std std-numref">9.7</span></a>.  Pygame allows us to play sounds when we wish.  We’re going to play a “boing” sound whenever we hit a wall.  First, <a class="reference external" href="https://raw.githubusercontent.com/jbshep/conversational-python/master/code/bounce.wav">download the sound file</a> and place it into the same folder as your code.  Then, note lines 25, 32, and 35.  Line 25 loads the sound file.  Lines 32 and 35 play the sound whenever the face hits the wall.</p>
+<p>Listing <a class="reference internal" href="#bounce-face-final"><span class="std std-numref">9.7</span></a> can be downloaded in its entirety here: <a class="reference external" href="https://raw.githubusercontent.com/jbshep/conversational-python/master/code/bounce-face.py">bounce-face.py</a>.</p>
+<div class="literal-block-wrapper docutils container" id="id12">
+<span id="bounce-face-final"></span><div class="code-block-caption"><span class="caption-number">Listing 9.7 </span><span class="caption-text">Final code for moving a face and bouncing off walls autonomously</span><a class="headerlink" href="#id12" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">import</span> <span class="nn">pygame</span>
+<span class="linenos"> 2</span><span class="kn">from</span> <span class="nn">pygame.locals</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="n">pygame</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span><span class="n">white</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+<span class="linenos"> 7</span><span class="n">black</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="linenos"> 8</span><span class="n">yellow</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="n">screenwidth</span> <span class="o">=</span> <span class="mi">800</span>
+<span class="linenos">11</span><span class="n">screenheight</span> <span class="o">=</span> <span class="mi">600</span>
+<span class="linenos">12</span><span class="n">screensize</span> <span class="o">=</span> <span class="p">[</span><span class="n">screenwidth</span><span class="p">,</span> <span class="n">screenheight</span><span class="p">]</span>
+<span class="linenos">13</span><span class="n">screen</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">set_mode</span><span class="p">(</span><span class="n">screensize</span><span class="p">)</span>
+<span class="linenos">14</span><span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">set_caption</span><span class="p">(</span><span class="s2">&quot;WINDOW TITLE HERE&quot;</span><span class="p">)</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span><span class="n">clock</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">Clock</span><span class="p">()</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span><span class="n">facex</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="linenos">19</span><span class="n">facey</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="linenos">20</span><span class="n">facewidth</span> <span class="o">=</span> <span class="mi">150</span>
+<span class="linenos">21</span><span class="n">faceheight</span> <span class="o">=</span> <span class="mi">150</span>
+<span class="linenos">22</span><span class="n">facespeed</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="linenos">23</span><span class="n">xchange</span> <span class="o">=</span> <span class="n">facespeed</span>
+<span class="linenos">24</span><span class="n">ychange</span> <span class="o">=</span> <span class="n">facespeed</span>
+<span class="linenos">25</span><span class="n">sound</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">mixer</span><span class="o">.</span><span class="n">Sound</span><span class="p">(</span><span class="s2">&quot;bounce.wav&quot;</span><span class="p">)</span>
+<span class="linenos">26</span>
+<span class="linenos">27</span><span class="k">def</span> <span class="nf">move_face</span><span class="p">():</span>
+<span class="linenos">28</span>    <span class="k">global</span> <span class="n">facex</span><span class="p">,</span> <span class="n">facey</span><span class="p">,</span> <span class="n">xchange</span><span class="p">,</span> <span class="n">ychange</span>
+<span class="linenos">29</span>
+<span class="linenos">30</span>    <span class="k">if</span> <span class="n">facex</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">facex</span> <span class="o">+</span> <span class="mi">150</span> <span class="o">&gt;=</span> <span class="n">screenwidth</span><span class="p">:</span>
+<span class="linenos">31</span>        <span class="n">xchange</span> <span class="o">=</span> <span class="n">xchange</span> <span class="o">*</span> <span class="o">-</span><span class="mi">1</span>
+<span class="linenos">32</span>        <span class="n">sound</span><span class="o">.</span><span class="n">play</span><span class="p">()</span>
+<span class="linenos">33</span>    <span class="k">if</span> <span class="n">facey</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">facey</span> <span class="o">+</span> <span class="mi">150</span> <span class="o">&gt;=</span> <span class="n">screenheight</span><span class="p">:</span>
+<span class="linenos">34</span>        <span class="n">ychange</span> <span class="o">=</span> <span class="n">ychange</span> <span class="o">*</span> <span class="o">-</span><span class="mi">1</span>
+<span class="linenos">35</span>        <span class="n">sound</span><span class="o">.</span><span class="n">play</span><span class="p">()</span>
+<span class="linenos">36</span>
+<span class="linenos">37</span>    <span class="n">facex</span> <span class="o">+=</span> <span class="n">xchange</span>
+<span class="linenos">38</span>    <span class="n">facey</span> <span class="o">+=</span> <span class="n">ychange</span>
+<span class="linenos">39</span>
+<span class="linenos">40</span><span class="n">done</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos">41</span>
+<span class="linenos">42</span><span class="k">while</span> <span class="ow">not</span> <span class="n">done</span><span class="p">:</span>
+<span class="linenos">43</span>    <span class="c1"># 1. Process events</span>
+<span class="linenos">44</span>    <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">pygame</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">():</span>
+<span class="linenos">45</span>        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">QUIT</span><span class="p">:</span>
+<span class="linenos">46</span>            <span class="n">done</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="linenos">47</span>
+<span class="linenos">48</span>    <span class="c1"># 2. Program logic, change variables, etc.</span>
+<span class="linenos">49</span>    <span class="n">move_face</span><span class="p">()</span>
+<span class="linenos">50</span>
+<span class="linenos">51</span>    <span class="c1"># 3. Draw stuff</span>
+<span class="linenos">52</span>    <span class="n">screen</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">white</span><span class="p">)</span>
+<span class="linenos">53</span>
+<span class="linenos">54</span>    <span class="c1"># Draw the head</span>
+<span class="linenos">55</span>    <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">yellow</span><span class="p">,</span> <span class="p">[</span><span class="n">facex</span><span class="p">,</span> <span class="n">facey</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">150</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+<span class="linenos">56</span>    <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">black</span><span class="p">,</span> <span class="p">[</span><span class="n">facex</span><span class="p">,</span> <span class="n">facey</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">150</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
+<span class="linenos">57</span>
+<span class="linenos">58</span>    <span class="c1"># Draw the eyes</span>
+<span class="linenos">59</span>    <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">black</span><span class="p">,</span> <span class="p">[</span><span class="n">facex</span> <span class="o">+</span> <span class="mi">40</span><span class="p">,</span> <span class="n">facey</span> <span class="o">+</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+<span class="linenos">60</span>    <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">black</span><span class="p">,</span> <span class="p">[</span><span class="n">facex</span> <span class="o">+</span> <span class="mi">100</span><span class="p">,</span> <span class="n">facey</span> <span class="o">+</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+<span class="linenos">61</span>
+<span class="linenos">62</span>    <span class="c1"># Draw the mouth</span>
+<span class="linenos">63</span>    <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">black</span><span class="p">,</span> <span class="p">[</span><span class="n">facex</span> <span class="o">+</span> <span class="mi">45</span><span class="p">,</span> <span class="n">facey</span> <span class="o">+</span> <span class="mi">100</span><span class="p">],</span>
+<span class="linenos">64</span>                                    <span class="p">[</span><span class="n">facex</span> <span class="o">+</span> <span class="mi">100</span><span class="p">,</span> <span class="n">facey</span> <span class="o">+</span> <span class="mi">100</span><span class="p">],</span> <span class="mi">3</span><span class="p">)</span>
+<span class="linenos">65</span>
+<span class="linenos">66</span>    <span class="c1"># Flip the buffer and do short delay to maintain framerate</span>
+<span class="linenos">67</span>    <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+<span class="linenos">68</span>    <span class="n">clock</span><span class="o">.</span><span class="n">tick</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="linenos">69</span>
+<span class="linenos">70</span><span class="n">pygame</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="objects-and-classes">
+<span id="sec-objects-and-classes"></span><h2><span class="section-number">9.5. </span>Objects and Classes<a class="headerlink" href="#objects-and-classes" title="Permalink to this headline">¶</a></h2>
+<p>In the previous section, we learned to make a face bounce around the screen.
+It was gloriously awesome!  But what would happen if we tried to add some
+features?  What if we wanted to add a whole bunch of faces (like
+ten!) and have them all bounce around the screen and bounce off each other?
+Can you imagine all the crazy <code class="docutils literal notranslate"><span class="pre">if</span></code>-statement code we would need to write to
+make all that happen, and how much code we would need to add and modify every
+time we added a new face to the screen?  That would be super bogus and awful.</p>
+<p>Fortunately, modern programming languages have a mechanism for dealing with
+interactions between code “objects” like bouncing balls.  It’s called
+<strong>object-orientation</strong>.</p>
+<p>In object-orientation, we have <strong>objects</strong> and we have <strong>classes</strong>.  An
+object has its own data and its own functions that do stuff with that data.
+A class is like a prototype for making a bunch of new objects that all have
+the same “structure.”</p>
+<p>This is best explained using examples, and believe it or not, you’ve been
+using classes and objects and you haven’t realized it.  A string is one
+example of an object.  The data in a string is the string’s characters.
+The functions are things like <code class="docutils literal notranslate"><span class="pre">.lower</span></code>, <code class="docutils literal notranslate"><span class="pre">.replace</span></code>, etc., all of which
+do something with the data kept in the string object.  The class used to
+create different strings is called <code class="docutils literal notranslate"><span class="pre">str</span></code>.</p>
+<p>We will explore the relationship between objects and classes visually.
+Suppose we create and use two string variables as in Listing
+<a class="reference internal" href="#create-strings"><span class="std std-numref">9.8</span></a>.  Each variable contains a value known as a
+string object.  Figure <a class="reference internal" href="#fig-str-objects"><span class="std std-numref">9.6</span></a> shows us the two objects.
+Notice how they have the same “form” but not the same exact data.
+The form of an object is defined by its class.  Eventually, we will
+show you how to define a class.  Notice in Figure <a class="reference internal" href="#fig-str-objects"><span class="std std-numref">9.6</span></a>
+how I’ve decided to depict each object.  We can see the data “inside” the
+object.  We can also see a couple of the functions represented as “tubes”
+that allow access into the inside of the object.</p>
+<div class="literal-block-wrapper docutils container" id="id13">
+<span id="create-strings"></span><div class="code-block-caption"><span class="caption-number">Listing 9.8 </span><span class="caption-text">Creating and using string variables</span><a class="headerlink" href="#id13" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">s1</span> <span class="o">=</span> <span class="s2">&quot;Good cop&quot;</span>
+<span class="linenos">2</span><span class="n">s2</span> <span class="o">=</span> <span class="s2">&quot;Bad cop&quot;</span>
+<span class="linenos">3</span><span class="n">x</span> <span class="o">=</span> <span class="n">s1</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="linenos">4</span><span class="n">y</span> <span class="o">=</span> <span class="n">s2</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;bad&quot;</span><span class="p">,</span> <span class="s2">&quot;good&quot;</span><span class="p">)</span>
+<span class="linenos">5</span><span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="n">y</span><span class="p">:</span>
+<span class="linenos">6</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Yay.&quot;</span><span class="p">)</span>
+<span class="linenos">7</span><span class="k">else</span><span class="p">:</span>
+<span class="linenos">8</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;What?&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<figure class="align-default" id="id14">
+<span id="fig-str-objects"></span><a class="reference internal image-reference" href="_images/str-objects.png"><img alt="Two string objects" src="_images/str-objects.png" style="width: 582.0px; height: 231.0px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 9.6 </span><span class="caption-text">Two string objects</span><a class="headerlink" href="#id14" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>To recap what we’ve learned so far:</p>
+<ol class="arabic simple">
+<li><p>All string objects have the same form.</p></li>
+<li><p>The code that defines the form is called a class.</p></li>
+<li><p>Each object has its own data.</p></li>
+<li><p>The class defines the common structure for each object.</p></li>
+</ol>
+<p>We can know what the class of an object is by using the <code class="docutils literal notranslate"><span class="pre">type</span></code> function.
+We can interactively check the class of an object stored in variable using
+the Python shell window like this:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; s1 = &quot;Good cop&quot;
+&gt;&gt;&gt; type(s1)
+&lt;class &#39;str&#39;&gt;
+</pre></div>
+</div>
+<p>Strings are special objects in Python.  When we create them using an
+assignmentn statement, Python allows us to use a short-hand notation that
+we’ve been unaware of until now.  This:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;123&quot;</span>
+</pre></div>
+</div>
+<p>is actually:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We know that <code class="docutils literal notranslate"><span class="pre">str</span></code> is every string object’s <strong>class</strong>.  Here, it also looks
+like a function.  It’s a special type of function known as a <strong>constructor</strong>.
+A constructor is a function that uses a class to create a new object.</p>
+<p>Let us pretend that we have a new class named <code class="docutils literal notranslate"><span class="pre">Circle</span></code>.  Notice that <code class="docutils literal notranslate"><span class="pre">Circle</span></code>
+starts with a capital letter.  By convention, from here forward we will
+capitalize the names of our classes.  That way it is easy to tell what things
+are variables that contain objects, and we can tell what things are the names
+of classes.</p>
+<p>With this <code class="docutils literal notranslate"><span class="pre">Circle</span></code> class that we are pretending we can use, we might be able
+to write code like this:</p>
+<div class="literal-block-wrapper docutils container" id="id15">
+<span id="using-circle-class"></span><div class="code-block-caption"><span class="caption-number">Listing 9.9 </span><span class="caption-text">Using a class named <code class="docutils literal notranslate"><span class="pre">Circle</span></code></span><a class="headerlink" href="#id15" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">c1</span> <span class="o">=</span> <span class="n">Circle</span><span class="p">()</span>
+<span class="n">c1</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">c1</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">c1</span><span class="o">.</span><span class="n">w</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">c1</span><span class="o">.</span><span class="n">h</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">c1</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">black</span>
+<span class="n">c1</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">screen</span><span class="p">)</span>
+
+<span class="n">c2</span> <span class="o">=</span> <span class="n">Circle</span><span class="p">()</span>
+<span class="n">c2</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">c2</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">c2</span><span class="o">.</span><span class="n">w</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">c2</span><span class="o">.</span><span class="n">h</span> <span class="o">=</span> <span class="mi">275</span>
+<span class="n">c2</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">turquoise</span>
+<span class="n">c2</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">screen</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Listing <a class="reference internal" href="#using-circle-class"><span class="std std-numref">9.9</span></a> will give us the opportunity to
+introduce some terminology.  This terminology will help us talk unambiguously
+about objects and classes, and very soon I will show you how to actually
+create this <code class="docutils literal notranslate"><span class="pre">Circle</span></code> class so that we can use it for real.  In Listing
+<a class="reference internal" href="#using-circle-class"><span class="std std-numref">9.9</span></a>, we are creating two separate
+<code class="docutils literal notranslate"><span class="pre">Circle</span></code> objects.  They have the same form, but they keep track of separate
+data.  Figure <a class="reference internal" href="#fig-class-terms"><span class="std std-numref">9.7</span></a> introduces the terminology we will
+be using.</p>
+<figure class="align-default" id="id16">
+<span id="fig-class-terms"></span><a class="reference internal image-reference" href="_images/class_terms.png"><img alt="Class/object terminology" src="_images/class_terms.png" style="width: 422.0px; height: 291.0px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 9.7 </span><span class="caption-text">Class/object terminology</span><a class="headerlink" href="#id16" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>We have already encountered the term <strong>constructor</strong>.  A constructor is
+a function that makes a new object by copying a class’s structure.</p>
+<p>The next term is <strong>attribute</strong>.  An attribute is a variable that is contained
+inside an object.  We might say that an attribute <em>belongs to</em> that object.
+Attributes can be accessed using “dot-notation.”  Thus, <code class="docutils literal notranslate"><span class="pre">c1.x</span></code> is <code class="docutils literal notranslate"><span class="pre">c1</span></code>’s
+<code class="docutils literal notranslate"><span class="pre">x</span></code> attribute or <code class="docutils literal notranslate"><span class="pre">x</span></code> variable.</p>
+<p>The last term is <strong>method</strong>.  Any function that <em>belongs to</em> an object is
+called a method.  Methods are functions that belong to an object.  Methods
+are defined by the class used to create the object in the first place.</p>
+<p>Notice that we have stored all of the different things we care about with
+regard to a circle in attributes.  Recall that when we draw a circle in
+Pygame, we will need to know the circle’s x, y, width, height, and color.
+Instead of having separate variables like <code class="docutils literal notranslate"><span class="pre">c1x</span></code>, <code class="docutils literal notranslate"><span class="pre">c1y</span></code>, <code class="docutils literal notranslate"><span class="pre">c1width</span></code>, etc.,
+now we can keep them all together in a single variable named <code class="docutils literal notranslate"><span class="pre">c1</span></code>, and
+then access their attributes using the dot-notation.</p>
+<p>Presumably, when it comes time to define the <code class="docutils literal notranslate"><span class="pre">draw</span></code> method, we can use
+these attributes when we call <code class="docutils literal notranslate"><span class="pre">pygame.draw.ellipse</span></code>.</p>
+<p>Okay, are you ready to see how to actually program the <code class="docutils literal notranslate"><span class="pre">Circle</span></code> class
+so that we can use it for real?</p>
+<p>Defining a class looks like this:</p>
+<div class="literal-block-wrapper docutils container" id="id17">
+<span id="def-circle"></span><div class="code-block-caption"><span class="caption-number">Listing 9.10 </span><span class="caption-text">First attempt at defining the <code class="docutils literal notranslate"><span class="pre">Circle</span></code> class</span><a class="headerlink" href="#id17" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">class</span> <span class="nc">Circle</span><span class="p">:</span>
+<span class="linenos">2</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">3</span>        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">4</span>        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">5</span>        <span class="bp">self</span><span class="o">.</span><span class="n">w</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="linenos">6</span>        <span class="bp">self</span><span class="o">.</span><span class="n">h</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="linenos">7</span>        <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">black</span>
+</pre></div>
+</div>
+</div>
+<p>Let’s break it down.  Line 1 is the start of the class definition and it
+seems pretty straightforward.  The rest of the class definition is indented
+below it.  Then we have line 2… ummm, okay, that looks kind of weird.
+What’s going on there?</p>
+<p>Well, line 2 is clearly the start of a function since it begins with the
+Python keyword <code class="docutils literal notranslate"><span class="pre">def</span></code>.  Then, we have the word “init” but it starts with
+two underscores and it ends with two underscores.  Python programmers
+(a.k.a. “Pythonistas”) use the word “dunder” when they want to talk about
+names having double underscores, so we often pronounce <code class="docutils literal notranslate"><span class="pre">__init__</span></code> aloud
+as “dunder init dunder” or simply “dunder init”.  <code class="docutils literal notranslate"><span class="pre">__init__</span></code> has a single
+parameter as well, and we have chosen to call it <code class="docutils literal notranslate"><span class="pre">self</span></code> for reasons that
+will make sense shortly.</p>
+<p>The body of the function in this particular example contains only a series
+of assignment statements.  In each statement, we are taking the <code class="docutils literal notranslate"><span class="pre">self</span></code>
+parameter and changing the value of one of its attributes.  Notice that
+this <code class="docutils literal notranslate"><span class="pre">self</span></code> variable appears to have the same attributes as the Circle
+objects in Listing <a class="reference internal" href="#using-circle-class"><span class="std std-numref">9.9</span></a>.  That’s interesting.
+Does that mean that <code class="docutils literal notranslate"><span class="pre">self</span></code> is a Circle object?  As turns out, it is!</p>
+<p>To understand what’s going on here, let’s take a closer look at what happens
+when you use the <code class="docutils literal notranslate"><span class="pre">Circle</span></code> constructor in your main code.  In Figure
+<a class="reference internal" href="#fig-ctor-rewrite"><span class="std std-numref">9.8</span></a>, we can see code that makes a <code class="docutils literal notranslate"><span class="pre">Circle</span></code> object
+named <code class="docutils literal notranslate"><span class="pre">c1</span></code>.  When the Python interpreter goes to run this code, it
+actually “re-writes” the code as shown in the figure.  Thus, the <code class="docutils literal notranslate"><span class="pre">Circle</span></code>
+object itself is passed as an argument to <code class="docutils literal notranslate"><span class="pre">__init__</span></code>, so <code class="docutils literal notranslate"><span class="pre">self</span></code>
+refers to the <code class="docutils literal notranslate"><span class="pre">c1</span></code> object.</p>
+<figure class="align-default" id="id18">
+<span id="fig-ctor-rewrite"></span><a class="reference internal image-reference" href="_images/ctor_rewrite.png"><img alt="What really happens when we call a constructor function" src="_images/ctor_rewrite.png" style="width: 571.1999999999999px; height: 80.39999999999999px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 9.8 </span><span class="caption-text">What really happens when we call a constructor function</span><a class="headerlink" href="#id18" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>Whenever we use a class’s constructor to create a new object, the new
+object is passed into the <code class="docutils literal notranslate"><span class="pre">self</span></code> parameter.  The “context” of the body
+of that function is then whichever circle we’re manipulating.</p>
+<p>Any methods that belong to objects of that class work the same way.
+Any method must have a <code class="docutils literal notranslate"><span class="pre">self</span></code> parameter as its first parameter so
+that we know <em>which</em> <code class="docutils literal notranslate"><span class="pre">Circle</span></code> object we’re using.  For example, circles
+are supposed to have a method named <code class="docutils literal notranslate"><span class="pre">draw</span></code>, which we used in Listing
+<a class="reference internal" href="#using-circle-class"><span class="std std-numref">9.9</span></a> to draw the circle on the screen
+using its attributes, like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">c1</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">screen</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Notice that <code class="docutils literal notranslate"><span class="pre">draw</span></code> <em>looks</em> like it only has one parameter, the screen object,
+but in fact there are two.  The first real parameter must be <code class="docutils literal notranslate"><span class="pre">self</span></code>, and
+the second then becomes the <code class="docutils literal notranslate"><span class="pre">screen</span></code> variable.  Figure
+<a class="reference internal" href="#fig-method-rewrite"><span class="std std-numref">9.9</span></a> helps us understand this more clearly.</p>
+<figure class="align-default" id="id19">
+<span id="fig-method-rewrite"></span><a class="reference internal image-reference" href="_images/method_rewrite.png"><img alt="What really happens when we call a method on an object" src="_images/method_rewrite.png" style="width: 613.8px; height: 100.2px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 9.9 </span><span class="caption-text">What really happens when we call a method on an object</span><a class="headerlink" href="#id19" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>We must now <strong>implement</strong> (i.e., “write the code for…”) the <code class="docutils literal notranslate"><span class="pre">draw</span></code> method
+to make it work.  Here is what we’ll do (see Listing
+<a class="reference internal" href="#def-circle-draw"><span class="std std-numref">9.11</span></a>).</p>
+<div class="literal-block-wrapper docutils container" id="id20">
+<span id="def-circle-draw"></span><div class="code-block-caption"><span class="caption-number">Listing 9.11 </span><span class="caption-text">Adding definition of <code class="docutils literal notranslate"><span class="pre">draw</span></code> method to <code class="docutils literal notranslate"><span class="pre">Circle</span></code> class</span><a class="headerlink" href="#id20" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">class</span> <span class="nc">Circle</span><span class="p">:</span>
+<span class="linenos"> 2</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos"> 3</span>        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos"> 4</span>        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos"> 5</span>        <span class="bp">self</span><span class="o">.</span><span class="n">w</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="linenos"> 6</span>        <span class="bp">self</span><span class="o">.</span><span class="n">h</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="linenos"> 7</span>        <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">black</span>
+<span class="linenos"> 8</span>
+<span class="hll"><span class="linenos"> 9</span>    <span class="k">def</span> <span class="nf">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">screen</span><span class="p">):</span>
+</span><span class="hll"><span class="linenos">10</span>        <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">,</span>
+</span><span class="hll"><span class="linenos">11</span>                            <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">w</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">h</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+</span></pre></div>
+</div>
+</div>
+<p>This is one thing that often trips up novice programmers (and sometimes
+experienced ones, too).  Any time we create a new method definition
+as part of a class definition, we must remember to make <code class="docutils literal notranslate"><span class="pre">self</span></code> the
+first parameter of the method even though we don’t explicitly pass a
+value to <code class="docutils literal notranslate"><span class="pre">self</span></code>.  Think of <code class="docutils literal notranslate"><span class="pre">self</span></code> as a hidden parameter.</p>
+</section>
+<section id="extending-classes-to-make-new-classes">
+<span id="sec-extending-classes"></span><h2><span class="section-number">9.6. </span>Extending Classes to Make New Classes<a class="headerlink" href="#extending-classes-to-make-new-classes" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes we want to define a new class that is very similar to a class
+we already have.  Maybe we want a <code class="docutils literal notranslate"><span class="pre">Face</span></code> class.  Drawing a <code class="docutils literal notranslate"><span class="pre">Face</span></code>
+is very similar to drawing a <code class="docutils literal notranslate"><span class="pre">Circle</span></code>.  To draw a face, all we need to do
+is draw a circle first, and then finish by drawing eyes and a mouth.
+In Python, we can <strong>extend</strong> the <code class="docutils literal notranslate"><span class="pre">Circle</span></code> class to define the <code class="docutils literal notranslate"><span class="pre">Face</span></code>
+class in such a way that we don’t have to re-invent the metaphorical wheel.
+In the <code class="docutils literal notranslate"><span class="pre">Face</span></code> class, we will only write code that deals with the eyes and
+mouth.  When it is time to do the circle, we will have <code class="docutils literal notranslate"><span class="pre">Face</span></code> defer to
+the <code class="docutils literal notranslate"><span class="pre">Circle</span></code> code so we don’t need to copy/paste that code, too.</p>
+<p>Terminology time!  As we just said, we are going to <strong>extend</strong> the <code class="docutils literal notranslate"><span class="pre">Circle</span></code>
+class to make the <code class="docutils literal notranslate"><span class="pre">Face</span></code> class.  When we do this, the <code class="docutils literal notranslate"><span class="pre">Circle</span></code> class
+is called the <strong>superclass</strong> or the <strong>parent class</strong>.  The <code class="docutils literal notranslate"><span class="pre">Face</span></code> class
+is known as the <strong>subclass</strong> or <strong>child class</strong>. Figure
+<a class="reference internal" href="#fig-parent-child"><span class="std std-numref">9.10</span></a> shows this relationship in code.</p>
+<figure class="align-default" id="id21">
+<span id="fig-parent-child"></span><a class="reference internal image-reference" href="_images/parent_child.png"><img alt="Parent class and child class" src="_images/parent_child.png" style="width: 584.8000000000001px; height: 140.8px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 9.10 </span><span class="caption-text">Parent class and child class</span><a class="headerlink" href="#id21" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>Observe that the first line of the <code class="docutils literal notranslate"><span class="pre">Face</span></code> class definition is a little
+different.  It has parentheses containing the word <code class="docutils literal notranslate"><span class="pre">Circle</span></code>.  If
+we want <code class="docutils literal notranslate"><span class="pre">Face</span></code> to be based on <code class="docutils literal notranslate"><span class="pre">Circle</span></code> and have <code class="docutils literal notranslate"><span class="pre">Circle</span></code> as its
+parent class, we write <code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">Face(Circle):</span></code>.</p>
+<p>Now, let’s program the body of the <code class="docutils literal notranslate"><span class="pre">Face</span></code> class.  See Listing
+<a class="reference internal" href="#face-class"><span class="std std-numref">9.12</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="id22">
+<span id="face-class"></span><div class="code-block-caption"><span class="caption-number">Listing 9.12 </span><span class="caption-text">Extending <code class="docutils literal notranslate"><span class="pre">Circle</span></code> to make <code class="docutils literal notranslate"><span class="pre">Face</span></code></span><a class="headerlink" href="#id22" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">class</span> <span class="nc">Face</span><span class="p">(</span><span class="n">Circle</span><span class="p">):</span>
+<span class="linenos">2</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">3</span>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+<span class="linenos">4</span>
+<span class="linenos">5</span>    <span class="k">def</span> <span class="nf">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">screen</span><span class="p">):</span>
+<span class="linenos">6</span>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">screen</span><span class="p">)</span>  <span class="c1"># Draw the circle</span>
+<span class="linenos">7</span>
+<span class="linenos">8</span>        <span class="c1"># Now, draw the rest of the face.</span>
+</pre></div>
+</div>
+</div>
+<p>The expression <code class="docutils literal notranslate"><span class="pre">super()</span></code> allows us to interact with the <code class="docutils literal notranslate"><span class="pre">Circle</span></code> code.
+<code class="docutils literal notranslate"><span class="pre">super()</span></code> gives us a reference to the <code class="docutils literal notranslate"><span class="pre">Circle</span></code> “portion” of our <code class="docutils literal notranslate"><span class="pre">self</span></code>
+object, which allows us to call <code class="docutils literal notranslate"><span class="pre">Circle</span></code> methods, like the <code class="docutils literal notranslate"><span class="pre">Circle</span></code>
+constructor <code class="docutils literal notranslate"><span class="pre">__init__</span></code> and, in line 6 of Listing <a class="reference internal" href="#face-class"><span class="std std-numref">9.12</span></a>,
+the <code class="docutils literal notranslate"><span class="pre">Circle</span></code>’s <code class="docutils literal notranslate"><span class="pre">draw</span></code> method.</p>
+<p>Let’s see how we might use these two new classes.  Listing
+<a class="reference internal" href="#using-face"><span class="std std-numref">9.13</span></a> shows an example program that you should
+examine and then try to modify in different ways.  If you’d like to download
+it and try it for yourself, use this link: <a class="reference external" href="https://raw.githubusercontent.com/jbshep/conversational-python/master/code/face-ex.py">face-ex.py</a>.</p>
+<div class="literal-block-wrapper docutils container" id="id23">
+<span id="using-face"></span><div class="code-block-caption"><span class="caption-number">Listing 9.13 </span><span class="caption-text">Using <code class="docutils literal notranslate"><span class="pre">Circle</span></code> and <code class="docutils literal notranslate"><span class="pre">Face</span></code></span><a class="headerlink" href="#id23" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pygame</span>
+<span class="kn">from</span> <span class="nn">pygame.locals</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">pygame</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+
+<span class="n">white</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+<span class="n">black</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">red</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">green</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">turquoise</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+<span class="n">yellow</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Circle</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">w</span> <span class="o">=</span> <span class="mi">100</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">h</span> <span class="o">=</span> <span class="mi">100</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">black</span>
+
+    <span class="k">def</span> <span class="nf">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">screen</span><span class="p">):</span>
+        <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">,</span>
+                            <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">w</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">h</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Face</span><span class="p">(</span><span class="n">Circle</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">screen</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">screen</span><span class="p">)</span>
+
+        <span class="n">x1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">w</span> <span class="o">/</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="n">x2</span> <span class="o">=</span> <span class="n">x1</span> <span class="o">+</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">w</span> <span class="o">/</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="n">y1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">h</span> <span class="o">/</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="n">y2</span> <span class="o">=</span> <span class="n">y1</span> <span class="o">+</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">h</span> <span class="o">/</span> <span class="mi">3</span><span class="p">)</span>
+
+        <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">black</span><span class="p">,</span> <span class="p">[</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">black</span><span class="p">,</span> <span class="p">[</span><span class="n">x2</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">black</span><span class="p">,</span> <span class="p">[</span><span class="n">x1</span><span class="p">,</span> <span class="n">y2</span><span class="p">],</span> <span class="p">[</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">],</span> <span class="mi">3</span><span class="p">)</span>
+
+
+<span class="n">screenwidth</span> <span class="o">=</span> <span class="mi">800</span>
+<span class="n">screenheight</span> <span class="o">=</span> <span class="mi">600</span>
+<span class="n">screensize</span> <span class="o">=</span> <span class="p">[</span><span class="n">screenwidth</span><span class="p">,</span> <span class="n">screenheight</span><span class="p">]</span>
+<span class="n">screen</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">set_mode</span><span class="p">(</span><span class="n">screensize</span><span class="p">)</span>
+<span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">set_caption</span><span class="p">(</span><span class="s2">&quot;Drawing with Classes&quot;</span><span class="p">)</span>
+
+<span class="n">clock</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">Clock</span><span class="p">()</span>
+
+
+<span class="n">done</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="n">c1</span> <span class="o">=</span> <span class="n">Circle</span><span class="p">()</span>
+
+<span class="n">c2</span> <span class="o">=</span> <span class="n">Circle</span><span class="p">()</span>
+<span class="n">c2</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">c2</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">c2</span><span class="o">.</span><span class="n">w</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">c2</span><span class="o">.</span><span class="n">h</span> <span class="o">=</span> <span class="mi">275</span>
+<span class="n">c2</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">turquoise</span>
+
+<span class="n">f1</span> <span class="o">=</span> <span class="n">Face</span><span class="p">()</span>
+<span class="n">f1</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">400</span>
+<span class="n">f1</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">f1</span><span class="o">.</span><span class="n">w</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">f1</span><span class="o">.</span><span class="n">h</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">f1</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">yellow</span>
+
+<span class="n">f2</span> <span class="o">=</span> <span class="n">Face</span><span class="p">()</span>
+<span class="n">f2</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">450</span>
+<span class="n">f2</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">450</span>
+<span class="n">f2</span><span class="o">.</span><span class="n">w</span> <span class="o">=</span> <span class="mi">75</span>
+<span class="n">f2</span><span class="o">.</span><span class="n">h</span> <span class="o">=</span> <span class="mi">75</span>
+<span class="n">f2</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">green</span>
+
+<span class="n">redface</span> <span class="o">=</span> <span class="n">Face</span><span class="p">()</span>
+<span class="n">redface</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">300</span>
+<span class="n">redface</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">redface</span><span class="o">.</span><span class="n">w</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">redface</span><span class="o">.</span><span class="n">h</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">redface</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">red</span>
+
+<span class="k">while</span> <span class="ow">not</span> <span class="n">done</span><span class="p">:</span>
+    <span class="c1"># 1. Process events</span>
+    <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">pygame</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">QUIT</span><span class="p">:</span>
+            <span class="n">done</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="c1"># 2. Program logic, change variables, etc.</span>
+
+    <span class="c1"># 3. Draw stuff</span>
+    <span class="n">screen</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">white</span><span class="p">)</span>
+    <span class="n">c1</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">screen</span><span class="p">)</span>
+    <span class="n">c2</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">screen</span><span class="p">)</span>
+    <span class="n">f1</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">screen</span><span class="p">)</span>
+    <span class="n">f2</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">screen</span><span class="p">)</span>
+    <span class="n">redface</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">screen</span><span class="p">)</span>
+
+    <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+    <span class="n">clock</span><span class="o">.</span><span class="n">tick</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="n">pygame</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>The ability to extend one class to create another child class is called
+<strong>inheritance</strong> because the child class <em>inherits</em> the attributes and methods
+of the parent class.  We are introducing this concept because it allows us
+to build on already existing code.</p>
+<p>In the next section, we will learn about Pygame sprites.  A <code class="docutils literal notranslate"><span class="pre">Sprite</span></code> is a
+class that contains all sorts of awesome code that helps us draw an image on
+the screen while managing a rectangle around the image.  Sprite methods
+already exist that help us determine whether the rectangles of two sprite
+are touching one another.  Through inheritance, we will extend the <code class="docutils literal notranslate"><span class="pre">Sprite</span></code>
+class to create basic 2-dimensional video games.  Let’s go!</p>
+</section>
+<section id="pygame-sprites">
+<span id="sec-sprites"></span><h2><span class="section-number">9.7. </span>Pygame Sprites<a class="headerlink" href="#pygame-sprites" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">pygame.sprite</span></code> package contains all sorts of useful classes for making
+interactive graphical programs.  We will be using two of them primarily.</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pygame.sprite.Sprite</span></code></p>
+<ul class="simple">
+<li><p>A class that we can subclass to make new Pygame on-screen objects</p></li>
+<li><p>Makes it easier to detect collisions between sprites</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pygame.sprite.Group</span></code></p>
+<ul class="simple">
+<li><p>A class that groups sprites together like a list</p></li>
+<li><p>Allows us to draw all sprites in a group at once</p></li>
+<li><p>Allows us to determine whether one sprite has collided with
+any number of other sprites who are of the same type</p></li>
+</ul>
+</li>
+</ol>
+<p>Notice that the package name <code class="docutils literal notranslate"><span class="pre">pygame.sprite</span></code> is in all lowercase, and
+then the class name starts with a capital letter, like “S” in <code class="docutils literal notranslate"><span class="pre">Sprite</span></code>
+and “G” in <code class="docutils literal notranslate"><span class="pre">Group</span></code>.</p>
+<p>When it comes time to create a child class of the <code class="docutils literal notranslate"><span class="pre">Sprite</span></code> class
+(let’s call it <code class="docutils literal notranslate"><span class="pre">Player</span></code>, for example), we would begin our class
+definition like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Player</span><span class="p">(</span><span class="n">pygame</span><span class="o">.</span><span class="n">sprite</span><span class="o">.</span><span class="n">Sprite</span><span class="p">):</span>
+</pre></div>
+</div>
+<p>We could also achieve the same effect by doing this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pygame.sprite</span> <span class="kn">import</span> <span class="n">Sprite</span>
+
+<span class="k">class</span> <span class="nc">Player</span><span class="p">(</span><span class="n">Sprite</span><span class="p">):</span>
+</pre></div>
+</div>
+<p>Suppose we are making a 2-dimensional game (like Super Marios Bros. or Legenda
+of Zelda), and we have an image of an adventurer that we’ve named <code class="docutils literal notranslate"><span class="pre">player.gif</span></code>.
+Let us suppose that image is in the same folder as our code.  The following code
+makes a <code class="docutils literal notranslate"><span class="pre">Sprite</span></code> subclass named <code class="docutils literal notranslate"><span class="pre">Player</span></code> that uses our image, and then it
+uses the <code class="docutils literal notranslate"><span class="pre">Player</span></code> class definition to create a new <code class="docutils literal notranslate"><span class="pre">Player</span></code> object that we
+could use in our game.</p>
+<div class="literal-block-wrapper docutils container" id="id24">
+<span id="player-class-def"></span><div class="code-block-caption"><span class="caption-number">Listing 9.14 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">Player</span></code> class definition</span><a class="headerlink" href="#id24" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Player</span><span class="p">(</span><span class="n">pygame</span><span class="o">.</span><span class="n">sprite</span><span class="o">.</span><span class="n">Sprite</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;player.gif&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rect</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">get_rect</span><span class="p">()</span>
+
+<span class="n">player_one</span> <span class="o">=</span> <span class="n">Player</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>The Pygame <a class="reference external" href="https://www.pygame.org/docs/ref/sprite.html">sprite documentation</a>
+states that any <code class="docutils literal notranslate"><span class="pre">Sprite</span></code> must possess two attributes: an <code class="docutils literal notranslate"><span class="pre">image</span></code> and a <code class="docutils literal notranslate"><span class="pre">rect</span></code>.
+The <code class="docutils literal notranslate"><span class="pre">image</span></code> attribute is a Pygame <code class="docutils literal notranslate"><span class="pre">Surface</span></code>, much like a screen that we can
+draw on.  The <code class="docutils literal notranslate"><span class="pre">image</span></code> attribute is loaded using <code class="docutils literal notranslate"><span class="pre">pygame.image.load</span></code> in line 4.
+The <code class="docutils literal notranslate"><span class="pre">rect</span></code> attribute stores the <code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>, <code class="docutils literal notranslate"><span class="pre">width</span></code>, and <code class="docutils literal notranslate"><span class="pre">height</span></code> of the
+sprite on the screen.  We fill in this <code class="docutils literal notranslate"><span class="pre">rect</span></code> value by getting the size of the
+rectangle around the <code class="docutils literal notranslate"><span class="pre">image</span></code> attribute.  Given that the sprite’s X/Y position
+is stored in the <code class="docutils literal notranslate"><span class="pre">rect</span></code> attribute, if we wanted to place our new
+<code class="docutils literal notranslate"><span class="pre">player_one</span></code> object at the very top left corner of the screen, we would write
+this code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">player_one</span><span class="o">.</span><span class="n">rect</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">player_one</span><span class="o">.</span><span class="n">rect</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>We may want to introduce another type of sprite on the screen, like an enemy
+for our player.  The best way to accomplish this is to create another sprite
+subclass.  If we have an enemy image named <code class="docutils literal notranslate"><span class="pre">enemy.gif</span></code>, we can easily create
+an <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> class.</p>
+<div class="literal-block-wrapper docutils container" id="id25">
+<span id="enemy-class-def"></span><div class="code-block-caption"><span class="caption-number">Listing 9.15 </span><span class="caption-text">Adding <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> class definition</span><a class="headerlink" href="#id25" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">class</span> <span class="nc">Player</span><span class="p">(</span><span class="n">pygame</span><span class="o">.</span><span class="n">sprite</span><span class="o">.</span><span class="n">Sprite</span><span class="p">):</span>
+<span class="linenos"> 2</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos"> 3</span>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+<span class="linenos"> 4</span>        <span class="bp">self</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;player.gif&quot;</span><span class="p">)</span>
+<span class="linenos"> 5</span>        <span class="bp">self</span><span class="o">.</span><span class="n">rect</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">get_rect</span><span class="p">()</span>
+<span class="linenos"> 6</span>
+<span class="hll"><span class="linenos"> 7</span><span class="k">class</span> <span class="nc">Enemy</span><span class="p">(</span><span class="n">pygame</span><span class="o">.</span><span class="n">sprite</span><span class="o">.</span><span class="n">Sprite</span><span class="p">):</span>
+</span><span class="hll"><span class="linenos"> 8</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class="hll"><span class="linenos"> 9</span>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+</span><span class="hll"><span class="linenos">10</span>        <span class="bp">self</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;enemy.gif&quot;</span><span class="p">)</span>
+</span><span class="hll"><span class="linenos">11</span>        <span class="bp">self</span><span class="o">.</span><span class="n">rect</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">get_rect</span><span class="p">()</span>
+</span><span class="linenos">12</span>
+<span class="linenos">13</span><span class="n">player_one</span> <span class="o">=</span> <span class="n">Player</span><span class="p">()</span>
+<span class="hll"><span class="linenos">14</span><span class="n">boss</span> <span class="o">=</span> <span class="n">Enemy</span><span class="p">()</span>
+</span></pre></div>
+</div>
+</div>
+<p><strong>NOTICE: This portion of the book is currently being re-written.</strong>
+<strong>Check back later for an update to this edition.</strong></p>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Conversational Python</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ch1_basicio_types.html">1. Basic I/O, Statements, Expressions, Variables, and Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch2_cond.html">2. Conditionals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch3_loops.html">3. Loops and String Manipulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch4_funcs.html">4. Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch5_lists.html">5. Lists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch6_files_excepts.html">6. Files and Exceptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch7_dicts.html">7. Dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch8_searchsort.html">8. Searching and Sorting</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">9. Classes, Object-Orientation, and Pygame</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#getting-started">9.1. Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#basic-pygame-drawing-graffiti">9.2. Basic Pygame: Drawing Graffiti</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#animation-part-1">9.3. Animation, Part 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#animation-part-2">9.4. Animation, Part 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#objects-and-classes">9.5. Objects and Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#extending-classes-to-make-new-classes">9.6. Extending Classes to Make New Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pygame-sprites">9.7. Pygame Sprites</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="ch8_searchsort.html" title="previous chapter"><span class="section-number">8. </span>Searching and Sorting</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, Jason B. Shepherd, Ph.D..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/ch9_classes.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

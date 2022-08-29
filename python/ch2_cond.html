@@ -1,0 +1,734 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>2. Conditionals &#8212; Conversational Python 2.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="3. Loops and String Manipulation" href="ch3_loops.html" />
+    <link rel="prev" title="1. Basic I/O, Statements, Expressions, Variables, and Types" href="ch1_basicio_types.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="conditionals">
+<span id="ch-cond"></span><h1><span class="section-number">2. </span>Conditionals<a class="headerlink" href="#conditionals" title="Permalink to this headline">¶</a></h1>
+<section id="the-if-statement-and-the-boolean-type">
+<h2><span class="section-number">2.1. </span>The <code class="docutils literal notranslate"><span class="pre">if</span></code> statement and the Boolean type<a class="headerlink" href="#the-if-statement-and-the-boolean-type" title="Permalink to this headline">¶</a></h2>
+<p>Do you remember our sample program involving cats in Chapter 1?  Let’s re-write
+it here in Listing <a class="reference internal" href="#barn-cats"><span class="std std-numref">2.1</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<span id="barn-cats"></span><div class="code-block-caption"><span class="caption-number">Listing 2.1 </span><span class="caption-text">Barn cats example</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">cats</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;How many barn cats do you own? &quot;</span><span class="p">))</span>
+<span class="linenos">2</span><span class="n">cats</span> <span class="o">=</span> <span class="n">cats</span> <span class="o">*</span> <span class="mi">2</span>
+<span class="linenos">3</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;In a six-months, you will have </span><span class="si">%d</span><span class="s2"> cats!&quot;</span> <span class="o">%</span> <span class="n">cats</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Feral barn cats can multiply rapidly if not spayed or neutered, so this is not
+that ridiculous of an example.  Suppose we want our program to make the
+observation “That’s a lot of cats!” if the barn owner ends up with more than 20
+cats.  Our first attempt at this, based on what we know so far, might look like
+this.</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-number">Listing 2.2 </span><span class="caption-text">Barn cats example, attempt 2</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">cats</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;How many barn cats do you own? &quot;</span><span class="p">))</span>
+<span class="linenos">2</span><span class="n">cats</span> <span class="o">=</span> <span class="n">cats</span> <span class="o">*</span> <span class="mi">2</span>
+<span class="linenos">3</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;In a six-months, you will have </span><span class="si">%d</span><span class="s2"> cats!&quot;</span> <span class="o">%</span> <span class="n">cats</span><span class="p">)</span>
+<span class="hll"><span class="linenos">4</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;That&#39;s a lot of cats!&quot;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+</div>
+<p>Python programs always execute in sequence.  That is, first Python executes line
+1, then line 2, line 3, and finally line 4.  With that in mind, line 4 will
+always execute no matter what.  This is absurd given what we are trying to
+accomplish, and even more absurd if the user types 0 for the number of cats
+initially.</p>
+<p>What we need is a way to say “only print if the number of cats is 20 or more.”
+Python allows us to do this by using something called an <code class="docutils literal notranslate"><span class="pre">if</span></code> statement.  Let’s
+modify our code as follows in Listing <a class="reference internal" href="#if-cats"><span class="std std-numref">2.3</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<span id="if-cats"></span><div class="code-block-caption"><span class="caption-number">Listing 2.3 </span><span class="caption-text">Barn cats example, attempt 3</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">cats</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;How many barn cats do you own? &quot;</span><span class="p">))</span>
+<span class="linenos">2</span><span class="n">cats</span> <span class="o">=</span> <span class="n">cats</span> <span class="o">*</span> <span class="mi">2</span>
+<span class="linenos">3</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;In a six-months, you will have </span><span class="si">%d</span><span class="s2"> cats!&quot;</span> <span class="o">%</span> <span class="n">cats</span><span class="p">)</span>
+<span class="hll"><span class="linenos">4</span><span class="k">if</span> <span class="n">cats</span> <span class="o">&gt;</span> <span class="mi">19</span><span class="p">:</span>
+</span><span class="hll"><span class="linenos">5</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;That&#39;s a lot of cats!&quot;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+</div>
+<p>Notice how we’ve added a line just before our final print statement.  Note also
+how our print statement in line 5 is now tabbed over one tab-stop.  Now try out
+your program using several different inputs for cats.  It works!</p>
+<p>To understand more about why it works and how if statements work in general,
+let’s add one more line of code (for now).</p>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-number">Listing 2.4 </span><span class="caption-text">Barn cats example, attempt 4</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">cats</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;How many barn cats do you own? &quot;</span><span class="p">))</span>
+<span class="linenos">2</span><span class="n">cats</span> <span class="o">=</span> <span class="n">cats</span> <span class="o">*</span> <span class="mi">2</span>
+<span class="linenos">3</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;In a six-months, you will have </span><span class="si">%d</span><span class="s2"> cats!&quot;</span> <span class="o">%</span> <span class="n">cats</span><span class="p">)</span>
+<span class="linenos">4</span><span class="k">if</span> <span class="n">cats</span> <span class="o">&gt;</span> <span class="mi">19</span><span class="p">:</span>
+<span class="linenos">5</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;That&#39;s a lot of cats!&quot;</span><span class="p">)</span>
+<span class="hll"><span class="linenos">6</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Thank you for using our program.&quot;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+</div>
+<p>Try out your program using several different inputs for cats again.  Notice how
+no matter how many cats you enter, the program always prints “Thank you for
+using our program.”  Now, let’s tab the last line over one tab-stop so that it
+lines up with the previous print statement.</p>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-number">Listing 2.5 </span><span class="caption-text">Barn cats example, attempt 4 with one small change</span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">cats</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;How many barn cats do you own? &quot;</span><span class="p">))</span>
+<span class="linenos">2</span><span class="n">cats</span> <span class="o">=</span> <span class="n">cats</span> <span class="o">*</span> <span class="mi">2</span>
+<span class="linenos">3</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;In a six-months, you will have </span><span class="si">%d</span><span class="s2"> cats!&quot;</span> <span class="o">%</span> <span class="n">cats</span><span class="p">)</span>
+<span class="linenos">4</span><span class="k">if</span> <span class="n">cats</span> <span class="o">&gt;</span> <span class="mi">19</span><span class="p">:</span>
+<span class="linenos">5</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;That&#39;s a lot of cats!&quot;</span><span class="p">)</span>
+<span class="hll"><span class="linenos">6</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Thank you for using our program.&quot;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+</div>
+<p>Try out your program again.</p>
+<p>Notice how now the program only prints “Thank you for using our program.” if the
+value of <code class="docutils literal notranslate"><span class="pre">cats</span></code> is greater than <code class="docutils literal notranslate"><span class="pre">19</span></code>.  This tells us something about how <code class="docutils literal notranslate"><span class="pre">if</span></code>
+statements work.  When the expression <code class="docutils literal notranslate"><span class="pre">cats</span> <span class="pre">&gt;</span> <span class="pre">19</span></code> is true, any statements that
+are indented beneath the <code class="docutils literal notranslate"><span class="pre">if</span></code> statement are executed, but they are only executed
+if the expression <code class="docutils literal notranslate"><span class="pre">cats</span> <span class="pre">&gt;</span> <span class="pre">19</span></code>  is true.  A sequence of statements separated
+together by indentation (i.e., tabs) is called a <em>block</em> of statements.</p>
+<p>Let’s try one more thing to understand how tabs/indentation work.  What happens
+if we de-indent line 5, i.e., the first line under the <code class="docutils literal notranslate"><span class="pre">if</span></code>?</p>
+<div class="literal-block-wrapper docutils container" id="id6">
+<div class="code-block-caption"><span class="caption-number">Listing 2.6 </span><span class="caption-text">Barn cats example, attempt 5</span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">cats</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;How many barn cats do you own? &quot;</span><span class="p">))</span>
+<span class="linenos">2</span><span class="n">cats</span> <span class="o">=</span> <span class="n">cats</span> <span class="o">*</span> <span class="mi">2</span>
+<span class="linenos">3</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;In a six-months, you will have </span><span class="si">%d</span><span class="s2"> cats!&quot;</span> <span class="o">%</span> <span class="n">cats</span><span class="p">)</span>
+<span class="linenos">4</span><span class="k">if</span> <span class="n">cats</span> <span class="o">&gt;</span> <span class="mi">19</span><span class="p">:</span>
+<span class="hll"><span class="linenos">5</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;That&#39;s a lot of cats!&quot;</span><span class="p">)</span>
+</span><span class="linenos">6</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Thank you for using our program.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Run your code.  Kablooey!  The error indicates that whenever Python sees an
+<code class="docutils literal notranslate"><span class="pre">if</span></code>, there should be at least one indented statement or block of code beneath
+it.</p>
+<p>Earlier, we referred to <code class="docutils literal notranslate"><span class="pre">cats</span> <span class="pre">&gt;</span> <span class="pre">19</span></code> as an expression.  If it is an expression,
+then it must produce a value and must have a type, right?  Let’s go to our
+Python Shell window and type the following: <code class="docutils literal notranslate"><span class="pre">type(cats</span> <span class="pre">&gt;</span> <span class="pre">19)</span></code>.  The result we
+are given is something called a <code class="docutils literal notranslate"><span class="pre">bool</span></code>.  The word “bool” stands for Boolean.
+The word Boolean refers to the work of George Boole, an English mathematician
+who formalized mathematical logic.  Valid Boolean values are either <code class="docutils literal notranslate"><span class="pre">True</span></code>
+or <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<p>Whenever the value of the Boolean expression given to an <code class="docutils literal notranslate"><span class="pre">if</span></code> statement is
+<code class="docutils literal notranslate"><span class="pre">True</span></code>, the indented block of code beneath it will be executed.  If it is
+<code class="docutils literal notranslate"><span class="pre">False</span></code>, the block will be skipped.</p>
+<p>Based on what we know about variables having types, we might conclude that we
+can create Boolean variables, too, and we’d be right!  Consider the
+code in Listing <a class="reference internal" href="#cats-bool-var"><span class="std std-numref">2.7</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="id7">
+<span id="cats-bool-var"></span><div class="code-block-caption"><span class="caption-number">Listing 2.7 </span><span class="caption-text">Barn cats example</span><a class="headerlink" href="#id7" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">cats</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;How many barn cats do you own? &quot;</span><span class="p">))</span>
+<span class="linenos">2</span><span class="n">cats</span> <span class="o">=</span> <span class="n">cats</span> <span class="o">*</span> <span class="mi">2</span>
+<span class="linenos">3</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;In a six-months, you will have </span><span class="si">%d</span><span class="s2"> cats!&quot;</span> <span class="o">%</span> <span class="n">cats</span><span class="p">)</span>
+<span class="linenos">4</span>
+<span class="hll"><span class="linenos">5</span><span class="n">too_many</span> <span class="o">=</span> <span class="n">cats</span> <span class="o">&gt;</span> <span class="mi">19</span>
+</span><span class="hll"><span class="linenos">6</span><span class="k">if</span> <span class="n">too_many</span><span class="p">:</span>
+</span><span class="linenos">7</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;That&#39;s a lot of cats!&quot;</span><span class="p">)</span>
+<span class="linenos">8</span>
+<span class="linenos">9</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Thank you for using our program.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Now, suppose we want to say “You should get more cats” if the barn owner does
+not yet have 20 cats.  That is, we want to say this message if the Boolean
+expression is <code class="docutils literal notranslate"><span class="pre">False</span></code>.  We can adjust our code by changing this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">cats</span> <span class="o">&gt;</span> <span class="mi">19</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;That&#39;s a lot of cats!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>to this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">cats</span> <span class="o">&gt;</span> <span class="mi">19</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;That&#39;s a lot of cats!&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You should get more cats.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Any <code class="docutils literal notranslate"><span class="pre">if</span></code> block can have an <code class="docutils literal notranslate"><span class="pre">else</span></code> block to handle situations where the <code class="docutils literal notranslate"><span class="pre">if</span></code>
+condition is <code class="docutils literal notranslate"><span class="pre">False</span></code>. Having an <code class="docutils literal notranslate"><span class="pre">else</span></code> block is always optional.</p>
+<p>Boolean expressions can be formed using <em>logical operators</em>.  We’ve already seen
+greater-than (<code class="docutils literal notranslate"><span class="pre">&gt;</span></code>).  Table <a class="reference internal" href="#logic-ops"><span class="std std-numref">2.1</span></a> shows the rest of the
+logical operators in Python.  Note that, for example, <code class="docutils literal notranslate"><span class="pre">&gt;=</span></code> denotes
+greater-than-or-equal-to, presumably because the symbol ( geq )  does not
+exist on your computer keyboard.  Also, note that comparing two values for
+equality uses the <code class="docutils literal notranslate"><span class="pre">==</span></code> double-equals symbol.  We already use the equals
+(<code class="docutils literal notranslate"><span class="pre">=</span></code>) symbol for assignment statements so <code class="docutils literal notranslate"><span class="pre">==</span></code>
+is used to compare two values as part of a Boolean expression.</p>
+<span id="logic-ops"></span><table class="colwidths-given docutils align-default" id="id8">
+<caption><span class="caption-number">Table 2.1 </span><span class="caption-text">Logical operators</span><a class="headerlink" href="#id8" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 70%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Operator</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">==</span></code></p></td>
+<td><p>equals</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">!=</span></code></p></td>
+<td><p>not equals</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&gt;</span></code></p></td>
+<td><p>greater than</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&gt;=</span></code></p></td>
+<td><p>greater than or equal to</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&lt;</span></code></p></td>
+<td><p>less than</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&lt;=</span></code></p></td>
+<td><p>less than or equal to</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="elif-and-boolean-operators">
+<h2><span class="section-number">2.2. </span><code class="docutils literal notranslate"><span class="pre">elif</span></code> and Boolean Operators<a class="headerlink" href="#elif-and-boolean-operators" title="Permalink to this headline">¶</a></h2>
+<p>Different states in the U.S.A. have different rules for when one is allowed to
+obtain a license to drive an automobile.  One common practice is to allow
+individuals who are 16 or older to get a license.  Suppose we wished to write a
+Python program that tells people if they are eligible to obtain a driver’s
+license in their state.  We might prompt users for their respective ages, and
+then we could respond appropriately.  Let’s use the code in
+Listing <a class="reference internal" href="#driver-start"><span class="std std-numref">2.8</span></a> as our starting point.</p>
+<div class="literal-block-wrapper docutils container" id="id9">
+<span id="driver-start"></span><div class="code-block-caption"><span class="caption-number">Listing 2.8 </span><span class="caption-text">Drivers license example</span><a class="headerlink" href="#id9" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">age</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What is your age? &quot;</span><span class="p">))</span>
+<span class="linenos">2</span><span class="k">if</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">16</span><span class="p">:</span>
+<span class="linenos">3</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You are old enough to take your license exam.&quot;</span><span class="p">)</span>
+<span class="linenos">4</span><span class="k">else</span><span class="p">:</span>
+<span class="linenos">5</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Perhaps you should ride a bike for now.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>The situation in some states is more involved than this.  In fact, let us
+suppose that if users are 14 or older, they can obtain a learner’s permit where
+they are able to drive if accompanied by an adult.  If they are 16 and they also
+have had a driver’s education class, then they can take the license exam.  Got
+it?  Let’s ignore driver’s education for right now to simplify things, and let’s
+try to re-write our program using what we know so far:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">age</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What is your age? &quot;</span><span class="p">))</span>
+<span class="k">if</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">14</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You may obtain a learner&#39;s permit.&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">16</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You are old enough to take your license exam.&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Perhaps you should ride a bike for now.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>That’s a lot of indentation!  Fortunately, the indentation makes the logic of
+our code a bit easier to follow, which is a nice feature of Python code.  When
+we reach the first <code class="docutils literal notranslate"><span class="pre">else</span></code>, our code beneath the <code class="docutils literal notranslate"><span class="pre">else</span></code> starts at a new
+indentation level.</p>
+<p>Try running this code using a variety of inputs.  Do you notice a problem?</p>
+<p>It appears that no matter what age we enter, we can never get it to tell us
+we’re old enough to take the license exam.  Our Boolean conditions are not in
+the correct order.  Even if we type that we are 17 years old, for example, the
+first condition is <code class="docutils literal notranslate"><span class="pre">True</span></code>, so it prints “You may obtain a learner’s permit.”
+Let’s fix the order of our code to place the most restrictive Boolean expression
+first:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">age</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What is your age? &quot;</span><span class="p">))</span>
+<span class="k">if</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">16</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You are old enough to take your license exam. &quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">14</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You may obtain a learner&#39;s permit.&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Perhaps you should ride a bike for now.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This is much better.</p>
+<p>You might imagine that if you have a lot of different conditions you wish to
+handle in your program, your code many eventually look like a very long series
+of stair steps.  This would make our code a bit difficult to read and maintain,
+so Python provides us with a statement for making a series of else-if
+conditions.  This statement is called <code class="docutils literal notranslate"><span class="pre">elif</span></code>, for short.  We can re-write the
+code above as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">age</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What is your age? &quot;</span><span class="p">))</span>
+<span class="k">if</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">16</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You are old enough to take your license exam. &quot;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">14</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You may obtain a learner&#39;s permit.&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Perhaps you should ride a bike for now.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Done.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that we’ve also added a statement that prints “Done” for illustrative
+purposes.</p>
+<p>Having <code class="docutils literal notranslate"><span class="pre">elif</span></code>’s work the same way as having an <code class="docutils literal notranslate"><span class="pre">else</span></code> block followed by an <code class="docutils literal notranslate"><span class="pre">if</span></code>
+block.  If the first condition is <code class="docutils literal notranslate"><span class="pre">True</span></code>, we print that we are old enough to
+take the exam.  Then, none of the other conditions are checked.  Instead, Python
+drops down to the “Done” <code class="docutils literal notranslate"><span class="pre">print</span></code> statement.  If the first condition is <code class="docutils literal notranslate"><span class="pre">False</span></code>,
+then, and only then, is the next condition checked.  If that condition is
+<code class="docutils literal notranslate"><span class="pre">True</span></code>, we print that they can obtain a learner’s permit and we drop down to the
+“Done” <code class="docutils literal notranslate"><span class="pre">print</span></code> statement.  If that condition was <code class="docutils literal notranslate"><span class="pre">False</span></code>, our code descends to
+the <code class="docutils literal notranslate"><span class="pre">else</span></code> block.</p>
+<p><code class="docutils literal notranslate"><span class="pre">else</span></code> blocks are always optional. <code class="docutils literal notranslate"><span class="pre">elif</span></code> blocks are also optional.  You can
+have any number of <code class="docutils literal notranslate"><span class="pre">elif</span></code> blocks, but <code class="docutils literal notranslate"><span class="pre">if</span></code>/<code class="docutils literal notranslate"><span class="pre">elif</span></code>/<code class="docutils literal notranslate"><span class="pre">else</span></code> blocks must
+always come in this sequence:</p>
+<ol class="arabic simple">
+<li><p>first an <code class="docutils literal notranslate"><span class="pre">if</span></code> statement</p></li>
+<li><p>then any <code class="docutils literal notranslate"><span class="pre">elif</span></code>’s</p></li>
+<li><p>finally an <code class="docutils literal notranslate"><span class="pre">else</span></code></p></li>
+</ol>
+<p>Now let’s consider driver’s education in our example.  Individuals must be 16
+years old and have had a driver’s education class to take the license exam.  So,
+we’ll need to ask them if they’ve taken the exam by using another <code class="docutils literal notranslate"><span class="pre">input</span></code>
+statement.</p>
+<div class="literal-block-wrapper docutils container" id="id10">
+<span id="drivers-ed-start"></span><div class="code-block-caption"><span class="caption-number">Listing 2.9 </span><span class="caption-text">Drivers license example with drivers education</span><a class="headerlink" href="#id10" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">age</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What is your age? &quot;</span><span class="p">))</span>
+<span class="hll"><span class="linenos">2</span><span class="n">drivers_ed</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Have you passed driver&#39;s education? (y/n) &quot;</span><span class="p">)</span>
+</span><span class="linenos">3</span><span class="k">if</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">16</span><span class="p">:</span>
+<span class="linenos">4</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You are old enough to take your license exam. &quot;</span><span class="p">)</span>
+<span class="linenos">5</span><span class="k">elif</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">14</span><span class="p">:</span>
+<span class="linenos">6</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You may obtain a learner&#39;s permit.&quot;</span><span class="p">)</span>
+<span class="linenos">7</span><span class="k">else</span><span class="p">:</span>
+<span class="linenos">8</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Perhaps you should ride a bike for now.&quot;</span><span class="p">)</span>
+<span class="linenos">9</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Done.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Notice how we are prompting users to enter either <code class="docutils literal notranslate"><span class="pre">&quot;y&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;n&quot;</span></code> for their
+answer to the driver’s education question.  Also notice that we do not need to
+cast the value returned from the <code class="docutils literal notranslate"><span class="pre">input</span></code> function to another type like we did in
+the previous <code class="docutils literal notranslate"><span class="pre">input</span></code> statement (the one that asks for the age).  The variable
+<code class="docutils literal notranslate"><span class="pre">drivers_ed</span></code> can remain a string, because <code class="docutils literal notranslate"><span class="pre">&quot;y&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;n&quot;</span></code> are string values.</p>
+<p>Now, let’s adjust our logic.  We’ll only show the part of the code that deals
+with taking the license exam for now.  This code:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">16</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You are old enough to take your license exam. &quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>can become this code:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">16</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">drivers_ed</span> <span class="o">==</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You are old enough to take your license exam. &quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This new code says that in order to print <code class="docutils literal notranslate"><span class="pre">&quot;You</span> <span class="pre">are</span> <span class="pre">old</span> <span class="pre">enough</span> <span class="pre">to</span> <span class="pre">take</span> <span class="pre">your</span>
+<span class="pre">license</span> <span class="pre">exam&quot;</span></code> first <code class="docutils literal notranslate"><span class="pre">age</span> <span class="pre">&gt;=</span> <span class="pre">16</span></code> must be <code class="docutils literal notranslate"><span class="pre">True</span></code>, and then <code class="docutils literal notranslate"><span class="pre">drivers_ed</span> <span class="pre">==</span> <span class="pre">&quot;y&quot;</span></code>
+must be <code class="docutils literal notranslate"><span class="pre">True</span></code>, too.</p>
+<p>There is another way to do this that you might like better.  We can use
+something called a <em>Boolean operator</em>.  Instead of this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">16</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">drivers_ed</span> <span class="o">==</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You are old enough to take your license exam. &quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>we can say this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">16</span> <span class="ow">and</span> <span class="n">drivers_ed</span> <span class="o">==</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You are old enough to take your license exam. &quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">and</span></code> keyword is the Boolean operator.  We can now modify Listing <a class="reference internal" href="#drivers-ed-start"><span class="std std-numref">2.9</span></a> as follows in Listing <a class="reference internal" href="#drivers-ed-and"><span class="std std-numref">2.10</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="id11">
+<span id="drivers-ed-and"></span><div class="code-block-caption"><span class="caption-number">Listing 2.10 </span><span class="caption-text">Drivers license example with Boolean <cite>and</cite> operator</span><a class="headerlink" href="#id11" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">age</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What is your age? &quot;</span><span class="p">))</span>
+<span class="linenos">2</span><span class="n">drivers_ed</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Have you passed driver&#39;s education? (y/n) &quot;</span><span class="p">)</span>
+<span class="hll"><span class="linenos">3</span><span class="k">if</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">16</span> <span class="ow">and</span> <span class="n">drivers_ed</span> <span class="o">==</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span>
+</span><span class="linenos">4</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You are old enough to take your license exam. &quot;</span><span class="p">)</span>
+<span class="linenos">5</span><span class="k">elif</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">14</span><span class="p">:</span>
+<span class="linenos">6</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You may obtain a learner&#39;s permit.&quot;</span><span class="p">)</span>
+<span class="linenos">7</span><span class="k">else</span><span class="p">:</span>
+<span class="linenos">8</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Perhaps you should ride a bike for now.&quot;</span><span class="p">)</span>
+<span class="linenos">9</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Done.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>When we join two separate Boolean expressions together with the keyword <code class="docutils literal notranslate"><span class="pre">and</span></code>,
+the resulting expression is <code class="docutils literal notranslate"><span class="pre">True</span></code> only if both of the expressions are each
+<code class="docutils literal notranslate"><span class="pre">True</span></code>.  If either <code class="docutils literal notranslate"><span class="pre">age</span> <span class="pre">&gt;=</span> <span class="pre">16</span></code> is <code class="docutils literal notranslate"><span class="pre">False</span></code> or <code class="docutils literal notranslate"><span class="pre">drivers_ed</span> <span class="pre">==</span> <span class="pre">&quot;y&quot;</span></code> is <code class="docutils literal notranslate"><span class="pre">False</span></code>,
+then the whole Boolean expression <code class="docutils literal notranslate"><span class="pre">age</span> <span class="pre">&gt;=</span> <span class="pre">16</span></code> and <code class="docutils literal notranslate"><span class="pre">drivers_ed</span> <span class="pre">==</span> <span class="pre">&quot;y&quot;</span></code> is
+<code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<p>There are three Boolean operators in Python, which are given in
+Table <a class="reference internal" href="#bool-ops"><span class="std std-numref">2.2</span></a>.</p>
+<span id="bool-ops"></span><table class="colwidths-given docutils align-default" id="id12">
+<caption><span class="caption-number">Table 2.2 </span><span class="caption-text">Logical operators</span><a class="headerlink" href="#id12" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Operator</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">and</span></code></p></td>
+<td><p>Suppose <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> are Boolean expressions.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">==</span> <span class="pre">True</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span> <span class="pre">==</span> <span class="pre">True</span></code>, then <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">and</span> <span class="pre">b</span> <span class="pre">==</span> <span class="pre">True</span></code>.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">==</span> <span class="pre">True</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span> <span class="pre">==</span> <span class="pre">False</span></code>, then <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">and</span> <span class="pre">b</span> <span class="pre">==</span> <span class="pre">False</span></code>.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">==</span> <span class="pre">False</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span> <span class="pre">==</span> <span class="pre">True</span></code>, then <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">and</span> <span class="pre">b</span> <span class="pre">==</span> <span class="pre">False</span></code>.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">==</span> <span class="pre">False</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span> <span class="pre">==</span> <span class="pre">False</span></code>, then <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">and</span> <span class="pre">b</span> <span class="pre">==</span> <span class="pre">False</span></code>.</p>
+<p>In other words, the expression <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">and</span> <span class="pre">b</span></code> is only <code class="docutils literal notranslate"><span class="pre">True</span></code> if both <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> are individually <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">or</span></code></p></td>
+<td><p>Suppose <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> are Boolean expressions.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">==</span> <span class="pre">True</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span> <span class="pre">==</span> <span class="pre">True</span></code>, then <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">or</span> <span class="pre">b</span> <span class="pre">==</span> <span class="pre">True</span></code>.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">==</span> <span class="pre">True</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span> <span class="pre">==</span> <span class="pre">False</span></code>, then <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">or</span> <span class="pre">b</span> <span class="pre">==</span> <span class="pre">True</span></code>.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">==</span> <span class="pre">False</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span> <span class="pre">==</span> <span class="pre">True</span></code>, then <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">or</span> <span class="pre">b</span> <span class="pre">==</span> <span class="pre">True</span></code>.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">==</span> <span class="pre">False</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span> <span class="pre">==</span> <span class="pre">False</span></code>, then <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">or</span> <span class="pre">b</span> <span class="pre">==</span> <span class="pre">False</span></code>.</p>
+<p>In other words, the expression <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">or</span> <span class="pre">b</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code> whenever either <code class="docutils literal notranslate"><span class="pre">a</span></code> or <code class="docutils literal notranslate"><span class="pre">b</span></code> is individually <code class="docutils literal notranslate"><span class="pre">True</span></code>, or both of them are <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+</td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">not</span></code></p></td>
+<td><p>Suppose <code class="docutils literal notranslate"><span class="pre">a</span></code> is a Boolean expression.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">==</span> <span class="pre">True</span></code>, then <code class="docutils literal notranslate"><span class="pre">not</span> <span class="pre">a</span></code> is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">==</span> <span class="pre">False</span></code>, then <code class="docutils literal notranslate"><span class="pre">not</span> <span class="pre">a</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Let us look at another example where these Boolean operators become useful.
+Suppose we want to write a program that tells people if they have an increased
+risk for heart disease.  There are a number of known risk factors, but for now
+we’ll only consider three.  Without Boolean operators, we might write the
+program in Listing <a class="reference internal" href="#heart-disease1"><span class="std std-numref">2.11</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="id13">
+<span id="heart-disease1"></span><div class="code-block-caption"><span class="caption-number">Listing 2.11 </span><span class="caption-text">Heart disease example</span><a class="headerlink" href="#id13" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">bp</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Do you have high blood pressure (y/n)? &quot;</span><span class="p">)</span>
+<span class="linenos"> 2</span><span class="n">smoke</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Do you smoke (y/n)? &quot;</span><span class="p">)</span>
+<span class="linenos"> 3</span><span class="n">hist</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Do you have a family history of heart disease (y/n)? &quot;</span><span class="p">)</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="k">if</span> <span class="n">bp</span> <span class="o">==</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span>
+<span class="linenos"> 6</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You have an increased risk of heart disease.&quot;</span><span class="p">)</span>
+<span class="linenos"> 7</span><span class="k">elif</span> <span class="n">smoke</span> <span class="o">==</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span>
+<span class="linenos"> 8</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You have an increased risk of heart disease.&quot;</span><span class="p">)</span>
+<span class="linenos"> 9</span><span class="k">elif</span> <span class="n">hist</span> <span class="o">==</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span>
+<span class="linenos">10</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You have an increased risk of heart disease.&quot;</span><span class="p">)</span>
+<span class="linenos">11</span><span class="k">else</span><span class="p">:</span>
+<span class="linenos">12</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You do not have an increased risk for heart disease.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Note that each of the statements that follow the <code class="docutils literal notranslate"><span class="pre">if</span></code>/<code class="docutils literal notranslate"><span class="pre">elif</span></code> conditions all
+print the same message.  Instead, we can use the Boolean operator <code class="docutils literal notranslate"><span class="pre">or</span></code> to
+simplify the code resulting in Listing <a class="reference internal" href="#heart-disease2"><span class="std std-numref">2.12</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="id14">
+<span id="heart-disease2"></span><div class="code-block-caption"><span class="caption-number">Listing 2.12 </span><span class="caption-text">Heart disease example with <code class="docutils literal notranslate"><span class="pre">or</span></code> operator</span><a class="headerlink" href="#id14" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">bp</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Do you have high blood pressure (y/n)? &quot;</span><span class="p">)</span>
+<span class="linenos">2</span><span class="n">smoke</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Do you smoke (y/n)? &quot;</span><span class="p">)</span>
+<span class="linenos">3</span><span class="n">hist</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Do you have a family history of heart disease (y/n)? &quot;</span><span class="p">)</span>
+<span class="linenos">4</span>
+<span class="hll"><span class="linenos">5</span><span class="k">if</span> <span class="n">bp</span> <span class="o">==</span> <span class="s2">&quot;y&quot;</span> <span class="ow">or</span> <span class="n">smoke</span> <span class="o">==</span> <span class="s2">&quot;y&quot;</span> <span class="ow">or</span> <span class="n">hist</span> <span class="o">==</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span>
+</span><span class="linenos">6</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You have an increased risk of heart disease.&quot;</span><span class="p">)</span>
+<span class="linenos">7</span><span class="k">else</span><span class="p">:</span>
+<span class="linenos">8</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You do not have an increased risk for heart disease.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Lastly, we can use the <code class="docutils literal notranslate"><span class="pre">not</span></code> operator to improve the readability of code.
+Recall how, in our driver’s license example
+(Listing <a class="reference internal" href="#drivers-ed-and"><span class="std std-numref">2.10</span></a>), we asked if the user had taken a driver’s
+education course.  With this scenario in mind, consider the following
+(Listing <a class="reference internal" href="#drivers-ed-bool-expr"><span class="std std-numref">2.13</span></a>).</p>
+<div class="literal-block-wrapper docutils container" id="id15">
+<span id="drivers-ed-bool-expr"></span><div class="code-block-caption"><span class="caption-number">Listing 2.13 </span><span class="caption-text">Drivers license with <cite>and</cite>/<cite>not</cite></span><a class="headerlink" href="#id15" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">age</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What is your age? &quot;</span><span class="p">))</span>
+<span class="linenos">2</span><span class="n">drivers_ed</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Have you taken driver&#39;s ed (y/n)? &quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;y&quot;</span>
+<span class="linenos">3</span><span class="k">if</span> <span class="mi">14</span> <span class="o">&lt;=</span> <span class="n">age</span> <span class="ow">and</span> <span class="n">age</span> <span class="o">&lt;=</span> <span class="mi">16</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">drivers_ed</span><span class="p">:</span>
+<span class="linenos">4</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You should consider taking a driver&#39;s ed course.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>This example includes a few interesting code constructions.  Line 2 of
+Listing <a class="reference internal" href="#drivers-ed-bool-expr"><span class="std std-numref">2.13</span></a> is different from what you’ve seen
+before.  Previously in Listing <a class="reference internal" href="#drivers-ed-and"><span class="std std-numref">2.10</span></a>, we let
+<code class="docutils literal notranslate"><span class="pre">drivers_ed</span></code> be a string
+variable whose value should be <code class="docutils literal notranslate"><span class="pre">&quot;y&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;n&quot;</span></code>. In this code, <code class="docutils literal notranslate"><span class="pre">drivers_ed</span></code> is a
+Boolean variable.  Why?</p>
+<p>Notice that the <code class="docutils literal notranslate"><span class="pre">input</span></code> part of the statement is followed by a logical operator,
+the double-equals (<code class="docutils literal notranslate"><span class="pre">==</span></code>).  Thus, we are comparing what the user types to the
+string <code class="docutils literal notranslate"><span class="pre">&quot;y&quot;</span></code>.  If the user typed <code class="docutils literal notranslate"><span class="pre">&quot;y&quot;</span></code>, then the RHS of the assignment statement
+is <code class="docutils literal notranslate"><span class="pre">True</span></code>, so <code class="docutils literal notranslate"><span class="pre">drivers_ed</span></code> gets the value <code class="docutils literal notranslate"><span class="pre">True</span></code>.  If the user types anything
+else, <code class="docutils literal notranslate"><span class="pre">drivers_ed</span></code> becomes <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<p>Next, we have code that checks to see if the user age’s is still typically in
+the range that students take a driver’s education class.  If so, and they’ve not
+had driver’s education, they are advised to do so via a <code class="docutils literal notranslate"><span class="pre">print</span></code> statement.  The
+only way the <code class="docutils literal notranslate"><span class="pre">print</span></code> statement will happen is if the age is between <code class="docutils literal notranslate"><span class="pre">14</span></code> and
+<code class="docutils literal notranslate"><span class="pre">16</span></code>, and they’ve not had driver’s education.</p>
+<p>Keep in mind that the programming practice in line 2 of
+Listing <a class="reference internal" href="#drivers-ed-bool-expr"><span class="std std-numref">2.13</span></a> might not be a good idea.  Your author
+has only written code this way to show you that it can be done.   The latter
+part of the expression (<code class="docutils literal notranslate"><span class="pre">==</span> <span class="pre">&quot;y&quot;</span></code>) might be hard to notice, and because it is
+hard to notice, it may make the code more difficult to read and therefore
+maintain.  In the future, we may want to check what the user typed in to make
+sure it’s what we expect (i.e., a <code class="docutils literal notranslate"><span class="pre">&quot;y&quot;</span></code> or a <code class="docutils literal notranslate"><span class="pre">&quot;n&quot;</span></code>).  Checking inputs is
+something we’ll discuss in Chapter 4: Loops.</p>
+</section>
+<section id="nuances-of-boolean-operators">
+<h2><span class="section-number">2.3. </span>Nuances of Boolean operators<a class="headerlink" href="#nuances-of-boolean-operators" title="Permalink to this headline">¶</a></h2>
+<p>Students will sometimes write code like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">age</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What is your age? &quot;</span><span class="p">))</span>
+<span class="k">if</span> <span class="n">age</span> <span class="o">==</span> <span class="mi">14</span> <span class="ow">or</span> <span class="mi">15</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You can get a learner&#39;s permit.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Run this code and type <code class="docutils literal notranslate"><span class="pre">18</span></code>.  Uh oh.  Why does it print “You can get a learner’s
+permit”?</p>
+<p>Remember than anything on the LHS and RHS of a Boolean operator must be itself a
+Boolean expression.  In other words, the LHS and RHS must both be <code class="docutils literal notranslate"><span class="pre">True</span></code> or
+<code class="docutils literal notranslate"><span class="pre">False</span></code>.  In the above example, there is an expression on either side of the
+double-equals.  One is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">age</span> <span class="o">==</span> <span class="mi">14</span>
+</pre></div>
+</div>
+<p>and the other is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">15</span>
+</pre></div>
+</div>
+<p>The expression <code class="docutils literal notranslate"><span class="pre">age</span> <span class="pre">==</span> <span class="pre">14</span></code> is <code class="docutils literal notranslate"><span class="pre">False</span></code>.  The expression <code class="docutils literal notranslate"><span class="pre">15</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>.
+<strong>Anything non-zero in Python is treated as True.</strong>  Therefore, the Boolean
+expression is “transformed” as in Figure <a class="reference internal" href="#bool-op-nuance"><span class="std std-numref">2.1</span></a>.</p>
+<figure class="align-default" id="id16">
+<span id="bool-op-nuance"></span><a class="reference internal image-reference" href="_images/bool_op_nuance.png"><img alt="Evaluating a Boolean ``or``" src="_images/bool_op_nuance.png" style="width: 236.0px; height: 256.0px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2.1 </span><span class="caption-text">Evaluating a Boolean <code class="docutils literal notranslate"><span class="pre">or</span></code></span><a class="headerlink" href="#id16" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>Instead of:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">age</span> <span class="o">==</span> <span class="mi">14</span> <span class="ow">or</span> <span class="mi">15</span>
+</pre></div>
+</div>
+<p>a programmer should write:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">age</span> <span class="o">==</span> <span class="mi">14</span> <span class="ow">or</span> <span class="n">age</span> <span class="o">==</span> <span class="mi">15</span>
+</pre></div>
+</div>
+<p>Bottom line: be very careful when using and/or.</p>
+</section>
+<section id="exercises">
+<h2><span class="section-number">2.4. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p>Suppose <code class="docutils literal notranslate"><span class="pre">x</span></code> is an integer variable.  What is the difference between the
+expression <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">2</span></code> and the expression <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">==</span> <span class="pre">2</span></code>?</p></li>
+<li><p>Given the following variable definitions,</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">6</span>
+</pre></div>
+</div>
+<p>what is the type and value of each of the following expressions?</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">!=</span> <span class="mi">0</span>
+<span class="n">y</span> <span class="o">&gt;=</span> <span class="mi">3</span>
+<span class="n">x</span> <span class="o">==</span> <span class="n">y</span>
+<span class="ow">not</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="mi">5</span>
+<span class="mi">2</span> <span class="o">&lt;</span> <span class="n">x</span> <span class="ow">and</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">5</span>
+<span class="mi">7</span> <span class="o">&lt;</span> <span class="n">y</span> <span class="ow">or</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="mi">10</span>
+</pre></div>
+</div>
+</li>
+<li><p>Identify the error in the following code.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">num</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter a real number: &quot;</span><span class="p">))</span>
+<span class="k">if</span> <span class="n">num</span> <span class="o">&lt;</span> <span class="mf">0.0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;%.2 is negative.&quot;</span> <span class="o">%</span> <span class="n">num</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The number is 0.0.&quot;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">num</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;%.2 is positive.&quot;</span> <span class="o">%</span> <span class="n">num</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Identify the error in the following code.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">num</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter a real number: &quot;</span><span class="p">))</span>
+<span class="k">if</span> <span class="n">num</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The number is 0.0.&quot;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">num</span> <span class="o">&lt;</span> <span class="mf">0.0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;%.2 is negative.&quot;</span> <span class="o">%</span> <span class="n">num</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;%.2 is positive.&quot;</span> <span class="o">%</span> <span class="n">num</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>What is the output of the following code?</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">major</span> <span class="o">=</span> <span class="s2">&quot;Music&quot;</span>
+
+<span class="k">if</span> <span class="n">major</span> <span class="o">==</span> <span class="s2">&quot;Computer Science&quot;</span> <span class="ow">or</span> <span class="s2">&quot;Math&quot;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Calculus is required for your major.&quot;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">major</span> <span class="o">==</span> <span class="s2">&quot;Music&quot;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Music Theory is required for your major.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Consider the following code.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Statement 1&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Statement 2&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">b</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Statement 3&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Statement 4&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>What is the output of the program if <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> were given the following values prior to the start of the code?</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">4</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</li>
+<li><p>What is the output of the following code.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="k">if</span> <span class="mi">5</span> <span class="o">&lt;</span> <span class="n">r</span> <span class="ow">and</span> <span class="n">r</span> <span class="o">&lt;</span> <span class="mi">15</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;1&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="mi">5</span> <span class="o">&lt;</span> <span class="n">r</span> <span class="ow">or</span> <span class="n">r</span> <span class="o">&lt;</span> <span class="mi">15</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;2&quot;</span><span class="p">)</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="k">if</span> <span class="mi">5</span> <span class="o">&lt;</span> <span class="n">r</span> <span class="ow">and</span> <span class="n">r</span> <span class="o">&lt;</span> <span class="mi">15</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;3&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="mi">5</span> <span class="o">&lt;</span> <span class="n">r</span> <span class="ow">or</span> <span class="n">r</span> <span class="o">&lt;</span> <span class="mi">15</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;4&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Write code that rounds a float number up or down <em>without</em> using the
+<code class="docutils literal notranslate"><span class="pre">round</span></code> function introduced in Chapter 1.  That is, write code that
+asks for a number, and then it takes that number and rounds it up or
+down appropriately without relying on the <code class="docutils literal notranslate"><span class="pre">round</span></code> function.  For
+example, if the user types <code class="docutils literal notranslate"><span class="pre">3.6</span></code>, the program should output a <code class="docutils literal notranslate"><span class="pre">4</span></code>
+since the fractional part <code class="docutils literal notranslate"><span class="pre">.6</span></code> is greater than <code class="docutils literal notranslate"><span class="pre">.5</span></code>.  The user
+were to type <code class="docutils literal notranslate"><span class="pre">3.2</span></code>, the program should output a <code class="docutils literal notranslate"><span class="pre">3</span></code> since the
+fractional part <code class="docutils literal notranslate"><span class="pre">.2</span></code> is less than <code class="docutils literal notranslate"><span class="pre">.5</span></code>.</p>
+<p>It may help to know that if you use the <code class="docutils literal notranslate"><span class="pre">int</span></code> function to cast a
+float to an integer, the fractional part disappears.  This is called
+<em>truncation</em>.  For example, in the following code</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="mf">3.6</span>
+<span class="n">i</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<blockquote>
+<div><p>the value of <code class="docutils literal notranslate"><span class="pre">i</span></code> ends up being <code class="docutils literal notranslate"><span class="pre">3</span></code>.</p>
+</div></blockquote>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Conversational Python</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ch1_basicio_types.html">1. Basic I/O, Statements, Expressions, Variables, and Types</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">2. Conditionals</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#the-if-statement-and-the-boolean-type">2.1. The <code class="docutils literal notranslate"><span class="pre">if</span></code> statement and the Boolean type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#elif-and-boolean-operators">2.2. <code class="docutils literal notranslate"><span class="pre">elif</span></code> and Boolean Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nuances-of-boolean-operators">2.3. Nuances of Boolean operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#exercises">2.4. Exercises</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ch3_loops.html">3. Loops and String Manipulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch4_funcs.html">4. Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch5_lists.html">5. Lists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch6_files_excepts.html">6. Files and Exceptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch7_dicts.html">7. Dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch8_searchsort.html">8. Searching and Sorting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch9_classes.html">9. Classes, Object-Orientation, and Pygame</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="ch1_basicio_types.html" title="previous chapter"><span class="section-number">1. </span>Basic I/O, Statements, Expressions, Variables, and Types</a></li>
+      <li>Next: <a href="ch3_loops.html" title="next chapter"><span class="section-number">3. </span>Loops and String Manipulation</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, Jason B. Shepherd, Ph.D..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/ch2_cond.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
