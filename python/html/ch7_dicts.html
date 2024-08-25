@@ -1,18 +1,16 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>7. Dictionaries &#8212; Conversational Python 2.0 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=12dfc556" />
+    <script src="_static/documentation_options.js?v=60dbed4a"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="8. Searching and Sorting" href="ch8_searchsort.html" />
@@ -20,8 +18,9 @@
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
+
   
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+  
 
   </head><body>
   
@@ -34,9 +33,9 @@
           <div class="body" role="main">
             
   <section id="dictionaries">
-<span id="ch-dict"></span><h1><span class="section-number">7. </span>Dictionaries<a class="headerlink" href="#dictionaries" title="Permalink to this headline">¶</a></h1>
+<span id="ch-dict"></span><h1><span class="section-number">7. </span>Dictionaries<a class="headerlink" href="#dictionaries" title="Link to this heading">¶</a></h1>
 <section id="creating-and-using-dictionaries">
-<span id="sec-crud-dict"></span><h2><span class="section-number">7.1. </span>Creating and using dictionaries<a class="headerlink" href="#creating-and-using-dictionaries" title="Permalink to this headline">¶</a></h2>
+<span id="sec-crud-dict"></span><h2><span class="section-number">7.1. </span>Creating and using dictionaries<a class="headerlink" href="#creating-and-using-dictionaries" title="Link to this heading">¶</a></h2>
 <p>We can do a lot of things in code using what we know so far.  Some of the things
 we can do in code is kind of, well, “clunky.”  Consider the following example.
 Suppose we want to keep track of a group of students and their major field of
@@ -95,7 +94,7 @@ say, look up <code class="docutils literal notranslate"><span class="pre">&quot;
 <p>Let’s create a dictionary to <em>associate</em> names with majors.  Here is how we do
 it (see Listing <a class="reference internal" href="#majors-dict-def"><span class="std std-numref">7.1</span></a>).</p>
 <div class="literal-block-wrapper docutils container" id="id1">
-<span id="majors-dict-def"></span><div class="code-block-caption"><span class="caption-number">Listing 7.1 </span><span class="caption-text">Defining a dictionary (<code class="docutils literal notranslate"><span class="pre">dict</span></code>)</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<span id="majors-dict-def"></span><div class="code-block-caption"><span class="caption-number">Listing 7.1 </span><span class="caption-text">Defining a dictionary (<code class="docutils literal notranslate"><span class="pre">dict</span></code>)</span><a class="headerlink" href="#id1" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">majors</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;Shayla Succotash&quot;</span> <span class="p">:</span> <span class="s2">&quot;Comp Sci&quot;</span><span class="p">,</span>
     <span class="s2">&quot;Amy Avocado&quot;</span> <span class="p">:</span> <span class="s2">&quot;Accounting&quot;</span><span class="p">,</span>
@@ -133,7 +132,7 @@ without looking at the next paragraph.</p>
 <p>Were you able to come up with an example?  If so, did it look like
 Listing <a class="reference internal" href="#dict-no-key"><span class="std std-numref">7.2</span></a>?</p>
 <div class="literal-block-wrapper docutils container" id="id2">
-<span id="dict-no-key"></span><div class="code-block-caption"><span class="caption-number">Listing 7.2 </span><span class="caption-text">Attempting to access a key that does not exist</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<span id="dict-no-key"></span><div class="code-block-caption"><span class="caption-number">Listing 7.2 </span><span class="caption-text">Attempting to access a key that does not exist</span><a class="headerlink" href="#id2" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">majors</span><span class="p">[</span><span class="s2">&quot;Brooklyn Broccolini&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
@@ -146,7 +145,7 @@ Listing <a class="reference internal" href="#dict-no-key"><span class="std std-n
 produces a <code class="docutils literal notranslate"><span class="pre">KeyError</span></code>.  We could handle <code class="docutils literal notranslate"><span class="pre">KeyError</span></code> if we so chose, like the code
 example found in Listing <a class="reference internal" href="#dict-no-key-except"><span class="std std-numref">7.3</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="id3">
-<span id="dict-no-key-except"></span><div class="code-block-caption"><span class="caption-number">Listing 7.3 </span><span class="caption-text">Handling <code class="docutils literal notranslate"><span class="pre">KeyError</span></code></span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<span id="dict-no-key-except"></span><div class="code-block-caption"><span class="caption-number">Listing 7.3 </span><span class="caption-text">Handling <code class="docutils literal notranslate"><span class="pre">KeyError</span></code></span><a class="headerlink" href="#id3" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
     <span class="n">student</span> <span class="o">=</span> <span class="s2">&quot;Brooklyn Broccolini&quot;</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">majors</span><span class="p">[</span><span class="n">student</span><span class="p">])</span>
@@ -159,7 +158,7 @@ example found in Listing <a class="reference internal" href="#dict-no-key-except
 if a certain key exists in a dictionary (see
 Listing <a class="reference internal" href="#dict-no-key-check"><span class="std std-numref">7.4</span></a>).</p>
 <div class="literal-block-wrapper docutils container" id="id4">
-<span id="dict-no-key-check"></span><div class="code-block-caption"><span class="caption-number">Listing 7.4 </span><span class="caption-text">Checking for the existence of a key first</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
+<span id="dict-no-key-check"></span><div class="code-block-caption"><span class="caption-number">Listing 7.4 </span><span class="caption-text">Checking for the existence of a key first</span><a class="headerlink" href="#id4" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">if</span> <span class="s2">&quot;Brooklyn Broccolini&quot;</span> <span class="ow">in</span> <span class="n">majors</span><span class="p">:</span>
 <span class="linenos">2</span>    <span class="nb">print</span><span class="p">(</span><span class="n">majors</span><span class="p">[</span><span class="s2">&quot;Brooklyn Broccolini&quot;</span><span class="p">])</span>
 <span class="linenos">3</span><span class="k">else</span><span class="p">:</span>
@@ -177,7 +176,7 @@ word’s value.</p>
 allows the user to look up definitions of words (see
 Listing <a class="reference internal" href="#eng-dict-str"><span class="std std-numref">7.5</span></a>).</p>
 <div class="literal-block-wrapper docutils container" id="id5">
-<span id="eng-dict-str"></span><div class="code-block-caption"><span class="caption-number">Listing 7.5 </span><span class="caption-text">Using a <code class="docutils literal notranslate"><span class="pre">dict</span></code> to create an English dictionary</span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
+<span id="eng-dict-str"></span><div class="code-block-caption"><span class="caption-number">Listing 7.5 </span><span class="caption-text">Using a <code class="docutils literal notranslate"><span class="pre">dict</span></code> to create an English dictionary</span><a class="headerlink" href="#id5" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span>
 <span class="linenos"> 2</span>    <span class="s2">&quot;alpaca&quot;</span> <span class="p">:</span> <span class="s2">&quot;A domesticated camelid&quot;</span><span class="p">,</span>
 <span class="linenos"> 3</span>    <span class="s2">&quot;bow&quot;</span> <span class="p">:</span> <span class="s2">&quot;A weapon that shoots arrows&quot;</span><span class="p">,</span>
@@ -223,7 +222,7 @@ produces the <code class="docutils literal notranslate"><span class="pre">int</s
 the definitions.  See how we have modified Listing <a class="reference internal" href="#eng-dict-str"><span class="std std-numref">7.5</span></a> to
 create Listing <a class="reference internal" href="#eng-dict-list"><span class="std std-numref">7.6</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="id6">
-<span id="eng-dict-list"></span><div class="code-block-caption"><span class="caption-number">Listing 7.6 </span><span class="caption-text">Using a <code class="docutils literal notranslate"><span class="pre">dict</span></code> to print word meanings</span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
+<span id="eng-dict-list"></span><div class="code-block-caption"><span class="caption-number">Listing 7.6 </span><span class="caption-text">Using a <code class="docutils literal notranslate"><span class="pre">dict</span></code> to print word meanings</span><a class="headerlink" href="#id6" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span>
 <span class="linenos"> 2</span>    <span class="s2">&quot;alpaca&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="s2">&quot;A domesticated camelid&quot;</span><span class="p">],</span>
 <span class="linenos"> 3</span>    <span class="s2">&quot;bow&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="s2">&quot;A weapon that shoots arrows&quot;</span><span class="p">,</span>
@@ -255,7 +254,7 @@ to stand for “definition.”</p>
 <code class="docutils literal notranslate"><span class="pre">del</span></code> keyword to accomplish this.  Consider Listing <a class="reference internal" href="#del-dict-pair"><span class="std std-numref">7.7</span></a>,
 specifically line 13.</p>
 <div class="literal-block-wrapper docutils container" id="id7">
-<span id="del-dict-pair"></span><div class="code-block-caption"><span class="caption-number">Listing 7.7 </span><span class="caption-text">Deleting a key-value pair from a <code class="docutils literal notranslate"><span class="pre">dict</span></code></span><a class="headerlink" href="#id7" title="Permalink to this code">¶</a></div>
+<span id="del-dict-pair"></span><div class="code-block-caption"><span class="caption-number">Listing 7.7 </span><span class="caption-text">Deleting a key-value pair from a <code class="docutils literal notranslate"><span class="pre">dict</span></code></span><a class="headerlink" href="#id7" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span>
 <span class="linenos"> 2</span>    <span class="s2">&quot;alpaca&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="s2">&quot;A domesticated camelid&quot;</span><span class="p">],</span>
 <span class="linenos"> 3</span>    <span class="s2">&quot;bow&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="s2">&quot;A weapon that shoots arrows&quot;</span><span class="p">,</span>
@@ -281,7 +280,7 @@ calamity because they are adorable and charming.  Llamas, on the other hand, are
 jerks.)</p>
 </section>
 <section id="iterating-through-dictionaries">
-<span id="sec-iter-dict"></span><h2><span class="section-number">7.2. </span>Iterating through dictionaries<a class="headerlink" href="#iterating-through-dictionaries" title="Permalink to this headline">¶</a></h2>
+<span id="sec-iter-dict"></span><h2><span class="section-number">7.2. </span>Iterating through dictionaries<a class="headerlink" href="#iterating-through-dictionaries" title="Link to this heading">¶</a></h2>
 <p>There may be instances where we wish to iterate through a <code class="docutils literal notranslate"><span class="pre">dict</span></code> similar to how
 we might traverse a <code class="docutils literal notranslate"><span class="pre">list</span></code>.  Suppose have the following dictionary definition.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">calories</span> <span class="o">=</span> <span class="p">{</span>
@@ -310,7 +309,7 @@ to be kept in order when we use a dictionary.  If we want the keys to be sorted
 alphabetically, we would need to do something like what we see in
 Listing <a class="reference internal" href="#sorted-dict-iter"><span class="std std-numref">7.8</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="id8">
-<span id="sorted-dict-iter"></span><div class="code-block-caption"><span class="caption-number">Listing 7.8 </span><span class="caption-text">Iterating through keys of a <code class="docutils literal notranslate"><span class="pre">dict</span></code></span><a class="headerlink" href="#id8" title="Permalink to this code">¶</a></div>
+<span id="sorted-dict-iter"></span><div class="code-block-caption"><span class="caption-number">Listing 7.8 </span><span class="caption-text">Iterating through keys of a <code class="docutils literal notranslate"><span class="pre">dict</span></code></span><a class="headerlink" href="#id8" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">for</span> <span class="n">food</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">calories</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
 <span class="linenos">2</span>    <span class="nb">print</span><span class="p">(</span><span class="n">food</span><span class="p">)</span>
 </pre></div>
@@ -326,7 +325,7 @@ curious readers should look on YouTube for a video from PyCon 2010 titled
 they organize the internals of a dictionary.)</p>
 </section>
 <section id="exercises">
-<span id="sec-dict-exercises"></span><h2><span class="section-number">7.3. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<span id="sec-dict-exercises"></span><h2><span class="section-number">7.3. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">¶</a></h2>
 <ol class="arabic">
 <li><p>Given the following <code class="docutils literal notranslate"><span class="pre">dict</span></code> definition</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;a&quot;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span> <span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span> <span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
@@ -422,7 +421,7 @@ Aaron
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 
@@ -436,11 +435,11 @@ Aaron
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2022, Jason B. Shepherd, Ph.D..
+      &#169;2024, Jason B. Shepherd, Ph.D..
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.2.6</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
       
       |
       <a href="_sources/ch7_dicts.rst.txt"

@@ -1,18 +1,16 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>8. Searching and Sorting &#8212; Conversational Python 2.0 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=12dfc556" />
+    <script src="_static/documentation_options.js?v=60dbed4a"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="9. Classes, Object-Orientation, and Pygame" href="ch9_classes.html" />
@@ -20,8 +18,9 @@
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
+
   
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+  
 
   </head><body>
   
@@ -34,9 +33,9 @@
           <div class="body" role="main">
             
   <section id="searching-and-sorting">
-<span id="ch-searchsort"></span><h1><span class="section-number">8. </span>Searching and Sorting<a class="headerlink" href="#searching-and-sorting" title="Permalink to this headline">¶</a></h1>
+<span id="ch-searchsort"></span><h1><span class="section-number">8. </span>Searching and Sorting<a class="headerlink" href="#searching-and-sorting" title="Link to this heading">¶</a></h1>
 <section id="the-sorting-problem">
-<span id="sec-sort-prob"></span><h2><span class="section-number">8.1. </span>The Sorting Problem<a class="headerlink" href="#the-sorting-problem" title="Permalink to this headline">¶</a></h2>
+<span id="sec-sort-prob"></span><h2><span class="section-number">8.1. </span>The Sorting Problem<a class="headerlink" href="#the-sorting-problem" title="Link to this heading">¶</a></h2>
 <p>Do you stream music online?  Do you click on a folder on your desktop to find
 and organize your files?  Have you ever used Microsoft Excel to keep information
 in a spreadsheet?  If we think for a moment about these software programs, we
@@ -58,7 +57,7 @@ ways to perform sorting, some of which have really interesting capabilities.
 Well, what are we waiting for?</p>
 </section>
 <section id="towards-an-algorithm-for-sorting">
-<span id="sec-sort-algo"></span><h2><span class="section-number">8.2. </span>Towards an Algorithm for Sorting<a class="headerlink" href="#towards-an-algorithm-for-sorting" title="Permalink to this headline">¶</a></h2>
+<span id="sec-sort-algo"></span><h2><span class="section-number">8.2. </span>Towards an Algorithm for Sorting<a class="headerlink" href="#towards-an-algorithm-for-sorting" title="Link to this heading">¶</a></h2>
 <p>In this section, we will start developing an algorithm for sorting.  An
 <em>algorithm</em> is a series of well defined steps for solving a problem that has an
 input, an output, and completes in a reasonable amount of time.  (The meaning of
@@ -143,7 +142,7 @@ named <em>selection sort</em> because of how we select the smallest item in each
 <figure class="align-default" id="id1">
 <span id="fig-selsort-steps"></span><a class="reference internal image-reference" href="_images/selsort_steps.png"><img alt="Selection sort steps" src="_images/selsort_steps.png" style="width: 260.0px; height: 388.0px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 8.1 </span><span class="caption-text">Selection sort steps</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+<p><span class="caption-number">Fig. 8.1 </span><span class="caption-text">Selection sort steps</span><a class="headerlink" href="#id1" title="Link to this image">¶</a></p>
 </figcaption>
 </figure>
 <p>There are a couple of things to note in the example shown that will help us
@@ -160,7 +159,7 @@ and look ahead.  Make a focused attempt, hand-written on paper before you
 proceed.</p>
 </section>
 <section id="the-selection-sort">
-<span id="sec-selsort"></span><h2><span class="section-number">8.3. </span>The Selection Sort<a class="headerlink" href="#the-selection-sort" title="Permalink to this headline">¶</a></h2>
+<span id="sec-selsort"></span><h2><span class="section-number">8.3. </span>The Selection Sort<a class="headerlink" href="#the-selection-sort" title="Link to this heading">¶</a></h2>
 <p>Let’s walk through the advice given at the end of Section
 <a class="reference internal" href="#sec-sort-algo"><span class="std std-numref">8.2</span></a>.  Rather than name our list <code class="docutils literal notranslate"><span class="pre">numbers</span></code>,
 we’ll name it <code class="docutils literal notranslate"><span class="pre">L</span></code> (hey, fewer keystrokes!).</p>
@@ -213,7 +212,7 @@ swap any values.  Once we’re finished with the scan, but before we do another
 scan, we need to swap values between the positions stored in <code class="docutils literal notranslate"><span class="pre">start</span></code> and
 <code class="docutils literal notranslate"><span class="pre">smallpos</span></code>.  The final solution is shown in Listing <a class="reference internal" href="#selsort"><span class="std std-numref">8.1</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="id2">
-<span id="selsort"></span><div class="code-block-caption"><span class="caption-number">Listing 8.1 </span><span class="caption-text">Selection Sort</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<span id="selsort"></span><div class="code-block-caption"><span class="caption-number">Listing 8.1 </span><span class="caption-text">Selection Sort</span><a class="headerlink" href="#id2" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">start</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
     <span class="c1"># Find the smallest value and keep track of its position.</span>
     <span class="n">smallpos</span> <span class="o">=</span> <span class="n">start</span>
@@ -234,7 +233,7 @@ with the <code class="docutils literal notranslate"><span class="pre">&lt;</span
 fill <code class="docutils literal notranslate"><span class="pre">L</span></code> with strings, it also works (can you guess how it orders strings?).</p>
 <p>We can take this one step further and wrap it into a function that we can call.  See Listing <a class="reference internal" href="#selsort-func"><span class="std std-numref">8.2</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="id3">
-<span id="selsort-func"></span><div class="code-block-caption"><span class="caption-number">Listing 8.2 </span><span class="caption-text">Selection Sort as a Function</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<span id="selsort-func"></span><div class="code-block-caption"><span class="caption-number">Listing 8.2 </span><span class="caption-text">Selection Sort as a Function</span><a class="headerlink" href="#id3" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">selsort</span><span class="p">(</span><span class="n">L</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">start</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
         <span class="c1"># Find the smallest value and keep track of its position.</span>
@@ -262,7 +261,7 @@ fill <code class="docutils literal notranslate"><span class="pre">L</span></code
 </div>
 </section>
 <section id="searching-for-items-in-sorted-data">
-<span id="sec-binsearch"></span><h2><span class="section-number">8.4. </span>Searching for Items in Sorted Data<a class="headerlink" href="#searching-for-items-in-sorted-data" title="Permalink to this headline">¶</a></h2>
+<span id="sec-binsearch"></span><h2><span class="section-number">8.4. </span>Searching for Items in Sorted Data<a class="headerlink" href="#searching-for-items-in-sorted-data" title="Link to this heading">¶</a></h2>
 <p>Human beings can find things easier in a list that has been sorted because they
 can eliminate sections of the list as they quickly visually scan its contents.
 Computers, too, can more easily find items in a list that has been pre-sorted.</p>
@@ -305,7 +304,7 @@ will find <code class="docutils literal notranslate"><span class="pre">18</span>
 <figure class="align-default" id="id4">
 <span id="fig-binsearch-1"></span><a class="reference internal image-reference" href="_images/binsearch-1.png"><img alt="Binary search steps, scenario 1" src="_images/binsearch-1.png" style="width: 500.0px; height: 210.0px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 8.2 </span><span class="caption-text">Binary search steps, scenario 1</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+<p><span class="caption-number">Fig. 8.2 </span><span class="caption-text">Binary search steps, scenario 1</span><a class="headerlink" href="#id4" title="Link to this image">¶</a></p>
 </figcaption>
 </figure>
 <p>If <code class="docutils literal notranslate"><span class="pre">18</span></code> is greater than the middle (that is, if <code class="docutils literal notranslate"><span class="pre">18</span> <span class="pre">&gt;</span> <span class="pre">L[m]</span></code>), then we move <code class="docutils literal notranslate"><span class="pre">i</span></code>
@@ -321,7 +320,7 @@ us through that scenario.</p>
 <figure class="align-default" id="id5">
 <span id="fig-binsearch-2"></span><a class="reference internal image-reference" href="_images/binsearch-2.png"><img alt="Binary search steps, scenario 2" src="_images/binsearch-2.png" style="width: 560.0px; height: 310.0px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 8.3 </span><span class="caption-text">Binary search steps, scenario 2</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+<p><span class="caption-number">Fig. 8.3 </span><span class="caption-text">Binary search steps, scenario 2</span><a class="headerlink" href="#id5" title="Link to this image">¶</a></p>
 </figcaption>
 </figure>
 <p>We are left with the idea that we will probably need to use a loop that
@@ -372,7 +371,7 @@ the target item <code class="docutils literal notranslate"><span class="pre">x</
 should be <code class="docutils literal notranslate"><span class="pre">-1</span></code> if we didn’t find the target item, or some integer <code class="docutils literal notranslate"><span class="pre">&gt;=</span> <span class="pre">0</span></code> if we
 did find it.  See Listing <a class="reference internal" href="#binsearch-func"><span class="std std-numref">8.3</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="id6">
-<span id="binsearch-func"></span><div class="code-block-caption"><span class="caption-number">Listing 8.3 </span><span class="caption-text">Binary Search as a Function</span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
+<span id="binsearch-func"></span><div class="code-block-caption"><span class="caption-number">Listing 8.3 </span><span class="caption-text">Binary Search as a Function</span><a class="headerlink" href="#id6" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span> <span class="nf">binsearch</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
 <span class="linenos"> 2</span>    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="linenos"> 3</span>    <span class="n">j</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
@@ -397,11 +396,43 @@ did find it.  See Listing <a class="reference internal" href="#binsearch-func"><
 </div>
 </section>
 <section id="optional-using-recursion-to-search">
-<span id="sec-recursion"></span><h2><span class="section-number">8.5. </span>(Optional) Using Recursion to Search<a class="headerlink" href="#optional-using-recursion-to-search" title="Permalink to this headline">¶</a></h2>
-<p>This section will be added at a later date.</p>
+<span id="sec-recursion"></span><h2><span class="section-number">8.5. </span>(Optional) Using Recursion to Search<a class="headerlink" href="#optional-using-recursion-to-search" title="Link to this heading">¶</a></h2>
+<p>Binary search is a clever way to find a value in a list when the list values are in sorted order.  Suppose we wanted to explain how it works to a friend.  We might use the following description.  If we want to find a value in an ordered list, look at the middle item.  If that’s the value we want, great.  We found it!  If not, we ask if the value we want is smaller or larger than the middle.  If its smaller, repeat the process again for the left “half” of the list.  Otherwise, repeat it for the right “half” of the list.</p>
+<p>Did you notice what we just did?  We have recast the problem in terms of solving smaller versions of the problem itself.  We could have said something like, “It the value isn’t in the middle, binary search either the left part or the right part.”</p>
+<p>You might recall from Section <a class="reference internal" href="ch4_funcs.html#sec-funcs-recursion"><span class="std std-numref">4.6</span></a> that this problem might be solvable using recursion.  A recursive function is one that calls itself, though calling itself using a different parameter value each time.</p>
+<p>The binary search function in the previous section was called with only two parameters, <code class="docutils literal notranslate"><span class="pre">L</span></code> and <code class="docutils literal notranslate"><span class="pre">x</span></code>.  If you need to refresh your memory, take a look again at Listing <a class="reference internal" href="#binsearch-func"><span class="std std-numref">8.3</span></a>.  <code class="docutils literal notranslate"><span class="pre">L</span></code> was the list, and <code class="docutils literal notranslate"><span class="pre">x</span></code> was the value we wish to find. If we are going perform a binary search recursively, each time the binsearch function calls itself, it will need more information than just <code class="docutils literal notranslate"><span class="pre">L</span></code> and <code class="docutils literal notranslate"><span class="pre">x</span></code>.  We will also need to pass the list indices that mark what part of the list that concerns us at that point.  Let’s call the beginning index <code class="docutils literal notranslate"><span class="pre">i</span></code> and the end index <code class="docutils literal notranslate"><span class="pre">j</span></code> just like we did in the body of the function in Listing <a class="reference internal" href="#binsearch-func"><span class="std std-numref">8.3</span></a>.</p>
+<p>With this in mind, let’s define a new function named <code class="docutils literal notranslate"><span class="pre">rbinsearch</span></code> (the “r” makes us think of the word “recursion”) and let’s have the signature of that function become <code class="docutils literal notranslate"><span class="pre">rbinsearch(L,</span> <span class="pre">x,</span> <span class="pre">i,</span> <span class="pre">j)</span></code>.  Now, let’s use what we’ve learned about programming recursive functions. Often, we use an <code class="docutils literal notranslate"><span class="pre">if</span></code> statement.  The first condition is the simplest.  In this case, if <code class="docutils literal notranslate"><span class="pre">i</span></code> and <code class="docutils literal notranslate"><span class="pre">j</span></code> have crossed, we don’t have anything left in the list to search, so we can return <code class="docutils literal notranslate"><span class="pre">-1</span></code>.  Otherwise, we can compute <code class="docutils literal notranslate"><span class="pre">m</span></code> as we did before.  If <code class="docutils literal notranslate"><span class="pre">x</span></code> is at <code class="docutils literal notranslate"><span class="pre">L[m]</span></code>, we found it and can return <code class="docutils literal notranslate"><span class="pre">m</span></code>.  If not, we can recursively call <code class="docutils literal notranslate"><span class="pre">rbinsearch</span></code>.  Try to write the code and define the function on your own.  You can test your code using the following examples.  If your function works properly, the code below should print <code class="docutils literal notranslate"><span class="pre">True</span></code> three times.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">M</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">13</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">rbinsearch</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">M</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="n">M</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">rbinsearch</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">M</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="n">M</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">13</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">rbinsearch</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">M</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>How did you do?  Where did you get stuck?  You can look at Listing <a class="reference internal" href="#rbinsearch-func"><span class="std std-numref">8.4</span></a> for an example solution.  We should notice that calling <code class="docutils literal notranslate"><span class="pre">rbinsearch</span></code> is really clunky because we have to pass <code class="docutils literal notranslate"><span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">len(M)</span> <span class="pre">-</span> <span class="pre">1</span></code> every time.  We can redefine <code class="docutils literal notranslate"><span class="pre">binsearch</span></code> to call <code class="docutils literal notranslate"><span class="pre">rbinsearch</span></code>.  In other words, <code class="docutils literal notranslate"><span class="pre">binsearch(L,</span> <span class="pre">x)</span></code> will call <code class="docutils literal notranslate"><span class="pre">rbinsearch(L,</span> <span class="pre">x,</span> <span class="pre">0,</span> <span class="pre">len(L)</span> <span class="pre">-</span> <span class="pre">1)</span></code>.  Sometimes programmers will call a function like <code class="docutils literal notranslate"><span class="pre">rbinsearch</span></code> a “helper” function, because the function you call in the first place (in this case, <code class="docutils literal notranslate"><span class="pre">binsearch</span></code>) then calls another function to do the actual work.</p>
+<div class="literal-block-wrapper docutils container" id="id7">
+<span id="rbinsearch-func"></span><div class="code-block-caption"><span class="caption-number">Listing 8.4 </span><span class="caption-text">Recursive Binary Search</span><a class="headerlink" href="#id7" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># The &quot;helper&quot; recursive function</span>
+<span class="linenos"> 2</span><span class="k">def</span> <span class="nf">rbinsearch</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
+<span class="linenos"> 3</span>    <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="n">j</span><span class="p">:</span>
+<span class="linenos"> 4</span>        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+<span class="linenos"> 5</span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos"> 6</span>        <span class="n">m</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+<span class="linenos"> 7</span>        <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="n">L</span><span class="p">[</span><span class="n">m</span><span class="p">]:</span>
+<span class="linenos"> 8</span>            <span class="k">return</span> <span class="n">m</span>
+<span class="linenos"> 9</span>        <span class="k">elif</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">L</span><span class="p">[</span><span class="n">m</span><span class="p">]:</span>
+<span class="linenos">10</span>            <span class="k">return</span> <span class="n">rbinsearch</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">m</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="linenos">11</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">12</span>            <span class="k">return</span> <span class="n">rbinsearch</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">m</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+<span class="linenos">13</span>
+<span class="linenos">14</span><span class="c1"># The function we actually call, which in turn calls the &quot;helper&quot; function.</span>
+<span class="linenos">15</span><span class="k">def</span> <span class="nf">binsearch</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<span class="linenos">16</span>    <span class="k">return</span> <span class="n">rbinsearch</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
 </section>
 <section id="exercises">
-<span id="sec-searchsort-exercises"></span><h2><span class="section-number">8.6. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<span id="sec-searchsort-exercises"></span><h2><span class="section-number">8.6. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">¶</a></h2>
 <ol class="arabic">
 <li><p>Demonstrate how selection sort would order the following list:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">27</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">13</span><span class="p">]</span>
@@ -498,7 +529,7 @@ did find it.  See Listing <a class="reference internal" href="#binsearch-func"><
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 
@@ -512,11 +543,11 @@ did find it.  See Listing <a class="reference internal" href="#binsearch-func"><
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2022, Jason B. Shepherd, Ph.D..
+      &#169;2024, Jason B. Shepherd, Ph.D..
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.2.6</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
       
       |
       <a href="_sources/ch8_searchsort.rst.txt"

@@ -1,18 +1,16 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>5. Lists &#8212; Conversational Python 2.0 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=12dfc556" />
+    <script src="_static/documentation_options.js?v=60dbed4a"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="6. Files and Exceptions" href="ch6_files_excepts.html" />
@@ -20,8 +18,9 @@
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
+
   
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+  
 
   </head><body>
   
@@ -34,9 +33,9 @@
           <div class="body" role="main">
             
   <section id="lists">
-<span id="ch-lists"></span><h1><span class="section-number">5. </span>Lists<a class="headerlink" href="#lists" title="Permalink to this headline">¶</a></h1>
+<span id="ch-lists"></span><h1><span class="section-number">5. </span>Lists<a class="headerlink" href="#lists" title="Link to this heading">¶</a></h1>
 <section id="list-operations">
-<span id="sec-list-ops"></span><h2><span class="section-number">5.1. </span>List Operations<a class="headerlink" href="#list-operations" title="Permalink to this headline">¶</a></h2>
+<span id="sec-list-ops"></span><h2><span class="section-number">5.1. </span>List Operations<a class="headerlink" href="#list-operations" title="Link to this heading">¶</a></h2>
 <p>Yay!  Finally, we get to talk about <em>lists</em>.  Lists are very useful and powerful
 structures in Python, and their use is critical when we start working with
 real-world data.  So, let’s get cracking!</p>
@@ -78,7 +77,7 @@ code might look like this:</p>
 could have just one variable to store all of the students.  We can!  Contrast
 the code we’ve presented so far with the code in Listing <a class="reference internal" href="#list-ex1"><span class="std std-numref">5.1</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="id1">
-<span id="list-ex1"></span><div class="code-block-caption"><span class="caption-number">Listing 5.1 </span><span class="caption-text">First list example</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<span id="list-ex1"></span><div class="code-block-caption"><span class="caption-number">Listing 5.1 </span><span class="caption-text">First list example</span><a class="headerlink" href="#id1" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">students</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;John Smith&quot;</span><span class="p">,</span> <span class="s2">&quot;Judy Adams&quot;</span><span class="p">,</span> <span class="s2">&quot;Frank Johnson&quot;</span><span class="p">,</span> <span class="s2">&quot;Paige McConnell&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
@@ -104,11 +103,11 @@ table, suppose we have the following variables.</p>
 </pre></div>
 </div>
 <p>You’ll notice in Table <a class="reference internal" href="#tbl-list-ops"><span class="std std-numref">5.1</span></a> that some of the same operations that can be performed on strings can also be performed on lists.</p>
-<span id="tbl-list-ops"></span><table class="colwidths-given docutils align-default" id="id2">
-<caption><span class="caption-number">Table 5.1 </span><span class="caption-text">Expression/value/type</span><a class="headerlink" href="#id2" title="Permalink to this table">¶</a></caption>
+<span id="tbl-list-ops"></span><table class="docutils align-default" id="id2">
+<caption><span class="caption-number">Table 5.1 </span><span class="caption-text">Expression/value/type</span><a class="headerlink" href="#id2" title="Link to this table">¶</a></caption>
 <colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
+<col style="width: 50.0%" />
+<col style="width: 50.0%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Expression</p></th>
@@ -152,7 +151,7 @@ few “toy” examples of how to use these list operations.  The result of most 
 the operations is printed, and the effect of each statement is shown in a
 comment to the right of the statement.</p>
 <div class="literal-block-wrapper docutils container" id="id3">
-<span id="list-ops-ex"></span><div class="code-block-caption"><span class="caption-number">Listing 5.2 </span><span class="caption-text">List operations example</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<span id="list-ops-ex"></span><div class="code-block-caption"><span class="caption-number">Listing 5.2 </span><span class="caption-text">List operations example</span><a class="headerlink" href="#id3" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">cheeses</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;cheddar&quot;</span><span class="p">,</span> <span class="s2">&quot;swiss&quot;</span><span class="p">,</span> <span class="s2">&quot;feta&quot;</span><span class="p">,</span> <span class="s2">&quot;gouda&quot;</span><span class="p">,</span> <span class="s2">&quot;parmesan&quot;</span><span class="p">]</span>
 <span class="linenos"> 2</span><span class="n">line</span> <span class="o">=</span> <span class="s2">&quot;red,green,blue,teal,cyan&quot;</span>
 <span class="linenos"> 3</span>
@@ -237,7 +236,7 @@ ahead.</p>
 value of the expression <code class="docutils literal notranslate"><span class="pre">lst[1]</span></code> and vice versa.  So, our first attempt might be
 Listing <a class="reference internal" href="#swap-bad"><span class="std std-numref">5.3</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="id4">
-<span id="swap-bad"></span><div class="code-block-caption"><span class="caption-number">Listing 5.3 </span><span class="caption-text">First attempt at swapping value in a list</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
+<span id="swap-bad"></span><div class="code-block-caption"><span class="caption-number">Listing 5.3 </span><span class="caption-text">First attempt at swapping value in a list</span><a class="headerlink" href="#id4" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">lst</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">lst</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 <span class="n">lst</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">lst</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
@@ -248,7 +247,7 @@ Figure <a class="reference internal" href="#fig-swap-bad"><span class="std std-n
 <figure class="align-default" id="id5">
 <span id="fig-swap-bad"></span><a class="reference internal image-reference" href="_images/swap-bad.png"><img alt="Incorrect attempt at swapping values in a list" src="_images/swap-bad.png" style="width: 400.0px; height: 146.0px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 5.1 </span><span class="caption-text">Incorrect attempt at swapping values in a list</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+<p><span class="caption-number">Fig. 5.1 </span><span class="caption-text">Incorrect attempt at swapping values in a list</span><a class="headerlink" href="#id5" title="Link to this image">¶</a></p>
 </figcaption>
 </figure>
 <p>Uh oh!  Our first statement overwrites “Maria” and she disappears forever!  That
@@ -260,7 +259,7 @@ of a temporary variable (or just “temp variable” for short) like a Post-It n
 We may write something on a Post-It note to remind ourselves of something for a
 brief period of time.  Consider our next attempt in Listing <a class="reference internal" href="#swap-good"><span class="std std-numref">5.4</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="id6">
-<span id="swap-good"></span><div class="code-block-caption"><span class="caption-number">Listing 5.4 </span><span class="caption-text">Correctly swapping values in a list</span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
+<span id="swap-good"></span><div class="code-block-caption"><span class="caption-number">Listing 5.4 </span><span class="caption-text">Correctly swapping values in a list</span><a class="headerlink" href="#id6" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">temp</span> <span class="o">=</span> <span class="n">lst</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">lst</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">lst</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 <span class="n">lst</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span>
@@ -271,7 +270,7 @@ brief period of time.  Consider our next attempt in Listing <a class="reference 
 <figure class="align-default" id="id7">
 <span id="fig-swap-good"></span><a class="reference internal image-reference" href="_images/swap-good.png"><img alt="Swapping values in a list" src="_images/swap-good.png" style="width: 870.8px; height: 242.2px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 5.2 </span><span class="caption-text">Swapping values in a list</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+<p><span class="caption-number">Fig. 5.2 </span><span class="caption-text">Swapping values in a list</span><a class="headerlink" href="#id7" title="Link to this image">¶</a></p>
 </figcaption>
 </figure>
 <p>The statement labeled number <code class="docutils literal notranslate"><span class="pre">1</span></code> copies the value at index <code class="docutils literal notranslate"><span class="pre">0</span></code> (in this case,
@@ -286,7 +285,7 @@ are now correctly <code class="docutils literal notranslate"><span class="pre">[
 wanted, we could invent two variables <code class="docutils literal notranslate"><span class="pre">i</span></code> and <code class="docutils literal notranslate"><span class="pre">j</span></code> to hold the indices whose
 values we wish to swap (see Listing <a class="reference internal" href="#swap-good-nohc"><span class="std std-numref">5.5</span></a>).</p>
 <div class="literal-block-wrapper docutils container" id="id8">
-<span id="swap-good-nohc"></span><div class="code-block-caption"><span class="caption-number">Listing 5.5 </span><span class="caption-text">Swapping values in a list, no hard-coded indices</span><a class="headerlink" href="#id8" title="Permalink to this code">¶</a></div>
+<span id="swap-good-nohc"></span><div class="code-block-caption"><span class="caption-number">Listing 5.5 </span><span class="caption-text">Swapping values in a list, no hard-coded indices</span><a class="headerlink" href="#id8" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># or, whatever index we wish</span>
 <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># or, whatever other index we wish</span>
 <span class="n">temp</span> <span class="o">=</span> <span class="n">lst</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
@@ -297,7 +296,7 @@ values we wish to swap (see Listing <a class="reference internal" href="#swap-go
 </div>
 </section>
 <section id="assignment-statements-revisited-multiple-assignment">
-<span id="sec-multi-assign"></span><h2><span class="section-number">5.2. </span>Assignment Statements Revisited: Multiple Assignment<a class="headerlink" href="#assignment-statements-revisited-multiple-assignment" title="Permalink to this headline">¶</a></h2>
+<span id="sec-multi-assign"></span><h2><span class="section-number">5.2. </span>Assignment Statements Revisited: Multiple Assignment<a class="headerlink" href="#assignment-statements-revisited-multiple-assignment" title="Link to this heading">¶</a></h2>
 <p>Since this book is purely an introduction to programming more so than a
 definitive guide to the nuances of Python, we could stop our discussion right
 here.  This same programming technique will work with most other programming
@@ -307,7 +306,7 @@ author (that’s me!) simply can’t help himself from showing you!  We can repl
 the code in Listing <a class="reference internal" href="#swap-good-nohc"><span class="std std-numref">5.5</span></a> with Listing
 <a class="reference internal" href="#swap-good-multiassign"><span class="std std-numref">5.6</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="id9">
-<span id="swap-good-multiassign"></span><div class="code-block-caption"><span class="caption-number">Listing 5.6 </span><span class="caption-text">Swapping values in a list using multiple assignment</span><a class="headerlink" href="#id9" title="Permalink to this code">¶</a></div>
+<span id="swap-good-multiassign"></span><div class="code-block-caption"><span class="caption-number">Listing 5.6 </span><span class="caption-text">Swapping values in a list using multiple assignment</span><a class="headerlink" href="#id9" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># or, whatever index we wish</span>
 <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># or, whatever other index we wish</span>
 <span class="n">lst</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">lst</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">lst</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">lst</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
@@ -320,7 +319,7 @@ Figure <a class="reference internal" href="#fig-multi-assign"><span class="std s
 <figure class="align-default" id="id10">
 <span id="fig-multi-assign"></span><a class="reference internal image-reference" href="_images/multi_assign.png"><img alt="Multiple assignment" src="_images/multi_assign.png" style="width: 300.0px; height: 103.0px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 5.3 </span><span class="caption-text">Multiple assignment</span><a class="headerlink" href="#id10" title="Permalink to this image">¶</a></p>
+<p><span class="caption-number">Fig. 5.3 </span><span class="caption-text">Multiple assignment</span><a class="headerlink" href="#id10" title="Link to this image">¶</a></p>
 </figcaption>
 </figure>
 <p>Multiple assignment is a Python feature known in the computer science community
@@ -346,11 +345,11 @@ converts this</p>
 </div>
 </section>
 <section id="list-variables-references-versus-values">
-<span id="sec-list-refs"></span><h2><span class="section-number">5.3. </span>List Variables: References Versus Values<a class="headerlink" href="#list-variables-references-versus-values" title="Permalink to this headline">¶</a></h2>
+<span id="sec-list-refs"></span><h2><span class="section-number">5.3. </span>List Variables: References Versus Values<a class="headerlink" href="#list-variables-references-versus-values" title="Link to this heading">¶</a></h2>
 <p>Here is some fairly simple code that creates variables, changes one of them, and
 then prints their values.</p>
 <div class="literal-block-wrapper docutils container" id="id11">
-<span id="simple-assign"></span><div class="code-block-caption"><span class="caption-number">Listing 5.7 </span><span class="caption-text">Simple assignment statements</span><a class="headerlink" href="#id11" title="Permalink to this code">¶</a></div>
+<span id="simple-assign"></span><div class="code-block-caption"><span class="caption-number">Listing 5.7 </span><span class="caption-text">Simple assignment statements</span><a class="headerlink" href="#id11" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">3</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">x</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
@@ -361,7 +360,7 @@ then prints their values.</p>
 </div>
 <p>Let’s do something similar, only this time we’ll use lists of numbers.</p>
 <div class="literal-block-wrapper docutils container" id="id12">
-<span id="list-assign"></span><div class="code-block-caption"><span class="caption-number">Listing 5.8 </span><span class="caption-text">Assignment with list variables</span><a class="headerlink" href="#id12" title="Permalink to this code">¶</a></div>
+<span id="list-assign"></span><div class="code-block-caption"><span class="caption-number">Listing 5.8 </span><span class="caption-text">Assignment with list variables</span><a class="headerlink" href="#id12" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">xlist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
 <span class="n">ylist</span> <span class="o">=</span> <span class="n">xlist</span>
 <span class="n">xlist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
@@ -386,7 +385,7 @@ Listing <a class="reference internal" href="#simple-assign"><span class="std std
 <figure class="align-default" id="id13">
 <span id="fig-inc-assign"></span><a class="reference internal image-reference" href="_images/inc_assign.png"><img alt="Visualizing Listing :numref:`%s &lt;simple_assign&gt;`" src="_images/inc_assign.png" style="width: 160.0px; height: 224.8px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 5.4 </span><span class="caption-text">Visualizing Listing <a class="reference internal" href="#simple-assign"><span class="std std-numref">5.7</span></a></span><a class="headerlink" href="#id13" title="Permalink to this image">¶</a></p>
+<p><span class="caption-number">Fig. 5.4 </span><span class="caption-text">Visualizing Listing <a class="reference internal" href="#simple-assign"><span class="std std-numref">5.7</span></a></span><a class="headerlink" href="#id13" title="Link to this image">¶</a></p>
 </figcaption>
 </figure>
 <p>No surprises there.  Now, let’s see what happens in the example with <code class="docutils literal notranslate"><span class="pre">xlist</span></code> and
@@ -399,7 +398,7 @@ Figure <a class="reference internal" href="#fig-list-assign"><span class="std st
 <figure class="align-default" id="id14">
 <span id="fig-list-assign"></span><a class="reference internal image-reference" href="_images/list_assign.png"><img alt="Visualizing Listing :numref:`%s &lt;list_assign&gt;`" src="_images/list_assign.png" style="width: 409.6px; height: 240.8px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 5.5 </span><span class="caption-text">Visualizing Listing <a class="reference internal" href="#list-assign"><span class="std std-numref">5.8</span></a></span><a class="headerlink" href="#id14" title="Permalink to this image">¶</a></p>
+<p><span class="caption-number">Fig. 5.5 </span><span class="caption-text">Visualizing Listing <a class="reference internal" href="#list-assign"><span class="std std-numref">5.8</span></a></span><a class="headerlink" href="#id14" title="Link to this image">¶</a></p>
 </figcaption>
 </figure>
 <p>If we attempt to modify <code class="docutils literal notranslate"><span class="pre">xlist</span></code> or <code class="docutils literal notranslate"><span class="pre">ylist</span></code>, either will affect the same list.
@@ -414,19 +413,19 @@ following.</p>
 <figure class="align-default" id="id15">
 <span id="fig-list-copy"></span><a class="reference internal image-reference" href="_images/list_copy.png"><img alt="Copying a list using the slicing (``[:]``) operator" src="_images/list_copy.png" style="width: 384.0px; height: 132.0px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 5.6 </span><span class="caption-text">Copying a list using the slicing (<code class="docutils literal notranslate"><span class="pre">[:]</span></code>) operator</span><a class="headerlink" href="#id15" title="Permalink to this image">¶</a></p>
+<p><span class="caption-number">Fig. 5.6 </span><span class="caption-text">Copying a list using the slicing (<code class="docutils literal notranslate"><span class="pre">[:]</span></code>) operator</span><a class="headerlink" href="#id15" title="Link to this image">¶</a></p>
 </figcaption>
 </figure>
 <p>Now if we perform <code class="docutils literal notranslate"><span class="pre">xlist.append(8)</span></code> this time, we end up with the result in Figure <a class="reference internal" href="#fig-list-append-after-copy"><span class="std std-numref">5.7</span></a>.</p>
 <figure class="align-default" id="id16">
 <span id="fig-list-append-after-copy"></span><a class="reference internal image-reference" href="_images/list_append_after_copy.png"><img alt="Appending an item after copying the list" src="_images/list_append_after_copy.png" style="width: 409.6px; height: 119.2px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 5.7 </span><span class="caption-text">Appending an item after copying the list</span><a class="headerlink" href="#id16" title="Permalink to this image">¶</a></p>
+<p><span class="caption-number">Fig. 5.7 </span><span class="caption-text">Appending an item after copying the list</span><a class="headerlink" href="#id16" title="Link to this image">¶</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="functions-with-lists">
-<span id="sec-list-funcs"></span><h2><span class="section-number">5.4. </span>Functions with Lists<a class="headerlink" href="#functions-with-lists" title="Permalink to this headline">¶</a></h2>
+<span id="sec-list-funcs"></span><h2><span class="section-number">5.4. </span>Functions with Lists<a class="headerlink" href="#functions-with-lists" title="Link to this heading">¶</a></h2>
 <p>In the previous section, we learned that list variables do not contain the lists
 themselves.  Rather, they contain a <em>reference</em> to a list.  There are a number
 of perfectly good reasons for this, the first of which has to do with how
@@ -459,7 +458,7 @@ copy of numbers (see Figure <a class="reference internal" href="#fig-numbers-cop
 <figure class="align-default" id="id17">
 <span id="fig-numbers-copy"></span><a class="reference internal image-reference" href="_images/numbers_copy.png"><img alt="Variable `lst` if list variables contained the list itself (rather than a reference)" src="_images/numbers_copy.png" style="width: 320.0px; height: 78.4px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 5.8 </span><span class="caption-text">Variable <cite>lst</cite> if list variables contained the list itself (rather than a reference)</span><a class="headerlink" href="#id17" title="Permalink to this image">¶</a></p>
+<p><span class="caption-number">Fig. 5.8 </span><span class="caption-text">Variable <cite>lst</cite> if list variables contained the list itself (rather than a reference)</span><a class="headerlink" href="#id17" title="Link to this image">¶</a></p>
 </figcaption>
 </figure>
 <p>If we program properly, <cite>make_int_list</cite> would convert all the strings in the
@@ -468,7 +467,7 @@ Figure <a class="reference internal" href="#fig-numbers-lst-diff"><span class="s
 <figure class="align-default" id="id18">
 <span id="fig-numbers-lst-diff"></span><a class="reference internal image-reference" href="_images/numbers_lst_diff.png"><img alt="Desired result of ``make_int_list``" src="_images/numbers_lst_diff.png" style="width: 320.0px; height: 82.4px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 5.9 </span><span class="caption-text">Desired result of <code class="docutils literal notranslate"><span class="pre">make_int_list</span></code></span><a class="headerlink" href="#id18" title="Permalink to this image">¶</a></p>
+<p><span class="caption-number">Fig. 5.9 </span><span class="caption-text">Desired result of <code class="docutils literal notranslate"><span class="pre">make_int_list</span></code></span><a class="headerlink" href="#id18" title="Link to this image">¶</a></p>
 </figcaption>
 </figure>
 <p>But, the original list that we wanted to change, namely <code class="docutils literal notranslate"><span class="pre">numbers</span></code>, hasn’t
@@ -480,7 +479,7 @@ value, so <code class="docutils literal notranslate"><span class="pre">lst</span
 <figure class="align-default" id="id19">
 <span id="fig-numbers-lst-same"></span><a class="reference internal image-reference" href="_images/numbers_lst_same.png"><img alt="List reference passed to ``make_int_list``" src="_images/numbers_lst_same.png" style="width: 409.6px; height: 171.20000000000002px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 5.10 </span><span class="caption-text">List reference passed to <code class="docutils literal notranslate"><span class="pre">make_int_list</span></code></span><a class="headerlink" href="#id19" title="Permalink to this image">¶</a></p>
+<p><span class="caption-number">Fig. 5.10 </span><span class="caption-text">List reference passed to <code class="docutils literal notranslate"><span class="pre">make_int_list</span></code></span><a class="headerlink" href="#id19" title="Link to this image">¶</a></p>
 </figcaption>
 </figure>
 <p>Now when <code class="docutils literal notranslate"><span class="pre">make_int_list</span></code> has returned, all changes made to <code class="docutils literal notranslate"><span class="pre">lst</span></code> are also made
@@ -489,7 +488,7 @@ Figure <a class="reference internal" href="#fig-numbers-lst-mod"><span class="st
 <figure class="align-default" id="id20">
 <span id="fig-numbers-lst-mod"></span><a class="reference internal image-reference" href="_images/numbers_lst_mod.png"><img alt="``make_int_list`` makes changes to the list" src="_images/numbers_lst_mod.png" style="width: 409.6px; height: 173.60000000000002px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 5.11 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">make_int_list</span></code> makes changes to the list</span><a class="headerlink" href="#id20" title="Permalink to this image">¶</a></p>
+<p><span class="caption-number">Fig. 5.11 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">make_int_list</span></code> makes changes to the list</span><a class="headerlink" href="#id20" title="Link to this image">¶</a></p>
 </figcaption>
 </figure>
 <p>We should probably go ahead and write the function’s body.  We use a loop to
@@ -541,7 +540,7 @@ each of them to a variable.  The variable will keep track of the running total.
 So, let’s create the variable (we’ll call it <code class="docutils literal notranslate"><span class="pre">running_total</span></code>) and then write the
 loop.</p>
 <div class="literal-block-wrapper docutils container" id="id21">
-<span id="total"></span><div class="code-block-caption"><span class="caption-number">Listing 5.9 </span><span class="caption-text">Function definition for <code class="docutils literal notranslate"><span class="pre">total</span></code></span><a class="headerlink" href="#id21" title="Permalink to this code">¶</a></div>
+<span id="total"></span><div class="code-block-caption"><span class="caption-number">Listing 5.9 </span><span class="caption-text">Function definition for <code class="docutils literal notranslate"><span class="pre">total</span></code></span><a class="headerlink" href="#id21" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">total</span><span class="p">(</span><span class="n">numbers</span><span class="p">):</span>
     <span class="n">running_total</span> <span class="o">=</span> <span class="mf">0.0</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">numbers</span><span class="p">)):</span>
@@ -579,7 +578,7 @@ before you test out your code.</p>
 above.  We’ll use a variable to keep track of the smallest value we’ve seen so
 far with each step of the loop.</p>
 <div class="literal-block-wrapper docutils container" id="id22">
-<span id="smallest-firstattempt"></span><div class="code-block-caption"><span class="caption-number">Listing 5.10 </span><span class="caption-text">Function definition for <code class="docutils literal notranslate"><span class="pre">smallest</span></code>, first attempt</span><a class="headerlink" href="#id22" title="Permalink to this code">¶</a></div>
+<span id="smallest-firstattempt"></span><div class="code-block-caption"><span class="caption-number">Listing 5.10 </span><span class="caption-text">Function definition for <code class="docutils literal notranslate"><span class="pre">smallest</span></code>, first attempt</span><a class="headerlink" href="#id22" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">smallest</span><span class="p">(</span><span class="n">numbers</span><span class="p">):</span>
 <span class="linenos">2</span>    <span class="n">small</span> <span class="o">=</span> <span class="mf">0.0</span>
 <span class="linenos">3</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">numbers</span><span class="p">)):</span>
@@ -617,7 +616,7 @@ than zero, so <code class="docutils literal notranslate"><span class="pre">small
 might say, “How about a really big number!”  That’s not a bad idea.  We could do
 something like Listing <a class="reference internal" href="#smallest-secondattempt"><span class="std std-numref">5.11</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="id23">
-<span id="smallest-secondattempt"></span><div class="code-block-caption"><span class="caption-number">Listing 5.11 </span><span class="caption-text">Function definition for <code class="docutils literal notranslate"><span class="pre">smallest</span></code>, second attempt</span><a class="headerlink" href="#id23" title="Permalink to this code">¶</a></div>
+<span id="smallest-secondattempt"></span><div class="code-block-caption"><span class="caption-number">Listing 5.11 </span><span class="caption-text">Function definition for <code class="docutils literal notranslate"><span class="pre">smallest</span></code>, second attempt</span><a class="headerlink" href="#id23" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">smallest</span><span class="p">(</span><span class="n">numbers</span><span class="p">):</span>
 <span class="hll"><span class="linenos">2</span>    <span class="n">small</span> <span class="o">=</span> <span class="mf">1000000000.0</span>
 </span><span class="linenos">3</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">numbers</span><span class="p">)):</span>
@@ -637,7 +636,7 @@ smaller number down the line in the list, eventually it will get changed.  This
 should work, and our final function definition for <code class="docutils literal notranslate"><span class="pre">smallest</span></code> is shown in
 Listing <a class="reference internal" href="#smallest"><span class="std std-numref">5.12</span></a>.  Naturally, we’ll want to test it, however.</p>
 <div class="literal-block-wrapper docutils container" id="id24">
-<span id="smallest"></span><div class="code-block-caption"><span class="caption-number">Listing 5.12 </span><span class="caption-text">Function definition for <code class="docutils literal notranslate"><span class="pre">smallest</span></code>, corrected</span><a class="headerlink" href="#id24" title="Permalink to this code">¶</a></div>
+<span id="smallest"></span><div class="code-block-caption"><span class="caption-number">Listing 5.12 </span><span class="caption-text">Function definition for <code class="docutils literal notranslate"><span class="pre">smallest</span></code>, corrected</span><a class="headerlink" href="#id24" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">smallest</span><span class="p">(</span><span class="n">numbers</span><span class="p">):</span>
 <span class="hll"><span class="linenos">2</span>    <span class="n">small</span> <span class="o">=</span> <span class="n">numbers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </span><span class="linenos">3</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">numbers</span><span class="p">)):</span>
@@ -663,7 +662,7 @@ above.  Let us define a function named <code class="docutils literal notranslate
 of passing students.</p>
 <p>First, write the function signature (Listing <a class="reference internal" href="#number-passed-sig"><span class="std std-numref">5.13</span></a>).</p>
 <div class="literal-block-wrapper docutils container" id="id25">
-<span id="number-passed-sig"></span><div class="code-block-caption"><span class="caption-number">Listing 5.13 </span><span class="caption-text">Function signature for <code class="docutils literal notranslate"><span class="pre">number_passed</span></code></span><a class="headerlink" href="#id25" title="Permalink to this code">¶</a></div>
+<span id="number-passed-sig"></span><div class="code-block-caption"><span class="caption-number">Listing 5.13 </span><span class="caption-text">Function signature for <code class="docutils literal notranslate"><span class="pre">number_passed</span></code></span><a class="headerlink" href="#id25" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">number_passed</span><span class="p">(</span><span class="n">scores</span><span class="p">):</span>
     <span class="c1"># FIXME</span>
     <span class="k">pass</span>
@@ -686,7 +685,7 @@ the programmer to express your code however you want.  Let’s write some code
 that scans through the list.  Listing <a class="reference internal" href="#number-passed-1"><span class="std std-numref">5.14</span></a> shows a loop
 with a lot of pseudocode surrounding it.</p>
 <div class="literal-block-wrapper docutils container" id="id26">
-<span id="number-passed-1"></span><div class="code-block-caption"><span class="caption-number">Listing 5.14 </span><span class="caption-text">Partial function definition for <code class="docutils literal notranslate"><span class="pre">number_passed</span></code>, attempt 1</span><a class="headerlink" href="#id26" title="Permalink to this code">¶</a></div>
+<span id="number-passed-1"></span><div class="code-block-caption"><span class="caption-number">Listing 5.14 </span><span class="caption-text">Partial function definition for <code class="docutils literal notranslate"><span class="pre">number_passed</span></code>, attempt 1</span><a class="headerlink" href="#id26" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">number_passed</span><span class="p">(</span><span class="n">scores</span><span class="p">):</span>
     <span class="c1"># Probably use a variable to keep track of something.</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">scores</span><span class="p">)):</span>
@@ -700,7 +699,7 @@ Since we wish to keep track of the number of students who’ve passed, we’ll u
 variable and that variable’s value will be what this function returns.  Let’s
 update those lines (Listing <a class="reference internal" href="#number-passed-2"><span class="std std-numref">5.15</span></a>).</p>
 <div class="literal-block-wrapper docutils container" id="id27">
-<span id="number-passed-2"></span><div class="code-block-caption"><span class="caption-number">Listing 5.15 </span><span class="caption-text">Partial function definition for <code class="docutils literal notranslate"><span class="pre">number_passed</span></code>, attempt 2</span><a class="headerlink" href="#id27" title="Permalink to this code">¶</a></div>
+<span id="number-passed-2"></span><div class="code-block-caption"><span class="caption-number">Listing 5.15 </span><span class="caption-text">Partial function definition for <code class="docutils literal notranslate"><span class="pre">number_passed</span></code>, attempt 2</span><a class="headerlink" href="#id27" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">number_passed</span><span class="p">(</span><span class="n">scores</span><span class="p">):</span>
 <span class="hll"><span class="linenos">2</span>    <span class="n">passed</span> <span class="o">=</span> <span class="mi">0</span>
 </span><span class="linenos">3</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">scores</span><span class="p">)):</span>
@@ -715,7 +714,7 @@ and then go back later and fill in the details.  Otherwise, it’s easy to get
 lost in the details.</p>
 <p>Lastly, we need to increment <code class="docutils literal notranslate"><span class="pre">passed</span></code> whenever we encounter a passing score, i.e., <code class="docutils literal notranslate"><span class="pre">scores[i]</span></code>.  Checking <code class="docutils literal notranslate"><span class="pre">scores[i]</span></code> involves an <code class="docutils literal notranslate"><span class="pre">if</span></code> statement (Listingref{code:number_passed_final}).</p>
 <div class="literal-block-wrapper docutils container" id="id28">
-<span id="number-passed-final"></span><div class="code-block-caption"><span class="caption-number">Listing 5.16 </span><span class="caption-text">Function definition for <code class="docutils literal notranslate"><span class="pre">number_passed</span></code></span><a class="headerlink" href="#id28" title="Permalink to this code">¶</a></div>
+<span id="number-passed-final"></span><div class="code-block-caption"><span class="caption-number">Listing 5.16 </span><span class="caption-text">Function definition for <code class="docutils literal notranslate"><span class="pre">number_passed</span></code></span><a class="headerlink" href="#id28" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">number_passed</span><span class="p">(</span><span class="n">scores</span><span class="p">):</span>
 <span class="linenos">2</span>    <span class="n">passed</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="linenos">3</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">scores</span><span class="p">)):</span>
@@ -738,7 +737,7 @@ book.  Writing a book is hard work, you know.</p>
 </div>
 </section>
 <section id="using-several-lists-to-store-related-data">
-<span id="sec-lists-rel-data"></span><h2><span class="section-number">5.5. </span>Using Several Lists to Store Related Data<a class="headerlink" href="#using-several-lists-to-store-related-data" title="Permalink to this headline">¶</a></h2>
+<span id="sec-lists-rel-data"></span><h2><span class="section-number">5.5. </span>Using Several Lists to Store Related Data<a class="headerlink" href="#using-several-lists-to-store-related-data" title="Link to this heading">¶</a></h2>
 <p>We’ve been using lists thus far to store groups of related information.  In
 Section <a class="reference internal" href="#sec-list-funcs"><span class="std std-numref">5.4</span></a>, for example, we kept a series of
 exam scores in a list variable we named <code class="docutils literal notranslate"><span class="pre">scores</span></code>.  We might store a series
@@ -751,7 +750,7 @@ in Chapters <a class="reference internal" href="ch7_dicts.html#ch-dict"><span cl
 However, there is a very good way to do this by simply using more than one list.
 Observe Listing <a class="reference internal" href="#names-scores-lists"><span class="std std-numref">5.17</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="id29">
-<span id="names-scores-lists"></span><div class="code-block-caption"><span class="caption-number">Listing 5.17 </span><span class="caption-text">Using several lists to store related data</span><a class="headerlink" href="#id29" title="Permalink to this code">¶</a></div>
+<span id="names-scores-lists"></span><div class="code-block-caption"><span class="caption-number">Listing 5.17 </span><span class="caption-text">Using several lists to store related data</span><a class="headerlink" href="#id29" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Aubrey Bell&quot;</span><span class="p">,</span> <span class="s2">&quot;Adam Jamison&quot;</span><span class="p">,</span> <span class="s2">&quot;Susan Stratford&quot;</span><span class="p">,</span> <span class="s2">&quot;Michelle Wang&quot;</span><span class="p">]</span>
 <span class="linenos">2</span><span class="n">scores</span> <span class="o">=</span> <span class="p">[</span><span class="mf">82.5</span><span class="p">,</span> <span class="mf">87.0</span><span class="p">,</span> <span class="mf">76.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">]</span>
 </pre></div>
@@ -769,12 +768,12 @@ are shown in the figure to keep the image smaller).</p>
 <figure class="align-default" id="id30">
 <span id="fig-names-scores-indices"></span><a class="reference internal image-reference" href="_images/names_scores_indices.png"><img alt="The relationship between values in two lists" src="_images/names_scores_indices.png" style="width: 744.6px; height: 228.0px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 5.12 </span><span class="caption-text">The relationship between values in two lists</span><a class="headerlink" href="#id30" title="Permalink to this image">¶</a></p>
+<p><span class="caption-number">Fig. 5.12 </span><span class="caption-text">The relationship between values in two lists</span><a class="headerlink" href="#id30" title="Link to this image">¶</a></p>
 </figcaption>
 </figure>
 <p>The definitions in Listing <a class="reference internal" href="#names-scores-lists"><span class="std std-numref">5.17</span></a> allows us to write code like the following (see Listing <a class="reference internal" href="#iter-names-scores-lists"><span class="std std-numref">5.18</span></a>).</p>
 <div class="literal-block-wrapper docutils container" id="id31">
-<span id="iter-names-scores-lists"></span><div class="code-block-caption"><span class="caption-number">Listing 5.18 </span><span class="caption-text">Iterating through related lists</span><a class="headerlink" href="#id31" title="Permalink to this code">¶</a></div>
+<span id="iter-names-scores-lists"></span><div class="code-block-caption"><span class="caption-number">Listing 5.18 </span><span class="caption-text">Iterating through related lists</span><a class="headerlink" href="#id31" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">names</span><span class="p">)):</span>
 <span class="linenos">2</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The score for </span><span class="si">%s</span><span class="s2"> is </span><span class="si">%.2f%%</span><span class="s2">.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">names</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="n">scores</span><span class="p">[</span><span class="n">index</span><span class="p">]))</span>
 </pre></div>
@@ -789,10 +788,10 @@ The score for Michelle Wang is 90.00%.
 </div>
 </section>
 <section id="coding-conventions-for-lists-spanning-multiple-lines">
-<span id="sec-code-conv-multi-lists"></span><h2><span class="section-number">5.6. </span>Coding Conventions for Lists Spanning Multiple Lines<a class="headerlink" href="#coding-conventions-for-lists-spanning-multiple-lines" title="Permalink to this headline">¶</a></h2>
+<span id="sec-code-conv-multi-lists"></span><h2><span class="section-number">5.6. </span>Coding Conventions for Lists Spanning Multiple Lines<a class="headerlink" href="#coding-conventions-for-lists-spanning-multiple-lines" title="Link to this heading">¶</a></h2>
 <p>Sometimes the lists we define will have a whole lot of items, and it will be cumbersome to manage their contents on a single line.  We can “spread out” the definition of such a list using the convention shown in Listing <a class="reference internal" href="#multi-line-list1"><span class="std std-numref">5.19</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="id32">
-<span id="multi-line-list1"></span><div class="code-block-caption"><span class="caption-number">Listing 5.19 </span><span class="caption-text">List definition spanning multiple lines</span><a class="headerlink" href="#id32" title="Permalink to this code">¶</a></div>
+<span id="multi-line-list1"></span><div class="code-block-caption"><span class="caption-number">Listing 5.19 </span><span class="caption-text">List definition spanning multiple lines</span><a class="headerlink" href="#id32" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">cheeses</span> <span class="o">=</span> <span class="p">[</span>
 <span class="linenos">2</span>    <span class="s2">&quot;cheddar&quot;</span><span class="p">,</span>
 <span class="linenos">3</span>    <span class="s2">&quot;provolone&quot;</span><span class="p">,</span>
@@ -826,7 +825,7 @@ wanted to add another cheese to the end of this list, we would need to add a com
 </div>
 <p>This is cumbersome, so the people who invented Python decided we should be able to leave a trailing comma at the end of any list (either single line or multiple line) in case we want to add more values.  This allows us to change the look of our definition to Listing <a class="reference internal" href="#multi-line-list2"><span class="std std-numref">5.20</span></a> (note line 7).</p>
 <div class="literal-block-wrapper docutils container" id="id33">
-<span id="multi-line-list2"></span><div class="code-block-caption"><span class="caption-number">Listing 5.20 </span><span class="caption-text">List definition spanning multiple lines</span><a class="headerlink" href="#id33" title="Permalink to this code">¶</a></div>
+<span id="multi-line-list2"></span><div class="code-block-caption"><span class="caption-number">Listing 5.20 </span><span class="caption-text">List definition spanning multiple lines</span><a class="headerlink" href="#id33" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">cheeses</span> <span class="o">=</span> <span class="p">[</span>
 <span class="linenos">2</span>    <span class="s2">&quot;cheddar&quot;</span><span class="p">,</span>
 <span class="linenos">3</span>    <span class="s2">&quot;provolone&quot;</span><span class="p">,</span>
@@ -842,7 +841,7 @@ wanted to add another cheese to the end of this list, we would need to add a com
 key and start typing.  This is handy if we want to copy and paste a bunch of
 lines.</p>
 <div class="literal-block-wrapper docutils container" id="id34">
-<div class="code-block-caption"><span class="caption-number">Listing 5.21 </span><span class="caption-text">List definition spanning multiple lines</span><a class="headerlink" href="#id34" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 5.21 </span><span class="caption-text">List definition spanning multiple lines</span><a class="headerlink" href="#id34" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">cheeses</span> <span class="o">=</span> <span class="p">[</span>
 <span class="linenos">2</span>    <span class="s2">&quot;cheddar&quot;</span><span class="p">,</span>
 <span class="linenos">3</span>    <span class="s2">&quot;provolone&quot;</span><span class="p">,</span>
@@ -857,7 +856,7 @@ lines.</p>
 </div>
 </section>
 <section id="lists-of-lists">
-<span id="sec-lists-of-lists"></span><h2><span class="section-number">5.7. </span>Lists of Lists<a class="headerlink" href="#lists-of-lists" title="Permalink to this headline">¶</a></h2>
+<span id="sec-lists-of-lists"></span><h2><span class="section-number">5.7. </span>Lists of Lists<a class="headerlink" href="#lists-of-lists" title="Link to this heading">¶</a></h2>
 <p>We’ve been using lists to store a series of items in a row. Each of these items
 can have any type: string, integer, float, … or even another list!  This might
 sound kind of weird and scary at first, but you may be surprised to know that a
@@ -905,7 +904,7 @@ We could write <code class="docutils literal notranslate"><span class="pre">tota
 <span class="pre">votes[4][0]</span></code>, but that’s really lame and we’d have to change our totaling code
 if we ever add more counties.  So, let’s do this instead (Listing <a class="reference internal" href="#total-one-cand"><span class="std std-numref">5.22</span></a>).</p>
 <div class="literal-block-wrapper docutils container" id="id35">
-<span id="total-one-cand"></span><div class="code-block-caption"><span class="caption-number">Listing 5.22 </span><span class="caption-text">Total votes for one candidate</span><a class="headerlink" href="#id35" title="Permalink to this code">¶</a></div>
+<span id="total-one-cand"></span><div class="code-block-caption"><span class="caption-number">Listing 5.22 </span><span class="caption-text">Total votes for one candidate</span><a class="headerlink" href="#id35" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="linenos">2</span><span class="k">for</span> <span class="n">countyindex</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">votes</span><span class="p">)):</span>
 <span class="linenos">3</span>    <span class="n">total</span> <span class="o">=</span> <span class="n">total</span> <span class="o">+</span> <span class="n">votes</span><span class="p">[</span><span class="n">countyindex</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
@@ -918,7 +917,7 @@ if we ever add more counties.  So, let’s do this instead (Listing <a class="re
 put all of this code in another loop and “loop through” the candidates
 (Listing <a class="reference internal" href="#total-all-cand"><span class="std std-numref">5.23</span></a>).</p>
 <div class="literal-block-wrapper docutils container" id="id36">
-<span id="total-all-cand"></span><div class="code-block-caption"><span class="caption-number">Listing 5.23 </span><span class="caption-text">Total votes for all candidates</span><a class="headerlink" href="#id36" title="Permalink to this code">¶</a></div>
+<span id="total-all-cand"></span><div class="code-block-caption"><span class="caption-number">Listing 5.23 </span><span class="caption-text">Total votes for all candidates</span><a class="headerlink" href="#id36" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos">1</span><span class="k">for</span> <span class="n">candindex</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">votes</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
 </span><span class="linenos">2</span>    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="linenos">3</span>    <span class="k">for</span> <span class="n">countyindex</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">votes</span><span class="p">)):</span>
@@ -932,7 +931,7 @@ put all of this code in another loop and “loop through” the candidates
 Let’s give them actual names and store them in code somewhere.  How about a
 using a list?</p>
 <div class="literal-block-wrapper docutils container" id="id37">
-<span id="cand-list"></span><div class="code-block-caption"><span class="caption-number">Listing 5.24 </span><span class="caption-text">A list for candidates</span><a class="headerlink" href="#id37" title="Permalink to this code">¶</a></div>
+<span id="cand-list"></span><div class="code-block-caption"><span class="caption-number">Listing 5.24 </span><span class="caption-text">A list for candidates</span><a class="headerlink" href="#id37" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">candidates</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Ronald Rump&quot;</span><span class="p">,</span> <span class="s2">&quot;Billary Blimpton&quot;</span><span class="p">,</span> <span class="s2">&quot;A Giant Meteor&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
@@ -943,7 +942,7 @@ is purely coincidental… or not.</p>
 to label the columns of our <code class="docutils literal notranslate"><span class="pre">votes</span></code> grid when totaling up the results (see
 Listing <a class="reference internal" href="#total-all-cand-names"><span class="std std-numref">5.25</span></a>).</p>
 <div class="literal-block-wrapper docutils container" id="id38">
-<span id="total-all-cand-names"></span><div class="code-block-caption"><span class="caption-number">Listing 5.25 </span><span class="caption-text">Total votes for all candidates, with names</span><a class="headerlink" href="#id38" title="Permalink to this code">¶</a></div>
+<span id="total-all-cand-names"></span><div class="code-block-caption"><span class="caption-number">Listing 5.25 </span><span class="caption-text">Total votes for all candidates, with names</span><a class="headerlink" href="#id38" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">votes</span> <span class="o">=</span> <span class="p">[</span>
 <span class="linenos"> 2</span>    <span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span>  <span class="mi">2</span><span class="p">],</span>
 <span class="linenos"> 3</span>    <span class="p">[</span><span class="mi">19</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span>  <span class="mi">1</span><span class="p">],</span>
@@ -978,7 +977,7 @@ because we have not hard-coded the number of candidates or counties.</p>
 matches the number of columns in <code class="docutils literal notranslate"><span class="pre">votes</span></code>) and then try to run our code again.  A
 new, full listing can be found in Listing <a class="reference internal" href="#bigger-votes"><span class="std std-numref">5.26</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="id39">
-<span id="bigger-votes"></span><div class="code-block-caption"><span class="caption-number">Listing 5.26 </span><span class="caption-text">Total votes for all candidates, again</span><a class="headerlink" href="#id39" title="Permalink to this code">¶</a></div>
+<span id="bigger-votes"></span><div class="code-block-caption"><span class="caption-number">Listing 5.26 </span><span class="caption-text">Total votes for all candidates, again</span><a class="headerlink" href="#id39" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">votes</span> <span class="o">=</span> <span class="p">[</span>
 <span class="hll"><span class="linenos"> 2</span>    <span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span>  <span class="mi">4</span><span class="p">,</span>  <span class="mi">2</span><span class="p">],</span>
 </span><span class="hll"><span class="linenos"> 3</span>    <span class="p">[</span><span class="mi">19</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span>  <span class="mi">8</span><span class="p">,</span>  <span class="mi">1</span><span class="p">],</span>
@@ -1016,7 +1015,7 @@ winner of each county, and you’ll need to give each county a name.  Be
 thinking about how you might accomplish that.</p>
 </section>
 <section id="optional-functional-programming-with-lists">
-<span id="sec-func-prog"></span><h2><span class="section-number">5.8. </span>(Optional) Functional Programming with Lists<a class="headerlink" href="#optional-functional-programming-with-lists" title="Permalink to this headline">¶</a></h2>
+<span id="sec-func-prog"></span><h2><span class="section-number">5.8. </span>(Optional) Functional Programming with Lists<a class="headerlink" href="#optional-functional-programming-with-lists" title="Link to this heading">¶</a></h2>
 <p>It’s not uncommon to have a list that contains items that we wish to modify.
 Or, we may have a list, and we wish to create a new list based on the original
 list.  You may recall an exercise in a previous chapter where we were asked to
@@ -1132,7 +1131,7 @@ built around a functional programming paradigm known as “Map-Reduce.”  Googl
 it!</p>
 </section>
 <section id="optional-list-comprehensions">
-<span id="sec-list-comprehensions"></span><h2><span class="section-number">5.9. </span>(Optional) List Comprehensions<a class="headerlink" href="#optional-list-comprehensions" title="Permalink to this headline">¶</a></h2>
+<span id="sec-list-comprehensions"></span><h2><span class="section-number">5.9. </span>(Optional) List Comprehensions<a class="headerlink" href="#optional-list-comprehensions" title="Link to this heading">¶</a></h2>
 <p>Based on what we know so far, we can construct lists in two ways.  If we know
 the items we want in a list at the time we create the list, we can do so as
 follows.</p>
@@ -1192,7 +1191,7 @@ Juanitas</a>
 for some exceptional, authentic Mexican food.)</p>
 </section>
 <section id="exercises">
-<span id="sec-lists-exercises"></span><h2><span class="section-number">5.10. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<span id="sec-lists-exercises"></span><h2><span class="section-number">5.10. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">¶</a></h2>
 <ol class="arabic">
 <li><p>Suppose we define a list as follows:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mylist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">]</span>
@@ -1367,7 +1366,7 @@ Ronald Rump has won Ironsheik county.
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 
@@ -1381,11 +1380,11 @@ Ronald Rump has won Ironsheik county.
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2022, Jason B. Shepherd, Ph.D..
+      &#169;2024, Jason B. Shepherd, Ph.D..
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.2.6</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
       
       |
       <a href="_sources/ch5_lists.rst.txt"

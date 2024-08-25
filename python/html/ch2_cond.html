@@ -1,18 +1,16 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>2. Conditionals &#8212; Conversational Python 2.0 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=12dfc556" />
+    <script src="_static/documentation_options.js?v=60dbed4a"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="3. Loops and String Manipulation" href="ch3_loops.html" />
@@ -20,8 +18,9 @@
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
+
   
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+  
 
   </head><body>
   
@@ -34,13 +33,13 @@
           <div class="body" role="main">
             
   <section id="conditionals">
-<span id="ch-cond"></span><h1><span class="section-number">2. </span>Conditionals<a class="headerlink" href="#conditionals" title="Permalink to this headline">¶</a></h1>
+<span id="ch-cond"></span><h1><span class="section-number">2. </span>Conditionals<a class="headerlink" href="#conditionals" title="Link to this heading">¶</a></h1>
 <section id="the-if-statement-and-the-boolean-type">
-<h2><span class="section-number">2.1. </span>The <code class="docutils literal notranslate"><span class="pre">if</span></code> statement and the Boolean type<a class="headerlink" href="#the-if-statement-and-the-boolean-type" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.1. </span>The <code class="docutils literal notranslate"><span class="pre">if</span></code> statement and the Boolean type<a class="headerlink" href="#the-if-statement-and-the-boolean-type" title="Link to this heading">¶</a></h2>
 <p>Do you remember our sample program involving cats in Chapter 1?  Let’s re-write
 it here in Listing <a class="reference internal" href="#barn-cats"><span class="std std-numref">2.1</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="id1">
-<span id="barn-cats"></span><div class="code-block-caption"><span class="caption-number">Listing 2.1 </span><span class="caption-text">Barn cats example</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<span id="barn-cats"></span><div class="code-block-caption"><span class="caption-number">Listing 2.1 </span><span class="caption-text">Barn cats example</span><a class="headerlink" href="#id1" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">cats</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;How many barn cats do you own? &quot;</span><span class="p">))</span>
 <span class="linenos">2</span><span class="n">cats</span> <span class="o">=</span> <span class="n">cats</span> <span class="o">*</span> <span class="mi">2</span>
 <span class="linenos">3</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;In a six-months, you will have </span><span class="si">%d</span><span class="s2"> cats!&quot;</span> <span class="o">%</span> <span class="n">cats</span><span class="p">)</span>
@@ -53,7 +52,7 @@ observation “That’s a lot of cats!” if the barn owner ends up with more th
 cats.  Our first attempt at this, based on what we know so far, might look like
 this.</p>
 <div class="literal-block-wrapper docutils container" id="id2">
-<div class="code-block-caption"><span class="caption-number">Listing 2.2 </span><span class="caption-text">Barn cats example, attempt 2</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 2.2 </span><span class="caption-text">Barn cats example, attempt 2</span><a class="headerlink" href="#id2" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">cats</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;How many barn cats do you own? &quot;</span><span class="p">))</span>
 <span class="linenos">2</span><span class="n">cats</span> <span class="o">=</span> <span class="n">cats</span> <span class="o">*</span> <span class="mi">2</span>
 <span class="linenos">3</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;In a six-months, you will have </span><span class="si">%d</span><span class="s2"> cats!&quot;</span> <span class="o">%</span> <span class="n">cats</span><span class="p">)</span>
@@ -70,7 +69,7 @@ initially.</p>
 Python allows us to do this by using something called an <code class="docutils literal notranslate"><span class="pre">if</span></code> statement.  Let’s
 modify our code as follows in Listing <a class="reference internal" href="#if-cats"><span class="std std-numref">2.3</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="id3">
-<span id="if-cats"></span><div class="code-block-caption"><span class="caption-number">Listing 2.3 </span><span class="caption-text">Barn cats example, attempt 3</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<span id="if-cats"></span><div class="code-block-caption"><span class="caption-number">Listing 2.3 </span><span class="caption-text">Barn cats example, attempt 3</span><a class="headerlink" href="#id3" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">cats</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;How many barn cats do you own? &quot;</span><span class="p">))</span>
 <span class="linenos">2</span><span class="n">cats</span> <span class="o">=</span> <span class="n">cats</span> <span class="o">*</span> <span class="mi">2</span>
 <span class="linenos">3</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;In a six-months, you will have </span><span class="si">%d</span><span class="s2"> cats!&quot;</span> <span class="o">%</span> <span class="n">cats</span><span class="p">)</span>
@@ -85,7 +84,7 @@ your program using several different inputs for cats.  It works!</p>
 <p>To understand more about why it works and how if statements work in general,
 let’s add one more line of code (for now).</p>
 <div class="literal-block-wrapper docutils container" id="id4">
-<div class="code-block-caption"><span class="caption-number">Listing 2.4 </span><span class="caption-text">Barn cats example, attempt 4</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 2.4 </span><span class="caption-text">Barn cats example, attempt 4</span><a class="headerlink" href="#id4" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">cats</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;How many barn cats do you own? &quot;</span><span class="p">))</span>
 <span class="linenos">2</span><span class="n">cats</span> <span class="o">=</span> <span class="n">cats</span> <span class="o">*</span> <span class="mi">2</span>
 <span class="linenos">3</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;In a six-months, you will have </span><span class="si">%d</span><span class="s2"> cats!&quot;</span> <span class="o">%</span> <span class="n">cats</span><span class="p">)</span>
@@ -100,7 +99,7 @@ no matter how many cats you enter, the program always prints “Thank you for
 using our program.”  Now, let’s tab the last line over one tab-stop so that it
 lines up with the previous print statement.</p>
 <div class="literal-block-wrapper docutils container" id="id5">
-<div class="code-block-caption"><span class="caption-number">Listing 2.5 </span><span class="caption-text">Barn cats example, attempt 4 with one small change</span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 2.5 </span><span class="caption-text">Barn cats example, attempt 4 with one small change</span><a class="headerlink" href="#id5" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">cats</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;How many barn cats do you own? &quot;</span><span class="p">))</span>
 <span class="linenos">2</span><span class="n">cats</span> <span class="o">=</span> <span class="n">cats</span> <span class="o">*</span> <span class="mi">2</span>
 <span class="linenos">3</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;In a six-months, you will have </span><span class="si">%d</span><span class="s2"> cats!&quot;</span> <span class="o">%</span> <span class="n">cats</span><span class="p">)</span>
@@ -120,7 +119,7 @@ together by indentation (i.e., tabs) is called a <em>block</em> of statements.</
 <p>Let’s try one more thing to understand how tabs/indentation work.  What happens
 if we de-indent line 5, i.e., the first line under the <code class="docutils literal notranslate"><span class="pre">if</span></code>?</p>
 <div class="literal-block-wrapper docutils container" id="id6">
-<div class="code-block-caption"><span class="caption-number">Listing 2.6 </span><span class="caption-text">Barn cats example, attempt 5</span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 2.6 </span><span class="caption-text">Barn cats example, attempt 5</span><a class="headerlink" href="#id6" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">cats</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;How many barn cats do you own? &quot;</span><span class="p">))</span>
 <span class="linenos">2</span><span class="n">cats</span> <span class="o">=</span> <span class="n">cats</span> <span class="o">*</span> <span class="mi">2</span>
 <span class="linenos">3</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;In a six-months, you will have </span><span class="si">%d</span><span class="s2"> cats!&quot;</span> <span class="o">%</span> <span class="n">cats</span><span class="p">)</span>
@@ -147,7 +146,7 @@ or <code class="docutils literal notranslate"><span class="pre">False</span></co
 can create Boolean variables, too, and we’d be right!  Consider the
 code in Listing <a class="reference internal" href="#cats-bool-var"><span class="std std-numref">2.7</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="id7">
-<span id="cats-bool-var"></span><div class="code-block-caption"><span class="caption-number">Listing 2.7 </span><span class="caption-text">Barn cats example</span><a class="headerlink" href="#id7" title="Permalink to this code">¶</a></div>
+<span id="cats-bool-var"></span><div class="code-block-caption"><span class="caption-number">Listing 2.7 </span><span class="caption-text">Barn cats example</span><a class="headerlink" href="#id7" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">cats</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;How many barn cats do you own? &quot;</span><span class="p">))</span>
 <span class="linenos">2</span><span class="n">cats</span> <span class="o">=</span> <span class="n">cats</span> <span class="o">*</span> <span class="mi">2</span>
 <span class="linenos">3</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;In a six-months, you will have </span><span class="si">%d</span><span class="s2"> cats!&quot;</span> <span class="o">%</span> <span class="n">cats</span><span class="p">)</span>
@@ -184,11 +183,11 @@ exist on your computer keyboard.  Also, note that comparing two values for
 equality uses the <code class="docutils literal notranslate"><span class="pre">==</span></code> double-equals symbol.  We already use the equals
 (<code class="docutils literal notranslate"><span class="pre">=</span></code>) symbol for assignment statements so <code class="docutils literal notranslate"><span class="pre">==</span></code>
 is used to compare two values as part of a Boolean expression.</p>
-<span id="logic-ops"></span><table class="colwidths-given docutils align-default" id="id8">
-<caption><span class="caption-number">Table 2.1 </span><span class="caption-text">Logical operators</span><a class="headerlink" href="#id8" title="Permalink to this table">¶</a></caption>
+<span id="logic-ops"></span><table class="docutils align-default" id="id8">
+<caption><span class="caption-number">Table 2.1 </span><span class="caption-text">Logical operators</span><a class="headerlink" href="#id8" title="Link to this table">¶</a></caption>
 <colgroup>
-<col style="width: 30%" />
-<col style="width: 70%" />
+<col style="width: 30.0%" />
+<col style="width: 70.0%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Operator</p></th>
@@ -218,7 +217,7 @@ is used to compare two values as part of a Boolean expression.</p>
 </table>
 </section>
 <section id="elif-and-boolean-operators">
-<h2><span class="section-number">2.2. </span><code class="docutils literal notranslate"><span class="pre">elif</span></code> and Boolean Operators<a class="headerlink" href="#elif-and-boolean-operators" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.2. </span><code class="docutils literal notranslate"><span class="pre">elif</span></code> and Boolean Operators<a class="headerlink" href="#elif-and-boolean-operators" title="Link to this heading">¶</a></h2>
 <p>Different states in the U.S.A. have different rules for when one is allowed to
 obtain a license to drive an automobile.  One common practice is to allow
 individuals who are 16 or older to get a license.  Suppose we wished to write a
@@ -227,7 +226,7 @@ license in their state.  We might prompt users for their respective ages, and
 then we could respond appropriately.  Let’s use the code in
 Listing <a class="reference internal" href="#driver-start"><span class="std std-numref">2.8</span></a> as our starting point.</p>
 <div class="literal-block-wrapper docutils container" id="id9">
-<span id="driver-start"></span><div class="code-block-caption"><span class="caption-number">Listing 2.8 </span><span class="caption-text">Drivers license example</span><a class="headerlink" href="#id9" title="Permalink to this code">¶</a></div>
+<span id="driver-start"></span><div class="code-block-caption"><span class="caption-number">Listing 2.8 </span><span class="caption-text">Drivers license example</span><a class="headerlink" href="#id9" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">age</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What is your age? &quot;</span><span class="p">))</span>
 <span class="linenos">2</span><span class="k">if</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">16</span><span class="p">:</span>
 <span class="linenos">3</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You are old enough to take your license exam.&quot;</span><span class="p">)</span>
@@ -313,7 +312,7 @@ years old and have had a driver’s education class to take the license exam.  S
 we’ll need to ask them if they’ve taken the exam by using another <code class="docutils literal notranslate"><span class="pre">input</span></code>
 statement.</p>
 <div class="literal-block-wrapper docutils container" id="id10">
-<span id="drivers-ed-start"></span><div class="code-block-caption"><span class="caption-number">Listing 2.9 </span><span class="caption-text">Drivers license example with drivers education</span><a class="headerlink" href="#id10" title="Permalink to this code">¶</a></div>
+<span id="drivers-ed-start"></span><div class="code-block-caption"><span class="caption-number">Listing 2.9 </span><span class="caption-text">Drivers license example with drivers education</span><a class="headerlink" href="#id10" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">age</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What is your age? &quot;</span><span class="p">))</span>
 <span class="hll"><span class="linenos">2</span><span class="n">drivers_ed</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Have you passed driver&#39;s education? (y/n) &quot;</span><span class="p">)</span>
 </span><span class="linenos">3</span><span class="k">if</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">16</span><span class="p">:</span>
@@ -360,7 +359,7 @@ something called a <em>Boolean operator</em>.  Instead of this:</p>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">and</span></code> keyword is the Boolean operator.  We can now modify Listing <a class="reference internal" href="#drivers-ed-start"><span class="std std-numref">2.9</span></a> as follows in Listing <a class="reference internal" href="#drivers-ed-and"><span class="std std-numref">2.10</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="id11">
-<span id="drivers-ed-and"></span><div class="code-block-caption"><span class="caption-number">Listing 2.10 </span><span class="caption-text">Drivers license example with Boolean <cite>and</cite> operator</span><a class="headerlink" href="#id11" title="Permalink to this code">¶</a></div>
+<span id="drivers-ed-and"></span><div class="code-block-caption"><span class="caption-number">Listing 2.10 </span><span class="caption-text">Drivers license example with Boolean <cite>and</cite> operator</span><a class="headerlink" href="#id11" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">age</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What is your age? &quot;</span><span class="p">))</span>
 <span class="linenos">2</span><span class="n">drivers_ed</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Have you passed driver&#39;s education? (y/n) &quot;</span><span class="p">)</span>
 <span class="hll"><span class="linenos">3</span><span class="k">if</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">16</span> <span class="ow">and</span> <span class="n">drivers_ed</span> <span class="o">==</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span>
@@ -380,11 +379,11 @@ then the whole Boolean expression <code class="docutils literal notranslate"><sp
 <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
 <p>There are three Boolean operators in Python, which are given in
 Table <a class="reference internal" href="#bool-ops"><span class="std std-numref">2.2</span></a>.</p>
-<span id="bool-ops"></span><table class="colwidths-given docutils align-default" id="id12">
-<caption><span class="caption-number">Table 2.2 </span><span class="caption-text">Logical operators</span><a class="headerlink" href="#id12" title="Permalink to this table">¶</a></caption>
+<span id="bool-ops"></span><table class="docutils align-default" id="id12">
+<caption><span class="caption-number">Table 2.2 </span><span class="caption-text">Logical operators</span><a class="headerlink" href="#id12" title="Link to this table">¶</a></caption>
 <colgroup>
-<col style="width: 20%" />
-<col style="width: 80%" />
+<col style="width: 20.0%" />
+<col style="width: 80.0%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Operator</p></th>
@@ -424,7 +423,7 @@ risk for heart disease.  There are a number of known risk factors, but for now
 we’ll only consider three.  Without Boolean operators, we might write the
 program in Listing <a class="reference internal" href="#heart-disease1"><span class="std std-numref">2.11</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="id13">
-<span id="heart-disease1"></span><div class="code-block-caption"><span class="caption-number">Listing 2.11 </span><span class="caption-text">Heart disease example</span><a class="headerlink" href="#id13" title="Permalink to this code">¶</a></div>
+<span id="heart-disease1"></span><div class="code-block-caption"><span class="caption-number">Listing 2.11 </span><span class="caption-text">Heart disease example</span><a class="headerlink" href="#id13" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">bp</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Do you have high blood pressure (y/n)? &quot;</span><span class="p">)</span>
 <span class="linenos"> 2</span><span class="n">smoke</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Do you smoke (y/n)? &quot;</span><span class="p">)</span>
 <span class="linenos"> 3</span><span class="n">hist</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Do you have a family history of heart disease (y/n)? &quot;</span><span class="p">)</span>
@@ -444,7 +443,7 @@ program in Listing <a class="reference internal" href="#heart-disease1"><span cl
 print the same message.  Instead, we can use the Boolean operator <code class="docutils literal notranslate"><span class="pre">or</span></code> to
 simplify the code resulting in Listing <a class="reference internal" href="#heart-disease2"><span class="std std-numref">2.12</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="id14">
-<span id="heart-disease2"></span><div class="code-block-caption"><span class="caption-number">Listing 2.12 </span><span class="caption-text">Heart disease example with <code class="docutils literal notranslate"><span class="pre">or</span></code> operator</span><a class="headerlink" href="#id14" title="Permalink to this code">¶</a></div>
+<span id="heart-disease2"></span><div class="code-block-caption"><span class="caption-number">Listing 2.12 </span><span class="caption-text">Heart disease example with <code class="docutils literal notranslate"><span class="pre">or</span></code> operator</span><a class="headerlink" href="#id14" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">bp</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Do you have high blood pressure (y/n)? &quot;</span><span class="p">)</span>
 <span class="linenos">2</span><span class="n">smoke</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Do you smoke (y/n)? &quot;</span><span class="p">)</span>
 <span class="linenos">3</span><span class="n">hist</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Do you have a family history of heart disease (y/n)? &quot;</span><span class="p">)</span>
@@ -462,7 +461,7 @@ Recall how, in our driver’s license example
 education course.  With this scenario in mind, consider the following
 (Listing <a class="reference internal" href="#drivers-ed-bool-expr"><span class="std std-numref">2.13</span></a>).</p>
 <div class="literal-block-wrapper docutils container" id="id15">
-<span id="drivers-ed-bool-expr"></span><div class="code-block-caption"><span class="caption-number">Listing 2.13 </span><span class="caption-text">Drivers license with <cite>and</cite>/<cite>not</cite></span><a class="headerlink" href="#id15" title="Permalink to this code">¶</a></div>
+<span id="drivers-ed-bool-expr"></span><div class="code-block-caption"><span class="caption-number">Listing 2.13 </span><span class="caption-text">Drivers license with <cite>and</cite>/<cite>not</cite></span><a class="headerlink" href="#id15" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">age</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What is your age? &quot;</span><span class="p">))</span>
 <span class="linenos">2</span><span class="n">drivers_ed</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Have you taken driver&#39;s ed (y/n)? &quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;y&quot;</span>
 <span class="linenos">3</span><span class="k">if</span> <span class="mi">14</span> <span class="o">&lt;=</span> <span class="n">age</span> <span class="ow">and</span> <span class="n">age</span> <span class="o">&lt;=</span> <span class="mi">16</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">drivers_ed</span><span class="p">:</span>
@@ -496,7 +495,7 @@ sure it’s what we expect (i.e., a <code class="docutils literal notranslate"><
 something we’ll discuss in Chapter 4: Loops.</p>
 </section>
 <section id="nuances-of-boolean-operators">
-<h2><span class="section-number">2.3. </span>Nuances of Boolean operators<a class="headerlink" href="#nuances-of-boolean-operators" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.3. </span>Nuances of Boolean operators<a class="headerlink" href="#nuances-of-boolean-operators" title="Link to this heading">¶</a></h2>
 <p>Students will sometimes write code like this:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">age</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What is your age? &quot;</span><span class="p">))</span>
 <span class="k">if</span> <span class="n">age</span> <span class="o">==</span> <span class="mi">14</span> <span class="ow">or</span> <span class="mi">15</span><span class="p">:</span>
@@ -522,7 +521,7 @@ expression is “transformed” as in Figure <a class="reference internal" href=
 <figure class="align-default" id="id16">
 <span id="bool-op-nuance"></span><a class="reference internal image-reference" href="_images/bool_op_nuance.png"><img alt="Evaluating a Boolean ``or``" src="_images/bool_op_nuance.png" style="width: 236.0px; height: 256.0px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 2.1 </span><span class="caption-text">Evaluating a Boolean <code class="docutils literal notranslate"><span class="pre">or</span></code></span><a class="headerlink" href="#id16" title="Permalink to this image">¶</a></p>
+<p><span class="caption-number">Fig. 2.1 </span><span class="caption-text">Evaluating a Boolean <code class="docutils literal notranslate"><span class="pre">or</span></code></span><a class="headerlink" href="#id16" title="Link to this image">¶</a></p>
 </figcaption>
 </figure>
 <p>Instead of:</p>
@@ -536,7 +535,7 @@ expression is “transformed” as in Figure <a class="reference internal" href=
 <p>Bottom line: be very careful when using and/or.</p>
 </section>
 <section id="exercises">
-<h2><span class="section-number">2.4. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.4. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">¶</a></h2>
 <ol class="arabic">
 <li><p>Suppose <code class="docutils literal notranslate"><span class="pre">x</span></code> is an integer variable.  What is the difference between the
 expression <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">2</span></code> and the expression <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">==</span> <span class="pre">2</span></code>?</p></li>
@@ -702,7 +701,7 @@ float to an integer, the fractional part disappears.  This is called
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 
@@ -716,11 +715,11 @@ float to an integer, the fractional part disappears.  This is called
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2022, Jason B. Shepherd, Ph.D..
+      &#169;2024, Jason B. Shepherd, Ph.D..
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.2.6</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
       
       |
       <a href="_sources/ch2_cond.rst.txt"
