@@ -6,10 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>2. Conditionals &#8212; Conversational Python 2.0 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d1102ebc" />
-    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=12dfc556" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
     <script src="_static/documentation_options.js?v=60dbed4a"></script>
-    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -519,7 +520,8 @@ double-equals.  One is:</p>
 <strong>Anything non-zero in Python is treated as True.</strong>  Therefore, the Boolean
 expression is “transformed” as in Figure <a class="reference internal" href="#bool-op-nuance"><span class="std std-numref">2.1</span></a>.</p>
 <figure class="align-default" id="id16">
-<span id="bool-op-nuance"></span><a class="reference internal image-reference" href="_images/bool_op_nuance.png"><img alt="Evaluating a Boolean ``or``" src="_images/bool_op_nuance.png" style="width: 236.0px; height: 256.0px;" /></a>
+<span id="bool-op-nuance"></span><a class="reference internal image-reference" href="_images/bool_op_nuance.png"><img alt="Evaluating a Boolean ``or``" src="_images/bool_op_nuance.png" style="width: 236.0px; height: 256.0px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 2.1 </span><span class="caption-text">Evaluating a Boolean <code class="docutils literal notranslate"><span class="pre">or</span></code></span><a class="headerlink" href="#id16" title="Link to this image">¶</a></p>
 </figcaption>
@@ -558,11 +560,11 @@ expression <code class="docutils literal notranslate"><span class="pre">x</span>
 <li><p>Identify the error in the following code.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">num</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter a real number: &quot;</span><span class="p">))</span>
 <span class="k">if</span> <span class="n">num</span> <span class="o">&lt;</span> <span class="mf">0.0</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;%.2 is negative.&quot;</span> <span class="o">%</span> <span class="n">num</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%.2f</span><span class="s2"> is negative.&quot;</span> <span class="o">%</span> <span class="n">num</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The number is 0.0.&quot;</span><span class="p">)</span>
 <span class="k">elif</span> <span class="n">num</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;%.2 is positive.&quot;</span> <span class="o">%</span> <span class="n">num</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%.2f</span><span class="s2"> is positive.&quot;</span> <span class="o">%</span> <span class="n">num</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
@@ -571,9 +573,9 @@ expression <code class="docutils literal notranslate"><span class="pre">x</span>
 <span class="k">if</span> <span class="n">num</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The number is 0.0.&quot;</span><span class="p">)</span>
 <span class="k">elif</span> <span class="n">num</span> <span class="o">&lt;</span> <span class="mf">0.0</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;%.2 is negative.&quot;</span> <span class="o">%</span> <span class="n">num</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%.2f</span><span class="s2"> is negative.&quot;</span> <span class="o">%</span> <span class="n">num</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;%.2 is positive.&quot;</span> <span class="o">%</span> <span class="n">num</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%.2f</span><span class="s2"> is positive.&quot;</span> <span class="o">%</span> <span class="n">num</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
@@ -652,7 +654,7 @@ float to an integer, the fractional part disappears.  This is called
           
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
 <h1 class="logo"><a href="index.html">Conversational Python</a></h1>
 
@@ -663,7 +665,16 @@ float to an integer, the fractional part disappears.  This is called
 
 
 
-<h3>Navigation</h3>
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="ch1_basicio_types.html">1. Basic I/O, Statements, Expressions, Variables, and Types</a></li>
@@ -692,16 +703,6 @@ float to an integer, the fractional part disappears.  This is called
   </ul></li>
 </ul>
 </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 
@@ -718,8 +719,8 @@ float to an integer, the fractional part disappears.  This is called
       &#169;2024, Jason B. Shepherd, Ph.D..
       
       |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.2.6</a>
-      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
       |
       <a href="_sources/ch2_cond.rst.txt"
